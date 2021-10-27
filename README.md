@@ -49,8 +49,11 @@ Het bevat de mogelijkheid om een vereniging aan te maken en daarbinnen meerdere 
 
 ## Milestones
 22 Oktober: ER-Diagram + Design in XD + Trello-Board
+
 29 Oktober: Basic routes in backend (CRUD-acties) + First layout frontend
+
 7 November: Te bepalen afhankelijk van voortgang
+
 8 December: Versie 1 app af (MVP)
 
 
