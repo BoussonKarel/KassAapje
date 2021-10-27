@@ -50,6 +50,8 @@ Het bevat de mogelijkheid om een vereniging aan te maken en daarbinnen meerdere 
 ## Milestones
 22 Oktober: ER-Diagram + Design in XD + Trello-Board
 
+![ER-Diagram](https://github.com/BoussonKarel/KassAapje/blob/main/documentation/img/KassAapje.drawio.png)
+
 29 Oktober: Basic routes in backend (CRUD-acties) + First layout frontend
 
 7 November: Te bepalen afhankelijk van voortgang
