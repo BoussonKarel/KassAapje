@@ -1,0 +1,15 @@
+[
+  {
+      "organization_id": "cc26ffd8-5d67-45e1-95a6-bbc1d4002be2",
+      "name": "Aapjes vzw",
+      "street": "Aapjeslaan",
+      "street_number": 123,
+      "zip": 1234,
+      "city": "Gemeente",
+      "country": "BE",
+      "website": "https://www.youtube.com/watch?v=q0hyYWKXF0Q",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Pan_Blue_Circle.png",
+      "color": "#613D30",
+      "email": "aapje@aapjesvzw.be"
+  }
+]
