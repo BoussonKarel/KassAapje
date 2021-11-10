@@ -1,4 +1,5 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm"
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { Register } from "./register"
 
 @Entity('organizations')
 export class Organization extends BaseEntity {
@@ -34,4 +35,7 @@ export class Organization extends BaseEntity {
 
     @Column()
     email?: string
+
+    @OneToMany(() => Register, r => r.organization)
+    registers?: Register[]
 }
