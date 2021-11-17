@@ -1,41 +1,40 @@
 import {
-    BaseEntity,
-    Column,
-    Entity,
-    JoinColumn,
-    ManyToOne,
-    OneToMany,
-    OneToOne,
-    PrimaryGeneratedColumn,
-  } from 'typeorm'
+  BaseEntity,
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm'
 import { Register } from './register'
 import { Variation } from './variation'
-  
-  @Entity('products')
-  export class Product extends BaseEntity {
-    @PrimaryGeneratedColumn('uuid')
-    product_id?: string
-    
-    @ManyToOne(() => Register, r => r.products)
-    @JoinColumn({name: 'register_id'})
-    register!: Register
 
-    @Column()
-    name?: string
+@Entity('products')
+export class Product extends BaseEntity {
+  @PrimaryGeneratedColumn('uuid')
+  product_id?: string
 
-    @Column('decimal')
-    price?: number
+  @ManyToOne(() => Register, r => r.products)
+  @JoinColumn({ name: 'register_id' })
+  register!: Register
 
-    @Column()
-    stock_is_managed?: boolean
+  @Column()
+  name?: string
 
-    @Column('int')
-    stock_quantity?: number
+  @Column('decimal')
+  price?: number
 
-    @Column()
-    allow_backorders?: boolean
+  @Column()
+  stock_is_managed?: boolean
 
-    @OneToMany(() => Variation, v => v.product)
-    variations?: Variation[]
-  }
-  
+  @Column('int')
+  stock_quantity?: number
+
+  @Column()
+  allow_backorders?: boolean
+
+  @OneToMany(() => Variation, v => v.product)
+  variations?: Variation[]
+}

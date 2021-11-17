@@ -1,41 +1,42 @@
 import {
-    BaseEntity,
-    Column,
-    Entity,
-    JoinColumn,
-    ManyToOne,
-    OneToOne,
-    PrimaryGeneratedColumn,
-  } from 'typeorm'
+  BaseEntity,
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  ObjectID,
+  ObjectIdColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm'
 import { Order } from './order'
 import { Product } from './product'
 import { Register } from './register'
 import { Variation } from './variation'
-  
-  @Entity('order_items')
-  export class OrderItem extends BaseEntity {
-    @PrimaryGeneratedColumn('uuid')
-    orderitem_id?: string
-    
-    @ManyToOne(() => Order, r => r.order_items)
-    @JoinColumn({name: 'order_id'})
-    order!: Register
 
-    // @ManyToOne(() => Product, p => p.orders)
-    @Column({name: 'product_id'})
-    product!: Product
+@Entity('order_items')
+export class OrderItem extends BaseEntity {
+  @PrimaryGeneratedColumn('uuid')
+  orderitem_id?: string
 
-    // @ManyToOne(() => Variation, v => v.order)
-    @Column({name: 'variation_id'})
-    variation?: Variation
+  @ManyToOne(() => Order, r => r.order_items)
+  @JoinColumn({ name: 'order_id' })
+  order!: Register
 
-    @Column('decimal')
-    price?: number
+  // @ManyToOne(() => Product, p => p.orders)
+  @Column({ name: 'product_id' })
+  product!: Product
 
-    @Column('int')
-    quantity?: number
-    
-    @Column()
-    delivered?: boolean
-  }
-  
+  // @ManyToOne(() => Variation, v => v.order)
+  @Column({ name: 'variation_id' })
+  variation?: Variation
+
+  @Column('decimal')
+  price?: number
+
+  @Column('int')
+  quantity?: number
+
+  @Column()
+  delivered?: boolean
+}
