@@ -17,9 +17,9 @@ export class Variation extends BaseEntity {
   @JoinColumn({ name: 'product_id' })
   product!: Product
 
-  @Column()
+  @Column('text')
   name?: string
 
-  @Column()
+  @Column('decimal')
   price?: number
 }

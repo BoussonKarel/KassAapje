@@ -8,8 +8,6 @@ import {
     OneToOne,
     PrimaryGeneratedColumn,
   } from 'typeorm'
-import { Order } from './order'
-import { OrderItem } from './orderitem'
 import { Register } from './register'
 import { Variation } from './variation'
   
@@ -25,13 +23,13 @@ import { Variation } from './variation'
     @Column()
     name?: string
 
-    @Column()
+    @Column('decimal')
     price?: number
 
     @Column()
     stock_is_managed?: boolean
 
-    @Column()
+    @Column('int')
     stock_quantity?: number
 
     @Column()

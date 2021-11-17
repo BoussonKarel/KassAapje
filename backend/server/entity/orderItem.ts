@@ -29,10 +29,10 @@ import { Variation } from './variation'
     @Column({name: 'variation_id'})
     variation?: Variation
 
-    @Column()
+    @Column('decimal')
     price?: number
 
-    @Column()
+    @Column('int')
     quantity?: number
     
     @Column()

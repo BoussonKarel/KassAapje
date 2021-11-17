@@ -12,13 +12,16 @@ export class Organization extends BaseEntity {
     @Column()
     street?: string
 
-    @Column()
+    @Column('int')
     street_number?: number
+
+    @Column()
+    box?: string
 
     @Column()
     zip?: number
 
-    @Column({ length: 100 })
+    @Column()
     city?: string
 
     @Column()

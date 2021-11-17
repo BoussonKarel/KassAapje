@@ -24,7 +24,7 @@ import { Variation } from './variation'
     @Column()
     payment_method?: string
 
-    @Column()
+    @Column('decimal')
     amount?: number
   }
   

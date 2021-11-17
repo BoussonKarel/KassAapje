@@ -8,7 +8,7 @@ import {
     OneToMany,
     PrimaryGeneratedColumn,
   } from 'typeorm'
-import { OrderItem } from './orderitem'
+import { OrderItem } from './orderItem'
 import { Payment } from './payment'
 import { Register } from './register'
   
