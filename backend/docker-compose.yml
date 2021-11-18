@@ -1,20 +1,8 @@
 version: '3.4'
 
 services:
-  # birds-api:
-  #   image: blablabla/express-birds
-  #   build:
-  #     context: .
-  #     dockerfile: ./Dockerfile
-  #   environment:
-  #     NODE_ENV: production
-  #   ports:
-  #     - 3000:3000
-  #   env_file:
-  #     - docker.ormconfig.env
-
   mariadb:
-    image: mariadb:10.5.9
+    image: mariadb:10.6.2
     env_file:
       - .env
     ports:
