@@ -19,6 +19,6 @@ export class OrganizationResolver {
   async getOrganizationById(
     @Arg('organization_id') id: string,
   ): Promise<Organization | undefined | null> {
-    return await this.repository.findOne(id)
+    return await this.repository.findOne(id, {relations: ['registers']})
   }
 }
