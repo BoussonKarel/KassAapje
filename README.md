@@ -28,12 +28,12 @@ Het bevat de mogelijkheid om een vereniging aan te maken en daarbinnen meerdere 
 
 ### Technische structuur
 * Frontend: Svelte
-* Backend: Express (Node.js)
-* Database: MariaDB + ? (CosmosDB/GraphQL?)
+* Backend: Express (Node.js) m.b.v. GraphQL 
+* Database: MariaDB
 ### Passwords
 * Database: 
-  * User: docent@howest.be
-  * Password: P@ssw0rd
+  * User: admin
+  * Password: strong_password
 * Frontend
   * User: docent@howest.be
   * Password: P@ssw0rd
@@ -44,18 +44,27 @@ Het bevat de mogelijkheid om een vereniging aan te maken en daarbinnen meerdere 
 * Karel Bousson
   * Focus op backend 
 * Ibe Verbeke
-  * Focus op frontend 
-*(Kruisbestuiving mogelijk aangezien één van de teamleden minder-valide is)*
+  * Focus op frontend
 
 ## Milestones
+### Gepasseerd
 22 Oktober: ER-Diagram + Design in XD + Trello-Board
-
-![ER-diagram](https://github.com/BoussonKarel/KassAapje/blob/main/documentation/img/KassAapje.drawio.png)
 
 29 Oktober: Basic routes in backend (CRUD-acties) + First layout frontend
 
+👎 Niet gelukt, lastiger dan voorspeld: lessenachterstand Karel etc.
+
 7 November: Te bepalen afhankelijk van voortgang
 
+ℹ STATUS 21/11:
+- 🅱 Alle entities aangemaakt in de backend en GraphQL toegevoegd. Je kan al organisaties ophalen.
+- 💻 Design in XD, nog niet af.
+
+### Nog te komen
 8 December: Versie 1 app af (MVP)
+## ER Diagram
+![ER-diagram](https://github.com/BoussonKarel/KassAapje/blob/main/documentation/img/KassAapje.drawio.png)
+
+
 
 
