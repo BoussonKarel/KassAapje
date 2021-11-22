@@ -1,4 +1,5 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import { UserOrganization } from './userOrganization'
 
 export const enum roleTypes {
   REGISTER,
@@ -18,4 +19,7 @@ export class Role extends BaseEntity {
 
   @Column()
   type?: roleTypes
+
+  @OneToMany(() => UserOrganization, uo => uo.role)
+  userOrganization?: UserOrganization
 }

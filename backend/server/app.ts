@@ -63,7 +63,7 @@ import { graphqlHTTP } from 'express-graphql';
       // APP START
       app.listen(port, () => {
         console.info(
-          `\nKassAapje backend 🧾🐵💰 \n>>> http://localhost:${port}/`,
+          `\nKassAapje backend 🧾🐵💰 \n>>> http://localhost:${port}/v1`,
         )
       })
     })
