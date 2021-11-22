@@ -12,6 +12,7 @@ import {
 import { Order } from './order'
 import { Organization } from './organization'
 import { Product } from './product'
+import { UserRegisterRole } from './userRegisterRole'
 
 @ObjectType()
 @InputType('RegisterInput')
@@ -46,4 +47,7 @@ export class Register extends BaseEntity {
   @Field(() => [Order])
   @OneToMany(() => Order, o => o.register)
   orders?: Order[]
+
+  @OneToMany(() => UserRegisterRole, urr => urr.register)
+  userRegisterRole?: UserRegisterRole
 }

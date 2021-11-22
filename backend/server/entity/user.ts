@@ -3,6 +3,7 @@ import {
   BaseEntity, Column, Entity, JoinColumn, ObjectIdColumn, OneToMany, PrimaryColumn,
 } from 'typeorm'
 import { UserOrganization } from './userOrganization'
+import { UserRegisterRole } from './userRegisterRole'
 
 @ObjectType()
 @InputType('UserInput')
@@ -18,4 +19,7 @@ export class User extends BaseEntity {
 
   @OneToMany(() => UserOrganization, uo => uo.user)
   userOrganization?: UserOrganization
+
+  @OneToMany(() => UserRegisterRole, urr => urr.user)
+  userRegisterRole?: UserRegisterRole
 }
