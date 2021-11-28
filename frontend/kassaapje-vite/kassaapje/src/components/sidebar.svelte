@@ -2,10 +2,11 @@
 
 </script>
 
-<div>
-  <aside>
-      <div class="bar">
-            hallo
-      </div>
-  </aside>
+<div class="sidebar">
+<div class="sidebar-title">KassAapje</div>
+
+<div class="sidebar-profile">
+  <div>PF PIC</div>
+  <div>Michiel</div>
+</div>
 </div>
