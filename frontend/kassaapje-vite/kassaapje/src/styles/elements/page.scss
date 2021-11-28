@@ -1,0 +1,14 @@
+body,
+html {
+  font: #{$base-font-size}/#{$base-line-height} $base-font-family;
+  color: map-get($colors-neutral, "900");
+
+  fill: map-get($colors-neutral, "800");
+
+  min-height: 100vh;
+
+  ::selection {
+    background-color: map-get($colors-theme, "400");
+    color: white;
+  }
+}

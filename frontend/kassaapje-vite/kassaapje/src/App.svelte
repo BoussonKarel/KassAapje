@@ -3,7 +3,7 @@
 </script>
 
 <main>
-  <h1 class="bar">Hello Kassaapje!</h1>
+  <h1 class="bar">Kassaapje</h1>
 
 </main>
 
