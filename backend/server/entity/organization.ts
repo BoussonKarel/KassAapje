@@ -7,14 +7,13 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm'
-import { Register } from './register'
+import { Register, RegisterInput } from './register'
 import { UserOrganization } from './userOrganization'
 
 @ObjectType()
-@InputType('OrganizationInput')
 @Entity('organizations')
 export class Organization extends BaseEntity {
-  @Field(() => ID, {nullable: true})
+  @Field(() => ID)
   @PrimaryGeneratedColumn('uuid')
   organization_id?: string
 
@@ -62,10 +61,49 @@ export class Organization extends BaseEntity {
   @Column()
   email?: string
 
-  @Field(() => [Register], {nullable: true})
+  @Field(() => [Register], {nullable: true, })
   @OneToMany(() => Register, r => r.organization)
   registers?: Register[]
 
   @OneToMany(() => UserOrganization, uo => uo.organization)
   userOrganization?: UserOrganization
+}
+
+@InputType('OrganizationInput')
+export class OrganizationInput {
+  @Field(() => ID, {nullable: true})
+  organization_id?: string
+
+  @Field()
+  name?: string
+
+  @Field()
+  street?: string
+
+  @Field()
+  street_number?: number
+
+  @Field({nullable: true})
+  box?: string
+
+  @Field()
+  zip?: number
+
+  @Field()
+  city?: string
+
+  @Field()
+  country?: string
+
+  @Field()
+  website?: string
+
+  @Field()
+  logo?: string
+
+  @Field()
+  color?: string
+
+  @Field()
+  email?: string
 }
