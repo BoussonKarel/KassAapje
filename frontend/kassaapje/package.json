@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "rollup-plugin-scss": "^3.0.0",
+    "rollup-plugin-svelte-hot": "^1.0.0-8",
     "sirv-cli": "^1.0.0"
   }
 }
