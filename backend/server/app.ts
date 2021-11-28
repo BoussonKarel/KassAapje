@@ -14,6 +14,7 @@ import cors from 'cors'
 import { OrganizationResolver } from './resolvers/OrganizationResolver';
 import { buildSchema } from 'type-graphql';
 import { graphqlHTTP } from 'express-graphql';
+import { RegisterResolver } from './resolvers/RegisterResolver';
 (async () => {
   const connectionOptions: ConnectionOptions = await getConnectionOptions()
 
@@ -45,7 +46,7 @@ import { graphqlHTTP } from 'express-graphql';
       let schema: GraphQLSchema = {} as GraphQLSchema
 
       await buildSchema({
-        resolvers: [OrganizationResolver],
+        resolvers: [OrganizationResolver, RegisterResolver],
       }).then(_ => {
         schema = _
       })

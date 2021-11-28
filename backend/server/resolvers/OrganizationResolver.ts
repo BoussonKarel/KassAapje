@@ -1,6 +1,6 @@
 import { Arg, Mutation, Query, Resolver } from 'type-graphql'
 import { EntityManager, getManager } from 'typeorm'
-import { Organization } from '../entity/organization'
+import { Organization, OrganizationInput } from '../entity/organization'
 
 @Resolver()
 export class OrganizationResolver {
@@ -11,14 +11,13 @@ export class OrganizationResolver {
   // -------
   @Mutation(() => Organization, { nullable: true })
   async addOrganization(
-    @Arg('data') newOrganizationData: Organization,
+    @Arg('organization') newOrganizationData: OrganizationInput,
   ): Promise<Organization> {
-    const organization: Organization = await this.manager.create(
+    const newOrganization: Organization = await this.manager.create(
       Organization,
       newOrganizationData
     )
-    const newOrganization = await this.manager.save(organization)
-    return newOrganization
+    return await this.manager.save(newOrganization)
   }
 
   // -------
