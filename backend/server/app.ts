@@ -15,6 +15,7 @@ import { OrganizationResolver } from './resolvers/OrganizationResolver';
 import { buildSchema } from 'type-graphql';
 import { graphqlHTTP } from 'express-graphql';
 import { RegisterResolver } from './resolvers/RegisterResolver';
+import { ProductResolver } from './resolvers/ProductResolver';
 (async () => {
   const connectionOptions: ConnectionOptions = await getConnectionOptions()
 
@@ -46,7 +47,7 @@ import { RegisterResolver } from './resolvers/RegisterResolver';
       let schema: GraphQLSchema = {} as GraphQLSchema
 
       await buildSchema({
-        resolvers: [OrganizationResolver, RegisterResolver],
+        resolvers: [OrganizationResolver, RegisterResolver, ProductResolver],
       }).then(_ => {
         schema = _
       })

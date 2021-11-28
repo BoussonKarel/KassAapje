@@ -32,7 +32,19 @@ export class Variation extends BaseEntity {
   @Column('decimal')
   price_diff?: number
 
-  @Field(() => [OrderItem])
+  @Field(() => [OrderItem], { nullable: true})
   @OneToMany(() => OrderItem, oi => oi.variation)
   orderItems?: OrderItem[]
+}
+
+@InputType('ProductVariationInput')
+export class ProductVariationInput {
+  @Field(() => ID, { nullable: true})
+  product_id?: string
+
+  @Field()
+  name?: string
+
+  @Field()
+  price_diff?: number
 }

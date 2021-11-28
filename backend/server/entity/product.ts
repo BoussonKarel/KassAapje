@@ -11,10 +11,9 @@ import {
 } from 'typeorm'
 import { OrderItem } from './orderItem'
 import { Register } from './register'
-import { Variation } from './variation'
+import { ProductVariationInput, Variation } from './variation'
 
 @ObjectType()
-@InputType('ProductInput')
 @Entity('products')
 export class Product extends BaseEntity {
   @Field(() => ID)
@@ -38,19 +37,46 @@ export class Product extends BaseEntity {
   @Column()
   stock_is_managed?: boolean
 
-  @Field()
-  @Column('int')
+  @Field({nullable: true})
+  @Column('int', { nullable: true})
   stock_quantity?: number
 
   @Field()
   @Column()
   allow_backorders?: boolean
 
-  @Field(() => [Variation])
+  @Field(() => [Variation], { nullable: true})
   @OneToMany(() => Variation, v => v.product)
   variations?: Variation[]
 
-  @Field(() => [OrderItem])
+  @Field(() => [OrderItem], { nullable: true})
   @OneToMany(() => OrderItem, oi => oi.product)
   orderItems?: OrderItem[]
+}
+
+@InputType('ProductInput')
+export class ProductInput {
+  @Field(() => ID, { nullable: true})
+  product_id?: string
+
+  @Field()
+  register_id?: string
+
+  @Field()
+  name?: string
+
+  @Field()
+  price?: number
+
+  @Field()
+  stock_is_managed?: boolean
+
+  @Field({nullable: true})
+  stock_quantity?: number
+
+  @Field()
+  allow_backorders?: boolean
+
+  @Field(() => [ProductVariationInput], { nullable: true})
+  variations?: ProductVariationInput[]
 }
