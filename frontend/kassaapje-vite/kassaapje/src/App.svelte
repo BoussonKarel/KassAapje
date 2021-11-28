@@ -6,7 +6,7 @@
 
 <main>
   <img src={logo} alt="Svelte Logo" />
-  <h1 class="sidebar">Hello Kassaapje!</h1>
+  <h1 class="test">Hello Kassaapje!</h1>
 
   <Counter />
 
