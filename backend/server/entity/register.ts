@@ -15,18 +15,18 @@ import { Product } from './product'
 import { UserRegisterRole } from './userRegisterRole'
 
 @ObjectType()
-@InputType('RegisterInput')
+// @InputType('RegisterInput')
 @Entity('registers')
 export class Register extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn('uuid')
   register_id?: string
 
-  @Field(() => Organization)
+  @Field(() => Organization, { nullable: true})
   @ManyToOne(() => Organization, o => o.registers)
   @JoinColumn({ name: 'organization_id' })
-  @Expose({name: 'organization_id'})
-  organization!: Organization
+  @Expose({ name: 'organization_id' })
+  organization?: Organization
 
   @Field()
   @Column({ length: 100 })
@@ -50,4 +50,22 @@ export class Register extends BaseEntity {
 
   @OneToMany(() => UserRegisterRole, urr => urr.register)
   userRegisterRole?: UserRegisterRole
+}
+
+@InputType('RegisterInput')
+export class RegisterInput {
+  @Field(() => ID, { nullable: true})
+  register_id?: string
+
+  @Field()
+  organization_id?: string
+
+  @Field()
+  name?: string
+
+  @Field()
+  description?: string
+
+  @Field()
+  color?: string
 }
