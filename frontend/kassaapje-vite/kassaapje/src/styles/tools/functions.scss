@@ -1,3 +1,4 @@
+@use 'sass:math';
 //
 //  Tools: Functions
 //  ---
@@ -9,10 +10,9 @@
 // if the parent is another value say 24px write em(12, 24)
 
 @function em($pxval, $base: $base-font-size) {
-	@return ($pxval / $base) * 1em;
-  }
-  
-  @function rem($pxval, $base: $base-font-size) {
-	@return ($pxval / $base) * 1rem;
-  }
-  
+  @return math.div($pxval, $base) * 1em;
+}
+
+@function rem($pxval, $base: $base-font-size) {
+  @return math.div($pxval, $base) * 1rem;
+}

@@ -1,31 +1,85 @@
-// .bar {
-//   font-size: 50px;
-//   color: orange;
-// }
-
 .sidebar {
-  background-color: map-get($colors-theme, "base");
+  background-color: map-get($colors-theme, 'base');
   width: 15%;
   height: 100vh;
   margin: none;
   padding: none;
 
   &-title {
-    color: map-get($colors-neutral, "100");
+    color: map-get($colors-neutral, '100');
     display: flex;
     justify-content: center;
 
-    font-size: $base-font-size * 2.5;
+    font-size: rem(32px);
     font-weight: 700;
 
     padding-top: 0.5em;
   }
 
   &-profile {
-   padding: 1em;
+    display: flex;
+    justify-content: center;
+    padding: 1em;
+
+    &-icon {
+      padding-right: 3em;
+    }
+
+    &-name {
+      color: map-get($colors-neutral, '100');
+      font-size: rem(24px);
+      font-weight: 500;
+    }
 
     &:hover {
-      background-color: map-get($colors-theme, "selection");
+      background-color: map-get($colors-theme, 'selection');
+      cursor: pointer;
     }
+  }
+
+  &-logout {
+    display: flex;
+    justify-content: center;
+    padding: 1em;
+
+    &-icon {
+      padding-right: 3em;
+    }
+
+    &-text {
+      color: map-get($colors-neutral, '100');
+      font-size: rem(24px);
+      font-weight: 500;
+    }
+
+    &:hover {
+      background-color: map-get($colors-theme, 'selection');
+      cursor: pointer;
+    }
+  }
+
+  &-collapse {
+    display: flex;
+    justify-content: center;
+    padding: 1em;
+
+    &-icon {
+      padding-right: 3em;
+    }
+
+    &-text {
+      color: map-get($colors-neutral, '100');
+      font-size: rem(24px);
+      font-weight: 500;
+    }
+
+    &:hover {
+      background-color: map-get($colors-theme, 'selection');
+      cursor: pointer;
+    }
+  }
+
+  &-organisations {
+    color: map-get($colors-neutral, '100');
   }
 }
