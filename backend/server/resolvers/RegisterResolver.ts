@@ -43,7 +43,7 @@ export class RegisterResolver {
 
   @Query(() => Register, { nullable: true })
   async getRegisterById(
-    @Arg('register_id') id: string,
+    @Arg('id') id: string,
   ): Promise<Register | undefined | null> {
     return await this.manager.findOne(Register, id)
   }

@@ -67,7 +67,7 @@ export class ProductResolver {
 
   @Query(() => Product, { nullable: true })
   async getProductById(
-    @Arg('product_id') id: string,
+    @Arg('id') id: string,
   ): Promise<Product | undefined | null> {
     return await this.manager.findOne(Product, id, {relations: ['variations']})
   }

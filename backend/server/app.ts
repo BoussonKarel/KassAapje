@@ -28,17 +28,22 @@ import { RegisterResolver } from './resolvers/RegisterResolver'
 import { ProductResolver } from './resolvers/ProductResolver'
 import { OrganizationResolver } from './resolvers/OrganizationResolver'
 
-
-
 (async () => {
   const connectionOptions: ConnectionOptions = await getConnectionOptions()
 
-  // Create the database before we make the connection. This will also add the tables
+  // CREATE DATABASE+TABLES, CONNECT, SEED DATABASE
   createDatabase({ ifNotExist: true }, connectionOptions)
     .then(() => console.log('Database has been created!'))
     .then(createConnection)
     .then(async (connection: Connection) => {
       seedDatabase(connection)
+
+      // APP SETUP
+      const app = express(),
+        port = process.env.PORT || 3001
+
+      // CORS
+      app.use(cors())
 
       // FIREBASE-ADMIN
       dotenv.config() // This will load in the GOOGLE_APPLICATION_CREDENTIALS
@@ -47,11 +52,8 @@ import { OrganizationResolver } from './resolvers/OrganizationResolver'
         credential: admin.credential.applicationDefault(),
       })
 
-      // APP SETUP
-      const app = express(),
-        port = process.env.PORT || 3001
-
-      app.use(cors())
+      // MIDDLEWARE
+      app.use(express.json()) // for parsing application/json
 
       // GRAPHQL
       let schema: GraphQLSchema = {} as GraphQLSchema
@@ -64,7 +66,7 @@ import { OrganizationResolver } from './resolvers/OrganizationResolver'
         schema = _
       })
 
-      // GraphQL init middleware
+      // GRAPHQL INIT MIDDLEWARE
       app.use(
         '/v1/', // Url, do you want to keep track of a version?
         graphqlHTTP((request, response) => ({
@@ -74,8 +76,7 @@ import { OrganizationResolver } from './resolvers/OrganizationResolver'
         })),
       )
 
-      // MIDDLEWARE
-      app.use(express.json()) // for parsing application/json
+      // AUTH
       app.use(authMiddleware)
 
       // ROUTES
@@ -83,25 +84,10 @@ import { OrganizationResolver } from './resolvers/OrganizationResolver'
         response.send(`KassAapje backend is working`)
       })
 
-      // SIGNUP
-      app.post('/signup', async (request: Request, response: Response) => {
-        const { email, password, name } = request.body
-
-        const user = await admin.auth().createUser({
-          email,
-          password,
-          displayName: name,
-        })
-
-        return response.json(user)
-      })
-
-      
-
       // APP START
       app.listen(port, () => {
         console.info(
-          `\nKassAapje backend 🧾🐵💰 \n>>> http://localhost:${port}/v1`,
+          `-x-x-x-x-x-\nKassAapje backend 🧾🐵💰 \n>>> http://localhost:${port}/v1\n-x-x-x-x-x`,
         )
       })
     })
