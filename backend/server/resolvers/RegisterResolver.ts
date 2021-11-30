@@ -18,8 +18,7 @@ export class RegisterResolver {
       Register,
       registerData
     )
-    newRegister.organization = new Organization();
-    newRegister.organization.organization_id = registerData.organization_id
+    newRegister.organization = await this.manager.findOneOrFail(Organization, registerData.organization_id)
     return await this.manager.save(newRegister)
   }
 

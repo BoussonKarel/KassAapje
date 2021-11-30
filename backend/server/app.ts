@@ -1,5 +1,6 @@
 // app.ts
 import express, { Request, Response } from 'express'
+// Database, typeorm
 import { createDatabase } from 'typeorm-extension'
 import {
   Connection,
@@ -8,14 +9,27 @@ import {
   getConnectionOptions,
 } from 'typeorm'
 import seedDatabase from './seeders/seeder'
+
+// Firebase / auth
+import admin from 'firebase-admin'
+import dotenv from 'dotenv'
+import authMiddleware from './auth/authMiddleware'
+
+// CORS
 import cors from 'cors'
 
-;import { GraphQLSchema } from 'graphql';
-import { OrganizationResolver } from './resolvers/OrganizationResolver';
-import { buildSchema } from 'type-graphql';
-import { graphqlHTTP } from 'express-graphql';
-import { RegisterResolver } from './resolvers/RegisterResolver';
-import { ProductResolver } from './resolvers/ProductResolver';
+// GraphQL
+import { GraphQLSchema } from 'graphql'
+import { buildSchema } from 'type-graphql'
+import { graphqlHTTP } from 'express-graphql'
+
+// Resolvers
+import { RegisterResolver } from './resolvers/RegisterResolver'
+import { ProductResolver } from './resolvers/ProductResolver'
+import { OrganizationResolver } from './resolvers/OrganizationResolver'
+
+
+
 (async () => {
   const connectionOptions: ConnectionOptions = await getConnectionOptions()
 
@@ -26,28 +40,26 @@ import { ProductResolver } from './resolvers/ProductResolver';
     .then(async (connection: Connection) => {
       seedDatabase(connection)
 
+      // FIREBASE-ADMIN
+      dotenv.config() // This will load in the GOOGLE_APPLICATION_CREDENTIALS
+
+      admin.initializeApp({
+        credential: admin.credential.applicationDefault(),
+      })
+
       // APP SETUP
       const app = express(),
         port = process.env.PORT || 3001
 
       app.use(cors())
 
-      // MIDDLEWARE
-      app.use(express.json()) // for parsing application/json
-
-      // ROUTES
-      app.get('/', (request: Request, response: Response) => {
-        response.send(`KassAapje backend is working`)
-      })
-
-      /**
-       *
-       * @description create the graphql schema with the imported resolvers
-       */
+      // GRAPHQL
       let schema: GraphQLSchema = {} as GraphQLSchema
 
       await buildSchema({
         resolvers: [OrganizationResolver, RegisterResolver, ProductResolver],
+        // authChecker: customAuthChecker,
+        // authMode: 'null'
       }).then(_ => {
         schema = _
       })
@@ -61,6 +73,30 @@ import { ProductResolver } from './resolvers/ProductResolver';
           graphiql: true,
         })),
       )
+
+      // MIDDLEWARE
+      app.use(express.json()) // for parsing application/json
+      app.use(authMiddleware)
+
+      // ROUTES
+      app.get('/', (request: Request, response: Response) => {
+        response.send(`KassAapje backend is working`)
+      })
+
+      // SIGNUP
+      app.post('/signup', async (request: Request, response: Response) => {
+        const { email, password, name } = request.body
+
+        const user = await admin.auth().createUser({
+          email,
+          password,
+          displayName: name,
+        })
+
+        return response.json(user)
+      })
+
+      
 
       // APP START
       app.listen(port, () => {
