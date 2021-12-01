@@ -15,7 +15,7 @@
     <div class="c-sidebar-profile-icon">
       <AccountCircleOutline />
     </div>
-    <div class="c-sidebar-profile-name">Michieltje</div>
+    <div class="c-sidebar-profile-name">Michiel</div>
   </div>
 
   <div class="c-sidebar-logout">

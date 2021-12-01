@@ -16,32 +16,39 @@
     font-weight: 700;
 
     padding-top: 0.5em;
-    padding-top: 0.5em;
     padding-bottom: 0.5em;
   }
 
   &-profile {
     display: flex;
-    justify-content: space-between;
-    padding-left: 1.5em;
-    padding-right: 1.5em;
+    align-items: center;
+    padding-left: 1em;
+    padding-right: 1em;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
-    &-icon svg {
-      color: map-get($colors-neutral, '100');
-      width: 2em;
-      height: 2em;
+
+    &-icon {
+      display: flex;
+      align-items: center;
+      padding-left: 1em;
+      padding-right: 1em;
+
+      svg {
+        color: map-get($colors-neutral, '100');
+        width: 2em;
+        height: 2em;
+      }
     }
 
     &-name {
       color: map-get($colors-neutral, '100');
-      font-size: rem(24px);
+
+      font-size: rem(20px);
       font-weight: 400;
 
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-
     }
 
     &:hover {
@@ -52,21 +59,27 @@
 
   &-logout {
     display: flex;
-    justify-content: space-between;
-    padding-left: 1.5em;
-    padding-right: 1.5em;
+    align-items: center;
+    padding-left: 1em;
+    padding-right: 1em;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
 
-    &-icon svg {
-      color: map-get($colors-neutral, '100');
-      width: 2em;
-      height: 2em;
-    }
+    &-icon {
+      display: flex;
+      align-items: center;
+      padding-left: 1em;
+      padding-right: 1em;
 
+      svg {
+        color: map-get($colors-neutral, '100');
+        width: 2em;
+        height: 2em;
+      }
+    }
     &-text {
       color: map-get($colors-neutral, '100');
-      font-size: rem(24px);
+      font-size: rem(20px);
       font-weight: 400;
     }
 
@@ -160,29 +173,40 @@
   }
 
   &-collapse {
+    
     padding-top: 0.5em;
     padding-bottom: 0.5em;
+    width: inherit;
     position: absolute;
     bottom: 0;
+    
 
     &-button {
-      display: flex;
-      justify-content: space-between;
-      width: 90%;
-      padding-left: 1.5em;
-      padding-right: 1.5em;
-      padding-top: 0.5em;
-      // background-color: hotpink;
+    display: flex;
+    align-items: center;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    
 
-      &-icon svg {
-        width: 2em;
-        height: 2em;
-        color: map-get($colors-neutral, '100');
+      &-icon {
+        display: flex;
+        align-items: center;
+        padding-left: 1em;
+        padding-right: 1em;
+
+        svg {
+          color: map-get($colors-neutral, '100');
+          width: 2em;
+          height: 2em;
+          
+        }
       }
 
       &-text {
         color: map-get($colors-neutral, '100');
-        font-size: rem(22px);
+        font-size: rem(20px);
         font-weight: 400;
       }
       &:hover {
@@ -190,7 +214,5 @@
         background-color: map-get($colors-theme, 'selection');
       }
     }
-
-    
   }
 }
