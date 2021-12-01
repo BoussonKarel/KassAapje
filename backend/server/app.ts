@@ -87,7 +87,7 @@ import { OrganizationResolver } from './resolvers/OrganizationResolver'
       // APP START
       app.listen(port, () => {
         console.info(
-          `-x-x-x-x-x-\nKassAapje backend 🧾🐵💰 \n>>> http://localhost:${port}/v1\n-x-x-x-x-x`,
+          `\nKassAapje backend 🧾🐵💰 \n>>> http://localhost:${port}/v1\n`,
         )
       })
     })

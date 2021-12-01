@@ -31,3 +31,11 @@ export class UserOrganization extends BaseEntity {
   @JoinColumn({ name: 'role_id' })
   role?: Role
 }
+
+export class CreateUserOrganization {
+  user?: User
+
+  organization?: Organization
+
+  role?: Role
+}
