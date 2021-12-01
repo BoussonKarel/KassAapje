@@ -15,7 +15,7 @@
     <div class="c-sidebar-profile-icon">
       <AccountCircleOutline />
     </div>
-    <div class="c-sidebar-profile-name">Michiel</div>
+    <div class="c-sidebar-profile-name">Michieltje</div>
   </div>
 
   <div class="c-sidebar-logout">
@@ -34,38 +34,43 @@
     </div>
 
     <ul class="c-sidebar-organisations-list">
-      <div class="c-sidebar-organisations-list-title">
-        <li class="c-sidebar-organisations-list-title-text">Scouts Beselare</li>
-        <div class="c-sidebar-organisations-list-title-icon">
+      <div class="c-sidebar-organisations-list-org">
+        <div class="c-sidebar-organisations-list-org-title">
+          <li class="c-sidebar-organisations-list-org-title-text">Scouts Beselare</li>
+          <div class="c-sidebar-organisations-list-org-title-icon">
+            <ChevronDown />
+          </div>
+        </div>
+  
+        <ul>
+          <li class="c-sidebar-organisations-list-org-item">Kerstmarkt</li>
+          <li class="c-sidebar-organisations-list-org-item">Pasta Avond</li>
+          <li class="c-sidebar-organisations-list-org-item">Lorem</li>
+          <li class="c-sidebar-organisations-list-org-item">Ipsum</li>
+        </ul>
+      </div>
+     
+      <div class="c-sidebar-organisations-list-org-title">
+        <li class="c-sidebar-organisations-list-org-title-text">De Kouter</li>
+        <div class="c-sidebar-organisations-list-org-title-icon">
           <ChevronDown />
         </div>
       </div>
 
       <ul>
-        <li class="c-sidebar-organisations-list-item">Kerstmarkt</li>
-        <li class="c-sidebar-organisations-list-item">Pasta Avond</li>
-        <li class="c-sidebar-organisations-list-item">Lorem</li>
-        <li class="c-sidebar-organisations-list-item">Ipsum</li>
-      </ul>
-      <div class="c-sidebar-organisations-list-title">
-        <li class="c-sidebar-organisations-list-title-text">De Kouter</li>
-        <div class="c-sidebar-organisations-list-title-icon">
-          <ChevronDown />
-        </div>
-      </div>
-
-      <ul>
-        <li class="c-sidebar-organisations-list-item">Blikkefeest</li>
-        <li class="c-sidebar-organisations-list-item">Girls Night</li>
-        <li class="c-sidebar-organisations-list-item">Tea Day</li>
+        <li class="c-sidebar-organisations-list-org-item">Blikkefeesten</li>
+        <li class="c-sidebar-organisations-list-org-item">Girls Night</li>
+        <li class="c-sidebar-organisations-list-org-item">Tea Day</li>
       </ul>
     </ul>
+  </div>
 
-    <div class="c-sidebar-collapse">
-      <div class="c-sidebar-collapse-icon">
+  <div class="c-sidebar-collapse">
+    <div class="c-sidebar-collapse-button">
+      <div class="c-sidebar-collapse-button-icon">
         <ArrowCollapseRight />
       </div>
-      <div class="c-sidebar-collapse-text">Verkleinen</div>
-    </div>
+      <div class="c-sidebar-collapse-button-text">Verkleinen</div>
+    </div> 
   </div>
 </div>

@@ -1,5 +1,7 @@
 .c-sidebar {
   background-color: map-get($colors-theme, 'base');
+  display: flex;
+  flex-direction: column;
   width: $menu-width;
   height: 100vh;
   margin: none;
@@ -14,21 +16,32 @@
     font-weight: 700;
 
     padding-top: 0.5em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
   }
 
   &-profile {
     display: flex;
     justify-content: space-between;
-    padding: 1.5em;
-
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
     &-icon svg {
       color: map-get($colors-neutral, '100');
+      width: 2em;
+      height: 2em;
     }
 
     &-name {
       color: map-get($colors-neutral, '100');
       font-size: rem(24px);
-      font-weight: 500;
+      font-weight: 400;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
     }
 
     &:hover {
@@ -40,45 +53,26 @@
   &-logout {
     display: flex;
     justify-content: space-between;
-    padding: 1.5em;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
 
     &-icon svg {
       color: map-get($colors-neutral, '100');
-    }
-
-    &-text {
-      color: map-get($colors-neutral, '100');
-      font-size: rem(24px);
-      font-weight: 500;
-    }
-
-    &:hover {
-      background-color: map-get($colors-theme, 'selection');
-      cursor: pointer;
-    }
-  }
-
-  &-collapse {
-    display: flex;
-    justify-content: center;
-    padding: 1em;
-
-    &-icon svg {
-      padding-right: 3em;
       width: 2em;
       height: 2em;
-      color: map-get($colors-neutral, '100');
     }
 
     &-text {
       color: map-get($colors-neutral, '100');
       font-size: rem(24px);
-      font-weight: 500;
+      font-weight: 400;
     }
 
     &:hover {
-      cursor: pointer;
       background-color: map-get($colors-theme, 'selection');
+      cursor: pointer;
     }
   }
 
@@ -86,43 +80,117 @@
     color: map-get($colors-neutral, '100');
 
     &-title {
+      display: flex;
+      justify-content: space-between;
+      padding-left: 1em;
+      padding-right: 1em;
+      margin-left: 0.5em;
+      margin-top: 1em;
+      margin-bottom: -1em;
+
+      font-size: rem(20px);
+
       &:hover {
         cursor: pointer;
-        background-color: map-get($colors-theme, 'selection');
       }
 
       &-text {
+        color: map-get($colors-neutral, '100');
       }
 
       &-icon svg {
         color: map-get($colors-neutral, '100');
+        width: 1.5em;
+        height: 1.5em;
       }
     }
 
     &-list {
+      display: flex;
+      flex-direction: column;
       list-style: none;
+      font-size: rem(16px);
 
-      &-title {
-        list-style: none;
-        &:hover {
-          cursor: pointer;
-          background-color: map-get($colors-theme, 'selection');
-        }
-        &-text {
+      &-org {
+        margin-bottom: 0.5em;
+
+        &-title {
+          list-style: none;
+          display: flex;
+          justify-content: space-between;
+          padding-left: 1em;
+          padding-right: 1em;
+
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+          &:hover {
+            cursor: pointer;
+          }
+          &-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          &-icon svg {
+            color: map-get($colors-neutral, '100');
+            width: 1.5em;
+            height: 1.5em;
+          }
         }
 
-        &-icon svg {
-          color: map-get($colors-neutral, '100');
-        }
-      }
+        &-item {
+          list-style: none;
+          padding-left: 1em;
+          padding-top: 2px;
+          padding-bottom: 2px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
 
-      &-item {
-        list-style: none;
-        &:hover {
-          cursor: pointer;
-          background-color: map-get($colors-theme, 'selection');
+          &:hover {
+            cursor: pointer;
+            background-color: map-get($colors-theme, 'selection');
+            border-radius: 20px 0 0 20px;
+          }
         }
       }
     }
+  }
+
+  &-collapse {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    position: absolute;
+    bottom: 0;
+
+    &-button {
+      display: flex;
+      justify-content: space-between;
+      width: 90%;
+      padding-left: 1.5em;
+      padding-right: 1.5em;
+      padding-top: 0.5em;
+      // background-color: hotpink;
+
+      &-icon svg {
+        width: 2em;
+        height: 2em;
+        color: map-get($colors-neutral, '100');
+      }
+
+      &-text {
+        color: map-get($colors-neutral, '100');
+        font-size: rem(22px);
+        font-weight: 400;
+      }
+      &:hover {
+        cursor: pointer;
+        background-color: map-get($colors-theme, 'selection');
+      }
+    }
+
+    
   }
 }
