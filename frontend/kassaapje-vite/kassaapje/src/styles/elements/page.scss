@@ -4,6 +4,7 @@ html {
   color: map-get($colors-neutral, "900");
 
   fill: map-get($colors-neutral, "800");
+  background-color: map-get($colors-neutral, '200');
 
   min-height: 100vh;
 
