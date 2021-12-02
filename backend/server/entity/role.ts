@@ -1,6 +1,7 @@
-import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
-import { UserOrganization } from './userOrganization'
-import { UserRegisterRole } from './userRegisterRole'
+import { Expose } from 'class-transformer'
+import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm'
+import { Organization } from './organization'
+import { Register } from './register'
 
 export const enum roleTypes {
   REGISTER,
@@ -10,10 +11,10 @@ export const enum roleTypes {
 @Entity('roles')
 export class Role extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
-  role_id!: string
+  role_id?: string
 
   @Column()
-  name!: string
+  name?: string // eg. OWNER, USER...
 
   @Column('text')
   description?: string
@@ -21,9 +22,13 @@ export class Role extends BaseEntity {
   @Column()
   type?: roleTypes
 
-  @OneToMany(() => UserOrganization, uo => uo.role)
-  userOrganization?: UserOrganization
+  @ManyToOne(() => Organization, { nullable: true})
+  @JoinColumn({ name: 'organization_id'})
+  @Expose({ name: 'organization_id' })
+  organization?: Organization
 
-  @OneToMany(() => UserRegisterRole, urr => urr.role)
-  userRegisterRole?: UserRegisterRole
+  @ManyToOne(() => Register, { nullable: true})
+  @JoinColumn({ name: 'register_id'})
+  @Expose({ name: 'register_id' })
+  register?: Register
 }

@@ -1,9 +1,6 @@
 import { Arg, Mutation, Query, Resolver } from 'type-graphql'
 import { EntityManager, getManager } from 'typeorm'
 import { Organization, OrganizationInput } from '../entity/organization'
-import { Role } from '../entity/role'
-import { User } from '../entity/user'
-import { CreateUserOrganization, UserOrganization } from '../entity/userOrganization'
 import { CurrentUser } from '../middleware/currentUserParamDecorator'
 
 @Resolver()
@@ -47,7 +44,7 @@ export class OrganizationResolver {
   @Mutation(() => Organization, { nullable: true })
   async addOrganizationWithCustomOwner(
     @Arg('organization') newOrganizationData: OrganizationInput,
-    @Arg('user_id') owner: User
+    @Arg('user_id') owner: string
   ): Promise<Organization> {
     const newOrganization: Organization = await this.manager.create(
       Organization,

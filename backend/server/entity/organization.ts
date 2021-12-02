@@ -3,12 +3,11 @@ import {
   BaseEntity,
   Column,
   Entity,
-  JoinColumn,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm'
-import { Register, RegisterInput } from './register'
-import { UserOrganization } from './userOrganization'
+import { Register } from './register'
+import { Role } from './role'
 
 @ObjectType()
 @Entity('organizations')
@@ -65,8 +64,8 @@ export class Organization extends BaseEntity {
   @OneToMany(() => Register, r => r.organization)
   registers?: Register[]
 
-  @OneToMany(() => UserOrganization, uo => uo.organization)
-  userOrganization?: UserOrganization
+  @OneToMany(() => Role, r => r.organization)
+  roles?: Role[]
 }
 
 @InputType('OrganizationInput')

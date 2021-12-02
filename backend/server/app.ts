@@ -27,6 +27,7 @@ import { graphqlHTTP } from 'express-graphql'
 import { RegisterResolver } from './resolvers/RegisterResolver'
 import { ProductResolver } from './resolvers/ProductResolver'
 import { OrganizationResolver } from './resolvers/OrganizationResolver'
+import { RoleResolver } from './resolvers/RoleResolver'
 
 (async () => {
   const connectionOptions: ConnectionOptions = await getConnectionOptions()
@@ -59,7 +60,7 @@ import { OrganizationResolver } from './resolvers/OrganizationResolver'
       let schema: GraphQLSchema = {} as GraphQLSchema
 
       await buildSchema({
-        resolvers: [OrganizationResolver, RegisterResolver, ProductResolver],
+        resolvers: [OrganizationResolver, RegisterResolver, ProductResolver, RoleResolver],
         // authChecker: customAuthChecker,
         // authMode: 'null'
       }).then(_ => {
