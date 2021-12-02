@@ -18,7 +18,6 @@ export class OrganizationResolver {
   @Mutation(() => Organization, { nullable: true })
   async addOrganization(
     @Arg('organization') newOrganizationData: OrganizationInput,
-    @CurrentUser() user: User
   ): Promise<Organization> {
     const newOrganization: Organization = await this.manager.create(
       Organization,
@@ -26,7 +25,6 @@ export class OrganizationResolver {
     )
 
     this.manager.save(newOrganization).then(async organization => {
-      console.log(user)
       // // Set this user as admin
       // const organizationOwnerData : CreateUserOrganization = {
       //   organization: organization,
@@ -63,16 +61,17 @@ export class OrganizationResolver {
   // -------
   @Query(() => [Organization], { nullable: true })
   async getOrganizations(
+    @CurrentUser() user: any
   ): Promise<Organization[]> {
+    
+    console.log({user})
     return await this.manager.find(Organization, { relations: ['registers'] })
   }
 
   @Query(() => Organization, { nullable: true })
   async getOrganizationById(
-    @Arg('id') id: string,
-    @CurrentUser() user: User
+    @Arg('id') id: string
   ): Promise<Organization | undefined | null> {
-    console.log("Current user: ", user)
     return await this.manager.findOne(Organization, id, {relations: ['registers']})
   }
 

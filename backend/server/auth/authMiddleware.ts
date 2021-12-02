@@ -7,7 +7,7 @@ async function authMiddleware(
   response: Response,
   next: NextFunction,
 ) {
-  const { error, statusCode } = addCurrentUserToRequest(request);
+  const { error, statusCode } = await addCurrentUserToRequest(request);
 
   if (error && statusCode) {
     return response.send({ message: error }).status(statusCode)

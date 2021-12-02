@@ -7,7 +7,7 @@ import { User } from '../entity/user'
 /**
  *@description checks if a user is authorized to use the requested query or mutation based on their role
  */
-export const addCurrentUserToRequest = (request: Request) : {error?: string, statusCode?: number, success?: boolean} => {
+export const addCurrentUserToRequest = async (request: Request) : Promise<{error?: string, statusCode?: number, success?: boolean}> => {
   const headerToken = request.headers.authorization
 
   if (!headerToken) {
@@ -21,7 +21,7 @@ export const addCurrentUserToRequest = (request: Request) : {error?: string, sta
 
   const token = headerToken.split(' ')[1]
 
-  verifyToken(token)
+  return await verifyToken(token)
     .then(claims => {
       ;(request as any).currentUser = claims
       console.log({ claims })
@@ -32,8 +32,6 @@ export const addCurrentUserToRequest = (request: Request) : {error?: string, sta
 
       return { error: "Could not authorize", statusCode: 403 }
     })
-
-    return {success: false};
 }
 
 export const customAuthChecker: AuthChecker<Context> = async ({ context }, roles) =>

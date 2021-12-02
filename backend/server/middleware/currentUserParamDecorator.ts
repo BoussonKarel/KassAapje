@@ -9,11 +9,11 @@ export const CurrentUser = () => {
     async ({context}) => {
       const manager: EntityManager = getManager()
 
-      const {success} = addCurrentUserToRequest(context.request)
+      const {success} = await addCurrentUserToRequest(context.request)
 
       if (!success) return undefined;
 
-      console.log(context.request.currentUser)
+      return context.request.currentUser;
   
       return await manager.findOne(User, {
         user_id: context.request.currentUser.uid,
