@@ -1,29 +1,44 @@
 .c-cardlist {
-display: grid;
-grid-template-columns: 350px 350px 350px;
-margin-top: 2em;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  margin-top: 2em;
 
-gap: 1em;
+  gap: 2em;
 }
 
 .c-organisation-card {
-    background-color: hotpink;
-    width: 250px;
-    height: 150px;
+  width: 380px;
+  height: 250px;
+  border-radius: $global-border-radius;
 
-    &-text {
-        color: white;
-        // font-family: inherit;
-    }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: rem(32px);
+  font-weight: 500;
+
+  background-color: #e97b0080;
+  color: #e97b00;
+  box-shadow: $default-shadow;
 }
 
 .c-register-card {
-    background-color: hotpink;
-    
+  width: 380px;
+  height: 250px;
+  border-radius: $global-border-radius;
+  box-shadow: $default-shadow;
 }
 
 .c-addcard {
-    background-color: lime;
-    width: 250px;
-    height: 150px;
+  width: 380px;
+  height: 250px;
+  border-radius: $global-border-radius;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: map-get($colors-neutral, '200');
+  box-shadow: $default-shadow;
 }

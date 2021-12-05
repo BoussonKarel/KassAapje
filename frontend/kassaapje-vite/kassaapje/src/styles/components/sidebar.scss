@@ -173,22 +173,19 @@
   }
 
   &-collapse {
-    
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     width: inherit;
     position: absolute;
     bottom: 0;
-    
 
     &-button {
-    display: flex;
-    align-items: center;
-    padding-left: 1em;
-    padding-right: 1em;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    
+      display: flex;
+      align-items: center;
+      padding-left: 1em;
+      padding-right: 1em;
+      padding-top: 0.5em;
+      padding-bottom: 0.5em;
 
       &-icon {
         display: flex;
@@ -200,7 +197,6 @@
           color: map-get($colors-neutral, '100');
           width: 2em;
           height: 2em;
-          
         }
       }
 
