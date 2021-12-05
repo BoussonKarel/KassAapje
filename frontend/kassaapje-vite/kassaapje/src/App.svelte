@@ -12,7 +12,4 @@
   <div class="c-organisation-overview">
     <OrganisationOverview/>
   </div>
-  
-  
-
 </main>
