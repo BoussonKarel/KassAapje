@@ -8,7 +8,7 @@
   import ArrowCollapse from 'svelte-material-icons/ArrowCollapse.svelte'
 </script>
 
-<div class="c-sidebar">
+<div >
   <div class="c-sidebar-title">KassAapje</div>
 
   <div class="c-sidebar-profile">

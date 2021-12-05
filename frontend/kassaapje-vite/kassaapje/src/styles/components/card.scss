@@ -1,0 +1,29 @@
+.c-cardlist {
+display: grid;
+grid-template-columns: 350px 350px 350px;
+margin-top: 2em;
+
+gap: 1em;
+}
+
+.c-organisation-card {
+    background-color: hotpink;
+    width: 250px;
+    height: 150px;
+
+    &-text {
+        color: white;
+        // font-family: inherit;
+    }
+}
+
+.c-register-card {
+    background-color: hotpink;
+    
+}
+
+.c-addcard {
+    background-color: lime;
+    width: 250px;
+    height: 150px;
+}
