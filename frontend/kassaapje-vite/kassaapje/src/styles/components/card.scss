@@ -27,7 +27,75 @@
   width: 380px;
   height: 250px;
   border-radius: $global-border-radius;
+  display: grid;
+  grid-template-rows: 50% 50%;
+
+  font-size: rem(32px);
+  font-weight: 500;
+
+  background-color: #088f8f80;
+
   box-shadow: $default-shadow;
+
+  &-title {
+    padding-left: 1rem;
+    margin-top: 20%;
+    color: #088f8f;
+  }
+
+  &-info {
+    background-color: white;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 0 0 $global-border-radius $global-border-radius;
+    font-size: $base-font-size;
+    font-weight: 400;
+
+    overflow: hidden;
+
+    &-desc {
+      color: map-get($colors-neutral, '600');
+      margin-top: .5rem;
+      margin-bottom: .8rem;
+    }
+
+    &-org {
+      color: #088f8f;
+      font-weight: 700;
+      margin-bottom: .5rem;
+    }
+
+    &-admin {
+      display: flex;
+
+      &-name {
+        color: #088f8f;
+        padding-left: 0.5rem;
+      }
+    }
+  }
+
+  &-icon {
+    &-cog {
+      color: white;
+      float: right;
+      padding: 0.5rem;
+
+      svg {
+        width: 1em;
+        height: 1em;
+      }
+    }
+
+    &-star {
+      color: #088f8f;
+
+      svg {
+        width: 1.5em;
+        height: 1.5em;
+      }
+    }
+  }
 }
 
 .c-addcard {
@@ -41,4 +109,17 @@
 
   background-color: map-get($colors-neutral, '200');
   box-shadow: $default-shadow;
+
+  &-icon {
+    display: flex;
+    align-items: center;
+    padding-left: 1em;
+    padding-right: 1em;
+
+    svg {
+      color: map-get($colors-theme, 'base');
+      width: 4em;
+      height: 4em;
+    }
+  }
 }
