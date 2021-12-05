@@ -1,8 +1,7 @@
 <script lang="ts">
   import './styles/screen.scss'
   import Sidebar from './components/sidebar.svelte'
-  import OrganisationOverview from './components/pages/organisationOverview.svelte';
-
+  import OrganisationOverview from './components/pages/organisationOverview.svelte'
 </script>
 
 <main class="c-app">
@@ -10,6 +9,7 @@
     <Sidebar />
   </aside>
   <div class="c-organisation-overview">
-    <OrganisationOverview/>
+    <OrganisationOverview />
   </div>
+  <div />
 </main>
