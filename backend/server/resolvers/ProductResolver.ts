@@ -2,6 +2,7 @@ import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import { EntityManager, getManager } from "typeorm";
 import { Product, ProductInput } from "../entity/product";
 import { Register } from "../entity/register";
+import { Variation } from "../entity/variation";
 
 @Resolver()
 export class ProductResolver {
@@ -22,10 +23,36 @@ export class ProductResolver {
       Product,
       productData
     )
-    newProduct.register = new Register();
-    newProduct.register.register_id = productData.register_id;
+    newProduct.register = await this.manager.findOneOrFail(Register, productData.register_id)
+
+    // ADD AND SAVE VARIATIONS
+    if (productData.variations) {
+      const variations : Variation[] = [];
+      for (const variationInput of productData.variations) {
+        const newVariation : Variation = await this.manager.create(
+          Variation,
+          variationInput
+        )
+
+        // newVariation.product = newProduct;
+
+        variations.push(newVariation);
+
+        // console.log("New Variation: ", newVariation)
+
+        // // SAVE AND ADD VARIATION
+        // const savedVariation = await this.manager.save(newVariation)
+
+        // console.log("Saved Variation: ", savedVariation)
+      }
+
+      newProduct.variations = variations;
+    }
     
-    return await this.manager.save(newProduct)
+    // SAVE PRODUCT
+    const savedProduct = await this.manager.save(newProduct)
+
+    return savedProduct;
   }
 
   // -------
@@ -40,7 +67,7 @@ export class ProductResolver {
 
   @Query(() => Product, { nullable: true })
   async getProductById(
-    @Arg('product_id') id: string,
+    @Arg('id') id: string,
   ): Promise<Product | undefined | null> {
     return await this.manager.findOne(Product, id, {relations: ['variations']})
   }

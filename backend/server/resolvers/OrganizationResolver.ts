@@ -1,4 +1,4 @@
-import { Arg, Mutation, Query, Resolver } from 'type-graphql'
+import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { EntityManager, getManager } from 'typeorm'
 import { Organization, OrganizationInput } from '../entity/organization'
 
@@ -30,7 +30,7 @@ export class OrganizationResolver {
 
   @Query(() => Organization, { nullable: true })
   async getOrganizationById(
-    @Arg('organization_id') id: string,
+    @Arg('id') id: string,
   ): Promise<Organization | undefined | null> {
     return await this.manager.findOne(Organization, id, {relations: ['registers']})
   }

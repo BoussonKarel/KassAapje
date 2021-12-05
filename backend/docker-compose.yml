@@ -1,6 +1,18 @@
 version: '3.4'
 
 services:
+  # backend:
+  #   image: kassaapje-backend:latest
+  #   build: .
+  #   ports:
+  #     - 8888:8888
+  #   environment:
+  #     - GOOGLE_APPLICATION_CREDENTIALS="auth/service-account.json"
+  #   env_file:
+  #     - docker.ormconfig.env
+  #   volumes:
+  #     - ./server/auth/service-account.json:/usr/app/auth/service-account.json
+
   mariadb:
     image: mariadb:10.6.2
     env_file:

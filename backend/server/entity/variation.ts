@@ -17,7 +17,7 @@ import { Product } from './product'
 export class Variation extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn('uuid')
-  product_id?: string
+  variation_id?: string
 
   @Field(() => Product)
   @ManyToOne(() => Product, p => p.variations)

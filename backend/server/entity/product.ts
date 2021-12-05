@@ -46,7 +46,7 @@ export class Product extends BaseEntity {
   allow_backorders?: boolean
 
   @Field(() => [Variation], { nullable: true})
-  @OneToMany(() => Variation, v => v.product)
+  @OneToMany(() => Variation, v => v.product, {cascade: ['insert', 'update']})
   variations?: Variation[]
 
   @Field(() => [OrderItem], { nullable: true})

@@ -1,5 +1,6 @@
 // app.ts
 import express, { Request, Response } from 'express'
+// Database, typeorm
 import { createDatabase } from 'typeorm-extension'
 import {
   Connection,
@@ -8,18 +9,29 @@ import {
   getConnectionOptions,
 } from 'typeorm'
 import seedDatabase from './seeders/seeder'
+
+// Firebase / auth
+import admin from 'firebase-admin'
+import dotenv from 'dotenv'
+import authMiddleware from './auth/authMiddleware'
+
+// CORS
 import cors from 'cors'
 
-;import { GraphQLSchema } from 'graphql';
-import { OrganizationResolver } from './resolvers/OrganizationResolver';
-import { buildSchema } from 'type-graphql';
-import { graphqlHTTP } from 'express-graphql';
-import { RegisterResolver } from './resolvers/RegisterResolver';
-import { ProductResolver } from './resolvers/ProductResolver';
+// GraphQL
+import { GraphQLSchema } from 'graphql'
+import { buildSchema } from 'type-graphql'
+import { graphqlHTTP } from 'express-graphql'
+
+// Resolvers
+import { RegisterResolver } from './resolvers/RegisterResolver'
+import { ProductResolver } from './resolvers/ProductResolver'
+import { OrganizationResolver } from './resolvers/OrganizationResolver'
+
 (async () => {
   const connectionOptions: ConnectionOptions = await getConnectionOptions()
 
-  // Create the database before we make the connection. This will also add the tables
+  // CREATE DATABASE+TABLES, CONNECT, SEED DATABASE
   createDatabase({ ifNotExist: true }, connectionOptions)
     .then(() => console.log('Database has been created!'))
     .then(createConnection)
@@ -30,29 +42,31 @@ import { ProductResolver } from './resolvers/ProductResolver';
       const app = express(),
         port = process.env.PORT || 3001
 
+      // CORS
       app.use(cors())
+
+      // FIREBASE-ADMIN
+      dotenv.config() // This will load in the GOOGLE_APPLICATION_CREDENTIALS
+
+      admin.initializeApp({
+        credential: admin.credential.applicationDefault(),
+      })
 
       // MIDDLEWARE
       app.use(express.json()) // for parsing application/json
 
-      // ROUTES
-      app.get('/', (request: Request, response: Response) => {
-        response.send(`KassAapje backend is working`)
-      })
-
-      /**
-       *
-       * @description create the graphql schema with the imported resolvers
-       */
+      // GRAPHQL
       let schema: GraphQLSchema = {} as GraphQLSchema
 
       await buildSchema({
         resolvers: [OrganizationResolver, RegisterResolver, ProductResolver],
+        // authChecker: customAuthChecker,
+        // authMode: 'null'
       }).then(_ => {
         schema = _
       })
 
-      // GraphQL init middleware
+      // GRAPHQL INIT MIDDLEWARE
       app.use(
         '/v1/', // Url, do you want to keep track of a version?
         graphqlHTTP((request, response) => ({
@@ -62,10 +76,18 @@ import { ProductResolver } from './resolvers/ProductResolver';
         })),
       )
 
+      // AUTH
+      app.use(authMiddleware)
+
+      // ROUTES
+      app.get('/', (request: Request, response: Response) => {
+        response.send(`KassAapje backend is working`)
+      })
+
       // APP START
       app.listen(port, () => {
         console.info(
-          `\nKassAapje backend 🧾🐵💰 \n>>> http://localhost:${port}/v1`,
+          `-x-x-x-x-x-\nKassAapje backend 🧾🐵💰 \n>>> http://localhost:${port}/v1\n-x-x-x-x-x`,
         )
       })
     })
