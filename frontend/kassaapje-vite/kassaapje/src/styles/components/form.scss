@@ -1,0 +1,39 @@
+.c-form {
+  display: grid;
+  grid-template-columns: 50% 40%;
+  margin-top: 2em;
+  gap: 40px;
+
+  &-textinputs {
+      display: flex;
+      flex-direction: column;
+      
+  }
+
+  &-altinputs {
+      margin-left: 50%;
+  }
+  
+
+  
+
+  &-label {
+    color: map-get($colors-neutral, '700');
+    font-size: rem(18px);
+  }
+  &-textinput {
+    background-color: white;
+    border-radius: calc($global-border-radius / 2);
+    border: solid 1px;
+    border-color: map-get($colors-neutral, '800');
+    height: 2em;
+    width: inherit;
+    margin-bottom: 16px;
+    padding-left: 8px;
+
+    &::placeholder {
+      color: map-get($colors-neutral, '600');
+      font-style: italic;
+    }
+  }
+}
