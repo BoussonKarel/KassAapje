@@ -62,18 +62,27 @@ import authenticateRequests from './auth/authenticateRequests'
 
       app.post('/signup', async (request: Request, response: Response) => {
         const manager : EntityManager = getManager();
+
         const {email, password, name} = request.body;
 
+        // Create firebase user
         await admin.auth().createUser({
           email, password, displayName: name
-        }).then(async user => {
-          console.log(user)
-          const newUser = manager.create(User, user);
-          const savedUser = await manager.save(newUser);
-          response.send(savedUser);
+        }).then(async firebaseUser => {
+          // User created, add to database
+          const newUser = manager.create(User, firebaseUser);
+          await manager.save(newUser).then(savedUser => {
+            console.info("✅ Succesfully created user")
+            response.send(savedUser).status(201);
+          }).catch(async error => {
+            console.error("⛔ Could not save new user to database:", error)
+            // Remove user from firebase?
+            await admin.auth().deleteUser(firebaseUser.uid)
+            response.send("Could not save new user to database.").status(500)
+          })
         }).catch(error => {
-          console.error(error)
-          response.send({ message: error }).status(500);
+          console.error("⛔ Could not register user at firebase:", error)
+            response.send("Could not register user at firebase.").status(500)
         })
       })
 
