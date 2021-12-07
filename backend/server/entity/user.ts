@@ -1,25 +1,21 @@
-// import { Field, ID, InputType, ObjectType } from 'type-graphql'
-// import {
-//   BaseEntity, Column, Entity, JoinColumn, ObjectIdColumn, OneToMany, PrimaryColumn,
-// } from 'typeorm'
-// import { UserOrganization } from './userOrganization'
-// import { UserRegisterRole } from './userRegisterRole'
+import { Field, ID, InputType, ObjectType } from 'type-graphql'
+import {
+  BaseEntity, Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryColumn,
+} from 'typeorm'
+import { Permission } from './permission'
 
-// @ObjectType()
-// @InputType('UserInput')
-// @Entity('users')
-// export class User extends BaseEntity {
-//   @Field(() => ID)
-//   @PrimaryColumn()
-//   user_id?: string
+@ObjectType()
+@InputType('UserInput')
+@Entity('users')
+export class User extends BaseEntity {
+  @Field(() => ID)
+  @PrimaryColumn()
+  uid!: string
 
-//   @Field()
-//   @Column()
-//   email?: string
+  @Field()
+  @Column()
+  email?: string
 
-//   @OneToMany(() => UserOrganization, uo => uo.user)
-//   userOrganization?: UserOrganization
-
-//   @OneToMany(() => UserRegisterRole, urr => urr.user)
-//   userRegisterRole?: UserRegisterRole
-// }
+  @OneToMany(() => Permission, p => p.user)
+  permissions?: Permission[]
+}

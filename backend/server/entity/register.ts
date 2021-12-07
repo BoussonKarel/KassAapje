@@ -2,25 +2,27 @@ import { Expose } from 'class-transformer'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 import {
   BaseEntity,
+  BeforeInsert,
   Column,
   Entity,
   JoinColumn,
   ManyToOne,
   OneToMany,
+  PrimaryColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm'
+import { generateUID } from '../helpers/generateUID'
 import { Order } from './order'
 import { Organization } from './organization'
+import { Permission } from './permission'
 import { Product } from './product'
-import { Role } from './role'
 
 @ObjectType()
 // @InputType('RegisterInput')
 @Entity('registers')
 export class Register extends BaseEntity {
-  @Field(() => ID)
-  @PrimaryGeneratedColumn('uuid')
-  register_id?: string
+  @PrimaryColumn({length: 6, unique: true})
+  register_id: string = generateUID();
 
   @Field(() => Organization, { nullable: true})
   @ManyToOne(() => Organization, o => o.registers)
@@ -48,8 +50,8 @@ export class Register extends BaseEntity {
   @OneToMany(() => Order, o => o.register)
   orders?: Order[]
 
-  @OneToMany(() => Role, r => r.register)
-  roles?: Role[]
+  @OneToMany(() => Permission, p => p.register)
+  permissions?: Permission[]
 }
 
 @InputType('RegisterInput')

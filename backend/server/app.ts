@@ -6,14 +6,15 @@ import {
   Connection,
   ConnectionOptions,
   createConnection,
+  EntityManager,
   getConnectionOptions,
+  getManager,
 } from 'typeorm'
 import seedDatabase from './seeders/seeder'
 
 // Firebase / auth
 import admin from 'firebase-admin'
 import dotenv from 'dotenv'
-import authMiddleware from './auth/authMiddleware'
 
 // CORS
 import cors from 'cors'
@@ -28,6 +29,9 @@ import { RegisterResolver } from './resolvers/RegisterResolver'
 import { ProductResolver } from './resolvers/ProductResolver'
 import { OrganizationResolver } from './resolvers/OrganizationResolver'
 import { RoleResolver } from './resolvers/RoleResolver'
+import { User } from './entity/user'
+import { customAuthChecker } from './auth/customAuthChecker'
+import authenticateRequests from './auth/authenticateRequests'
 
 (async () => {
   const connectionOptions: ConnectionOptions = await getConnectionOptions()
@@ -56,13 +60,30 @@ import { RoleResolver } from './resolvers/RoleResolver'
       // MIDDLEWARE
       app.use(express.json()) // for parsing application/json
 
+      app.post('/signup', async (request: Request, response: Response) => {
+        const manager : EntityManager = getManager();
+        const {email, password, name} = request.body;
+
+        await admin.auth().createUser({
+          email, password, displayName: name
+        }).then(async user => {
+          console.log(user)
+          const newUser = manager.create(User, user);
+          const savedUser = await manager.save(newUser);
+          response.send(savedUser);
+        }).catch(error => {
+          console.error(error)
+          response.send({ message: error }).status(500);
+        })
+      })
+
       // GRAPHQL
       let schema: GraphQLSchema = {} as GraphQLSchema
 
       await buildSchema({
         resolvers: [OrganizationResolver, RegisterResolver, ProductResolver, RoleResolver],
-        // authChecker: customAuthChecker,
-        // authMode: 'null'
+        authChecker: customAuthChecker,
+        authMode: 'null'
       }).then(_ => {
         schema = _
       })
@@ -77,8 +98,8 @@ import { RoleResolver } from './resolvers/RoleResolver'
         })),
       )
 
-      // AUTH
-      app.use(authMiddleware)
+      // AUTHENTICATE REQUESTS AFTER THIS
+      app.use(authenticateRequests)
 
       // ROUTES
       app.get('/', (request: Request, response: Response) => {

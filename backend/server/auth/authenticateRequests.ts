@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express'
 import { verifyToken } from '.'
 import { addCurrentUserToRequest } from './customAuthChecker'
 
-async function authMiddleware(
+async function authenticateRequests(
   request: Request,
   response: Response,
   next: NextFunction,
@@ -16,4 +16,4 @@ async function authMiddleware(
   next()
 }
 
-export default authMiddleware
+export default authenticateRequests

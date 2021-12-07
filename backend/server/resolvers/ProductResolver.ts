@@ -34,16 +34,7 @@ export class ProductResolver {
           variationInput
         )
 
-        // newVariation.product = newProduct;
-
         variations.push(newVariation);
-
-        // console.log("New Variation: ", newVariation)
-
-        // // SAVE AND ADD VARIATION
-        // const savedVariation = await this.manager.save(newVariation)
-
-        // console.log("Saved Variation: ", savedVariation)
       }
 
       newProduct.variations = variations;

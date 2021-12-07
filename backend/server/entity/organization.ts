@@ -1,20 +1,22 @@
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 import {
   BaseEntity,
+  BeforeInsert,
   Column,
   Entity,
   OneToMany,
+  PrimaryColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm'
+import { generateUID } from '../helpers/generateUID';
+import { Permission } from './permission'
 import { Register } from './register'
-import { Role } from './role'
 
 @ObjectType()
 @Entity('organizations')
 export class Organization extends BaseEntity {
-  @Field(() => ID)
-  @PrimaryGeneratedColumn('uuid')
-  organization_id?: string
+  @PrimaryColumn({length: 6, unique: true})
+  organization_id: string = generateUID()
 
   @Field()
   @Column({ length: 100 })
@@ -60,12 +62,12 @@ export class Organization extends BaseEntity {
   @Column()
   email?: string
 
-  @Field(() => [Register], {nullable: true, })
+  @Field(() => [Register], {nullable: true})
   @OneToMany(() => Register, r => r.organization)
   registers?: Register[]
 
-  @OneToMany(() => Role, r => r.organization)
-  roles?: Role[]
+  @OneToMany(() => Permission, p => p.organization)
+  permissions?: Permission[]
 }
 
 @InputType('OrganizationInput')
