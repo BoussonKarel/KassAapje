@@ -1,9 +1,8 @@
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 import {
-  BaseEntity, Column, Entity, JoinColumn, ObjectIdColumn, OneToMany, PrimaryColumn,
+  BaseEntity, Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryColumn,
 } from 'typeorm'
-import { UserOrganization } from './userOrganization'
-import { UserRegisterRole } from './userRegisterRole'
+import { Permission } from './permission'
 
 @ObjectType()
 @InputType('UserInput')
@@ -11,15 +10,12 @@ import { UserRegisterRole } from './userRegisterRole'
 export class User extends BaseEntity {
   @Field(() => ID)
   @PrimaryColumn()
-  user_id?: string
+  uid!: string
 
   @Field()
   @Column()
   email?: string
 
-  @OneToMany(() => UserOrganization, uo => uo.user)
-  userOrganization?: UserOrganization
-
-  @OneToMany(() => UserRegisterRole, urr => urr.user)
-  userRegisterRole?: UserRegisterRole
+  @OneToMany(() => Permission, p => p.user)
+  permissions?: Permission[]
 }

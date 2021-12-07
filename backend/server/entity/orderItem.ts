@@ -10,6 +10,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm'
+import { generateUID } from '../helpers/generateUID'
 import { Order } from './order'
 import { Product } from './product'
 import { Register } from './register'

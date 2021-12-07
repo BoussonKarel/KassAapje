@@ -34,16 +34,7 @@ export class ProductResolver {
           variationInput
         )
 
-        // newVariation.product = newProduct;
-
         variations.push(newVariation);
-
-        // console.log("New Variation: ", newVariation)
-
-        // // SAVE AND ADD VARIATION
-        // const savedVariation = await this.manager.save(newVariation)
-
-        // console.log("Saved Variation: ", savedVariation)
       }
 
       newProduct.variations = variations;
@@ -62,14 +53,14 @@ export class ProductResolver {
   async getProducts(
     @Arg('register_id') registerId: string
   ): Promise<Product[]> {
-    return await this.manager.find(Product, {relations: ['variations']})
+    return await this.manager.find(Product)
   }
 
   @Query(() => Product, { nullable: true })
   async getProductById(
     @Arg('id') id: string,
   ): Promise<Product | undefined | null> {
-    return await this.manager.findOne(Product, id, {relations: ['variations']})
+    return await this.manager.findOne(Product, id)
   }
 
   // -------
