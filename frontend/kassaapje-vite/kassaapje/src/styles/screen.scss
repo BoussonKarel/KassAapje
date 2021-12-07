@@ -11,12 +11,19 @@
 @import "./generic/normalize.scss";
 
 // ELEMENTS
+@import "./elements/headers.scss";
+@import "./elements/page.scss";
+
+
 
 
 // OBJECTS
 
 // COMPONENTS
 @import "./components/sidebar.scss";
+@import "./components/app.scss";
+@import "./components/card.scss";
+
 
 
 

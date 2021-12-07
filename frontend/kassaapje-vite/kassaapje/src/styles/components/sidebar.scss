@@ -1,4 +1,218 @@
-.bar {
-  font-size: 50px;
-  color: orange;
+.c-sidebar {
+  background-color: map-get($colors-theme, 'base');
+  display: flex;
+  flex-direction: column;
+  width: $menu-width;
+  height: 100vh;
+  margin: none;
+  padding: none;
+
+  &-title {
+    color: map-get($colors-neutral, '100');
+    display: flex;
+    justify-content: center;
+
+    font-size: rem(32px);
+    font-weight: 700;
+
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+  }
+
+  &-profile {
+    display: flex;
+    align-items: center;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+
+    &-icon {
+      display: flex;
+      align-items: center;
+      padding-left: 1em;
+      padding-right: 1em;
+
+      svg {
+        color: map-get($colors-neutral, '100');
+        width: 2em;
+        height: 2em;
+      }
+    }
+
+    &-name {
+      color: map-get($colors-neutral, '100');
+
+      font-size: rem(20px);
+      font-weight: 400;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &:hover {
+      background-color: map-get($colors-theme, 'selection');
+      cursor: pointer;
+    }
+  }
+
+  &-logout {
+    display: flex;
+    align-items: center;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+
+    &-icon {
+      display: flex;
+      align-items: center;
+      padding-left: 1em;
+      padding-right: 1em;
+
+      svg {
+        color: map-get($colors-neutral, '100');
+        width: 2em;
+        height: 2em;
+      }
+    }
+    &-text {
+      color: map-get($colors-neutral, '100');
+      font-size: rem(20px);
+      font-weight: 400;
+    }
+
+    &:hover {
+      background-color: map-get($colors-theme, 'selection');
+      cursor: pointer;
+    }
+  }
+
+  &-organisations {
+    color: map-get($colors-neutral, '100');
+
+    &-title {
+      display: flex;
+      justify-content: space-between;
+      padding-left: 1em;
+      padding-right: 1em;
+      margin-left: 0.5em;
+      margin-top: 1em;
+      margin-bottom: -1em;
+
+      font-size: rem(20px);
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &-text {
+        color: map-get($colors-neutral, '100');
+      }
+
+      &-icon svg {
+        color: map-get($colors-neutral, '100');
+        width: 1.5em;
+        height: 1.5em;
+      }
+    }
+
+    &-list {
+      display: flex;
+      flex-direction: column;
+      list-style: none;
+      font-size: rem(16px);
+
+      &-org {
+        margin-bottom: 0.5em;
+
+        &-title {
+          list-style: none;
+          display: flex;
+          justify-content: space-between;
+          padding-left: 1em;
+          padding-right: 1em;
+
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+          &:hover {
+            cursor: pointer;
+          }
+          &-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          &-icon svg {
+            color: map-get($colors-neutral, '100');
+            width: 1.5em;
+            height: 1.5em;
+          }
+        }
+
+        &-item {
+          list-style: none;
+          padding-left: 1em;
+          padding-top: 2px;
+          padding-bottom: 2px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+          &:hover {
+            cursor: pointer;
+            background-color: map-get($colors-theme, 'selection');
+            border-radius: 20px 0 0 20px;
+          }
+        }
+      }
+    }
+  }
+
+  &-collapse {
+    
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    width: inherit;
+    position: absolute;
+    bottom: 0;
+    
+
+    &-button {
+    display: flex;
+    align-items: center;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    
+
+      &-icon {
+        display: flex;
+        align-items: center;
+        padding-left: 1em;
+        padding-right: 1em;
+
+        svg {
+          color: map-get($colors-neutral, '100');
+          width: 2em;
+          height: 2em;
+          
+        }
+      }
+
+      &-text {
+        color: map-get($colors-neutral, '100');
+        font-size: rem(20px);
+        font-weight: 400;
+      }
+      &:hover {
+        cursor: pointer;
+        background-color: map-get($colors-theme, 'selection');
+      }
+    }
+  }
 }
