@@ -1,4 +1,4 @@
-import { Arg, Mutation, Query, Resolver } from 'type-graphql'
+import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { EntityManager, getManager } from 'typeorm'
 import { Organization } from '../entity/organization'
 import { Register, RegisterInput } from '../entity/register'
@@ -14,11 +14,13 @@ export class RegisterResolver {
   // -------
   // READ
   // -------
+  @Authorized()
   @Query(() => [Register], { nullable: true })
   async getRegisters(): Promise<Register[]> {
     return await this.manager.find(Register, {relations: ['organization']})
   }
 
+  @Authorized()
   @Query(() => [Register], { nullable: true })
   async getRegistersByOrganization(
     @Arg('organization_id') organization_id: string,
@@ -30,6 +32,7 @@ export class RegisterResolver {
     })
   }
 
+  @Authorized()
   @Query(() => Register, { nullable: true })
   async getRegisterById(
     @Arg('id') id: string,

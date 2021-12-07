@@ -18,4 +18,7 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Permission, p => p.user)
   permissions?: Permission[]
+
+  // @Column('bool') // APP ADMIN?
+  // superUser?: boolean
 }

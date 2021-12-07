@@ -9,7 +9,7 @@ export const CurrentUser = () => {
     async ({context}) => {
       const {user} = await addCurrentUserToRequest(context.request)
 
-      return getManager().findOneOrFail(User, {uid: user.uid})
+      return getManager().findOneOrFail(User, {uid: user.uid}, {relations: ['permissions']})
     }
     );
 }

@@ -1,4 +1,4 @@
-import { Arg, Mutation, Query, Resolver } from 'type-graphql'
+import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { EntityManager, getManager } from 'typeorm'
 import { CurrentUser } from '../middleware/currentUserParamDecorator';
 import admin from 'firebase-admin';
@@ -14,6 +14,7 @@ export class RoleResolver {
   // -------
   // READ
   // -------
+  @Authorized()
   @Query(() => String)
   async getMyRoles(
     @CurrentUser() user: unknown

@@ -28,18 +28,24 @@ export class OrganizationResolver {
     return await this.manager
       .save(newOrganization)
       .then(async savedOrganization => {
-        // SET USER's roles
+        // DEFINE OWNER PERMISSION
         const ownerPerms = this.manager.create(Permission, {
           user: user,
           organization: savedOrganization,
           role: Role.OWNER,
         })
-        return await this.roleManager.addPermission(ownerPerms).then(() => {
-          return savedOrganization
-        }).catch(async error => {
-          await this.manager.remove(savedOrganization);
-          throw error;
-        })
+        // ADD THIS PERMISSION TO THE USER
+        return await this.roleManager
+          .addPermission(ownerPerms)
+          .then(() => {
+            // SUCCES > RETURN USER
+            return savedOrganization
+          })
+          .catch(async error => {
+            // FAIL > REMOVE ORGANIZATION
+            await this.manager.remove(savedOrganization)
+            throw error
+          })
       })
   }
 
@@ -47,17 +53,23 @@ export class OrganizationResolver {
   // READ
   // -------
   @Query(() => [Organization], { nullable: true })
-  async getOrganizations(
-    @CurrentUser() user: any
-  ): Promise<Organization[]> {
+  async getOrganizations(@CurrentUser() user: any): Promise<Organization[]> {
     console.log(user.roles)
     return await this.manager.find(Organization, { relations: ['registers'] })
   }
 
+  @Authorized()
   @Query(() => Organization, { nullable: true })
   async getOrganizationById(
     @Arg('id') id: string,
+    @CurrentUser() user: any,
   ): Promise<Organization | undefined | null> {
+    // Check if user has correct perms
+    const authorized = this.roleManager.hasOrganizationRole(user, id, [
+      Role.OWNER,
+    ])
+    if (!authorized) throw Error('You do not have the right permissions.')
+
     return await this.manager.findOne(Organization, id, {
       relations: ['registers'],
     })
