@@ -4,6 +4,7 @@ import { EntityManager, getManager } from 'typeorm'
 import { Context } from 'vm'
 import { User } from '../entity/user'
 import admin from 'firebase-admin'
+import { Role } from './roleManagement'
 
 /**
  *@description checks if a user is authorized to use the requested query or mutation based on their role
@@ -34,19 +35,13 @@ export const addCurrentUserToRequest = async (request: Request) : Promise<{error
     })
 }
 
-export const customAuthChecker: AuthChecker<Context> = async ({ context }, roles) =>
+// Check if user is logged in
+export const customAuthChecker: AuthChecker<Context> = async ({ context }) =>
   {
-    const manager: EntityManager = getManager()
-
     return await addCurrentUserToRequest(context.request).then(async ({user}) => {
-      const dbUser = await manager.findOne(User, 
-        user.uid
-      )
-
-      // Logged in?
-      if (context.request.currentUser) return true;
-
-      // Not:
-      return false
+      return getManager().findOneOrFail(User, {uid: user.uid,}).then(user => {
+        if (!user) return false; // user not found
+        return true; // user valid (logged in), no roles required
+      })
     })
   }
