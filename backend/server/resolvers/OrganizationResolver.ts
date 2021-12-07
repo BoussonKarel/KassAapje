@@ -67,7 +67,7 @@ export class OrganizationResolver {
   async getOrganizationById(
     @Arg('id') id: string,
     @CurrentUser() user: any,
-  ): Promise<Organization | undefined | null> {
+  ): Promise<Organization | undefined> {
     try {
       // Check if user has correct perms
       const authorized = this.roleManager.hasOrganizationRole(user, id, [Role.OWNER,])
