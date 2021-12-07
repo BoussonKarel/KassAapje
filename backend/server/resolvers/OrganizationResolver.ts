@@ -1,7 +1,7 @@
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { EntityManager, getManager } from 'typeorm'
 import { Role, RoleManager } from '../auth/roleManagement'
-import { Organization, OrganizationInput } from '../entity/organization'
+import { Organization, OrganizationInput, OrganizationUpdateInput } from '../entity/organization'
 import { Permission } from '../entity/permission'
 import { User } from '../entity/user'
 import { CurrentUser } from '../middleware/currentUserParamDecorator'
@@ -14,7 +14,7 @@ export class OrganizationResolver {
   // -------
   // CREATE
   // -------
-  // @Authorized() // is logged in?
+  @Authorized() // is logged in
   @Mutation(() => Organization, { nullable: true })
   async addOrganization(
     @Arg('organization') newOrganizationData: OrganizationInput,
@@ -48,8 +48,8 @@ export class OrganizationResolver {
               throw error
             })
         })
-    } catch (error:any) {
-      console.error("⛔ " + error.message)
+    } catch (error: any) {
+      console.error('⛔ ' + error.message)
       throw error
     }
   }
@@ -58,8 +58,7 @@ export class OrganizationResolver {
   // READ
   // -------
   @Query(() => [Organization], { nullable: true })
-  async getOrganizations(@CurrentUser() user: any): Promise<Organization[]> {
-    console.log(user.roles)
+  async getOrganizations(): Promise<Organization[]> {
     return await this.manager.find(Organization, { relations: ['registers'] })
   }
 
@@ -69,21 +68,49 @@ export class OrganizationResolver {
     @Arg('id') id: string,
     @CurrentUser() user: any,
   ): Promise<Organization | undefined | null> {
-    // Check if user has correct perms
-    const authorized = this.roleManager.hasOrganizationRole(user, id, [
-      Role.OWNER,
-    ])
-    if (!authorized) throw Error('You do not have the right permissions.')
+    try {
+      // Check if user has correct perms
+      const authorized = this.roleManager.hasOrganizationRole(user, id, [Role.OWNER,])
+      if (!authorized) throw Error('You do not have the right permissions.')
 
-    return await this.manager.findOne(Organization, id, {
-      relations: ['registers'],
-    })
+      return await this.manager.findOne(Organization, id, {
+        relations: ['registers'],
+      })
+    } catch (error: any) {
+      console.error('⛔ ' + error.message)
+      throw error
+    }
   }
 
   // -------
   // UPDATE
   // -------
+  @Authorized()
+  @Mutation(() => Organization, { nullable: true })
+  async updateOrganization(
+    @Arg('organization') updatingOrganizationData: OrganizationUpdateInput,
+    @CurrentUser() user: User,
+  ) {
+    try {
+      // Check if user has correct perms
+      const authorized = this.roleManager.hasOrganizationRole(user, updatingOrganizationData.organization_id, [Role.OWNER,])
+      if (!authorized) throw Error('You do not have the right permissions.')
 
+      // Does organization exist?
+      return await this.manager.findOneOrFail(Organization, updatingOrganizationData.organization_id).then(organization => {
+        // Exists => update
+        const updatingOrganization = this.manager.create(Organization,
+          updatingOrganizationData
+        )
+        return this.manager.save(Organization, {...updatingOrganization});
+      }).catch(e => {
+        throw new Error("Organization not found.")
+      })
+    } catch (error: any) {
+      console.error("⛔ " + error.message)
+      throw error;
+    }
+  }
   // -------
   // DELETE
   // -------
