@@ -20,33 +20,38 @@ export class OrganizationResolver {
     @Arg('organization') newOrganizationData: OrganizationInput,
     @CurrentUser() user: User,
   ) {
-    // Create organization
-    const newOrganization = this.manager.create(Organization, {
-      ...newOrganizationData,
-    })
-
-    return await this.manager
-      .save(newOrganization)
-      .then(async savedOrganization => {
-        // DEFINE OWNER PERMISSION
-        const ownerPerms = this.manager.create(Permission, {
-          user: user,
-          organization: savedOrganization,
-          role: Role.OWNER,
-        })
-        // ADD THIS PERMISSION TO THE USER
-        return await this.roleManager
-          .addPermission(ownerPerms)
-          .then(() => {
-            // SUCCES > RETURN USER
-            return savedOrganization
-          })
-          .catch(async error => {
-            // FAIL > REMOVE ORGANIZATION
-            await this.manager.remove(savedOrganization)
-            throw error
-          })
+    try {
+      // Create organization
+      const newOrganization = this.manager.create(Organization, {
+        ...newOrganizationData,
       })
+
+      return await this.manager
+        .save(newOrganization)
+        .then(async savedOrganization => {
+          // DEFINE OWNER PERMISSION
+          const ownerPerms = this.manager.create(Permission, {
+            user: user,
+            organization: savedOrganization,
+            role: Role.OWNER,
+          })
+          // ADD THIS PERMISSION TO THE USER
+          return await this.roleManager
+            .addPermission(ownerPerms)
+            .then(() => {
+              // SUCCES > RETURN USER
+              return savedOrganization
+            })
+            .catch(async error => {
+              // FAIL > REMOVE ORGANIZATION
+              await this.manager.remove(savedOrganization)
+              throw error
+            })
+        })
+    } catch (error:any) {
+      console.error("⛔ " + error.message)
+      throw error
+    }
   }
 
   // -------

@@ -75,7 +75,7 @@ export class RoleManager {
     // Add role to database
     const savedPermission = await this.manager.save(Permission, permission)
     if (!savedPermission)
-      throw new Error('⛔ Could not save permission to database.')
+      throw new Error('Could not save permission to database.')
 
     // Success > Add role to firebase claims
     // Get user's permissions from database
@@ -83,7 +83,7 @@ export class RoleManager {
       where: { user: { uid: uid } },
     })
     if (!userPermissions || userPermissions.length < 1)
-      throw new Error('⛔ Could not find permissions for user.')
+      throw new Error('Could not find permissions for user.')
 
     // Format to our special string
     const encodedPerms = this.encodePermissions(userPermissions)
@@ -92,7 +92,7 @@ export class RoleManager {
       .auth()
       .getUser(uid)
       .catch(e => {
-        throw new Error('⛔ Could not get firebase user.')
+        throw new Error('Could not get firebase user.')
       })
 
     const customClaims = firebaseUser.customClaims
@@ -100,12 +100,12 @@ export class RoleManager {
     // Overwrite the 'perms' claim (property)
     return await admin
       .auth()
-      .setCustomUserClaims(uid, {
+      .setCustomUserClaims('uid', {
         ...customClaims,
         perms: encodedPerms,
       })
       .catch(error => {
-        error.message = '⛔ Error setting custom claims: ' + error.message
+        error.message = 'Error setting custom claims: ' + error.message
         throw error
       })
   }
