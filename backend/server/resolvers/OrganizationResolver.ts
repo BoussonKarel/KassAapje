@@ -1,70 +1,55 @@
-import { Arg, Mutation, Query, Resolver } from 'type-graphql'
+import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { EntityManager, getManager } from 'typeorm'
+import { Role, RoleManager } from '../auth/roleManagement'
 import { Organization, OrganizationInput } from '../entity/organization'
+import { Permission } from '../entity/permission'
+import { User } from '../entity/user'
 import { CurrentUser } from '../middleware/currentUserParamDecorator'
 
 @Resolver()
 export class OrganizationResolver {
   manager: EntityManager = getManager()
+  roleManager: RoleManager = new RoleManager()
 
   // -------
   // CREATE
   // -------
-  // ADD AN ORGANIZATION WITH AN OWNER [USER ITSELF]
-  // @Authorized() // Check if user is logged in
-  // @Mutation(() => Organization, { nullable: true })
-  // async addOrganization(
-  //   @Arg('organization') newOrganizationData: OrganizationInput,
-  //   @CurrentUser() user: User,
-  // ): Promise<Organization> {
-
-  //   // GET OWNER ROLE
-  //   const orgOwnerRole = await this.manager.findOneOrFail(Role, {where: {name: "OWNER", type: roleTypes.ORGANIZATION}})
-
-  //   // ASSIGN OWNER ROLE TO USER
-  //   const userRole = this.manager.create(UserRole, {
-  //     user: user,
-  //     role: orgOwnerRole
-  //   })
-    
-  //   // CREATE THE ORGANIZATION, WITH THE ASSIGNED ROLE
-  //   const newOrganization = await this.manager.create(Organization, {
-  //     ...newOrganizationData,
-  //     userRoles: [userRole]
-  //   });
-
-  //   // ADD THE ROLE TO THE CLAIMS?
-  //   return await this.manager.save(newOrganization).then(async savedOrganization => {
-  //     return await addRoleToClaims(user, savedOrganization.userRoles![0]).then(async success => {
-  //       console.log(savedOrganization.userRoles)
-  //       if (!success) {
-  //         // "UNDO" THE ADDING OF THE TRANSACTION
-  //         await this.manager.remove(savedOrganization);
-  //         throw new Error("Could not add role to claims");
-  //       }
-  //       return savedOrganization;
-  //     });
-  //   })
-  // }
-
-  // ADD AN ORGANIZATION WITH A (CUSTOM) OWNER [ONLY APP ADMIN]
+  // @Authorized() // is logged in?
   @Mutation(() => Organization, { nullable: true })
-  async addOrganizationWithCustomOwner(
+  async addOrganization(
     @Arg('organization') newOrganizationData: OrganizationInput,
-    @Arg('user_id') owner: string,
-  ): Promise<Organization> {
-    const newOrganization: Organization = await this.manager.create(
-      Organization,
-      newOrganizationData,
-    )
-    return await this.manager.save(newOrganization)
+    @CurrentUser() user: User,
+  ) {
+    // Create organization
+    const newOrganization = this.manager.create(Organization, {
+      ...newOrganizationData,
+    })
+
+    return await this.manager
+      .save(newOrganization)
+      .then(async savedOrganization => {
+        // SET USER's roles
+        const ownerPerms = this.manager.create(Permission, {
+          user: user,
+          organization: savedOrganization,
+          role: Role.OWNER,
+        })
+        return await this.roleManager.addPermission(ownerPerms).then(() => {
+          return savedOrganization
+        }).catch(async error => {
+          await this.manager.remove(savedOrganization);
+          throw error;
+        })
+      })
   }
 
   // -------
   // READ
   // -------
   @Query(() => [Organization], { nullable: true })
-  async getOrganizations(@CurrentUser() user: any): Promise<Organization[]> {
+  async getOrganizations(
+    @CurrentUser() user: any
+  ): Promise<Organization[]> {
     console.log(user.roles)
     return await this.manager.find(Organization, { relations: ['registers'] })
   }

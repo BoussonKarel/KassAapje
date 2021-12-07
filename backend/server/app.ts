@@ -107,13 +107,13 @@ import authenticateRequests from './auth/authenticateRequests'
         })),
       )
 
-      // AUTHENTICATE REQUESTS AFTER THIS
-      app.use(authenticateRequests)
-
       // ROUTES
       app.get('/', (request: Request, response: Response) => {
         response.send(`KassAapje backend is working`)
       })
+
+      // AUTHENTICATE REQUESTS AFTER THIS
+      app.use(authenticateRequests)
 
       // APP START
       app.listen(port, () => {
