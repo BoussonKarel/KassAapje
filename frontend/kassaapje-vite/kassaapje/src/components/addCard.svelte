@@ -1,7 +1,9 @@
 <script lang="ts">
-    
+    import Plus from 'svelte-material-icons/Plus.svelte'
 </script>
 
 <div class="c-addcard">
-    this is the add card
+    <div class="c-addcard-icon">
+        <Plus />
+    </div>
 </div>

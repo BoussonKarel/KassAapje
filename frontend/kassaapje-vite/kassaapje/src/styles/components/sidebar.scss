@@ -6,6 +6,7 @@
   height: 100vh;
   margin: none;
   padding: none;
+  position: relative;
 
   &-title {
     color: map-get($colors-neutral, '100');
@@ -26,6 +27,7 @@
     padding-right: 1em;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
+
 
     &-icon {
       display: flex;
@@ -173,22 +175,24 @@
   }
 
   &-collapse {
-    
     padding-top: 0.5em;
     padding-bottom: 0.5em;
-    width: inherit;
     position: absolute;
     bottom: 0;
-    
+    width: 100%;
+
+    &:hover {
+      cursor: pointer;
+      background-color: map-get($colors-theme, 'selection');
+    }
 
     &-button {
-    display: flex;
-    align-items: center;
-    padding-left: 1em;
-    padding-right: 1em;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    
+      display: flex;
+      align-items: center;
+      padding-left: 1em;
+      padding-right: 1em;
+      padding-top: 0.5em;
+      padding-bottom: 0.5em;
 
       &-icon {
         display: flex;
@@ -200,7 +204,6 @@
           color: map-get($colors-neutral, '100');
           width: 2em;
           height: 2em;
-          
         }
       }
 
@@ -209,10 +212,7 @@
         font-size: rem(20px);
         font-weight: 400;
       }
-      &:hover {
-        cursor: pointer;
-        background-color: map-get($colors-theme, 'selection');
-      }
+      
     }
   }
 }

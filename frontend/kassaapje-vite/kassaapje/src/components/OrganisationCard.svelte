@@ -1,7 +1,6 @@
 <script lang="ts">
-    
 </script>
 
 <div class="c-organisation-card">
-    <p class="c-organisation-card-text">this is a card</p>
+  <p>Scouts Beselare</p>
 </div>

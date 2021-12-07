@@ -21,6 +21,8 @@
     "vite": "^2.6.4"
   },
   "dependencies": {
+    "svelte-chroma-picker": "^1.1.1",
+    "svelte-color-picker": "^1.0.7",
     "svelte-material-icons": "^1.0.3",
     "vite-plugin-svelte-svg": "^1.0.0"
   }

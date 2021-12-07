@@ -1,0 +1,45 @@
+.c-button-back {
+    background-color: map-get($colors-neutral ,'100' );
+    box-shadow: $default-shadow;
+
+    height: 60px;
+
+    width: 60px;
+
+    display: flex;
+
+    border-radius: 100%;
+
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 1em;
+    margin-left: -1em;
+
+    svg {
+        color: map-get($colors-theme, 'base' );
+        width: 2rem;
+        height: 2rem;
+    }
+
+    &:hover {
+        background-color: map-get($colors-neutral, '200');
+    }
+}
+
+.c-button-save {
+    background-color: map-get($colors-theme, 'base');
+    color: map-get($colors-neutral, '100' );
+    font-size: rem(28px);
+    font-weight: 500;
+    border: none;
+    height: 60px;
+    width: 240px;
+    margin-top: 1em;
+    border-radius: $global-border-radius;
+
+    &:hover {
+        background-color: map-get($colors-theme, 'selection');
+        cursor: pointer;
+    }
+}
