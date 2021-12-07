@@ -7,7 +7,11 @@ import { Register } from "../entity/register";
 import organizations from './organizations.json'
 import registers from './registers.json'
 
+import admin from 'firebase-admin'
+import { User } from "../entity/user";
+
 const seedDatabase = async (connection: Connection) => {
+    console.info('ℹ Seeding started')
     const dbIsSeeded = await getRepository(Config).findOne('seeded');
     if (dbIsSeeded === undefined) {
         await connection.manager.save(plainToClass(Organization, organizations)); // Seed organizations
@@ -19,9 +23,21 @@ const seedDatabase = async (connection: Connection) => {
         seeded.value = 'true';
         await connection.manager.save(seeded);
     
-        console.log('I have seeded the database with everything necessary!');
+        console.log('✅ I have seeded the database with JSONs.');
+
+        admin.auth().listUsers().then(usersResult => {
+            connection.manager.transaction(async manager => {
+                for (const user of usersResult.users) {
+                    const newUser  = connection.manager.create(User, user);
+                    await manager.save(newUser);
+                }
+            }).then(() => {
+                console.log(`✅ I have seeded the database with ${usersResult.users.length} firebase users.`);
+            })
+        })
+
     } else {
-        console.log('The database has already been seeded before.');
+        console.log('❎ Database has already been seeded before.');
     }
 
 }  

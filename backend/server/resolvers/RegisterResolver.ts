@@ -10,17 +10,6 @@ export class RegisterResolver {
   // -------
   // CREATE
   // -------
-  @Mutation(() => Register, { nullable: true })
-  async addRegister(
-    @Arg('register') registerData: RegisterInput
-  ): Promise<Register> {
-    const newRegister: Register = await this.manager.create(
-      Register,
-      registerData
-    )
-    newRegister.organization = await this.manager.findOneOrFail(Organization, registerData.organization_id)
-    return await this.manager.save(newRegister)
-  }
 
   // -------
   // READ
