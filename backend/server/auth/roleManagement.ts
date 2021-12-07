@@ -60,7 +60,7 @@ export class RoleManager {
     return this.permissionsContainRole(permissionsHere, roles)
   }
 
-  hasRegister(user: User, register_id: string, roles: Role[]) {
+  hasRegisterRole(user: User, register_id: string, roles: Role[]) {
     if (!user.permissions || user.permissions.length < 1) return false
     // Check roles in this organization_id
     const permissionsHere = user.permissions.filter(
@@ -100,7 +100,7 @@ export class RoleManager {
     // Overwrite the 'perms' claim (property)
     return await admin
       .auth()
-      .setCustomUserClaims('uid', {
+      .setCustomUserClaims(uid, {
         ...customClaims,
         perms: encodedPerms,
       })

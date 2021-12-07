@@ -1,7 +1,11 @@
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { EntityManager, getManager } from 'typeorm'
 import { Role, RoleManager } from '../auth/roleManagement'
-import { Organization, OrganizationInput, OrganizationUpdateInput } from '../entity/organization'
+import {
+  Organization,
+  OrganizationInput,
+  OrganizationUpdateInput,
+} from '../entity/organization'
 import { Permission } from '../entity/permission'
 import { User } from '../entity/user'
 import { CurrentUser } from '../middleware/currentUserParamDecorator'
@@ -70,8 +74,13 @@ export class OrganizationResolver {
   ): Promise<Organization | undefined> {
     try {
       // Check if user has correct perms
-      const authorized = this.roleManager.hasOrganizationRole(user, id, [Role.OWNER,])
-      if (!authorized) throw Error('You do not have the right permissions.')
+      const authorized = this.roleManager.hasOrganizationRole(user, id, [
+        Role.OWNER,
+      ])
+      if (!authorized)
+        throw Error(
+          'You do not have the right permissions on that organization.',
+        )
 
       return await this.manager.findOne(Organization, id, {
         relations: ['registers'],
@@ -93,25 +102,37 @@ export class OrganizationResolver {
   ) {
     try {
       // Check if user has correct perms
-      const authorized = this.roleManager.hasOrganizationRole(user, updatingOrganizationData.organization_id, [Role.OWNER,])
-      if (!authorized) throw Error('You do not have the right permissions.')
+      const authorized = this.roleManager.hasOrganizationRole(
+        user,
+        updatingOrganizationData.organization_id,
+        [Role.OWNER],
+      )
+      if (!authorized)
+        throw Error(
+          'You do not have the right permissions on that organization.',
+        )
 
       // Does organization exist?
-      return await this.manager.findOneOrFail(Organization, updatingOrganizationData.organization_id).then(organization => {
-        // Exists => update
-        const updatingOrganization = this.manager.create(Organization,
-          updatingOrganizationData
-        )
-        return this.manager.save(Organization, {...updatingOrganization});
-      }).catch(e => {
-        throw new Error("Organization not found.")
-      })
+      const existingOrganization = await this.manager.findOneOrFail(
+        Organization,
+        updatingOrganizationData.organization_id,
+      )
+
+      const updatingOrganization = this.manager.create(
+        Organization,
+        updatingOrganizationData,
+      )
+
+      // Exists => update
+      if (existingOrganization)
+        return await this.manager.save(Organization, { ...updatingOrganization })
+      else throw new Error('Organization not found.')
     } catch (error: any) {
-      console.error("⛔ " + error.message)
-      throw error;
+      console.error('⛔ ' + error.message)
+      throw error
     }
   }
-  
+
   // -------
   // DELETE
   // -------

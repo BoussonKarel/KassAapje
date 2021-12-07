@@ -15,6 +15,7 @@ import { Register } from './register'
 @ObjectType()
 @Entity('organizations')
 export class Organization extends BaseEntity {
+  @Field(() => ID)
   @PrimaryColumn({ length: 6, unique: true })
   organization_id: string = generateUID()
 
@@ -84,7 +85,7 @@ export class OrganizationInput {
   @Field()
   street_number?: number
 
-  @Field()
+  @Field({nullable: true})
   box?: string
 
   @Field()
