@@ -4,8 +4,8 @@
 </script>
 
 <div>
-  <!-- <div class="c-button-back">
+  <div class="c-button-back">
     <ArrowLeftThick />
-  </div> -->
+  </div>
   <CardList />
 </div>

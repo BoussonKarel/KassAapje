@@ -6,19 +6,32 @@
   import ArrowCollapseLeft from 'svelte-material-icons/ArrowCollapseLeft.svelte'
   import ArrowCollapseRight from 'svelte-material-icons/ArrowCollapseRight.svelte'
   import ArrowCollapse from 'svelte-material-icons/ArrowCollapse.svelte'
+
+  async function handleProfileClick(event) {
+    console.log('Profile Click')
+    console.log(event)
+  }
+  async function handleLogoutClick(event) {
+    console.log('Logout Click')
+    console.log(event)
+  }
+  async function toggleCollapse(event) {
+    console.log('Collapse Toggle')
+    console.log(event)
+  }
 </script>
 
-<div >
+<div class="c-sidebar">
   <div class="c-sidebar-title">KassAapje</div>
 
-  <div class="c-sidebar-profile">
+  <div on:click={handleProfileClick} class="c-sidebar-profile">
     <div class="c-sidebar-profile-icon">
       <AccountCircleOutline />
     </div>
     <div class="c-sidebar-profile-name">Michiel</div>
   </div>
 
-  <div class="c-sidebar-logout">
+  <div on:click={handleLogoutClick} class="c-sidebar-logout">
     <div class="c-sidebar-logout-icon">
       <LogoutVariant />
     </div>
@@ -41,7 +54,7 @@
             <ChevronDown />
           </div>
         </div>
-  
+
         <ul>
           <li class="c-sidebar-organisations-list-org-item">Kerstmarkt</li>
           <li class="c-sidebar-organisations-list-org-item">Pasta Avond</li>
@@ -49,7 +62,7 @@
           <li class="c-sidebar-organisations-list-org-item">Ipsum</li>
         </ul>
       </div>
-     
+
       <div class="c-sidebar-organisations-list-org-title">
         <li class="c-sidebar-organisations-list-org-title-text">De Kouter</li>
         <div class="c-sidebar-organisations-list-org-title-icon">
@@ -65,12 +78,12 @@
     </ul>
   </div>
 
-  <div class="c-sidebar-collapse">
+  <div on:click={toggleCollapse} class="c-sidebar-collapse">
     <div class="c-sidebar-collapse-button">
       <div class="c-sidebar-collapse-button-icon">
         <ArrowCollapseRight />
       </div>
       <div class="c-sidebar-collapse-button-text">Verkleinen</div>
-    </div> 
+    </div>
   </div>
 </div>

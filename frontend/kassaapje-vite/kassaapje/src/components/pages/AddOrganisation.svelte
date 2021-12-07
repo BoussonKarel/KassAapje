@@ -1,23 +1,35 @@
 <script lang="ts">
   import ChromaPicker from 'svelte-chroma-picker'
-  import { prevent_default } from 'svelte/internal'
+  import { onMount, prevent_default } from 'svelte/internal'
   import ArrowLeftThick from 'svelte-material-icons/ArrowLeftThick.svelte'
 
   let color = '#fff'
 
-  $: console.log(`change detected: ${color}`)
+  $: {
+    console.log(`change detected: ${color}`)
+  }
 
   async function handleSubmit(event) {
-        console.log("submitted")
-        console.log(event)
-    }
+    console.log('submitted')
+    console.log(event)
+  }
+
+  async function handleBackButton(event) {
+    console.log('BackButton')
+    console.log(event)
+  }
+
+  function changeColor(event) {
+    console.log('fix color change')
+    console.log(event)
+  }
 </script>
 
 <div>
-      <div class="c-button-back">
+  <div on:click={handleBackButton} class="c-button-back">
     <ArrowLeftThick />
   </div>
-  <form class="c-form" name="AddOrganisation" on:submit|preventDefault="{handleSubmit}">
+  <form class="c-form" name="AddOrganisation" on:submit|preventDefault={handleSubmit}>
     <div class="c-form-textinputs">
       <label class="c-form-label" for="Name"> Naam: </label>
       <input class="c-form-textinput" type="text" name="Name" placeholder="Naam" />
@@ -49,8 +61,10 @@
       <div>
         <label class="c-form-label" for="Color"> Kleur:</label>
 
-        <ChromaPicker bind:color />
-        <div>Current color bar</div>
+        <div class="c-colorpicker">
+          <ChromaPicker bind:color />
+          <div class="c-colorpicker-bar"/>
+        </div>
       </div>
 
       <button class="c-button-save"> Opslaan </button>

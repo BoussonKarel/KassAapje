@@ -14,6 +14,7 @@
     align-items: center;
 
     margin-top: 1em;
+    margin-left: -1em;
 
     svg {
         color: map-get($colors-theme, 'base' );

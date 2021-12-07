@@ -122,4 +122,8 @@
       height: 4em;
     }
   }
+
+  &:hover {
+    background-color: map-get($colors-neutral, '100');
+  }
 }
