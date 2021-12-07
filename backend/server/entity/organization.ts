@@ -66,7 +66,7 @@ export class Organization extends BaseEntity {
   @OneToMany(() => Register, r => r.organization)
   registers?: Register[]
 
-  @OneToMany(() => Permission, p => p.organization, {onDelete: "CASCADE"})
+  @OneToMany(() => Permission, p => p.organization)
   permissions?: Permission[]
 }
 
