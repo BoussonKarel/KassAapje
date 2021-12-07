@@ -34,7 +34,7 @@ export class Product extends BaseEntity {
   price?: number
 
   @Field()
-  @Column()
+  @Column('bool')
   stock_is_managed?: boolean
 
   @Field({nullable: true})
@@ -42,11 +42,11 @@ export class Product extends BaseEntity {
   stock_quantity?: number
 
   @Field()
-  @Column()
+  @Column('bool')
   allow_backorders?: boolean
 
   @Field(() => [Variation], { nullable: true})
-  @OneToMany(() => Variation, v => v.product, {cascade: ['insert']})
+  @OneToMany(() => Variation, v => v.product, {eager: true, cascade: ['insert']})
   variations?: Variation[]
 
   @Field(() => [OrderItem], { nullable: true})
