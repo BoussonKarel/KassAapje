@@ -111,6 +111,7 @@ export class OrganizationResolver {
       throw error;
     }
   }
+  
   // -------
   // DELETE
   // -------
