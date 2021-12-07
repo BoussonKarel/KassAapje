@@ -14,14 +14,6 @@ export class RoleResolver {
   // -------
   // READ
   // -------
-  @Authorized()
-  @Query(() => String)
-  async getMyRoles(
-    @CurrentUser() user: unknown
-  ) {
-    console.log({user})
-    return "OK";
-  }
 
   // -------
   // UPDATE
