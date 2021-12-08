@@ -50,14 +50,16 @@ export class RoleManager {
     return false
   }
 
-  hasOrganizationRole(user: User, organization_id: string, roles: Role[]) {
+  async hasOrganizationRole(user: User, organization_id: string, roles: Role[]) {
     if (!user.permissions || user.permissions.length < 1) return false
     // Check roles in this organization_id
     const permissionsHere = user.permissions.filter(
       p => p.organization && p.organization.organization_id === organization_id,
     )
     // Check if role is present in those permissions
-    return this.permissionsContainRole(permissionsHere, roles)
+    const hasPermission = this.permissionsContainRole(permissionsHere, roles)
+    if (hasPermission) return true;
+    else throw Error('You do not have the right permissions on that register / organization.')
   }
 
   async hasRegisterRole(user: User, register_id: string, roles: Role[]) {
@@ -82,7 +84,7 @@ export class RoleManager {
     // Check roles in above organization first: owner?
     const organization_id = registerOnlyIDs.organization.organization_id
     // user is owner in the above organization
-    if (this.hasOrganizationRole(user, organization_id, [Role.OWNER]))
+    if (await this.hasOrganizationRole(user, organization_id, [Role.OWNER]))
       return true
     else {
       // Check roles in this register
@@ -90,7 +92,9 @@ export class RoleManager {
         p => p.register && p.register.register_id === register_id,
       )
       // Check if role is present in those permissions
-      return this.permissionsContainRole(permissionsHere, roles)
+      const hasPermission = this.permissionsContainRole(permissionsHere, roles)
+      if (hasPermission) return true;
+      else throw Error('You do not have the right permissions on that register / organization.')
     }
   }
 

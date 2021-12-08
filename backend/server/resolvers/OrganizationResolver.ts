@@ -74,17 +74,13 @@ export class OrganizationResolver {
   ): Promise<Organization | undefined> {
     try {
       // Check if user has correct perms
-      const authorized = this.roleManager.hasOrganizationRole(user, id, [
-        Role.OWNER,
-      ])
-      if (!authorized)
-        throw Error(
-          'You do not have the right permissions on that organization.',
-        )
-
-      return await this.manager.findOne(Organization, id, {
-        relations: ['registers'],
-      })
+      return await this.roleManager
+        .hasOrganizationRole(user, id, [Role.OWNER])
+        .then(async () => {
+          return await this.manager.findOne(Organization, id, {
+            relations: ['registers'],
+          })
+        })
     } catch (error: any) {
       console.error(`⛔ (${user.email}) ` + error.message)
       throw error
@@ -102,31 +98,29 @@ export class OrganizationResolver {
   ) {
     try {
       // Check if user has correct perms
-      const authorized = this.roleManager.hasOrganizationRole(
-        user,
-        updatingOrganizationData.organization_id,
-        [Role.OWNER],
-      )
-      if (!authorized)
-        throw Error(
-          'You do not have the right permissions on that organization.',
-        )
+      return await this.roleManager
+        .hasOrganizationRole(user, updatingOrganizationData.organization_id, [
+          Role.OWNER,
+        ])
+        .then(async () => {
+          // Does organization exist?
+          const existingOrganization = await this.manager.findOneOrFail(
+            Organization,
+            updatingOrganizationData.organization_id,
+          )
 
-      // Does organization exist?
-      const existingOrganization = await this.manager.findOneOrFail(
-        Organization,
-        updatingOrganizationData.organization_id,
-      )
+          const updatingOrganization = this.manager.create(
+            Organization,
+            updatingOrganizationData,
+          )
 
-      const updatingOrganization = this.manager.create(
-        Organization,
-        updatingOrganizationData,
-      )
-
-      // Exists => update
-      if (existingOrganization)
-        return await this.manager.save(Organization, { ...updatingOrganization })
-      else throw new Error('Organization not found.')
+          // Exists => update
+          if (existingOrganization)
+            return await this.manager.save(Organization, {
+              ...updatingOrganization,
+            })
+          else throw new Error('Organization not found.')
+        })
     } catch (error: any) {
       console.error(`⛔ (${user.email}) ` + error.message)
       throw error

@@ -26,25 +26,21 @@ export class RegisterResolver {
   ): Promise<Register> {
     try {
       // Check if user has correct perms
-      const authorized = this.roleManager.hasOrganizationRole(
-        user,
-        newRegisterData.organization_id,
-        [Role.OWNER],
-      )
-      if (!authorized)
-        throw Error(
-          'You do not have the right permissions on that organization.',
-        )
+      return await this.roleManager
+        .hasOrganizationRole(user, newRegisterData.organization_id, [
+          Role.OWNER,
+        ])
+        .then(async () => {
+          // Add register
+          const newRegister = this.manager.create(Register, {
+            ...newRegisterData,
+            organization: { organization_id: newRegisterData.organization_id },
+          })
 
-      // Add register
-      const newRegister = this.manager.create(Register, {
-        ...newRegisterData,
-        organization: { organization_id: newRegisterData.organization_id },
-      })
-
-      return this.manager.save(newRegister).catch(e => {
-        throw new Error('Could not save new register.')
-      })
+          return this.manager.save(newRegister).catch(e => {
+            throw new Error('Could not save new register.')
+          })
+        })
     } catch (error: any) {
       console.error('⛔ ' + error.message)
       throw error
@@ -67,19 +63,15 @@ export class RegisterResolver {
     @CurrentUser() user: User,
   ): Promise<Register[]> {
     // Check if user has correct perms
-    const authorized = this.roleManager.hasOrganizationRole(
-      user,
-      organization_id,
-      [Role.OWNER],
-    )
-    if (!authorized)
-      throw Error('You do not have the right permissions on that organization.')
-
-    return await this.manager.find(Register, {
-      where: {
-        organization: { organization_id: organization_id },
-      },
-    })
+    return await this.roleManager
+      .hasOrganizationRole(user, organization_id, [Role.OWNER])
+      .then(async () => {
+        return await this.manager.find(Register, {
+          where: {
+            organization: { organization_id: organization_id },
+          },
+        })
+      })
   }
 
   @Authorized()
@@ -88,15 +80,11 @@ export class RegisterResolver {
     @Arg('id') id: string,
     @CurrentUser() user: User,
   ): Promise<Register | undefined | null> {
-    const authorized = await this.roleManager.hasRegisterRole(
-      user,
-      id,
-      [Role.USER, Role.OWNER],
-    )
-    if (authorized) return await this.manager.findOne(Register, id)
-    else throw Error('You do not have the right permissions on that register / organization.')
-
-    
+    return await this.roleManager
+      .hasRegisterRole(user, id, [Role.USER, Role.OWNER])
+      .then(async () => {
+        return await this.manager.findOne(Register, id)
+      })
   }
 
   // -------
@@ -124,21 +112,13 @@ export class RegisterResolver {
       // Exists => update
       if (existingRegister) {
         // Check if user has correct perms
-        const authorized = await this.roleManager.hasRegisterRole(
-          user,
-          existingRegister.register_id,
-          [Role.OWNER],
-        )
-
-        // Save register
-        if (authorized)
-          return await this.manager.save(Register, {
-            ...updatingRegister,
+        return await this.roleManager
+          .hasRegisterRole(user, existingRegister.register_id, [Role.OWNER])
+          .then(async () => {
+            return await this.manager.save(Register, {
+              ...updatingRegister,
+            })
           })
-        else
-          throw Error(
-            'You do not have the right permissions on that organization.',
-          )
       } else throw new Error('Register not found.')
     } catch (error: any) {
       console.error('⛔ ' + error.message)
@@ -157,23 +137,17 @@ export class RegisterResolver {
   ): Promise<Number> {
     try {
       // Check if user has correct perms
-      const authorized = await this.roleManager.hasRegisterRole(
-        user,
-        register_id,
-        [Role.OWNER],
-      )
-      if (authorized) {
-        const {affected} = await this.manager.delete(Register, register_id);
-        if (!affected) throw Error('Could not delete register. Does it exist?')
-        return affected;
-      } 
-      else
-        throw Error(
-          'You do not have the right permissions on that organization.',
-        )
+      return await this.roleManager
+        .hasRegisterRole(user, register_id, [Role.OWNER])
+        .then(async () => {
+          const { affected } = await this.manager.delete(Register, register_id)
+          if (!affected)
+            throw Error('Could not delete register. Does it exist?')
+          return affected
+        })
     } catch (error: any) {
       console.error(`⛔ (${user.email}) ` + error.message)
-      throw error;
+      throw error
     }
   }
 }
