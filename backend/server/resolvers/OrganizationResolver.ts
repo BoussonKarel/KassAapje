@@ -63,7 +63,7 @@ export class OrganizationResolver {
   // -------
   @Query(() => [Organization], { nullable: true })
   async getOrganizations(): Promise<Organization[]> {
-    return await this.manager.find(Organization, { relations: ['registers'] })
+    return await this.manager.find(Organization)
   }
 
   @Authorized()
