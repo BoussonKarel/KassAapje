@@ -1,12 +1,16 @@
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import { EntityManager, getManager } from "typeorm";
+import { Role, RoleManager } from "../auth/roleManagement";
 import { Product, ProductInput } from "../entity/product";
 import { Register } from "../entity/register";
+import { User } from "../entity/user";
 import { Variation } from "../entity/variation";
+import { CurrentUser } from "../middleware/currentUserParamDecorator";
 
 @Resolver()
 export class ProductResolver {
   manager: EntityManager = getManager()
+  roleManager: RoleManager = new RoleManager();
 
   // -------
   // CREATE
@@ -15,6 +19,8 @@ export class ProductResolver {
   async addProduct(
     @Arg('product') productData: ProductInput
   ): Promise<Product> {
+
+
     if (productData.variations) {
       productData.variations.forEach(v => v.product_id = productData.product_id)
     }
@@ -51,9 +57,20 @@ export class ProductResolver {
   // -------
   @Query(() => [Product], { nullable: true })
   async getProducts(
-    @Arg('register_id') registerId: string
+    @Arg('register_id') registerId: string,
+    @CurrentUser() user: User,
   ): Promise<Product[]> {
-    return await this.manager.find(Product)
+    try {
+      // If authorized...
+      return await this.roleManager.hasRegisterRole(user, registerId, [Role.OWNER, Role.USER]).then(async () => {
+        // ...then find products
+        return await this.manager.find(Product)
+      })
+    } catch (error: any) {
+      console.error(`⛔ (${user.email}) ` + error.message)
+      throw error;
+    }
+    
   }
 
   @Query(() => Product, { nullable: true })

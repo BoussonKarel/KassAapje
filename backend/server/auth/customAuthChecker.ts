@@ -5,20 +5,20 @@ import { Context } from 'vm'
 import { User } from '../entity/user'
 import admin from 'firebase-admin'
 import { Role } from './roleManagement'
+import { ErrorWithStatus } from '../models/errorWithStatus'
 
 /**
  *@description checks if a user is authorized to use the requested query or mutation based on their role
  */
-export const addCurrentUserToRequest = async (request: Request) : Promise<{error?: string, statusCode?: number, user?: any}> => {
+export const addCurrentUserToRequest = async (request: Request) : Promise<any> => {
   const headerToken = request.headers.authorization
 
   if (!headerToken) {
-    return {error: "No token provided", statusCode: 401} 
+    throw new ErrorWithStatus("No token provided.", 401)
   }
 
   if (headerToken && headerToken.split(' ')[0] !== 'Bearer') {
-    return {error: "Invalid token", statusCode: 401} 
-    
+    throw new ErrorWithStatus("Invalid token", 401)
   }
 
   const token = headerToken.split(' ')[1]
@@ -31,7 +31,7 @@ export const addCurrentUserToRequest = async (request: Request) : Promise<{error
     .catch(error => {
       console.log(error)
 
-      return { error: "Could not authorize", statusCode: 403 }
+      throw new ErrorWithStatus("Could not authorize.", 403)
     })
 }
 
