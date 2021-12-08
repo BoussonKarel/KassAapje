@@ -1,5 +1,5 @@
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
-import { EntityManager, getManager } from 'typeorm'
+import { DeleteResult, EntityManager, getManager } from 'typeorm'
 import { Role, RoleManager } from '../auth/roleManagement'
 import { Organization } from '../entity/organization'
 import {
@@ -102,9 +102,7 @@ export class RegisterResolver {
     try {
       // Does register exist?
       const existingRegister = await this.manager
-        .findOneOrFail(Register, updatingRegisterData.register_id, {
-          relations: ['organization'],
-        })
+        .findOneOrFail(Register, updatingRegisterData.register_id)
         .catch(e => {
           throw new Error('Register not found.')
         })
@@ -117,19 +115,21 @@ export class RegisterResolver {
       // Exists => update
       if (existingRegister) {
         // Check if user has correct perms
-        const authorized =
-          this.roleManager.hasRegisterRole(user, existingRegister.register_id, [
-            Role.OWNER,
-          ])
-        if (!authorized)
+        const authorized = await this.roleManager.hasRegisterRole(
+          user,
+          existingRegister.register_id,
+          [Role.OWNER],
+        )
+
+        // Save register
+        if (authorized)
+          return await this.manager.save(Register, {
+            ...updatingRegister,
+          })
+        else
           throw Error(
             'You do not have the right permissions on that organization.',
           )
-
-        // Save register
-        return await this.manager.save(Register, {
-          ...updatingRegister,
-        })
       } else throw new Error('Register not found.')
     } catch (error: any) {
       console.error('⛔ ' + error.message)
@@ -140,4 +140,31 @@ export class RegisterResolver {
   // -------
   // DELETE
   // -------
+  @Authorized()
+  @Mutation(() => Number)
+  async deleteRegister(
+    @Arg('id') register_id: string,
+    @CurrentUser() user: User,
+  ): Promise<Number> {
+    try {
+      // Check if user has correct perms
+      const authorized = await this.roleManager.hasRegisterRole(
+        user,
+        register_id,
+        [Role.OWNER],
+      )
+      if (authorized) {
+        const {affected} = await this.manager.delete(Register, register_id);
+        if (!affected) throw Error('Could not delete register. Does it exist?')
+        return affected;
+      } 
+      else
+        throw Error(
+          'You do not have the right permissions on that organization.',
+        )
+    } catch (error: any) {
+      console.error(`⛔ (${user.email}) ` + error.message)
+      throw error;
+    }
+  }
 }
