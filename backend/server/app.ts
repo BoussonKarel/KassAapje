@@ -75,13 +75,13 @@ import authenticateRequests from './auth/authenticateRequests'
             console.info("✅ Succesfully created user")
             response.send(savedUser).status(201);
           }).catch(async error => {
-            console.error("⛔ Could not save new user to database:", error)
+            console.error(`⛔ (${email}) Could not save new user to database:`, error)
             // Remove user from firebase?
             await admin.auth().deleteUser(firebaseUser.uid)
             response.send("Could not save new user to database.").status(500)
           })
         }).catch(error => {
-          console.error("⛔ Could not register user at firebase:", error)
+          console.error(`⛔ (${email}) Could not register user at firebase:`, error)
             response.send("Could not register user at firebase.").status(500)
         })
       })

@@ -53,7 +53,7 @@ export class OrganizationResolver {
             })
         })
     } catch (error: any) {
-      console.error('⛔ ' + error.message)
+      console.error(`⛔ (${user.email}) ` + error.message)
       throw error
     }
   }
@@ -86,7 +86,7 @@ export class OrganizationResolver {
         relations: ['registers'],
       })
     } catch (error: any) {
-      console.error('⛔ ' + error.message)
+      console.error(`⛔ (${user.email}) ` + error.message)
       throw error
     }
   }
@@ -128,7 +128,7 @@ export class OrganizationResolver {
         return await this.manager.save(Organization, { ...updatingOrganization })
       else throw new Error('Organization not found.')
     } catch (error: any) {
-      console.error('⛔ ' + error.message)
+      console.error(`⛔ (${user.email}) ` + error.message)
       throw error
     }
   }
