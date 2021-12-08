@@ -60,14 +60,38 @@ export class RoleManager {
     return this.permissionsContainRole(permissionsHere, roles)
   }
 
-  hasRegisterRole(user: User, register_id: string, roles: Role[]) {
+  async hasRegisterRole(user: User, register_id: string, roles: Role[]) {
     if (!user.permissions || user.permissions.length < 1) return false
-    // Check roles in this organization_id
-    const permissionsHere = user.permissions.filter(
-      p => p.register && p.register.register_id === register_id,
-    )
-    // Check if role is present in those permissions
-    return this.permissionsContainRole(permissionsHere, roles)
+
+    // Get (register_id and) organization_id
+    // Also kind of a check if the register exists
+    const registerOnlyIDs = await this.manager
+      .createQueryBuilder(Register, 'r')
+      .select('r.register_id')
+      .leftJoin('r.organization', 'o')
+      .addSelect('o.organization_id')
+      .where('r.register_id = :id', { id: register_id })
+      .getOneOrFail()
+      .catch(e => {
+        console.error(e)
+        throw new Error(
+          'Could not find the register you are trying to work in.',
+        )
+      })
+
+    // Check roles in above organization first: owner?
+    const organization_id = registerOnlyIDs.organization.organization_id
+    // user is owner in the above organization
+    if (this.hasOrganizationRole(user, organization_id, [Role.OWNER]))
+      return true
+    else {
+      // Check roles in this register
+      const permissionsHere = user.permissions.filter(
+        p => p.register && p.register.register_id === register_id,
+      )
+      // Check if role is present in those permissions
+      return this.permissionsContainRole(permissionsHere, roles)
+    }
   }
 
   async addPermission(permission: Permission): Promise<void> {

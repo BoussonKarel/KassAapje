@@ -118,11 +118,6 @@ export class RegisterResolver {
       if (existingRegister) {
         // Check if user has correct perms
         const authorized =
-          this.roleManager.hasOrganizationRole(
-            user,
-            existingRegister.organization.organization_id,
-            [Role.OWNER],
-          ) ||
           this.roleManager.hasRegisterRole(user, existingRegister.register_id, [
             Role.OWNER,
           ])
