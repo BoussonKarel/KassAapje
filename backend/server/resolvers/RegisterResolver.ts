@@ -86,8 +86,17 @@ export class RegisterResolver {
   @Query(() => Register, { nullable: true })
   async getRegisterById(
     @Arg('id') id: string,
+    @CurrentUser() user: User,
   ): Promise<Register | undefined | null> {
-    return await this.manager.findOne(Register, id)
+    const authorized = await this.roleManager.hasRegisterRole(
+      user,
+      id,
+      [Role.USER, Role.OWNER],
+    )
+    if (authorized) return await this.manager.findOne(Register, id)
+    else throw Error('You do not have the right permissions on that register / organization.')
+
+    
   }
 
   // -------
