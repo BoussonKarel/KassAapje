@@ -60,3 +60,20 @@
     cursor: pointer;
   }
 }
+
+.c-button-edit {
+  background-color: map-get($colors-neutral, '600');
+  color: map-get($colors-neutral, '100');
+  font-size: rem(28px);
+  font-weight: 500;
+  border: none;
+  height: 60px;
+  width: 240px;
+  margin-top: 1em;
+  border-radius: $global-border-radius;
+
+  &:hover {
+    background-color: map-get($colors-neutral, '700');
+    cursor: pointer;
+  }
+}
