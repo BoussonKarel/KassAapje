@@ -1,45 +1,62 @@
 .c-button-back {
-    background-color: map-get($colors-neutral ,'100' );
-    box-shadow: $default-shadow;
+  background-color: map-get($colors-neutral, '100');
+  box-shadow: $default-shadow;
 
-    height: 60px;
+  height: 60px;
 
-    width: 60px;
+  width: 60px;
 
-    display: flex;
+  display: flex;
 
-    border-radius: 100%;
+  border-radius: 100%;
 
-    justify-content: center;
-    align-items: center;
+  justify-content: center;
+  align-items: center;
 
-    margin-top: 1em;
-    margin-left: -1em;
+  margin-top: 1em;
+  margin-left: -1em;
 
-    svg {
-        color: map-get($colors-theme, 'base' );
-        width: 2rem;
-        height: 2rem;
-    }
+  svg {
+    color: map-get($colors-theme, 'base');
+    width: 2rem;
+    height: 2rem;
+  }
 
-    &:hover {
-        background-color: map-get($colors-neutral, '200');
-    }
+  &:hover {
+    background-color: map-get($colors-neutral, '200');
+  }
 }
 
 .c-button-save {
-    background-color: map-get($colors-theme, 'base');
-    color: map-get($colors-neutral, '100' );
-    font-size: rem(28px);
-    font-weight: 500;
-    border: none;
-    height: 60px;
-    width: 240px;
-    margin-top: 1em;
-    border-radius: $global-border-radius;
+  background-color: map-get($colors-theme, 'base');
+  color: map-get($colors-neutral, '100');
+  font-size: rem(28px);
+  font-weight: 500;
+  border: none;
+  height: 60px;
+  width: 240px;
+  margin-top: 1em;
+  border-radius: $global-border-radius;
 
-    &:hover {
-        background-color: map-get($colors-theme, 'selection');
-        cursor: pointer;
-    }
+  &:hover {
+    background-color: map-get($colors-theme, 'selection');
+    cursor: pointer;
+  }
+}
+
+.c-button-addcard {
+
+  display: flex;
+  width: 6em;
+  height: 6em;
+
+  border-radius: 100%;
+
+  background-color: map-get($colors-neutral, '100');
+  box-shadow: $default-shadow;
+
+  &:hover {
+    background-color: map-get($colors-neutral, '200');
+    cursor: pointer;
+  }
 }
