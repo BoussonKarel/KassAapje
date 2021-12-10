@@ -11,9 +11,9 @@
   <div class="c-page">
     <!-- <OrganisationOverview /> -->
 
-    <!-- <AddOrganisation/> -->
+    <AddOrganisation/>
 
-    <EditOrganisation />
+    <!-- <EditOrganisation /> -->
   </div>
   <div />
 </main>

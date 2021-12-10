@@ -38,7 +38,7 @@
     <div class="c-sidebar-logout-text">Uitloggen</div>
   </div>
 
-  <div class="c-sidebar-organisations">
+  <div on:click={toggleCollapse} class="c-sidebar-organisations">
     <div class="c-sidebar-organisations-title">
       <div class="c-sidebar-organisations-title-text">Verenigingen</div>
       <div class="c-sidebar-organisations-title-icon">
@@ -78,7 +78,7 @@
     </ul>
   </div>
 
-  <div on:click={toggleCollapse} class="c-sidebar-collapse">
+  <div class="c-sidebar-collapse">
     <div class="c-sidebar-collapse-button">
       <div class="c-sidebar-collapse-button-icon">
         <ArrowCollapseRight />
