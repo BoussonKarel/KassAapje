@@ -18,17 +18,17 @@ import { Permission } from './permission'
 import { Product } from './product'
 
 @ObjectType()
-// @InputType('RegisterInput')
 @Entity('registers')
 export class Register extends BaseEntity {
+  @Field(() => ID, {nullable: true})
   @PrimaryColumn({length: 6, unique: true})
   register_id: string = generateUID();
 
-  @Field(() => Organization, { nullable: true})
+  @Field(() => Organization)
   @ManyToOne(() => Organization, o => o.registers)
   @JoinColumn({ name: 'organization_id' })
   @Expose({ name: 'organization_id' })
-  organization?: Organization
+  organization!: Organization
 
   @Field()
   @Column({ length: 100 })
@@ -60,7 +60,7 @@ export class RegisterInput {
   register_id?: string
 
   @Field()
-  organization_id?: string
+  organization_id!: string
 
   @Field()
   name?: string
@@ -69,5 +69,20 @@ export class RegisterInput {
   description?: string
 
   @Field()
+  color?: string
+}
+
+@InputType('RegisterUpdateInput')
+export class RegisterUpdateInput {
+  @Field(() => ID, { nullable: true})
+  register_id!: string
+
+  @Field({nullable: true})
+  name?: string
+
+  @Field({nullable: true})
+  description?: string
+
+  @Field({nullable: true})
   color?: string
 }

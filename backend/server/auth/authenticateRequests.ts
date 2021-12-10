@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 import { verifyToken } from '.'
+import { ErrorWithStatus } from '../models/errorWithStatus'
 import { addCurrentUserToRequest } from './customAuthChecker'
 
 async function authenticateRequests(
@@ -7,13 +8,13 @@ async function authenticateRequests(
   response: Response,
   next: NextFunction,
 ) {
-  const { error, statusCode } = await addCurrentUserToRequest(request);
-
-  if (error && statusCode) {
-    return response.send({ message: error }).status(statusCode)
-  }
-
-  next()
+  return await addCurrentUserToRequest(request)
+    .then(() => next())
+    .catch(e => {
+      if (e instanceof ErrorWithStatus)
+        response.send({ message: e.message }).status(e.status)
+      else throw e;
+    })
 }
 
 export default authenticateRequests

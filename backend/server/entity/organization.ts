@@ -8,14 +8,15 @@ import {
   PrimaryColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm'
-import { generateUID } from '../helpers/generateUID';
+import { generateUID } from '../helpers/generateUID'
 import { Permission } from './permission'
 import { Register } from './register'
 
 @ObjectType()
 @Entity('organizations')
 export class Organization extends BaseEntity {
-  @PrimaryColumn({length: 6, unique: true})
+  @Field(() => ID)
+  @PrimaryColumn({ length: 6, unique: true })
   organization_id: string = generateUID()
 
   @Field()
@@ -30,8 +31,8 @@ export class Organization extends BaseEntity {
   @Column('int')
   street_number?: number
 
-  @Field({nullable: true})
-  @Column({nullable: true})
+  @Field({ nullable: true })
+  @Column({ nullable: true })
   box?: string
 
   @Field()
@@ -62,17 +63,17 @@ export class Organization extends BaseEntity {
   @Column()
   email?: string
 
-  @Field(() => [Register], {nullable: true})
+  @Field(() => [Register], { nullable: true })
   @OneToMany(() => Register, r => r.organization)
   registers?: Register[]
 
-  @OneToMany(() => Permission, p => p.organization, {onDelete: "CASCADE"})
+  @OneToMany(() => Permission, p => p.organization)
   permissions?: Permission[]
 }
 
 @InputType('OrganizationInput')
 export class OrganizationInput {
-  @Field(() => ID, {nullable: true})
+  @Field(() => ID, { nullable: true })
   organization_id?: string
 
   @Field()
@@ -106,5 +107,44 @@ export class OrganizationInput {
   color?: string
 
   @Field()
+  email?: string
+}
+
+@InputType('OrganizationUpdateInput')
+export class OrganizationUpdateInput {
+  @Field(() => ID)
+  organization_id!: string
+
+  @Field({nullable: true})
+  name?: string
+
+  @Field({nullable: true})
+  street?: string
+
+  @Field({nullable: true})
+  street_number?: number
+
+  @Field({nullable: true})
+  box?: string
+
+  @Field({nullable: true})
+  zip?: number
+
+  @Field({nullable: true})
+  city?: string
+
+  @Field({nullable: true})
+  country?: string
+
+  @Field({nullable: true})
+  website?: string
+
+  @Field({nullable: true})
+  logo?: string
+
+  @Field({nullable: true})
+  color?: string
+
+  @Field({nullable: true})
   email?: string
 }
