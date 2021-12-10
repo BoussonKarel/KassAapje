@@ -7,7 +7,7 @@
   import RegisterOverview from './components/pages/Register/RegisterOverview.svelte'
   import AddRegister from './components/pages/Register/AddRegister.svelte'
   import RegisterInfo from './components/pages/Register/RegisterInfo.svelte'
-  import UserOverview from './components/pages/User/UserOverview.svelte'
+  import UserInfo from './components/pages/User/UserInfo.svelte'
   import EditUser from './components/pages/User/EditUser.svelte'
 </script>
 
@@ -18,11 +18,11 @@
     <!-- <AddOrganisation/> -->
     <!-- <OrganisationInfo /> -->
 
-    <!-- <RegisterOverview/> -->
-    <AddRegister />
+    <RegisterOverview/>
+    <!-- <AddRegister /> -->
     <!-- <RegisterInfo/> -->
 
-    <!-- <UserOverview /> -->
+    <!-- <UserInfo /> -->
     <!-- <EditUser/> -->
   </div>
   <div />

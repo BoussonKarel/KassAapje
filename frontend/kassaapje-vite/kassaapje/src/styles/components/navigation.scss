@@ -1,0 +1,26 @@
+.c-navigation {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+
+    &-back {
+        margin-right: 1em;
+    }
+    
+
+    &-title {
+        color: map-get($colors-theme, 'base' );
+    }
+
+    &-settings {
+        color: map-get($colors-theme, 'base' );
+
+        & svg {
+            width: 2em;
+            height: 2em;
+        }
+        
+
+        
+    }
+}
