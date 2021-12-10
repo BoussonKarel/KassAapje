@@ -1,7 +1,6 @@
 <script lang="ts">
   import ChromaPicker from 'svelte-chroma-picker'
   import { prevent_default } from 'svelte/internal'
-  import ArrowLeftThick from 'svelte-material-icons/ArrowLeftThick.svelte'
 
   let color = '#fff'
 
@@ -14,9 +13,6 @@
 </script>
 
 <div>
-  <div class="c-button-back">
-    <ArrowLeftThick />
-  </div>
   <form class="c-form" name="AddOrganisation" on:submit|preventDefault={handleSubmit}>
     <div class="c-form-textinputs">
       <label class="c-form-label" for="Name"> Naam: </label>

@@ -7,18 +7,7 @@
 </script>
 
 <div>
-  <div class="c-navigation">
-    <div class="c-button-back c-navigation-back">
-      <ArrowLeftThick />
-    </div>
-
-    <h1 class="c-navigation-title">
-      Scouts Beselare
-    </h1>
-    <div class="c-navigation-settings">
-      <Settings />
-    </div>
-  </div>
+  
    
   <CardList />
 </div>

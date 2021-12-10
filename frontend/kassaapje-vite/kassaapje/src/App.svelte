@@ -9,16 +9,22 @@
   import RegisterInfo from './components/pages/Register/RegisterInfo.svelte'
   import UserInfo from './components/pages/User/UserInfo.svelte'
   import EditUser from './components/pages/User/EditUser.svelte'
+import NavigationBar from './components/navigationBar.svelte'
 </script>
 
 <main class="c-app">
   <Sidebar />
+  
+  
   <div class="c-page">
+    <div class="c-navigation">
+      <NavigationBar/>
+    </div>
     <!-- <OrganisationOverview /> -->
     <!-- <AddOrganisation/> -->
     <!-- <OrganisationInfo /> -->
 
-    <RegisterOverview/>
+    <!-- <RegisterOverview/> -->
     <!-- <AddRegister /> -->
     <!-- <RegisterInfo/> -->
 

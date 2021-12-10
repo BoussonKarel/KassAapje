@@ -1,5 +1,4 @@
 <script lang="ts">
-import ArrowLeftThick from "svelte-material-icons/ArrowLeftThick.svelte";
 
 
 
@@ -8,18 +7,10 @@ async function handleSubmit(event) {
     console.log(event)
   }
 
-  async function handleBackButton(event) {
-    console.log('BackButton')
-    console.log(event)
-  }
     
 </script>
 
 <div>
-    <div on:click={handleBackButton} class="c-button-back">
-      <ArrowLeftThick />
-    </div>
-  
     <form class="c-form" name="AddOrganisation" on:submit|preventDefault={handleSubmit}>
       <div class="c-form-edit">
         <p class="c-form-edit-label">Naam:</p>

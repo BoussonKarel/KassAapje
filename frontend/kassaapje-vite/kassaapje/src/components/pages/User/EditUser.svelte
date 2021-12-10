@@ -1,23 +1,13 @@
 <script lang=ts>
-import ArrowLeftThick from "svelte-material-icons/ArrowLeftThick.svelte";
 
 async function handleSubmit(event) {
     console.log('submitted')
     console.log(event)
   }
 
-  async function handleBackButton(event) {
-    console.log('BackButton')
-    console.log(event)
-  }
-
 </script>
 
 <div>
-    <div on:click={handleBackButton} class="c-button-back">
-      <ArrowLeftThick />
-    </div>
-  
     <form class="c-form" name="AddOrganisation" on:submit|preventDefault={handleSubmit}>
         <div class="c-form-textinputs">
             <label class="c-form-label" for="FirstName"> Voornaam: </label>
