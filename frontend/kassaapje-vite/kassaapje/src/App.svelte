@@ -1,12 +1,14 @@
 <script lang="ts">
   import './styles/screen.scss'
   import Sidebar from './components/sidebar.svelte'
-  import OrganisationOverview from './components/pages/organisationOverview.svelte'
-  import AddOrganisation from './components/pages/AddOrganisation.svelte'
-  import EditOrganisation from './components/pages/EditOrganisation.svelte'
-  import RegisterOverview from './components/pages/RegisterOverview.svelte'
-  import UserOverview from './components/pages/UserOverview.svelte'
-  import EditUser from './components/pages/EditUser.svelte'
+  import OrganisationOverview from './components/pages/Organisation/organisationOverview.svelte'
+  import AddOrganisation from './components/pages/Organisation/AddOrganisation.svelte'
+  import OrganisationInfo from './components/pages/Organisation/OrganisationInfo.svelte'
+  import RegisterOverview from './components/pages/Register/RegisterOverview.svelte'
+  import AddRegister from './components/pages/Register/AddRegister.svelte'
+  import RegisterInfo from './components/pages/Register/RegisterInfo.svelte'
+  import UserOverview from './components/pages/User/UserOverview.svelte'
+  import EditUser from './components/pages/User/EditUser.svelte'
 </script>
 
 <main class="c-app">
@@ -14,12 +16,14 @@
   <div class="c-page">
     <!-- <OrganisationOverview /> -->
     <!-- <AddOrganisation/> -->
-    <!-- <EditOrganisation /> -->
+    <!-- <OrganisationInfo /> -->
 
     <!-- <RegisterOverview/> -->
+    <AddRegister />
+    <!-- <RegisterInfo/> -->
 
     <!-- <UserOverview /> -->
-    <EditUser/>
+    <!-- <EditUser/> -->
   </div>
   <div />
 </main>

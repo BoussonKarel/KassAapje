@@ -1,6 +1,6 @@
 <script lang="ts">
   import ArrowLeftThick from 'svelte-material-icons/ArrowLeftThick.svelte'
-  import CardList from '../cardlist.svelte'
+  import CardList from '../../cardlist.svelte'
 
 </script>
 

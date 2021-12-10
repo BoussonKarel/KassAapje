@@ -1,5 +1,5 @@
 <script lang="ts">
-  import CardList from '../cardlist.svelte'
+  import CardList from '../../cardlist.svelte'
   import ArrowLeftThick from 'svelte-material-icons/ArrowLeftThick.svelte'
   import Plus from 'svelte-material-icons/Plus.svelte'
   import AddOrganisation from './AddOrganisation.svelte'
