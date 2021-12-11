@@ -1,5 +1,6 @@
 <script lang="ts">
-  import ProductCardList from '../../Cards/productCardList.svelte';
+  import ShoppingBasket from '../../shoppingBasket.svelte';
+import ProductCardList from '../../Cards/productCardList.svelte';
 import SearchBar from '../../searchBar.svelte'
 </script>
 
@@ -13,5 +14,7 @@ import SearchBar from '../../searchBar.svelte'
         <ProductCardList/>
     </div>
   </div>
-  <div>shopping basket placeholder</div>
+  <div>
+    <ShoppingBasket/>
+  </div>
 </div>

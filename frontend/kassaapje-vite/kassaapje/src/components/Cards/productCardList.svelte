@@ -16,6 +16,11 @@ import ProductCard from "./productCard.svelte";
     <ProductCard/>
     <ProductCard/>
     <ProductCard/>
+    <ProductCard/>
+    <ProductCard/>
+    <ProductCard/>
+    <ProductCard/>
+    <ProductCard/>
 
 
 </div>

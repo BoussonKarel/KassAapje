@@ -1,6 +1,6 @@
 .c-cardlist {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: repeat( auto-fill, minmax(380px, auto) );
   margin-top: 2em;
 
   gap: 2em;
@@ -131,10 +131,15 @@
 
 .c-product-cardlist {
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: repeat( auto-fill, minmax(200px, auto) );
   margin-top: 2em;
+  max-height: 400px;
 
-  gap: 1em;
+  row-gap: 1.5em;
+  column-gap: 1em;
+
+  overflow-y: scroll;
+  
   
 }
 
