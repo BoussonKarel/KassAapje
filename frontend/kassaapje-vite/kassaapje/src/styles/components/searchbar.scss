@@ -1,0 +1,32 @@
+.c-searchbar {
+    display: flex;
+    align-items: center;
+    
+    &-input {
+        height: 2.5em;
+        min-width: 300px;
+        width: 40%;
+        padding-left: 1em;
+
+        border: none;
+        border-radius: $global-border-radius;
+        box-shadow: $default-shadow;
+
+        &:focus {
+           outline: none;
+           
+        }
+    }
+
+    &-icon {
+        // background-color: green;
+        margin-left: -2em;
+        margin-top: 8px;
+       
+        & svg {
+            width: 28px;
+            height: 28px;
+            color: map-get($colors-neutral, '800')
+        }
+    }
+}
