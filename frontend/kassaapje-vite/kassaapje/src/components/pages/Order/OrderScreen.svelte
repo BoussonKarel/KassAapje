@@ -9,7 +9,7 @@ import SearchBar from '../../searchBar.svelte'
       <SearchBar />
     </div>
 
-    <div>// Order Card List placeholder
+    <div>
         <ProductCardList/>
     </div>
   </div>
