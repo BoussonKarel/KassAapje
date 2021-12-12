@@ -1,20 +1,20 @@
 version: '3.4'
 
 services:
-  # birds-api:
-  #   image: blablabla/express-birds
-  #   build:
-  #     context: .
-  #     dockerfile: ./Dockerfile
-  #   environment:
-  #     NODE_ENV: production
-  #   ports:
-  #     - 3000:3000
-  #   env_file:
-  #     - docker.ormconfig.env
+  backend:
+    image: kassaapje-backend:latest
+    build: .
+    ports:
+      - 8888:8888
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=auth/service-account.json
+    env_file:
+      - docker.ormconfig.env
+    volumes:
+      - ./server/auth/service-account.json:/usr/app/auth/service-account.json
 
   mariadb:
-    image: mariadb:10.5.9
+    image: mariadb:10.6.2
     env_file:
       - .env
     ports:
@@ -25,7 +25,7 @@ services:
   adminer:
     image: adminer:4.8.1
     ports:
-      - 9999:8080
+      - 9999:8081
 
 volumes:
   database:

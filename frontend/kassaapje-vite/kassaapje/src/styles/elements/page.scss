@@ -1,0 +1,50 @@
+body,
+html {
+  font: #{$base-font-size}/#{$base-line-height} $base-font-family;
+  color: map-get($colors-neutral, "900");
+
+  fill: map-get($colors-neutral, "800");
+  background-color: map-get($colors-neutral, '200');
+
+  min-height: 100vh;
+
+  ::selection {
+    background-color: map-get($colors-theme, "400");
+    color: white;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Rubik", sans-serif;
+  margin: 0;
+}
+
+h1 {
+  font-size: rem(34px);
+
+}
+
+h2 {
+  font-size: rem(32px);
+  font-weight: 300;
+  font-style: italic;
+  color: map-get($colors-neutral, '700' );
+  
+}
+
+h3 {
+  font-size: rem(26px);
+}
+
+h4 {
+  font-size: rem(23px);
+}
+
+h5 {
+  font-size: rem(20px);
+}
+
+h6 {
+  font-size: rem(18px);
+}
+

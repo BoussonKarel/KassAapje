@@ -1,9 +1,10 @@
 [
   {
-      "organization_id": "cc26ffd8-5d67-45e1-95a6-bbc1d4002be2",
+      "organization_id": "cc26ff",
       "name": "Aapjes vzw",
       "street": "Aapjeslaan",
       "street_number": 123,
+      "box": null,
       "zip": 1234,
       "city": "Gemeente",
       "country": "BE",
