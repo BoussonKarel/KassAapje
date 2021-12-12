@@ -38,6 +38,7 @@ metadata:
   name: kassaapje-backend-svc
   namespace: kassaapje
 spec:
+  nodeName: bousson-karel
   type: ClusterIP
   selector:
     app: adminer
