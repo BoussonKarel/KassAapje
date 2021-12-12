@@ -37,4 +37,4 @@ jobs:
       run: kubectl apply -f k8/mariadb.yml
       
     - name: Deploy adminer to kubernetes
-      run: kubectl apply -f k8/adminer.yml
+      run: kubectl apply -f k8/adminer.yml --validate=false
