@@ -20,10 +20,21 @@ spec:
             - containerPort: 3306
               name: 3306tcp
               protocol: TCP
-              _serviceType: ClusterIP
           envFrom:
           - configMapRef:
               name: env-variables
           - secretRef:
               name: env-secrets
       nodeName: bousson-karel
+---
+apiVersion: v1
+kind: Service
+  name: mariadb-svc
+  namespace: kassaapje
+spec:
+  ports:
+  - name: 3306tcp
+    port: 3306
+    protocol: TCP
+    targetPort: 3306
+  type: ClusterIP
