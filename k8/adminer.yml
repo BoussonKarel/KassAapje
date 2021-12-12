@@ -30,7 +30,6 @@ metadata:
   name: adminer-svc
   namespace: kassaapje
 spec:
-  nodeName: bousson-karel
   selector:
     app: adminer
   ports:

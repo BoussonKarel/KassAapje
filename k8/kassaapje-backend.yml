@@ -38,10 +38,9 @@ metadata:
   name: kassaapje-backend-svc
   namespace: kassaapje
 spec:
-  nodeName: bousson-karel
   type: ClusterIP
   selector:
-    app: adminer
+    app: kassaapje-backend
   ports:
     - name: 30000tcp
       port: 30000

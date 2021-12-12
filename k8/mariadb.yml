@@ -31,7 +31,6 @@ metadata:
   name: mariadb-svc
   namespace: kassaapje
 spec:
-  nodeName: bousson-karel
   selector:
     app: mariadb
   ports:
