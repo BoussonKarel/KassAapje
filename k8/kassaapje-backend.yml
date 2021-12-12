@@ -17,7 +17,9 @@ spec:
       containers:
       - envFrom:
         - secretRef:
-            name: db-connection-typeorm
+            name: typeorm-secrets
+          secretRef:
+            name: env-secrets
         image: ghcr.io/boussonkarel/kassaapje-backend # Change to your image
         name: backend-container
         ports:
