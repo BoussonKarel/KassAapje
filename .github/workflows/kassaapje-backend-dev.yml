@@ -1,0 +1,19 @@
+name: Deploy KassAapje DEV backend
+
+on:
+  push:
+    branches: [ develop ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Build the Docker image
+      run: docker build ./backend --file Dockerfile --tag ghcr.io/boussonkarel/kassaapje-backend-dev
+      
+    - name: Push the Docker image to GHCR
+      run: docker push ghcr.io/boussonkarel/kassaapje-backend-dev:latest
