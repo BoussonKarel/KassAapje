@@ -26,6 +26,12 @@ jobs:
 #         file: ./backend/Dockerfile
         push: true
         tags: ghcr.io/boussonkarel/kassaapje-backend:latest
+        
+    - name: Deploy env secrets to kubernetes
+      run: kubectl apply -f k8/env-secrets.yml
     
     - name: Deploy mariadb to kubernetes
       run: kubectl apply -f k8/mariadb.yml
+      
+    - name: Deploy adminer to kubernetes
+      run: kubectl apply -f k8/adminer.yml
