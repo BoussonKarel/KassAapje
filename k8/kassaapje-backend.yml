@@ -29,7 +29,7 @@ spec:
         - containerPort: 8888 # The interal port of the app
           name: 8888tcp
           protocol: TCP
-          # _serviceType: ClusterIP # Register it as a ClusterIP service
+          _serviceType: ClusterIP # Register it as a ClusterIP service
       nodeName: bousson-karel # Change the name of your node!
 ---
 apiVersion: v1
