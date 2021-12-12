@@ -14,6 +14,6 @@ COPY ["package.json", "package-lock.json", "./"]
 RUN npm ci --only=production
 RUN npm install pm2 -g
 COPY --from=build-container /usr/app/dist .
-EXPOSE 80
+EXPOSE 8888
 
 CMD ["pm2-runtime","app.js"]

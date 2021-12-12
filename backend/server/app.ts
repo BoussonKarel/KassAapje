@@ -45,7 +45,7 @@ import authenticateRequests from './auth/authenticateRequests'
 
       // APP SETUP
       const app = express(),
-        port = process.env.PORT || 3001
+        port = process.env.PORT || 8888
 
       // CORS
       app.use(cors())
