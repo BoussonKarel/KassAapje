@@ -19,6 +19,8 @@ spec:
           ports:
             - containerPort: 3306
           envFrom:
+          - configMapRef:
+                name: env-variables
             - secretRef:
                 name: env-secrets
       nodeName: bousson-karel

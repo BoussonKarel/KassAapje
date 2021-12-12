@@ -15,13 +15,16 @@ spec:
         workload.user.cattle.io/workloadselector: apps.deployment-kassaapje-backend # Change to anything you like, but keep it same as line 11
     spec:
       containers:
-      - envFrom:
-        - secretRef:
-            name: typeorm-secrets
-          secretRef:
-            name: env-secrets
-        image: ghcr.io/boussonkarel/kassaapje-backend # Change to your image
+      - image: ghcr.io/boussonkarel/kassaapje-backend # Change to your image
         name: backend-container
+        envFrom:
+        - configMapRef:
+            name: typeorm-variables
+        - secretRef:
+            name: env-secrets
+        env:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: server/auth/service-account.json
         ports:
         - containerPort: 8080 # The interal port of the app
           name: 8080tcp

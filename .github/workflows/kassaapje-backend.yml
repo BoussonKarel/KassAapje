@@ -1,0 +1,40 @@
+name: Deploy KassAapje backend
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Log in to the Container registry
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v2
+      with:
+        context: ./backend
+#         file: ./backend/Dockerfile
+        push: true
+        tags: ghcr.io/boussonkarel/kassaapje-backend:latest
+        
+    - name: Deploy env variables to kubernetes
+      run: kubectl apply -f k8/env-variables.yml
+
+    - name: Deploy typeorm variables to kubernetes
+      run: kubectl apply -f k8/typeorm-variables.yml
+    
+    - name: Deploy mariadb to kubernetes
+      run: kubectl apply -f k8/mariadb.yml
+      
+    - name: Deploy adminer to kubernetes
+      run: kubectl apply -f k8/adminer.yml
