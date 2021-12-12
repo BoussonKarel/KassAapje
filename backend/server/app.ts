@@ -129,7 +129,7 @@ const main = async () => {
       console.error(error)
       getConnection().close();
       attempts++;
-      if (attempts <= max_attempts) setTimeout(main, 5000);
+      if (attempts <= max_attempts) setTimeout(main, 10000);
     })
 }
 
