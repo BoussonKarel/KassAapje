@@ -33,7 +33,7 @@ import { User } from './entity/user'
 import { customAuthChecker } from './auth/customAuthChecker'
 import authenticateRequests from './auth/authenticateRequests'
 
-(async () => {
+const main = async () => {
   const connectionOptions: ConnectionOptions = await getConnectionOptions()
 
   // CREATE DATABASE+TABLES, CONNECT, SEED DATABASE
@@ -122,5 +122,10 @@ import authenticateRequests from './auth/authenticateRequests'
         )
       })
     })
-    .catch(error => console.error(error))
-})()
+    .catch(error => {
+      console.error(error)
+      setTimeout(main, 5000);
+    })
+}
+
+main()
