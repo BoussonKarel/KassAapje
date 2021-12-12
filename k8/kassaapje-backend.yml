@@ -35,7 +35,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: adminer-svc
+  name: kassaapje-backend-svc
   namespace: kassaapje
 spec:
   selector:
