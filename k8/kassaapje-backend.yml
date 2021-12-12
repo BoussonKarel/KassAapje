@@ -31,3 +31,17 @@ spec:
           protocol: TCP
           _serviceType: ClusterIP # Register it as a ClusterIP service
       nodeName: bousson-karel # Change the name of your node!
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: adminer-svc
+  namespace: kassaapje
+spec:
+  selector:
+    app: adminer
+  ports:
+    - name: 30000tcp
+      port: 30000
+      protocol: TCP
+      targetPort: 8080
