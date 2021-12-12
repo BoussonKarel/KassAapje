@@ -26,3 +26,6 @@ jobs:
 #         file: ./backend/Dockerfile
         push: true
         tags: ghcr.io/boussonkarel/kassaapje-backend:latest
+    
+    - name: Deploy mariadb to kubernetes
+      run: kubectl apply -f k8/mariadb.yml
