@@ -1,0 +1,28 @@
+# express-api.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kassaapje-backend
+  namespace: kassaapje # Change to your own namespace!
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: apps.deployment-kassaapje-backend # Change to anything you like, but keep it same as line 15
+  template:
+    metadata:
+      labels:
+        workload.user.cattle.io/workloadselector: apps.deployment-kassaapje-backend # Change to anything you like, but keep it same as line 11
+    spec:
+      containers:
+      - envFrom:
+        - secretRef:
+            name: db-connection-typeorm
+        image: ghcr.io/boussonkarel/kassaapje-backend # Change to your image
+        name: backend-container
+        ports:
+        - containerPort: 8080 # The interal port of the app
+          name: 8080tcp
+          protocol: TCP
+          _serviceType: ClusterIP # Register it as a ClusterIP service
+      nodeName: bousson-karel # Change the name of your node!
