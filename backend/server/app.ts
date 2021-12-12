@@ -33,6 +33,8 @@ import { User } from './entity/user'
 import { customAuthChecker } from './auth/customAuthChecker'
 import authenticateRequests from './auth/authenticateRequests'
 
+let attempts = 0;
+let max_attempts = 10;
 const main = async () => {
   const connectionOptions: ConnectionOptions = await getConnectionOptions()
 
@@ -124,7 +126,8 @@ const main = async () => {
     })
     .catch(error => {
       console.error(error)
-      setTimeout(main, 5000);
+      attempts++;
+      if (attempts <= max_attempts) setTimeout(main, 5000);
     })
 }
 
