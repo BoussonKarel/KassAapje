@@ -26,15 +26,9 @@ jobs:
 #         file: ./backend/Dockerfile
         push: true
         tags: ghcr.io/boussonkarel/kassaapje-backend:latest
-        
-    - name: Deploy env variables to kubernetes
-      run: kubectl apply -f k8/env-variables.yml
-
-    - name: Deploy typeorm variables to kubernetes
-      run: kubectl apply -f k8/typeorm-variables.yml
     
     - name: Deploy mariadb to kubernetes
-      run: kubectl apply -f k8/mariadb.yml
+      run: kubectl apply -f k8/mariadb.yml --validate=false
       
     - name: Deploy adminer to kubernetes
       run: kubectl apply -f k8/adminer.yml --validate=false
