@@ -12,10 +12,17 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - name: Build and push
+    - name: Log in to the Container registry
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Build and push Docker image
       uses: docker/build-push-action@v2
       with:
         context: ./backend
-        file: ./backend/Dockerfile
+#         file: ./backend/Dockerfile
         push: true
         tags: ghcr.io/boussonkarel/kassaapje-backend:latest
