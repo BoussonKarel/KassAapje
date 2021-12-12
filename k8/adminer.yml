@@ -1,0 +1,39 @@
+# adminer.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adminer
+  namespace: kassaapje # Change to your own namespace!
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: adminer
+  template:
+    metadata:
+      labels:
+        app: adminer
+    spec:
+      containers:
+        - image: adminer
+          name: adminer-container
+          ports:
+          - containerPort: 8080 # The interal port of the app
+            name: 8080tcp
+            protocol: TCP
+            _serviceType: ClusterIP # Register it as a ClusterIP service
+      nodeName: bousson-karel # Change the name of your node!
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: adminer-svc
+  namespace: kassaapje
+spec:
+  selector:
+    app: adminer
+  ports:
+    - name: adminer-port
+      port: 9999
+      protocol: TCP
+      targetPort: 8080
