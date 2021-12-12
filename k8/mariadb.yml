@@ -30,9 +30,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mariadb-svc
+  name: mariadb
   namespace: kassaapje
 spec:
+  selector:
+    app: mariadb
   ports:
   - name: 3306tcp
     port: 3306
