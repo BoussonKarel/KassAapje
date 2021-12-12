@@ -40,4 +40,4 @@ jobs:
       run: kubectl apply -f k8/adminer.yml --validate=false
       
     - name: Deploy backend to kubernetes
-      run: kubectl apply -f k8/kassaapje-backend.yml
+      run: kubectl apply -f k8/kassaapje-backend.yml --validate=false
