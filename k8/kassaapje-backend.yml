@@ -32,7 +32,7 @@ spec:
           _serviceType: ClusterIP # Register it as a ClusterIP service
         volumeMounts:
           - mountPath: /usr/app/auth/service-account.json
-            name: kassaapje-backend-auth-pvc
+            name: kassaapje-backend-auth
       volumes:
       - name: kassaapje-backend-auth
         persistentVolumeClaim:
