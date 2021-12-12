@@ -31,7 +31,7 @@ spec:
           protocol: TCP
           _serviceType: ClusterIP # Register it as a ClusterIP service
         volumeMounts:
-          - mountPath: /usr/app/auth/service-account.json
+          - mountPath: /mnt/auth/service-account.json
             name: kassaapje-backend-auth
       volumes:
       - name: kassaapje-backend-auth
