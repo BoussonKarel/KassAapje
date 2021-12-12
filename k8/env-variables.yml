@@ -6,4 +6,4 @@ data:
   MYSQL_DATABASE: kassaapje
   MYSQL_USER: admin
   MYSQL_HOST: localhost
-  MYSQL_PORT: 3306
+  MYSQL_PORT: "3306"
