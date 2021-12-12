@@ -5,7 +5,8 @@
 
   float: right;
 
-  width: 85%;
+  width: 90%;
+  min-width: 380px;
   max-width: 450px;
   height: 95%;
   background-color: #fff;
@@ -19,6 +20,7 @@
     justify-content: space-between;
     margin-left: 1.5em;
     margin-right: 2em;
+    height: 15%;
   }
 
   &-title {
@@ -48,6 +50,14 @@
 
   &-items {
     height: 65%;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    -ms-overflow-style: none;
+    scrollbar-width: none; /* Firefox */
   }
 
   &-item {
@@ -59,7 +69,10 @@
     margin-bottom: 2em;
 
     &-delete {
-      color: map-get($colors-neutral, '700');
+      color: map-get($colors-neutral, '500');
+      &:hover {
+        color: map-get($colors-neutral, '700');
+      }
 
       & svg {
         height: 1.5em;
@@ -68,14 +81,16 @@
     }
 
     &-name {
-      font-size: em(16px);
+      font-size: em(17px);
       width: 90px;
       text-align: center;
       -webkit-line-clamp: 2; /* number of lines to show */
       -webkit-box-orient: vertical;
-      
+
       overflow: hidden;
       text-overflow: ellipsis;
+
+      color: map-get($colors-neutral, '800');
     }
     &-calc {
       display: flex;
@@ -97,9 +112,13 @@
         height: 1.3em;
         width: 1.3em;
       }
+      &:hover {
+        background-color: map-get($colors-neutral, '600');
+      }
     }
 
     &-amount {
+      color: map-get($colors-neutral, '800');
     }
     &-more {
       width: 2.5em;
@@ -114,8 +133,12 @@
         height: 1.3em;
         width: 1.3em;
       }
+      &:hover {
+        background-color: map-get($colors-theme, 'selection');
+      }
     }
     &-price {
+      color: map-get($colors-neutral, '800');
     }
   }
 
@@ -127,14 +150,26 @@
 
     &-line {
       height: 1px;
-      width: 90%;
+      width: 80%;
       background-color: map-get($colors-neutral, '700');
     }
   }
 
   &-total {
-    height: 10%;
-    background-color: wheat;
+    display: flex;
+    align-items: center;
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-top: 8px;
+    justify-content: space-between;
+
+    &-title {
+      font-weight: 500;
+    }
+
+    &-amount {
+      font-weight: 500;
+    }
   }
 
   &-checkout {
@@ -156,6 +191,10 @@
 
       font-size: em(20px);
       font-weight: 500;
+
+      &:hover {
+        background-color: map-get($colors-theme, 'selection');
+      }
     }
   }
 }

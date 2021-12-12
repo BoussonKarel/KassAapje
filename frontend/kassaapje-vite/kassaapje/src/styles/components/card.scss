@@ -1,11 +1,10 @@
 .c-cardlist {
   display: grid;
-  grid-template-columns: repeat( auto-fill, minmax(380px, auto) );
+  grid-template-columns: repeat(auto-fill, minmax(380px, auto));
   margin-top: 2em;
 
   gap: 2em;
 }
-
 
 .c-organisation-card {
   width: 380px;
@@ -56,14 +55,14 @@
 
     &-desc {
       color: map-get($colors-neutral, '600');
-      margin-top: .5rem;
-      margin-bottom: .8rem;
+      margin-top: 0.5rem;
+      margin-bottom: 0.8rem;
     }
 
     &-org {
       color: #088f8f;
       font-weight: 700;
-      margin-bottom: .5rem;
+      margin-bottom: 0.5rem;
     }
 
     &-admin {
@@ -131,7 +130,7 @@
 
 .c-product-cardlist {
   display: grid;
-  grid-template-columns: repeat( auto-fill, minmax(200px, auto) );
+  grid-template-columns: repeat(auto-fill, minmax(200px, auto));
   margin-top: 2em;
   max-height: 400px;
 
@@ -139,10 +138,14 @@
   column-gap: 1em;
 
   overflow-y: scroll;
-  
-  
-}
 
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  -ms-overflow-style: none;
+  scrollbar-width: none; /* Firefox */
+}
 
 .c-product-card {
   display: flex;
@@ -157,7 +160,7 @@
   height: 130px;
   border-radius: $global-border-radius;
 
-  background-color: map-get($colors-theme, 'selection' );
+  background-color: map-get($colors-theme, 'selection');
 
   &-title {
     color: map-get($colors-neutral, '100');
@@ -173,14 +176,15 @@
     width: 100%;
 
     color: map-get($colors-neutral, '100');
-  
 
-    background-color: map-get($colors-theme, 'base' );
+    background-color: map-get($colors-theme, 'base');
 
     & svg {
       width: 2em;
       height: 2em;
     }
+    &:hover {
+      background-color: map-get($colors-theme, 'selection');
+    }
   }
 }
-

@@ -63,7 +63,6 @@
             </div>
         </div>
 
-
     </div>
     <div class="c-shoppingbasket-divider">
         <span class="c-shoppingbasket-divider-line"/>
@@ -71,6 +70,13 @@
    
 
     <div class="c-shoppingbasket-total">
+        <div class="c-shoppingbasket-total-title">
+            Totaal
+        </div>
+
+        <div class="c-shoppingbasket-total-amount">
+            € 200,0
+        </div>
 
     </div>
     <div class="c-shoppingbasket-checkout">

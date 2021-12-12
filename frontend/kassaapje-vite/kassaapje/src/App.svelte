@@ -19,6 +19,9 @@
   <div class="c-page">
     <div class="c-navigation">
       <NavigationBar />
+      <div class="c-button-manage">
+        Beheren
+      </div>
     </div>
     <!-- <OrganisationOverview /> -->
     <!-- <AddOrganisation/> -->
