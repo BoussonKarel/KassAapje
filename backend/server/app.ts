@@ -8,6 +8,7 @@ import {
   createConnection,
   EntityManager,
   getConnection,
+  getConnectionManager,
   getConnectionOptions,
   getManager,
 } from 'typeorm'
@@ -127,7 +128,13 @@ const main = async () => {
     })
     .catch(error => {
       console.error(error)
-      getConnection().close();
+      
+      try {
+        const conn = getConnection()
+        conn.close();
+      }
+      catch(e) { console.error(e) }
+
       attempts++;
       if (attempts <= max_attempts) setTimeout(main, 10000);
     })
