@@ -25,6 +25,13 @@ spec:
               name: env-variables
           - secretRef:
               name: env-secrets
+          volumeMounts:
+          - mountPath: /var/lib/mysql
+            name: kassaapje-db
+      volumes:
+      - name: kassaapje-db
+        persistentVolumeClaim:
+          claimName: kassaapje-db-pvc
       nodeName: bousson-karel
 ---
 apiVersion: v1
