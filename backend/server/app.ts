@@ -7,6 +7,8 @@ import {
   ConnectionOptions,
   createConnection,
   EntityManager,
+  getConnection,
+  getConnectionManager,
   getConnectionOptions,
   getManager,
 } from 'typeorm'
@@ -33,7 +35,9 @@ import { User } from './entity/user'
 import { customAuthChecker } from './auth/customAuthChecker'
 import authenticateRequests from './auth/authenticateRequests'
 
-(async () => {
+let attempts = 0;
+let max_attempts = 10;
+const main = async () => {
   const connectionOptions: ConnectionOptions = await getConnectionOptions()
 
   // CREATE DATABASE+TABLES, CONNECT, SEED DATABASE
@@ -122,5 +126,18 @@ import authenticateRequests from './auth/authenticateRequests'
         )
       })
     })
-    .catch(error => console.error(error))
-})()
+    .catch(error => {
+      console.error(error)
+      
+      try {
+        const conn = getConnection()
+        conn.close();
+      }
+      catch(e) { console.error(e) }
+
+      attempts++;
+      if (attempts <= max_attempts) setTimeout(main, 10000);
+    })
+}
+
+main()

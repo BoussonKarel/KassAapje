@@ -7,34 +7,44 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mariadb
+      app: kassaapje-mariadb
   template:
     metadata:
       labels:
-        app: mariadb
+        app: kassaapje-mariadb
     spec:
       containers:
         - image: mariadb:10.6.2
           name: mariadb-container
           ports:
             - containerPort: 3306
+              name: 3306tcp
+              protocol: TCP
           envFrom:
           - configMapRef:
-                name: env-variables
-            - secretRef:
-                name: env-secrets
+              name: env-variables
+          - secretRef:
+              name: env-secrets
+          volumeMounts:
+          - mountPath: /var/lib/mysql
+            name: kassaapje-db
+      volumes:
+      - name: kassaapje-db
+        persistentVolumeClaim:
+          claimName: kassaapje-db-pvc
       nodeName: bousson-karel
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: mariadb-svc
+  name: mariadb
   namespace: kassaapje
 spec:
   selector:
-    app: mariadb
+    app: kassaapje-mariadb
   ports:
-  - name: mariadb-port
-    port: 3307
+  - name: 3306tcp
+    port: 3306
     protocol: TCP
     targetPort: 3306
+  type: ClusterIP

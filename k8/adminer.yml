@@ -8,11 +8,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: adminer
+      app: kassaapje-adminer
   template:
     metadata:
       labels:
-        app: adminer
+        app: kassaapje-adminer
     spec:
       containers:
         - image: adminer
@@ -21,7 +21,7 @@ spec:
           - containerPort: 8080 # The interal port of the app
             name: 8080tcp
             protocol: TCP
-            _serviceType: ClusterIP # Register it as a ClusterIP service
+            # _serviceType: ClusterIP # Register it as a ClusterIP service
       nodeName: bousson-karel # Change the name of your node!
 ---
 apiVersion: v1
@@ -31,9 +31,11 @@ metadata:
   namespace: kassaapje
 spec:
   selector:
-    app: adminer
+    app: kassaapje-adminer
   ports:
-    - name: adminer-port
+    - name: 30299tcp
+      nodePort: 30299
       port: 9999
       protocol: TCP
       targetPort: 8080
+  type: NodePort
