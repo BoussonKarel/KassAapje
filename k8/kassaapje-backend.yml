@@ -12,6 +12,7 @@ spec:
   template:
     metadata:
       labels:
+        app: kassaapje-backend
         workload.user.cattle.io/workloadselector: apps.deployment-kassaapje-backend # Change to anything you like, but keep it same as line 11
     spec:
       containers:
@@ -29,7 +30,7 @@ spec:
         - containerPort: 8888 # The interal port of the app
           name: 8888tcp
           protocol: TCP
-          _serviceType: ClusterIP # Register it as a ClusterIP service
+          # _serviceType: ClusterIP # Register it as a ClusterIP service
         volumeMounts:
           - mountPath: /usr/app/auth/service-account
             name: kassaapje-backend-auth
@@ -48,7 +49,9 @@ spec:
   selector:
     app: kassaapje-backend
   ports:
-    - name: 31234tcp
-      port: 31234
+    - name: 30201tcp
+      nodePort: 30201
+      port: 30201
       protocol: TCP
       targetPort: 8888
+  type: NodePort
