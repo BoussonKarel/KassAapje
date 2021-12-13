@@ -24,14 +24,14 @@ spec:
             name: env-secrets
         env:
         - name: GOOGLE_APPLICATION_CREDENTIALS
-          value: auth/service-account.json
+          value: auth/service-account/service-account.json
         ports:
         - containerPort: 8888 # The interal port of the app
           name: 8888tcp
           protocol: TCP
           _serviceType: ClusterIP # Register it as a ClusterIP service
         volumeMounts:
-          - mountPath: /mnt/auth/service-account.json
+          - mountPath: /usr/app/auth/service-account
             name: kassaapje-backend-auth
       volumes:
       - name: kassaapje-backend-auth
