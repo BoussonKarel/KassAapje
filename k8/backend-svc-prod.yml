@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kassaapje-backend-svc
+  namespace: kassaapje
+spec:
+  selector:
+    app: kassaapje-backend
+  ports:
+    - name: 30201tcp
+      nodePort: 30201
+      port: 30201
+      protocol: TCP
+      targetPort: 8888
+  type: NodePort

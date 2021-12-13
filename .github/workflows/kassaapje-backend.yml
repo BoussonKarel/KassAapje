@@ -34,4 +34,7 @@ jobs:
       run: kubectl apply -f k8/adminer.yml --validate=false
       
     - name: Deploy backend to kubernetes
-      run: kubectl apply -f k8/kassaapje-backend.yml --validate=false
+      run: kubectl apply -f k8/backend-prod.yml
+
+    - name: Deploy backend service to kubernetes
+      run: kubectl apply -f k8/backend-svc-prod.yml

@@ -30,7 +30,6 @@ spec:
         - containerPort: 8888 # The interal port of the app
           name: 8888tcp
           protocol: TCP
-          # _serviceType: ClusterIP # Register it as a ClusterIP service
         volumeMounts:
           - mountPath: /usr/app/auth/service-account
             name: kassaapje-backend-auth
@@ -39,19 +38,3 @@ spec:
         persistentVolumeClaim:
           claimName: kassaapje-backend-auth-pvc
       nodeName: bousson-karel # Change the name of your node!
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: kassaapje-backend-svc
-  namespace: kassaapje
-spec:
-  selector:
-    app: kassaapje-backend
-  ports:
-    - name: 30201tcp
-      nodePort: 30201
-      port: 30201
-      protocol: TCP
-      targetPort: 8888
-  type: NodePort
