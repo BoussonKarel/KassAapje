@@ -5,13 +5,9 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm'
 import { Order } from './order'
-import { Product } from './product'
-import { Register } from './register'
-import { Variation } from './variation'
 
 @ObjectType()
 @InputType('PaymentInput')

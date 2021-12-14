@@ -29,7 +29,7 @@ export class Variation extends BaseEntity {
   name?: string
 
   @Field()
-  @Column('decimal')
+  @Column({type: 'decimal', precision: 10, scale:2})
   price_diff?: number
 
   @Field(() => [OrderItem], { nullable: true})

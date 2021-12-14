@@ -12,6 +12,7 @@ import {
 import { OrderItem, OrderItemInput } from './orderItem'
 import { Payment, PaymentOrderInput } from './payment'
 import { Register } from './register'
+import { User } from './user'
 
 @ObjectType()
 @Entity('orders')
@@ -27,41 +28,39 @@ export class Order extends BaseEntity {
 
   @Field()
   @CreateDateColumn()
-  timestamp?: Date
+  timestamp?: Date = new Date(Date.now())
 
-  @Field()
-  @Column()
+  @Field({nullable: true})
+  @Column({nullable: true})
   customer_name?: string
 
   @Field()
-  @Column()
-  seller_id?: string
+  @ManyToOne(() => User, u => u.orders)
+  @JoinColumn({name: 'seller_id'})
+  seller?: User
 
   @Field(() => [OrderItem])
-  @OneToMany(() => OrderItem, p => p.order)
+  @OneToMany(() => OrderItem, p => p.order, {eager: true, cascade: true})
   order_items?: OrderItem[]
 
   @Field(() => [Payment])
-  @OneToMany(() => Payment, p => p.order)
+  @OneToMany(() => Payment, p => p.order, {eager: true, cascade: true})
   payments?: Payment[]
 }
 
 @InputType('OrderInput')
 export class OrderInput {
-  @Field(() => ID)
+  @Field(() => ID, { nullable: true })
   order_id?: string
 
-  @Field(() => Register)
-  register?: Register
-
   @Field()
+  register_id!: string
+
+  @Field({nullable: true})
   timestamp?: Date
 
-  @Field()
+  @Field({nullable: true})
   customer_name?: string
-
-  @Field()
-  seller_id?: string
 
   @Field(() => [OrderItemInput])
   order_items?: OrderItemInput[]

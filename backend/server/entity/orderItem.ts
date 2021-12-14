@@ -5,16 +5,11 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  ObjectID,
-  ObjectIdColumn,
-  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm'
-import { generateUID } from '../helpers/generateUID'
 import { Order } from './order'
-import { Product, ProductOrderInput } from './product'
-import { Register } from './register'
-import { Variation, VariationOrderInput } from './variation'
+import { Product } from './product'
+import { Variation } from './variation'
 
 @ObjectType()
 @Entity('order_items')
@@ -28,10 +23,16 @@ export class OrderItem extends BaseEntity {
   @JoinColumn({ name: 'order_id' })
   order!: Order
 
+  @Column()
+  product_id!: string
+
   @Field(() => Product)
   @ManyToOne(() => Product, p => p.orderItems)
   @JoinColumn({ name: 'product_id' })
   product!: Product
+
+  @Column({nullable: true})
+  variation_id?: string
 
   @Field(() => Variation)
   @ManyToOne(() => Variation, v => v.orderItems)
@@ -56,11 +57,11 @@ export class OrderItemInput {
   @Field(() => ID, { nullable: true})
   orderitem_id?: string
 
-  @Field(() => ProductOrderInput)
-  product!: ProductOrderInput
+  @Field()
+  product_id!: string
 
-  @Field(() => VariationOrderInput, { nullable: true})
-  variation?: VariationOrderInput
+  @Field({nullable: true})
+  variation_id?: string
 
   @Field()
   price?: number
@@ -68,6 +69,6 @@ export class OrderItemInput {
   @Field()
   quantity?: number
 
-  @Field()
-  delivered?: boolean
+  @Field({nullable: true})
+  delivered?: boolean = true
 }

@@ -6,7 +6,6 @@ import {
   JoinColumn,
   ManyToOne,
   OneToMany,
-  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm'
 import { OrderItem } from './orderItem'
@@ -30,12 +29,12 @@ export class Product extends BaseEntity {
   name?: string
 
   @Field()
-  @Column('decimal')
+  @Column({type: 'decimal', precision: 10, scale:2})
   price?: number
 
   @Field()
   @Column('bool')
-  stock_is_managed?: boolean
+  stock_is_managed?: boolean = false
 
   @Field({ nullable: true })
   @Column('int', { nullable: true })
@@ -71,13 +70,13 @@ export class ProductInput {
   @Field()
   price?: number
 
-  @Field()
+  @Field({ nullable: true })
   stock_is_managed?: boolean
 
   @Field({ nullable: true })
   stock_quantity?: number
 
-  @Field()
+  @Field({ nullable: true })
   allow_backorders?: boolean = false
 
   @Field(() => [ProductVariationInput], { nullable: true })
