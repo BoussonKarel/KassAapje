@@ -19,7 +19,7 @@ export class RegisterResolver {
   // CREATE
   // -------
   @Authorized()
-  @Mutation(() => Register, { nullable: true })
+  @Mutation(() => Register)
   async addRegister(
     @Arg('register') newRegisterData: RegisterInput,
     @CurrentUser() user: User,
@@ -80,7 +80,7 @@ export class RegisterResolver {
   }
 
   @Authorized()
-  @Query(() => Register, { nullable: true })
+  @Query(() => Register)
   async getRegisterById(
     @Arg('id') id: string,
     @CurrentUser() user: User,
@@ -101,7 +101,7 @@ export class RegisterResolver {
   // UPDATE
   // -------
   @Authorized()
-  @Mutation(() => Register, { nullable: true })
+  @Mutation(() => Register)
   async updateRegister(
     @Arg('register') updatingRegisterData: RegisterUpdateInput,
     @CurrentUser() user: User,
@@ -133,15 +133,15 @@ export class RegisterResolver {
   @Authorized()
   @Mutation(() => Number)
   async removeRegister(
-    @Arg('id') register_id: string,
+    @Arg('id') registerId: string,
     @CurrentUser() user: User,
   ): Promise<Number> {
     try {
       // Check if user has correct perms
       return await this.roleManager
-        .hasRegisterRole(user, register_id, [Role.OWNER])
+        .hasRegisterRole(user, registerId, [Role.OWNER])
         .then(async () => {
-          const { affected } = await this.manager.delete(Register, register_id)
+          const { affected } = await this.manager.delete(Register, registerId)
           if (!affected) throw Error('Could not delete register (<1 affected)')
           return affected
         })

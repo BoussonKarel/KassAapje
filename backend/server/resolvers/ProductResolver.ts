@@ -15,7 +15,7 @@ export class ProductResolver {
   // -------
   // CREATE
   // -------
-  @Mutation(() => Product, { nullable: true })
+  @Mutation(() => Product)
   async addProduct(
     @Arg('product') productData: ProductInput,
     @CurrentUser() user: User,
@@ -71,7 +71,7 @@ export class ProductResolver {
     }
   }
 
-  @Query(() => Product, { nullable: true })
+  @Query(() => Product)
   async getProductById(
     @Arg('id') productId: string,
     @CurrentUser() user: User,
@@ -80,7 +80,6 @@ export class ProductResolver {
       const foundProduct = await this.manager
         .findOneOrFail(Product, productId, { relations: ['register'] })
         .catch(e => {
-          console.error(e)
           throw new Error('Could not find that product.')
         })
 
@@ -101,7 +100,7 @@ export class ProductResolver {
   // -------
   // UPDATE
   // -------
-  @Mutation(() => Product, { nullable: true })
+  @Mutation(() => Product)
   async updateProduct(
     @Arg('product') productData: ProductUpdateInput,
     @CurrentUser() user: User,
@@ -144,4 +143,40 @@ export class ProductResolver {
   // -------
   // DELETE
   // -------
+  @Mutation(() => Number)
+  async removeProduct(
+    @Arg('id') productId: string,
+    @CurrentUser() user: User,
+  ) {
+    try {
+      // DOES PRODUCT EXIST (if so get id and register id)
+      const existingProduct = await this.manager
+        .createQueryBuilder(Product, 'p')
+        .where('p.product_id = :id', { id: productId })
+        .select('p.product_id')
+        .leftJoin('p.register', 'r')
+        .addSelect('r.register_id')
+        .getOneOrFail()
+        .catch(() => {
+          throw new Error(
+            'Could not find the product you are trying to update.',
+          )
+        })
+
+      // DOES USER HAVE ROLE
+      return await this.roleManager
+        .hasRegisterRole(user, existingProduct.register.register_id, [
+          Role.OWNER,
+        ])
+        .then(async () => {
+          // DELETE PRODUCT
+          const { affected } = await this.manager.delete(Product, productId)
+          if (!affected) throw Error('Could not delete product (<1 affected)')
+          return affected
+        })
+    } catch (error: any) {
+      console.error(`⛔ (${user.email}) ` + error.message)
+      throw error
+    }
+  }
 }
