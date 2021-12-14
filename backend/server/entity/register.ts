@@ -25,7 +25,7 @@ export class Register extends BaseEntity {
   register_id: string = generateUID();
 
   @Field(() => Organization)
-  @ManyToOne(() => Organization, o => o.registers)
+  @ManyToOne(() => Organization, o => o.registers, {onDelete: 'CASCADE'})
   @JoinColumn({ name: 'organization_id' })
   @Expose({ name: 'organization_id' })
   organization!: Organization

@@ -21,7 +21,7 @@ export class Product extends BaseEntity {
   product_id?: string
 
   @Field(() => Register)
-  @ManyToOne(() => Register, r => r.products)
+  @ManyToOne(() => Register, r => r.products, {onDelete: 'CASCADE'})
   @JoinColumn({ name: 'register_id' })
   register!: Register
 
