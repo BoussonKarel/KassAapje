@@ -19,7 +19,7 @@ export class RegisterResolver {
   // CREATE
   // -------
   @Authorized()
-  @Mutation(() => Register, { nullable: true })
+  @Mutation(() => Register)
   async addRegister(
     @Arg('register') newRegisterData: RegisterInput,
     @CurrentUser() user: User,
@@ -62,64 +62,65 @@ export class RegisterResolver {
     @Arg('organization_id') organization_id: string,
     @CurrentUser() user: User,
   ): Promise<Register[]> {
-    // Check if user has correct perms
-    return await this.roleManager
-      .hasOrganizationRole(user, organization_id, [Role.OWNER])
-      .then(async () => {
-        return await this.manager.find(Register, {
-          where: {
-            organization: { organization_id: organization_id },
-          },
+    try {
+      // Check if user has correct perms
+      return await this.roleManager
+        .hasOrganizationRole(user, organization_id, [Role.OWNER])
+        .then(async () => {
+          return await this.manager.find(Register, {
+            where: {
+              organization: { organization_id: organization_id },
+            },
+          })
         })
-      })
+    } catch (error: any) {
+      console.error(`⛔ (${user.email}) ` + error.message)
+      throw error
+    }
   }
 
   @Authorized()
-  @Query(() => Register, { nullable: true })
+  @Query(() => Register)
   async getRegisterById(
     @Arg('id') id: string,
     @CurrentUser() user: User,
   ): Promise<Register | undefined | null> {
-    return await this.roleManager
-      .hasRegisterRole(user, id, [Role.USER, Role.OWNER])
-      .then(async () => {
-        return await this.manager.findOne(Register, id)
-      })
+    try {
+      return await this.roleManager
+        .hasRegisterRole(user, id, [Role.USER, Role.OWNER])
+        .then(async () => {
+          return await this.manager.findOne(Register, id)
+        })
+    } catch (error: any) {
+      console.error(`⛔ (${user.email}) ` + error.message)
+      throw error
+    }
   }
 
   // -------
   // UPDATE
   // -------
   @Authorized()
-  @Mutation(() => Register, { nullable: true })
+  @Mutation(() => Register)
   async updateRegister(
     @Arg('register') updatingRegisterData: RegisterUpdateInput,
     @CurrentUser() user: User,
   ) {
     try {
-      // Does register exist?
-      const existingRegister = await this.manager
-        .findOneOrFail(Register, updatingRegisterData.register_id)
-        .catch(e => {
-          throw new Error('Register not found.')
-        })
-
       const updatingRegister = this.manager.create(
         Register,
         updatingRegisterData,
       )
 
-      // Exists => update
-      if (existingRegister) {
-        // Check if user has correct perms
-        return await this.roleManager
-          .hasRegisterRole(user, existingRegister.register_id, [Role.OWNER])
-          .then(async () => {
-            return await this.manager.save(Register, {
-              ...updatingRegister,
-            })
+      // Check if user has correct perms
+      // This also checks if it exists
+      return await this.roleManager
+        .hasRegisterRole(user, updatingRegister.register_id, [Role.OWNER])
+        .then(async () => {
+          return await this.manager.save(Register, {
+            ...updatingRegister,
           })
-      } else throw new Error('Register not found.')
+        })
     } catch (error: any) {
       console.error('⛔ ' + error.message)
       throw error
@@ -132,17 +133,16 @@ export class RegisterResolver {
   @Authorized()
   @Mutation(() => Number)
   async removeRegister(
-    @Arg('id') register_id: string,
+    @Arg('id') registerId: string,
     @CurrentUser() user: User,
   ): Promise<Number> {
     try {
       // Check if user has correct perms
       return await this.roleManager
-        .hasRegisterRole(user, register_id, [Role.OWNER])
+        .hasRegisterRole(user, registerId, [Role.OWNER])
         .then(async () => {
-          const { affected } = await this.manager.delete(Register, register_id)
-          if (!affected)
-            throw Error('Could not delete register. Does it exist?')
+          const { affected } = await this.manager.delete(Register, registerId)
+          if (!affected) throw Error('Could not delete register (<1 affected)')
           return affected
         })
     } catch (error: any) {
