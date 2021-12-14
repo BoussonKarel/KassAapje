@@ -39,10 +39,10 @@ export class Order extends BaseEntity {
   seller_id?: string
 
   @Field(() => [OrderItem])
-  @OneToMany(() => OrderItem, p => p.order)
+  @OneToMany(() => OrderItem, p => p.order, {onDelete: 'CASCADE'}) // MAYBE ONDELETE: SET NULL?
   order_items?: OrderItem[]
 
   @Field(() => [Payment])
-  @OneToMany(() => Payment, p => p.order)
+  @OneToMany(() => Payment, p => p.order, {onDelete: 'CASCADE'}) // MAYBE ONDELETE: SET NULL?
   payments?: Payment[]
 }

@@ -64,10 +64,10 @@ export class Organization extends BaseEntity {
   email?: string
 
   @Field(() => [Register], { nullable: true })
-  @OneToMany(() => Register, r => r.organization)
+  @OneToMany(() => Register, r => r.organization, {onDelete: 'CASCADE'}) // MAYBE ONDELETE: SET NULL?
   registers?: Register[]
 
-  @OneToMany(() => Permission, p => p.organization)
+  @OneToMany(() => Permission, p => p.organization, {onDelete: 'CASCADE'}) // MAYBE ONDELETE: SET NULL?
   permissions?: Permission[]
 }
 

@@ -46,11 +46,11 @@ export class Product extends BaseEntity {
   allow_backorders?: boolean
 
   @Field(() => [Variation], { nullable: true})
-  @OneToMany(() => Variation, v => v.product, {eager: true, cascade: ['insert']})
+  @OneToMany(() => Variation, v => v.product, {eager: true, cascade: ['insert'], onDelete: 'CASCADE'}) // MAYBE ONDELETE: SET NULL?
   variations?: Variation[]
 
   @Field(() => [OrderItem], { nullable: true})
-  @OneToMany(() => OrderItem, oi => oi.product)
+  @OneToMany(() => OrderItem, oi => oi.product, {onDelete: 'CASCADE'}) // MAYBE ONDELETE: SET NULL?
   orderItems?: OrderItem[]
 }
 

@@ -16,7 +16,7 @@ export class User extends BaseEntity {
   @Column()
   email?: string
 
-  @OneToMany(() => Permission, p => p.user)
+  @OneToMany(() => Permission, p => p.user, {onDelete: 'CASCADE'}) // MAYBE ONDELETE: SET NULL?
   permissions?: Permission[]
 
   // @Column('bool') // APP ADMIN?

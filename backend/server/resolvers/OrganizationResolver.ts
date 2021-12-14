@@ -130,4 +130,33 @@ export class OrganizationResolver {
   // -------
   // DELETE
   // -------
+  @Authorized()
+  @Mutation(() => String, { nullable: true })
+  async removeOrganization(
+    @Arg('id') organizationId: string,
+    @CurrentUser() user: User,
+  ) {
+    try {
+      // Check if user has correct perms
+      return await this.roleManager
+        .hasOrganizationRole(user, organizationId, [
+          Role.OWNER,
+        ])
+        .then(async () => {
+          // Does organization exist?
+          const existingOrganization = await this.manager.findOneOrFail(
+            Organization,
+            organizationId,
+          )
+
+          // Exists => remove
+          if (existingOrganization)
+            return await this.manager.remove(existingOrganization).then(() => {return organizationId})
+          else throw new Error('Organization not found.')
+        })
+    } catch (error: any) {
+      console.error(`⛔ (${user.email}) ` + error.message)
+      throw error
+    }
+  }  
 }
