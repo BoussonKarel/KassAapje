@@ -43,14 +43,14 @@ export class Register extends BaseEntity {
   color?: string
 
   @Field(() => [Product])
-  @OneToMany(() => Product, p => p.register, {onDelete: 'CASCADE'}) // MAYBE ONDELETE: SET NULL?
+  @OneToMany(() => Product, p => p.register )
   products?: Product[]
 
   @Field(() => [Order])
-  @OneToMany(() => Order, o => o.register, {onDelete: 'CASCADE'}) // MAYBE ONDELETE: SET NULL?
+  @OneToMany(() => Order, o => o.register )
   orders?: Order[]
 
-  @OneToMany(() => Permission, p => p.register, {onDelete: 'CASCADE'}) // MAYBE ONDELETE: SET NULL?
+  @OneToMany(() => Permission, p => p.register )
   permissions?: Permission[]
 }
 
