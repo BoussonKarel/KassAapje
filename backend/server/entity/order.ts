@@ -9,12 +9,11 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm'
-import { OrderItem } from './orderItem'
-import { Payment } from './payment'
+import { OrderItem, OrderItemInput } from './orderItem'
+import { Payment, PaymentOrderInput } from './payment'
 import { Register } from './register'
 
 @ObjectType()
-@InputType('OrderInput')
 @Entity('orders')
 export class Order extends BaseEntity {
   @Field(() => ID)
@@ -45,4 +44,28 @@ export class Order extends BaseEntity {
   @Field(() => [Payment])
   @OneToMany(() => Payment, p => p.order)
   payments?: Payment[]
+}
+
+@InputType('OrderInput')
+export class OrderInput {
+  @Field(() => ID)
+  order_id?: string
+
+  @Field(() => Register)
+  register?: Register
+
+  @Field()
+  timestamp?: Date
+
+  @Field()
+  customer_name?: string
+
+  @Field()
+  seller_id?: string
+
+  @Field(() => [OrderItemInput])
+  order_items?: OrderItemInput[]
+
+  @Field(() => [PaymentOrderInput], { nullable: true })
+  payments?: PaymentOrderInput[]
 }

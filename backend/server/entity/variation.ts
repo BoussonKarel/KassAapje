@@ -48,3 +48,9 @@ export class ProductVariationInput {
   @Field()
   price_diff?: number
 }
+
+@InputType('VariationOrderInput')
+export class VariationOrderInput extends BaseEntity {
+  @Field(() => ID)
+  variation_id?: string
+}

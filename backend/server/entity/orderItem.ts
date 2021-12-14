@@ -12,22 +12,21 @@ import {
 } from 'typeorm'
 import { generateUID } from '../helpers/generateUID'
 import { Order } from './order'
-import { Product } from './product'
+import { Product, ProductOrderInput } from './product'
 import { Register } from './register'
-import { Variation } from './variation'
+import { Variation, VariationOrderInput } from './variation'
 
 @ObjectType()
-@InputType('OrderItemInput')
 @Entity('order_items')
 export class OrderItem extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn('uuid')
   orderitem_id?: string
 
-  @Field(() => Register)
+  @Field(() => Order)
   @ManyToOne(() => Order, r => r.order_items, {onDelete: 'CASCADE'})
   @JoinColumn({ name: 'order_id' })
-  order!: Register
+  order!: Order
 
   @Field(() => Product)
   @ManyToOne(() => Product, p => p.orderItems)
@@ -49,5 +48,26 @@ export class OrderItem extends BaseEntity {
 
   @Field()
   @Column()
+  delivered?: boolean
+}
+
+@InputType('OrderItemInput')
+export class OrderItemInput {
+  @Field(() => ID, { nullable: true})
+  orderitem_id?: string
+
+  @Field(() => ProductOrderInput)
+  product!: ProductOrderInput
+
+  @Field(() => VariationOrderInput, { nullable: true})
+  variation?: VariationOrderInput
+
+  @Field()
+  price?: number
+
+  @Field()
+  quantity?: number
+
+  @Field()
   delivered?: boolean
 }

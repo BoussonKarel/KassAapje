@@ -107,3 +107,9 @@ export class ProductUpdateInput {
   @Field(() => [ProductVariationInput], { nullable: true })
   variations?: ProductVariationInput[]
 }
+
+@InputType('ProductOrderInput')
+export class ProductOrderInput {
+  @Field(() => ID)
+  product_id!: string
+}

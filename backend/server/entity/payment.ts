@@ -21,10 +21,10 @@ export class Payment extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   payment_id?: string
 
-  @Field(() => Register)
+  @Field(() => Order)
   @ManyToOne(() => Order, r => r.payments)
   @JoinColumn({ name: 'order_id' })
-  order!: Register
+  order!: Order
 
   @Field()
   @Column()
@@ -32,5 +32,17 @@ export class Payment extends BaseEntity {
 
   @Field()
   @Column('decimal')
+  amount?: number
+}
+
+@InputType('PaymentOrderInput')
+export class PaymentOrderInput {
+  @Field(() => ID, { nullable: true})
+  payment_id?: string
+
+  @Field()
+  payment_method?: string
+
+  @Field()
   amount?: number
 }
