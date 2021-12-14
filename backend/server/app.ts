@@ -34,7 +34,8 @@ import { RoleResolver } from './resolvers/RoleResolver'
 import { User } from './entity/user'
 import { customAuthChecker } from './auth/customAuthChecker'
 import authenticateRequests from './auth/authenticateRequests'
-;(async () => {
+;import { OrderResolver } from './resolvers/OrderResolver'
+(async () => {
   const connectionOptions: ConnectionOptions = await getConnectionOptions()
 
   const initDatabase = () => {
@@ -121,6 +122,7 @@ import authenticateRequests from './auth/authenticateRequests'
         RegisterResolver,
         ProductResolver,
         RoleResolver,
+        OrderResolver
       ],
       authChecker: customAuthChecker,
       authMode: 'null',
