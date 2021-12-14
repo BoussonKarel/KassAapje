@@ -25,7 +25,7 @@ export class Register extends BaseEntity {
   register_id: string = generateUID();
 
   @Field(() => Organization)
-  @ManyToOne(() => Organization, o => o.registers)
+  @ManyToOne(() => Organization, o => o.registers, {onDelete: 'CASCADE'})
   @JoinColumn({ name: 'organization_id' })
   @Expose({ name: 'organization_id' })
   organization!: Organization
@@ -43,14 +43,14 @@ export class Register extends BaseEntity {
   color?: string
 
   @Field(() => [Product])
-  @OneToMany(() => Product, p => p.register)
+  @OneToMany(() => Product, p => p.register )
   products?: Product[]
 
   @Field(() => [Order])
-  @OneToMany(() => Order, o => o.register)
+  @OneToMany(() => Order, o => o.register )
   orders?: Order[]
 
-  @OneToMany(() => Permission, p => p.register)
+  @OneToMany(() => Permission, p => p.register )
   permissions?: Permission[]
 }
 

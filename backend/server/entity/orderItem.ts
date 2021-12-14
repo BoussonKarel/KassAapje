@@ -25,7 +25,7 @@ export class OrderItem extends BaseEntity {
   orderitem_id?: string
 
   @Field(() => Register)
-  @ManyToOne(() => Order, r => r.order_items)
+  @ManyToOne(() => Order, r => r.order_items, {onDelete: 'CASCADE'})
   @JoinColumn({ name: 'order_id' })
   order!: Register
 

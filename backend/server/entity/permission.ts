@@ -16,12 +16,12 @@ export class Permission extends BaseEntity {
   @Expose({name: 'uid'})
   user!: User
 
-  @ManyToOne(() => Organization, o => o.permissions, { nullable: true, eager: true, onDelete: "CASCADE"})
+  @ManyToOne(() => Organization, o => o.permissions, { nullable: true, eager: true, onDelete: 'CASCADE' })
   @JoinColumn({ name: 'organization_id'})
   @Expose({name: 'organization_id'})
   organization?: Organization
 
-  @ManyToOne(() => Register, o => o.permissions, { nullable: true, eager: true, onDelete: "CASCADE"})
+  @ManyToOne(() => Register, o => o.permissions, { nullable: true, eager: true, onDelete: 'CASCADE' })
   @JoinColumn({ name: 'register_id'})
   @Expose({name: 'register_id'})
   register?: Register

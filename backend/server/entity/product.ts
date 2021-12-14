@@ -21,7 +21,7 @@ export class Product extends BaseEntity {
   product_id?: string
 
   @Field(() => Register)
-  @ManyToOne(() => Register, r => r.products)
+  @ManyToOne(() => Register, r => r.products, {onDelete: 'CASCADE'})
   @JoinColumn({ name: 'register_id' })
   register!: Register
 
@@ -46,7 +46,7 @@ export class Product extends BaseEntity {
   allow_backorders?: boolean
 
   @Field(() => [Variation], { nullable: true})
-  @OneToMany(() => Variation, v => v.product, {eager: true, cascade: ['insert']})
+  @OneToMany(() => Variation, v => v.product, {eager: true, cascade: ['insert'] })
   variations?: Variation[]
 
   @Field(() => [OrderItem], { nullable: true})

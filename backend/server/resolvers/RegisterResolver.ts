@@ -131,7 +131,7 @@ export class RegisterResolver {
   // -------
   @Authorized()
   @Mutation(() => Number)
-  async deleteRegister(
+  async removeRegister(
     @Arg('id') register_id: string,
     @CurrentUser() user: User,
   ): Promise<Number> {
