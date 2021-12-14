@@ -17,39 +17,33 @@ export class ProductResolver {
   // -------
   @Mutation(() => Product, { nullable: true })
   async addProduct(
-    @Arg('product') productData: ProductInput
+    @Arg('product') productData: ProductInput,
+    @CurrentUser() user: User,
   ): Promise<Product> {
-
-
-    if (productData.variations) {
-      productData.variations.forEach(v => v.product_id = productData.product_id)
-    }
-
-    const newProduct : Product = await this.manager.create(
-      Product,
-      productData
-    )
-    newProduct.register = await this.manager.findOneOrFail(Register, productData.register_id)
-
-    // ADD AND SAVE VARIATIONS
-    if (productData.variations) {
-      const variations : Variation[] = [];
-      for (const variationInput of productData.variations) {
-        const newVariation : Variation = await this.manager.create(
-          Variation,
-          variationInput
+    try {
+      // Check if user has permissions
+      return await this.roleManager.hasRegisterRole(user, productData.register_id, [
+        Role.OWNER
+      ]).then(async () => {
+        // NIEUW PRODUCT AANMAKEN
+        const newProduct : Product = await this.manager.create(
+          Product,
+          productData
         )
 
-        variations.push(newVariation);
-      }
+        console.log({newProduct})
+        console.log(newProduct.variations)
 
-      newProduct.variations = variations;
+        // REGISTER TOEVOEGEN
+        newProduct.register = await this.manager.findOneOrFail(Register, productData.register_id)
+
+        // SAVE PRODUCT
+        return await this.manager.save(newProduct)
+      })
+    } catch (error: any) {
+      console.error(`⛔ (${user.email}) ` + error.message)
+      throw error
     }
-    
-    // SAVE PRODUCT
-    const savedProduct = await this.manager.save(newProduct)
-
-    return savedProduct;
   }
 
   // -------

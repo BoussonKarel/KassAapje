@@ -20,7 +20,7 @@ export class Variation extends BaseEntity {
   variation_id?: string
 
   @Field(() => Product)
-  @ManyToOne(() => Product, p => p.variations)
+  @ManyToOne(() => Product, p => p.variations, {onDelete: 'CASCADE'})
   @JoinColumn({ name: 'product_id' })
   product!: Product
 
