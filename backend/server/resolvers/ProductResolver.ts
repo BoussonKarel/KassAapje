@@ -132,8 +132,6 @@ export class ProductResolver {
             productData,
           )
 
-          console.log({ updatingProduct })
-
           // SAVE PRODUCT
           return await this.manager.save(updatingProduct)
         })
