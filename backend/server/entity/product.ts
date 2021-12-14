@@ -47,8 +47,8 @@ export class Product extends BaseEntity {
 
   @Field(() => [Variation], { nullable: true })
   @OneToMany(() => Variation, v => v.product, {
-    eager: true,
-    cascade: ['insert'],
+    eager: true, // always include in 'find'
+    cascade: true, // always update (add, update, remove) in 'save'
   })
   variations?: Variation[]
 
@@ -78,6 +78,30 @@ export class ProductInput {
   stock_quantity?: number
 
   @Field()
+  allow_backorders?: boolean = false
+
+  @Field(() => [ProductVariationInput], { nullable: true })
+  variations?: ProductVariationInput[]
+}
+
+@InputType('ProductUpdateInput')
+export class ProductUpdateInput {
+  @Field(() => ID)
+  product_id!: string
+
+  @Field({ nullable: true })
+  name?: string
+
+  @Field({ nullable: true })
+  price?: number
+
+  @Field({ nullable: true })
+  stock_is_managed?: boolean
+
+  @Field({ nullable: true })
+  stock_quantity?: number
+
+  @Field({ nullable: true })
   allow_backorders?: boolean = false
 
   @Field(() => [ProductVariationInput], { nullable: true })

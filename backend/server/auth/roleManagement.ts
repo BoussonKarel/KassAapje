@@ -51,7 +51,7 @@ export class RoleManager {
   }
 
   async hasOrganizationRole(user: User, organization_id: string, roles: Role[]) {
-    if (!user.permissions || user.permissions.length < 1) return false
+    if (!user.permissions || user.permissions.length < 1) throw Error('You do not have any permissions.')
     // Check roles in this organization_id
     const permissionsHere = user.permissions.filter(
       p => p.organization && p.organization.organization_id === organization_id,
@@ -59,11 +59,11 @@ export class RoleManager {
     // Check if role is present in those permissions
     const hasPermission = this.permissionsContainRole(permissionsHere, roles)
     if (hasPermission) return true;
-    else throw Error('You do not have the right permissions on that register / organization.')
+    else throw Error('You do not have the right permissions on that register / organization (or it does not exist).')
   }
 
   async hasRegisterRole(user: User, register_id: string, roles: Role[]) {
-    if (!user.permissions || user.permissions.length < 1) return false
+    if (!user.permissions || user.permissions.length < 1) throw Error('You do not have any permissions.')
 
     // Get (register_id and) organization_id
     // Also kind of a check if the register exists
@@ -75,7 +75,6 @@ export class RoleManager {
       .where('r.register_id = :id', { id: register_id })
       .getOneOrFail()
       .catch(e => {
-        console.error(e)
         throw new Error(
           'Could not find the register you are trying to work in.',
         )
