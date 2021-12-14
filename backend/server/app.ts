@@ -34,110 +34,131 @@ import { RoleResolver } from './resolvers/RoleResolver'
 import { User } from './entity/user'
 import { customAuthChecker } from './auth/customAuthChecker'
 import authenticateRequests from './auth/authenticateRequests'
-
-let attempts = 0;
-let max_attempts = 10;
-const main = async () => {
+;(async () => {
   const connectionOptions: ConnectionOptions = await getConnectionOptions()
 
-  // CREATE DATABASE+TABLES, CONNECT, SEED DATABASE
-  createDatabase({ ifNotExist: true }, connectionOptions)
-    .then(() => console.log('Database has been created!'))
-    .then(createConnection)
-    .then(async (connection: Connection) => {
-      seedDatabase(connection)
-
-      // APP SETUP
-      const app = express(),
-        port = process.env.PORT || 8888
-
-      // CORS
-      app.use(cors())
-
-      // FIREBASE-ADMIN
-      dotenv.config() // This will load in the GOOGLE_APPLICATION_CREDENTIALS
-
-      admin.initializeApp({
-        credential: admin.credential.applicationDefault(),
-      })
-
-      // MIDDLEWARE
-      app.use(express.json()) // for parsing application/json
-
-      app.post('/signup', async (request: Request, response: Response) => {
-        const manager : EntityManager = getManager();
-
-        const {email, password, name} = request.body;
-
-        // Create firebase user
-        await admin.auth().createUser({
-          email, password, displayName: name
-        }).then(async firebaseUser => {
-          // User created, add to database
-          const newUser = manager.create(User, firebaseUser);
-          await manager.save(newUser).then(savedUser => {
-            console.info("✅ Succesfully created user")
-            response.send(savedUser).status(201);
-          }).catch(async error => {
-            console.error(`⛔ (${email}) Could not save new user to database:`, error)
-            // Remove user from firebase?
-            await admin.auth().deleteUser(firebaseUser.uid)
-            response.send("Could not save new user to database.").status(500)
-          })
-        }).catch(error => {
-          console.error(`⛔ (${email}) Could not register user at firebase:`, error)
-            response.send("Could not register user at firebase.").status(500)
+  const initDatabase = () => {
+    // CREATE DATABASE
+    return (
+      createDatabase({ ifNotExist: true }, connectionOptions)
+        .then(() => {
+          console.log('Database has been created.')
         })
-      })
+        // CREATE CONNECTION
+        .then(createConnection)
+        // SEED DATABASE
+        .then(async (connection: Connection) => {
+          seedDatabase(connection)
+        })
+    )
+  }
 
-      // GRAPHQL
-      let schema: GraphQLSchema = {} as GraphQLSchema
+  const main = async () => {
+    // APP SETUP
+    const app = express(),
+      port = process.env.PORT || 8888
 
-      await buildSchema({
-        resolvers: [OrganizationResolver, RegisterResolver, ProductResolver, RoleResolver],
-        authChecker: customAuthChecker,
-        authMode: 'null'
-      }).then(_ => {
-        schema = _
-      })
+    // CORS
+    app.use(cors())
 
-      // GRAPHQL INIT MIDDLEWARE
-      app.use(
-        '/v1/', // Url, do you want to keep track of a version?
-        graphqlHTTP((request, response) => ({
-          schema: schema,
-          context: { request, response },
-          graphiql: true,
-        })),
+    // FIREBASE-ADMIN
+    dotenv.config() // This will load in the GOOGLE_APPLICATION_CREDENTIALS
+
+    admin.initializeApp({
+      credential: admin.credential.applicationDefault(),
+    })
+
+    // MIDDLEWARE
+    app.use(express.json()) // for parsing application/json
+
+    app.post('/signup', async (request: Request, response: Response) => {
+      const manager: EntityManager = getManager()
+
+      const { email, password, name } = request.body
+
+      // Create firebase user
+      await admin
+        .auth()
+        .createUser({
+          email,
+          password,
+          displayName: name,
+        })
+        .then(async firebaseUser => {
+          // User created, add to database
+          const newUser = manager.create(User, firebaseUser)
+          await manager
+            .save(newUser)
+            .then(savedUser => {
+              console.info('✅ Succesfully created user')
+              response.send(savedUser).status(201)
+            })
+            .catch(async error => {
+              console.error(
+                `⛔ (${email}) Could not save new user to database:`,
+                error,
+              )
+              // Remove user from firebase?
+              await admin.auth().deleteUser(firebaseUser.uid)
+              response.send('Could not save new user to database.').status(500)
+            })
+        })
+        .catch(error => {
+          console.error(
+            `⛔ (${email}) Could not register user at firebase:`,
+            error,
+          )
+          response.send('Could not register user at firebase.').status(500)
+        })
+    })
+
+    // GRAPHQL
+    let schema: GraphQLSchema = {} as GraphQLSchema
+
+    await buildSchema({
+      resolvers: [
+        OrganizationResolver,
+        RegisterResolver,
+        ProductResolver,
+        RoleResolver,
+      ],
+      authChecker: customAuthChecker,
+      authMode: 'null',
+    }).then(_ => {
+      schema = _
+    })
+
+    // GRAPHQL INIT MIDDLEWARE
+    app.use(
+      '/v1/', // Url, do you want to keep track of a version?
+      graphqlHTTP((request, response) => ({
+        schema: schema,
+        context: { request, response },
+        graphiql: true,
+      })),
+    )
+
+    // ROUTES
+    app.get('/', (request: Request, response: Response) => {
+      response.send(`KassAapje backend is working`)
+    })
+
+    // AUTHENTICATE REQUESTS AFTER THIS
+    app.use(authenticateRequests)
+
+    // APP START
+    app.listen(port, () => {
+      console.info(
+        `\nKassAapje backend 🧾🐵💰 \n>>> http://localhost:${port}/v1\n`,
       )
-
-      // ROUTES
-      app.get('/', (request: Request, response: Response) => {
-        response.send(`KassAapje backend is working`)
-      })
-
-      // AUTHENTICATE REQUESTS AFTER THIS
-      app.use(authenticateRequests)
-
-      // APP START
-      app.listen(port, () => {
-        console.info(
-          `\nKassAapje backend 🧾🐵💰 \n>>> http://localhost:${port}/v1\n`,
-        )
-      })
     })
-    .catch(error => {
-      console.error(error)
-      
-      try {
-        const conn = getConnection()
-        conn.close();
-      }
-      catch(e) { console.error(e) }
+  }
 
-      attempts++;
-      if (attempts <= max_attempts) setTimeout(main, 10000);
+  // TRY TO INIT THE DATABASE
+  initDatabase()
+    .then(main)
+    .catch(() => {
+      console.error('Could not create database. Trying again in 10.')
+      setTimeout(initDatabase, 10000)
     })
-}
-
-main()
+})()
