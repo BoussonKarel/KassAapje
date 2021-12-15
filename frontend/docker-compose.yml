@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  kassaapje:
+    image: kassaapje-frontend
+    build: .
+    ports:
+      - 80:80
+    volumes:
+    - ./src/config/Auth/config.ts:/usr/app/src/config/Auth/config.ts

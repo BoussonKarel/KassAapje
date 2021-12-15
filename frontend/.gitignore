@@ -126,6 +126,4 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-docker-compose.yml
-Dockerfile
 src/config/Auth/settings.ts
