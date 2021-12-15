@@ -1,5 +1,5 @@
 import { createParamDecorator } from 'type-graphql'
-import { EntityManager, getManager } from 'typeorm'
+import { getManager } from 'typeorm'
 import { Context } from 'vm'
 import { addCurrentUserToRequest } from '../auth/customAuthChecker'
 import { User } from '../entity/user'

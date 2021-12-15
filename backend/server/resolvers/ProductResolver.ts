@@ -4,7 +4,6 @@ import { Role, RoleManager } from '../auth/roleManagement'
 import { Product, ProductInput, ProductUpdateInput } from '../entity/product'
 import { Register } from '../entity/register'
 import { User } from '../entity/user'
-import { Variation } from '../entity/variation'
 import { CurrentUser } from '../middleware/currentUserParamDecorator'
 
 @Resolver()
@@ -31,14 +30,13 @@ export class ProductResolver {
             productData,
           )
 
-          console.log({ newProduct })
-          console.log(newProduct.variations)
-
           // REGISTER TOEVOEGEN
           newProduct.register = await this.manager.findOneOrFail(
             Register,
             productData.register_id,
-          )
+          ).catch(() => {
+            throw new Error("Could not find the register you are trying to add a product to.")
+          })
 
           // SAVE PRODUCT
           return await this.manager.save(newProduct)

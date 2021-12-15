@@ -1,12 +1,10 @@
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 import {
   BaseEntity,
-  BeforeInsert,
   Column,
   Entity,
   OneToMany,
   PrimaryColumn,
-  PrimaryGeneratedColumn,
 } from 'typeorm'
 import { generateUID } from '../helpers/generateUID'
 import { Permission } from './permission'
