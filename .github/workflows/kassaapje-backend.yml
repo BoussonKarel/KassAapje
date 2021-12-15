@@ -29,10 +29,10 @@ jobs:
         push: true
         tags: ghcr.io/boussonkarel/kassaapje-backend:latest
     
-    - name: Deploy mariadb to kubernetes
+    - name: Deploy mariadb to kubernetes # Does not do anything when it is unchanged
       run: kubectl apply -f k8/mariadb.yml
       
-    - name: Deploy adminer to kubernetes
+    - name: Deploy adminer to kubernetes # Does not do anything when it is unchanged
       run: kubectl apply -f k8/adminer.yml
       
     - name: Deploy backend to kubernetes
