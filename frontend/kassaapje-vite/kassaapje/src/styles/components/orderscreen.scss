@@ -5,5 +5,10 @@
 
     grid-template-columns: 65% auto;
 
+}
 
+.u-blur {
+    
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
 }
