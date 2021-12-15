@@ -36,4 +36,4 @@ jobs:
       run: kubectl apply -f k8/backend.yml
 
     - name: Deploy backend service to kubernetes
-      run: kubectl apply -f k8/backend-svc-prod.yml
+      run: kubectl apply -f k8/backend-svc.yml
