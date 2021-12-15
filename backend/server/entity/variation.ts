@@ -19,6 +19,10 @@ export class Variation extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   variation_id?: string
 
+  @Field()
+  @Column()
+  product_id!: string
+
   @Field(() => Product)
   @ManyToOne(() => Product, p => p.variations, {onDelete: 'CASCADE'})
   @JoinColumn({ name: 'product_id' })

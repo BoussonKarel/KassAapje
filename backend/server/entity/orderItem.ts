@@ -18,12 +18,16 @@ export class OrderItem extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   orderitem_id?: string
 
+  @Field()
+  @Column()
+  order_id!: string
+
   @Field(() => Order)
   @ManyToOne(() => Order, r => r.order_items, {onDelete: 'CASCADE'})
   @JoinColumn({ name: 'order_id' })
   order!: Order
 
-  @Field({nullable: true})
+  @Field()
   @Column()
   product_id!: string
 
