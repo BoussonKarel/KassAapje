@@ -1,8 +1,11 @@
-name: Deploy KassAapje backend
+name: Deploy KassAapje frontend
 
 on:
   push:
-    branches: [ main ]
+    branches:
+    - main
+    paths:
+      - 'frontend/**'
   workflow_dispatch:
 
 jobs:
