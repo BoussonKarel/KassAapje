@@ -21,10 +21,13 @@ export class Order extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   order_id?: string
 
+  @Column()
+  register_id!: string
+
   @Field(() => Register)
   @ManyToOne(() => Register, r => r.orders, {onDelete: 'CASCADE'})
   @JoinColumn({ name: 'register_id' })
-  register?: Register
+  register!: Register
 
   @Field()
   @CreateDateColumn()

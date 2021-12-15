@@ -1,4 +1,3 @@
-import { Expose } from 'class-transformer'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 import {
   BaseEntity,
@@ -22,10 +21,13 @@ export class Register extends BaseEntity {
   @PrimaryColumn({length: 6, unique: true})
   register_id: string = generateUID();
 
+  @Field()
+  @Column()
+  organization_id!: string
+
   @Field(() => Organization)
   @ManyToOne(() => Organization, o => o.registers, {onDelete: 'CASCADE'})
   @JoinColumn({ name: 'organization_id' })
-  @Expose({ name: 'organization_id' })
   organization!: Organization
 
   @Field()

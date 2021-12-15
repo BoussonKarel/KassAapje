@@ -12,6 +12,8 @@ services:
       - docker.ormconfig.env
     volumes:
       - ./server/auth/service-account.json:/usr/app/auth/service-account.json
+    depends_on:
+      - mariadb
 
   mariadb:
     image: mariadb:10.6.2
@@ -26,6 +28,8 @@ services:
     image: adminer:4.8.1
     ports:
       - 9999:8080
+    depends_on:
+      - mariadb
 
 volumes:
   database:

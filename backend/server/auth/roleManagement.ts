@@ -64,13 +64,11 @@ export class RoleManager {
   async hasRegisterRole(user: User, register_id: string, roles: Role[]) {
     if (!user.permissions || user.permissions.length < 1) throw Error('You do not have any permissions.')
 
-    // Get (register_id and) organization_id
+    // Get organization_id
     // Also kind of a check if the register exists
     const registerOnlyIDs = await this.manager
       .createQueryBuilder(Register, 'r')
-      .select('r.register_id')
-      .leftJoin('r.organization', 'o')
-      .addSelect('o.organization_id')
+      .select('r.organization_id')
       .where('r.register_id = :id', { id: register_id })
       .getOneOrFail()
       .catch(e => {
@@ -80,7 +78,7 @@ export class RoleManager {
       })
 
     // Check roles in above organization first: owner?
-    const organization_id = registerOnlyIDs.organization.organization_id
+    const organization_id = registerOnlyIDs.organization_id
     // user is owner in the above organization
     if (await this.hasOrganizationRole(user, organization_id, [Role.OWNER]))
       return true

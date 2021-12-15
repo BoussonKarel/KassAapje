@@ -61,7 +61,7 @@ export class ProductResolver {
         .hasRegisterRole(user, registerId, [Role.OWNER, Role.USER])
         .then(async () => {
           // ...then find products
-          return await this.manager.find(Product)
+          return await this.manager.find(Product, {where: {register_id: registerId}})
         })
     } catch (error: any) {
       console.error(`⛔ (${user.email}) ` + error.message)
@@ -76,19 +76,25 @@ export class ProductResolver {
   ): Promise<Product> {
     try {
       const foundProduct = await this.manager
-        .findOneOrFail(Product, productId, { relations: ['register'] })
+        .findOneOrFail(Product, productId)
         .catch(e => {
           throw new Error('Could not find that product.')
         })
 
-      return await this.roleManager
-        .hasRegisterRole(user, foundProduct.register.register_id, [
-          Role.USER,
-          Role.OWNER,
-        ])
-        .then(() => {
-          return foundProduct
-        })
+        if (foundProduct.register_id) {
+          return await this.roleManager
+          .hasRegisterRole(user, foundProduct.register_id, [
+            Role.USER,
+            Role.OWNER,
+          ])
+          .then(() => {
+            return foundProduct
+          })
+        }
+        // Has no register, can be accessed by anyone I guess?
+        else return foundProduct;
+
+      
     } catch (error: any) {
       console.error(`⛔ (${user.email}) ` + error.message)
       throw error
@@ -148,28 +154,25 @@ export class ProductResolver {
   ) {
     try {
       // DOES PRODUCT EXIST (if so get id and register id)
-      const existingProduct = await this.manager
-        .createQueryBuilder(Product, 'p')
-        .where('p.product_id = :id', { id: productId })
-        .select('p.product_id')
-        .leftJoin('p.register', 'r')
-        .addSelect('r.register_id')
-        .getOneOrFail()
+      const existingProduct = await this.manager.findOneOrFail(Product, productId)
         .catch(() => {
           throw new Error(
-            'Could not find the product you are trying to update.',
+            'Could not find the product you are trying to remove.',
           )
         })
 
       // DOES USER HAVE ROLE
       return await this.roleManager
-        .hasRegisterRole(user, existingProduct.register.register_id, [
+        .hasRegisterRole(user, existingProduct.register_id, [
           Role.OWNER,
         ])
         .then(async () => {
-          // DELETE PRODUCT
-          const { affected } = await this.manager.delete(Product, productId)
-          if (!affected) throw Error('Could not delete product (<1 affected)')
+          const {affected} = await this.manager.createQueryBuilder(Product, 'p')
+          .update().set({
+            register: () => "null"
+          }).where("product_id = :id", {id: productId}).execute();
+
+          if (!affected) throw Error('Could not \'delete\' product (<1 affected)')
           return affected
         })
     } catch (error: any) {
