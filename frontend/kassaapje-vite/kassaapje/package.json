@@ -21,6 +21,8 @@
     "vite": "^2.6.4"
   },
   "dependencies": {
+    "@firebase/auth": "^0.19.4",
+    "firebase": "^9.6.1",
     "svelte-chroma-picker": "^1.1.1",
     "svelte-color-picker": "^1.0.7",
     "svelte-material-icons": "^1.0.3",
