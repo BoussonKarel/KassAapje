@@ -6,7 +6,6 @@
 
   const submitLogin = () => {
     const submission = {
-      name,
       password,
       email,
     }
