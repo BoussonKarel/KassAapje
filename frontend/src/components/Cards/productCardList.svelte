@@ -1,10 +1,8 @@
 <script lang="ts">
-import ProductCard from "./productCard.svelte";
-
+import ProductCard from './ProductCard.svelte'
 </script>
 
 <div class="c-product-cardlist">
-
     <ProductCard/>
     <ProductCard/>
     <ProductCard/>

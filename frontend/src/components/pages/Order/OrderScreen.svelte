@@ -1,8 +1,7 @@
 <script lang="ts">
-  import ShoppingBasket from '../../shoppingBasket.svelte';
-import ProductCardList from '../../Cards/productCardList.svelte';
-import SearchBar from '../../searchBar.svelte'
-import OrderPopup from '../OrderPopup.svelte';
+  import ShoppingBasket from '../../ShoppingBasket.svelte';
+import ProductCardList from '../../Cards/ProductCardList.svelte';
+import SearchBar from '../../SearchBar.svelte'
 </script>
 
 <div class="c-orderscreen">

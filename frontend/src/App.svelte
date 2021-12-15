@@ -1,17 +1,5 @@
 <script lang="ts">
   import './styles/screen.scss'
-  import Sidebar from './components/sidebar.svelte'
-  import OrganisationOverview from './components/pages/Organisation/organisationOverview.svelte'
-  import AddOrganisation from './components/pages/Organisation/AddOrganisation.svelte'
-  import OrganisationInfo from './components/pages/Organisation/OrganisationInfo.svelte'
-  import RegisterOverview from './components/pages/Register/RegisterOverview.svelte'
-  import AddRegister from './components/pages/Register/AddRegister.svelte'
-  import RegisterInfo from './components/pages/Register/RegisterInfo.svelte'
-  import UserInfo from './components/pages/User/UserInfo.svelte'
-  import EditUser from './components/pages/User/EditUser.svelte'
-  import NavigationBar from './components/navigationBar.svelte'
-  import OrderScreen from './components/pages/Order/OrderScreen.svelte'
-  import Register from './components/pages/Auth/Register.svelte'
   import Login from './components/pages/Auth/Login.svelte'
 </script>
 

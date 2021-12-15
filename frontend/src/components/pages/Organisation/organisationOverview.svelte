@@ -1,7 +1,6 @@
 <script lang="ts">
-  import CardList from '../../Cards/cardlist.svelte'
+  import CardList from '../../Cards/CardList.svelte'
   import Plus from 'svelte-material-icons/Plus.svelte'
-  import AddOrganisation from './AddOrganisation.svelte'
 
   function addOrganisation(event) {
     console.log('clicked')
