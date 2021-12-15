@@ -5,37 +5,43 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  ObjectID,
-  ObjectIdColumn,
-  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm'
-import { generateUID } from '../helpers/generateUID'
 import { Order } from './order'
 import { Product } from './product'
-import { Register } from './register'
 import { Variation } from './variation'
 
 @ObjectType()
-@InputType('OrderItemInput')
 @Entity('order_items')
 export class OrderItem extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn('uuid')
   orderitem_id?: string
 
-  @Field(() => Register)
-  @ManyToOne(() => Order, r => r.order_items)
+  @Field()
+  @Column()
+  order_id!: string
+
+  @Field(() => Order)
+  @ManyToOne(() => Order, r => r.order_items, {onDelete: 'CASCADE'})
   @JoinColumn({ name: 'order_id' })
-  order!: Register
+  order!: Order
+
+  @Field()
+  @Column()
+  product_id!: string
 
   @Field(() => Product)
-  @ManyToOne(() => Product, p => p.orderItems)
+  @ManyToOne(() => Product, p => p.orderItems, {eager: true})
   @JoinColumn({ name: 'product_id' })
   product!: Product
 
+  @Field({nullable: true})
+  @Column({nullable: true})
+  variation_id?: string
+
   @Field(() => Variation)
-  @ManyToOne(() => Variation, v => v.orderItems)
+  @ManyToOne(() => Variation, v => v.orderItems, {eager: true})
   @JoinColumn({ name: 'variation_id' })
   variation?: Variation
 
@@ -50,4 +56,25 @@ export class OrderItem extends BaseEntity {
   @Field()
   @Column()
   delivered?: boolean
+}
+
+@InputType('OrderItemInput')
+export class OrderItemInput {
+  @Field(() => ID, { nullable: true})
+  orderitem_id?: string
+
+  @Field()
+  product_id!: string
+
+  @Field({nullable: true})
+  variation_id?: string
+
+  @Field()
+  price?: number
+
+  @Field()
+  quantity?: number
+
+  @Field({nullable: true})
+  delivered?: boolean = true
 }

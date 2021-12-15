@@ -1,15 +1,12 @@
-import { Expose } from 'class-transformer'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 import {
   BaseEntity,
-  BeforeInsert,
   Column,
   Entity,
   JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryColumn,
-  PrimaryGeneratedColumn,
 } from 'typeorm'
 import { generateUID } from '../helpers/generateUID'
 import { Order } from './order'
@@ -24,10 +21,13 @@ export class Register extends BaseEntity {
   @PrimaryColumn({length: 6, unique: true})
   register_id: string = generateUID();
 
+  @Field()
+  @Column()
+  organization_id!: string
+
   @Field(() => Organization)
-  @ManyToOne(() => Organization, o => o.registers)
+  @ManyToOne(() => Organization, o => o.registers, {onDelete: 'CASCADE'})
   @JoinColumn({ name: 'organization_id' })
-  @Expose({ name: 'organization_id' })
   organization!: Organization
 
   @Field()
@@ -43,14 +43,14 @@ export class Register extends BaseEntity {
   color?: string
 
   @Field(() => [Product])
-  @OneToMany(() => Product, p => p.register)
+  @OneToMany(() => Product, p => p.register )
   products?: Product[]
 
   @Field(() => [Order])
-  @OneToMany(() => Order, o => o.register)
+  @OneToMany(() => Order, o => o.register )
   orders?: Order[]
 
-  @OneToMany(() => Permission, p => p.register)
+  @OneToMany(() => Permission, p => p.register )
   permissions?: Permission[]
 }
 

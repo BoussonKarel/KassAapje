@@ -6,7 +6,6 @@ import {
   JoinColumn,
   ManyToOne,
   OneToMany,
-  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm'
 import { OrderItem } from './orderItem'
@@ -20,8 +19,12 @@ export class Product extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   product_id?: string
 
+  @Field({nullable: true})
+  @Column({nullable: true})
+  register_id!: string
+
   @Field(() => Register)
-  @ManyToOne(() => Register, r => r.products)
+  @ManyToOne(() => Register, r => r.products, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'register_id' })
   register!: Register
 
@@ -30,37 +33,40 @@ export class Product extends BaseEntity {
   name?: string
 
   @Field()
-  @Column('decimal')
+  @Column({type: 'decimal', precision: 10, scale:2})
   price?: number
 
   @Field()
   @Column('bool')
-  stock_is_managed?: boolean
+  stock_is_managed?: boolean = false
 
-  @Field({nullable: true})
-  @Column('int', { nullable: true})
+  @Field({ nullable: true })
+  @Column('int', { nullable: true })
   stock_quantity?: number
 
   @Field()
   @Column('bool')
-  allow_backorders?: boolean
+  allow_backorders?: boolean = false
 
-  @Field(() => [Variation], { nullable: true})
-  @OneToMany(() => Variation, v => v.product, {eager: true, cascade: ['insert']})
+  @Field(() => [Variation], { nullable: true })
+  @OneToMany(() => Variation, v => v.product, {
+    eager: true, // always include in 'find'
+    cascade: true, // always update (add, update, remove) in 'save'
+  })
   variations?: Variation[]
 
-  @Field(() => [OrderItem], { nullable: true})
+  @Field(() => [OrderItem], { nullable: true })
   @OneToMany(() => OrderItem, oi => oi.product)
   orderItems?: OrderItem[]
 }
 
 @InputType('ProductInput')
 export class ProductInput {
-  @Field(() => ID, { nullable: true})
+  @Field(() => ID, { nullable: true })
   product_id?: string
 
   @Field()
-  register_id?: string
+  register_id!: string
 
   @Field()
   name?: string
@@ -68,15 +74,45 @@ export class ProductInput {
   @Field()
   price?: number
 
-  @Field()
+  @Field({ nullable: true })
   stock_is_managed?: boolean
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
   stock_quantity?: number
 
-  @Field()
-  allow_backorders?: boolean
+  @Field({ nullable: true })
+  allow_backorders?: boolean = false
 
-  @Field(() => [ProductVariationInput], { nullable: true})
+  @Field(() => [ProductVariationInput], { nullable: true })
   variations?: ProductVariationInput[]
+}
+
+@InputType('ProductUpdateInput')
+export class ProductUpdateInput {
+  @Field(() => ID)
+  product_id!: string
+
+  @Field({ nullable: true })
+  name?: string
+
+  @Field({ nullable: true })
+  price?: number
+
+  @Field({ nullable: true })
+  stock_is_managed?: boolean
+
+  @Field({ nullable: true })
+  stock_quantity?: number
+
+  @Field({ nullable: true })
+  allow_backorders?: boolean = false
+
+  @Field(() => [ProductVariationInput], { nullable: true })
+  variations?: ProductVariationInput[]
+}
+
+@InputType('ProductOrderInput')
+export class ProductOrderInput {
+  @Field(() => ID)
+  product_id!: string
 }

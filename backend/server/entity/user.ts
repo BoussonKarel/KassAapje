@@ -1,7 +1,8 @@
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 import {
-  BaseEntity, Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryColumn,
+  BaseEntity, Column, Entity, OneToMany, PrimaryColumn,
 } from 'typeorm'
+import { Order } from './order'
 import { Permission } from './permission'
 
 @ObjectType()
@@ -18,6 +19,9 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Permission, p => p.user)
   permissions?: Permission[]
+
+  @OneToMany(() => Order, o => o.seller)
+  orders?: User[]
 
   // @Column('bool') // APP ADMIN?
   // superUser?: boolean

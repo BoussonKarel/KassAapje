@@ -11,10 +11,14 @@
   import EditUser from './components/pages/User/EditUser.svelte'
   import NavigationBar from './components/navigationBar.svelte'
   import OrderScreen from './components/pages/Order/OrderScreen.svelte'
+  import Register from './components/pages/Auth/Register.svelte'
+
+  import { auth } from './components/Auth/Firebase'
 </script>
 
 <main class="c-app">
-  <Sidebar />
+  
+  <!-- <Sidebar />
 
   <div class="c-page">
     <div class="c-navigation">
@@ -23,18 +27,20 @@
         Beheren
       </div>
     </div>
-    <!-- <OrganisationOverview /> -->
-    <!-- <AddOrganisation/> -->
-    <!-- <OrganisationInfo /> -->
+    <OrganisationOverview />
+    <AddOrganisation/>
+    <OrganisationInfo />
 
-    <!-- <RegisterOverview/> -->
-    <!-- <AddRegister /> -->
-    <!-- <RegisterInfo/> -->
+    <RegisterOverview/>
+    <AddRegister />
+    <RegisterInfo/>
 
-    <!-- <UserInfo /> -->
-    <!-- <EditUser/> -->
+    <UserInfo />
+    <EditUser/>
 
     <OrderScreen />
   </div>
-  <div />
+  <div /> -->
+
+  <Register/>
 </main>

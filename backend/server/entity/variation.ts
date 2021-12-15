@@ -19,8 +19,12 @@ export class Variation extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   variation_id?: string
 
+  @Field()
+  @Column()
+  product_id!: string
+
   @Field(() => Product)
-  @ManyToOne(() => Product, p => p.variations)
+  @ManyToOne(() => Product, p => p.variations, {onDelete: 'CASCADE'})
   @JoinColumn({ name: 'product_id' })
   product!: Product
 
@@ -29,7 +33,7 @@ export class Variation extends BaseEntity {
   name?: string
 
   @Field()
-  @Column('decimal')
+  @Column({type: 'decimal', precision: 10, scale:2})
   price_diff?: number
 
   @Field(() => [OrderItem], { nullable: true})
@@ -47,4 +51,10 @@ export class ProductVariationInput {
 
   @Field()
   price_diff?: number
+}
+
+@InputType('VariationOrderInput')
+export class VariationOrderInput extends BaseEntity {
+  @Field(() => ID)
+  variation_id?: string
 }

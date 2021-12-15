@@ -26,9 +26,10 @@ export class OrganizationResolver {
   ) {
     try {
       // Create organization
-      const newOrganization = this.manager.create(Organization, {
-        ...newOrganizationData,
-      })
+      const newOrganization = this.manager.create(
+        Organization,
+        newOrganizationData,
+      )
 
       return await this.manager
         .save(newOrganization)
@@ -130,4 +131,28 @@ export class OrganizationResolver {
   // -------
   // DELETE
   // -------
+  @Authorized()
+  @Mutation(() => Number)
+  async removeOrganization(
+    @Arg('id') organizationId: string,
+    @CurrentUser() user: User,
+  ): Promise<Number> {
+    try {
+      // Check if user has correct perms
+      return await this.roleManager
+        .hasOrganizationRole(user, organizationId, [Role.OWNER])
+        .then(async () => {
+          const { affected } = await this.manager.delete(
+            Organization,
+            organizationId,
+          )
+          if (!affected)
+            throw Error('Could not delete organization. Does it exist?')
+          return affected
+        })
+    } catch (error: any) {
+      console.error(`⛔ (${user.email}) ` + error.message)
+      throw error
+    }
+  }
 }

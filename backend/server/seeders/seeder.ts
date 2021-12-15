@@ -11,17 +11,12 @@ import admin from 'firebase-admin'
 import { User } from "../entity/user";
 
 const seedDatabase = async (connection: Connection) => {
-    console.info('ℹ Seeding started')
+    try {
+        console.info('ℹ Seeding started')
     const dbIsSeeded = await getRepository(Config).findOne('seeded');
     if (dbIsSeeded === undefined) {
         await connection.manager.save(plainToClass(Organization, organizations)); // Seed organizations
-        await connection.manager.save(plainToClass(Register, registers)); // Seed registers
-
-        // Mark as seeded.
-        const seeded = new Config();
-        seeded.key = 'seeded';
-        seeded.value = 'true';
-        await connection.manager.save(seeded);
+        await connection.manager.save(plainToClass(Register, registers));
     
         console.log('✅ I have seeded the database with JSONs.');
 
@@ -36,9 +31,17 @@ const seedDatabase = async (connection: Connection) => {
             })
         })
 
+        // Mark as seeded.
+        const seeded = new Config();
+        seeded.key = 'seeded';
+        seeded.value = 'true';
+        await connection.manager.save(seeded);
+
     } else {
         console.log('❎ Database has already been seeded before.');
     }
-
+    } catch (error:any) {
+        console.error("SEEDING ERROR: " + error.message)
+    }
 }  
 export default seedDatabase;
