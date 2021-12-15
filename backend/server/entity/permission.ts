@@ -17,14 +17,14 @@ export class Permission extends BaseEntity {
   @JoinColumn({ name: 'uid'})
   user!: User
 
-  @Column()
+  @Column({nullable: true})
   organization_id?: string
 
   @ManyToOne(() => Organization, o => o.permissions, { nullable: true, eager: true, onDelete: 'CASCADE' })
   @JoinColumn({ name: 'organization_id'})
   organization?: Organization
 
-  @Column()
+  @Column({nullable: true})
   register_id?: string
 
   @ManyToOne(() => Register, o => o.permissions, { nullable: true, eager: true, onDelete: 'CASCADE' })

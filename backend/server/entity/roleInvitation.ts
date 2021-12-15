@@ -24,9 +24,5 @@ export class Invitation extends BaseEntity {
 
   @CreateDateColumn()
   @Field({ nullable: true})
-  expiration_date?: Date = (() => {
-    const result = new Date(Date.now());
-    result.setDate(result.getDate() + 14);
-    return result;
-  })();
+  expiration_date!: Date;
 }
