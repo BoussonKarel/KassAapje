@@ -23,19 +23,21 @@ export class OrderItem extends BaseEntity {
   @JoinColumn({ name: 'order_id' })
   order!: Order
 
+  @Field({nullable: true})
   @Column()
   product_id!: string
 
   @Field(() => Product)
-  @ManyToOne(() => Product, p => p.orderItems)
+  @ManyToOne(() => Product, p => p.orderItems, {eager: true})
   @JoinColumn({ name: 'product_id' })
   product!: Product
 
+  @Field({nullable: true})
   @Column({nullable: true})
   variation_id?: string
 
   @Field(() => Variation)
-  @ManyToOne(() => Variation, v => v.orderItems)
+  @ManyToOne(() => Variation, v => v.orderItems, {eager: true})
   @JoinColumn({ name: 'variation_id' })
   variation?: Variation
 

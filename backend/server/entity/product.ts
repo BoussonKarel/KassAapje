@@ -19,6 +19,10 @@ export class Product extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   product_id?: string
 
+  @Field({nullable: true})
+  @Column({nullable: true})
+  register_id?: string
+
   @Field(() => Register)
   @ManyToOne(() => Register, r => r.products, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'register_id' })
