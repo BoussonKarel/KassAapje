@@ -17,6 +17,10 @@ export class Payment extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   payment_id?: string
 
+  @Field()
+  @Column()
+  order_id!: string
+
   @Field(() => Order)
   @ManyToOne(() => Order, r => r.payments, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'order_id' })

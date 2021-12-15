@@ -28,7 +28,7 @@ import { graphqlHTTP } from 'express-graphql'
 import { RegisterResolver } from './resolvers/RegisterResolver'
 import { ProductResolver } from './resolvers/ProductResolver'
 import { OrganizationResolver } from './resolvers/OrganizationResolver'
-import { RoleResolver } from './resolvers/RoleResolver'
+import { InvitationResolver } from './resolvers/InvitationResolver'
 import { User } from './entity/user'
 import { customAuthChecker } from './auth/customAuthChecker'
 import authenticateRequests from './auth/authenticateRequests'
@@ -120,7 +120,7 @@ import { OrderResolver } from './resolvers/OrderResolver'
         OrganizationResolver,
         RegisterResolver,
         ProductResolver,
-        RoleResolver,
+        InvitationResolver,
         OrderResolver
       ],
       authChecker: customAuthChecker,
