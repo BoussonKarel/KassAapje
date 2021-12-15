@@ -15,4 +15,27 @@
         flex-direction: column;
        
     }
+
+    &-container {
+        width: 100vw;
+        height: 100vh;
+        background-color: map-get($colors-theme, 'selection');
+    }
+
+    &-title {
+
+        margin: 0;
+        padding-bottom: 1em;
+        font-family: inherit;
+        font-size: 32px;
+        font-weight: bold;
+        color: map-get($colors-theme, 'base' );
+        
+        display: flex;
+        justify-content: center;
+
+        & p {
+            margin: 0;
+        }
+    }
   }

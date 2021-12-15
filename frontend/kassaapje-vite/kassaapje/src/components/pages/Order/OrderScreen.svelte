@@ -19,6 +19,6 @@ import OrderPopup from '../OrderPopup.svelte';
     <ShoppingBasket/>
   </div>
   
-<OrderPopup/>
+<!-- <OrderPopup/> -->
   
 </div>

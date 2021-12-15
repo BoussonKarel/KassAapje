@@ -11,36 +11,34 @@
   import EditUser from './components/pages/User/EditUser.svelte'
   import NavigationBar from './components/navigationBar.svelte'
   import OrderScreen from './components/pages/Order/OrderScreen.svelte'
-import Register from './components/pages/Auth/Register.svelte';
-
-
+  import Register from './components/pages/Auth/Register.svelte'
+  import Login from './components/pages/Auth/Login.svelte'
 </script>
 
 <main class="c-app">
-  
-  <!-- <Sidebar />
+  <!-- <Sidebar /> -->
 
-  <div class="c-page">
+  <!-- <div class="c-page">
     <div class="c-navigation">
       <NavigationBar />
-      <div class="c-button-manage">
-        Beheren
-      </div>
-    </div>
-    <OrganisationOverview />
-    <AddOrganisation/>
-    <OrganisationInfo />
+    </div> -->
 
-    <RegisterOverview/>
-    <AddRegister />
-    <RegisterInfo/>
+    <!-- <OrganisationOverview /> -->
+    <!-- <AddOrganisation/> -->
+    <!-- <OrganisationInfo /> -->
 
-    <UserInfo />
-    <EditUser/>
+    <!-- <RegisterOverview/> -->
+    <!-- <AddRegister /> -->
+    <!-- <RegisterInfo/> -->
 
-    <OrderScreen />
-  </div>
+    <!-- <UserInfo /> -->
+    <!-- <EditUser/> -->
+
+    <!-- <OrderScreen /> -->
+
+  <!-- </div>
   <div /> -->
 
-  <Register/>
+  <Login />
+  <!-- <Register/> -->
 </main>
