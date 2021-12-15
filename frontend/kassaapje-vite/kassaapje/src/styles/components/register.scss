@@ -1,0 +1,18 @@
+.c-register {
+    padding: 48px;
+    background-color: map-get($colors-neutral, '100' );
+    border-radius: $global-border-radius;
+    box-shadow: $default-shadow;
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    &-form {
+        display: flex;
+        flex-direction: column;
+       
+    }
+  }
