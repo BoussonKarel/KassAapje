@@ -65,6 +65,6 @@ export class OrderInput {
   @Field(() => [OrderItemInput])
   order_items?: OrderItemInput[]
 
-  @Field(() => [PaymentOrderInput], { nullable: true })
+  @Field(() => [PaymentOrderInput])
   payments?: PaymentOrderInput[]
 }
