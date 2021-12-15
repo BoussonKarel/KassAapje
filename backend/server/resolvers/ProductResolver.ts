@@ -163,7 +163,7 @@ export class ProductResolver {
 
       // DOES USER HAVE ROLE
       return await this.roleManager
-        .hasRegisterRole(user, existingProduct.register_id!, [
+        .hasRegisterRole(user, existingProduct.register_id, [
           Role.OWNER,
         ])
         .then(async () => {

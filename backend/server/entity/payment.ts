@@ -18,7 +18,7 @@ export class Payment extends BaseEntity {
   payment_id?: string
 
   @Field(() => Order)
-  @ManyToOne(() => Order, r => r.payments)
+  @ManyToOne(() => Order, r => r.payments, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'order_id' })
   order!: Order
 
