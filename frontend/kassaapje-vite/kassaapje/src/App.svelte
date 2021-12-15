@@ -11,9 +11,9 @@
   import EditUser from './components/pages/User/EditUser.svelte'
   import NavigationBar from './components/navigationBar.svelte'
   import OrderScreen from './components/pages/Order/OrderScreen.svelte'
-  import Register from './components/pages/Auth/Register.svelte'
+import Register from './components/pages/Auth/Register.svelte';
 
-  import { auth } from './components/Auth/Firebase'
+
 </script>
 
 <main class="c-app">

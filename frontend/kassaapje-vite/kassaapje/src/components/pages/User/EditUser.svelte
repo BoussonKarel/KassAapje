@@ -9,10 +9,7 @@ async function handleSubmit(event) {
 
 <div>
     <form class="c-form" name="AddOrganisation" on:submit|preventDefault={handleSubmit}>
-        <div class="c-form-textinputs">
-            <label class="c-form-label" for="FirstName"> Voornaam: </label>
-            <input class="c-form-textinput" type="text" name="FirstName" placeholder="Voornaam" />
-            
+        <div class="c-form-textinputs">            
             <label class="c-form-label" for="Name"> Naam: </label>
             <input class="c-form-textinput" type="text" name="Name" placeholder="Naam" />
             
