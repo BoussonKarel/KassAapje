@@ -21,7 +21,7 @@ export class Product extends BaseEntity {
 
   @Field({nullable: true})
   @Column({nullable: true})
-  register_id?: string
+  register_id!: string
 
   @Field(() => Register)
   @ManyToOne(() => Register, r => r.products, { onDelete: 'CASCADE' })
