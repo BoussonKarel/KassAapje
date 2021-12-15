@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from 'express'
-import { verifyToken } from '.'
 import { ErrorWithStatus } from '../models/errorWithStatus'
 import { addCurrentUserToRequest } from './customAuthChecker'
 

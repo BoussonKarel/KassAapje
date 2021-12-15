@@ -1,7 +1,6 @@
 import { EntityManager, getManager } from 'typeorm'
 import admin from 'firebase-admin'
 
-import { Organization } from '../entity/organization'
 import { Permission } from '../entity/permission'
 import { Register } from '../entity/register'
 import { User } from '../entity/user'

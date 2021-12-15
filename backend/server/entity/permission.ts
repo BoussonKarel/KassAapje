@@ -1,9 +1,8 @@
 import { Expose } from "class-transformer";
-import { BaseEntity, BeforeInsert, Column, Entity, JoinColumn, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm"
+import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
 import { Role } from "../auth/roleManagement";
 import { Organization } from "./organization";
 import { Register } from "./register";
-import { generateUID } from "../helpers/generateUID"
 import { User } from "./user";
 
 @Entity("perms")

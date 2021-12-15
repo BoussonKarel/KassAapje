@@ -2,14 +2,12 @@ import { Expose } from 'class-transformer'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 import {
   BaseEntity,
-  BeforeInsert,
   Column,
   Entity,
   JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryColumn,
-  PrimaryGeneratedColumn,
 } from 'typeorm'
 import { generateUID } from '../helpers/generateUID'
 import { Order } from './order'

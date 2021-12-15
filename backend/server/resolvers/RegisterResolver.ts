@@ -1,7 +1,6 @@
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
-import { DeleteResult, EntityManager, getManager } from 'typeorm'
+import { EntityManager, getManager } from 'typeorm'
 import { Role, RoleManager } from '../auth/roleManagement'
-import { Organization } from '../entity/organization'
 import {
   Register,
   RegisterInput,

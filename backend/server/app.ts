@@ -7,8 +7,6 @@ import {
   ConnectionOptions,
   createConnection,
   EntityManager,
-  getConnection,
-  getConnectionManager,
   getConnectionOptions,
   getManager,
 } from 'typeorm'
@@ -34,7 +32,9 @@ import { RoleResolver } from './resolvers/RoleResolver'
 import { User } from './entity/user'
 import { customAuthChecker } from './auth/customAuthChecker'
 import authenticateRequests from './auth/authenticateRequests'
-;(async () => {
+import { OrderResolver } from './resolvers/OrderResolver'
+
+(async () => {
   const connectionOptions: ConnectionOptions = await getConnectionOptions()
 
   const initDatabase = () => {
@@ -121,6 +121,7 @@ import authenticateRequests from './auth/authenticateRequests'
         RegisterResolver,
         ProductResolver,
         RoleResolver,
+        OrderResolver
       ],
       authChecker: customAuthChecker,
       authMode: 'null',
@@ -157,8 +158,9 @@ import authenticateRequests from './auth/authenticateRequests'
   // TRY TO INIT THE DATABASE
   initDatabase()
     .then(main)
-    .catch(() => {
-      console.error('Could not create database. Trying again in 10.')
+    .catch((e) => {
+      console.error('⛔ Could not create database. Trying again in 10.')
+      console.error(e)
       setTimeout(initDatabase, 10000)
     })
 })()

@@ -1,10 +1,9 @@
 import { Request } from 'express'
 import { AuthChecker } from 'type-graphql'
-import { EntityManager, getManager } from 'typeorm'
+import { getManager } from 'typeorm'
 import { Context } from 'vm'
 import { User } from '../entity/user'
 import admin from 'firebase-admin'
-import { Role } from './roleManagement'
 import { ErrorWithStatus } from '../models/errorWithStatus'
 
 /**
