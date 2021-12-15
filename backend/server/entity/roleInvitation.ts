@@ -1,30 +1,32 @@
-// import { Expose } from "class-transformer";
-// import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
-// import { Role } from "../auth/roleManagement";
-// import { Organization } from "./organization";
-// import { Register } from "./register";
-// import { User } from "./user";
+import { Field, ID, InputType, ObjectType } from "type-graphql";
+import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Role } from "../auth/roleManagement";
 
-// @Entity("invitations")
-// export class RoleInvitation extends BaseEntity {
-//   @PrimaryGeneratedColumn('uuid')
-//   invitation_id?: string
-  
-//   @ManyToOne(() => User, o => o.permissions, {eager: true})
-//   @JoinColumn({ name: 'uid'})
-//   @Expose({name: 'uid'})
-//   user!: User
+@ObjectType("Invitation")
+@Entity("invitations")
+@InputType("InvitationInput")
+export class Invitation extends BaseEntity {
+  @PrimaryGeneratedColumn('uuid')
+  @Field(() => ID, { nullable: true})
+  invitation_id?: string
 
-//   @ManyToOne(() => Organization, o => o.permissions, { nullable: true, eager: true, onDelete: 'CASCADE' })
-//   @JoinColumn({ name: 'organization_id'})
-//   @Expose({name: 'organization_id'})
-//   organization?: Organization
+  @Column({ nullable: true})
+  @Field({ nullable: true})
+  organization_id?: string
 
-//   @ManyToOne(() => Register, o => o.permissions, { nullable: true, eager: true, onDelete: 'CASCADE' })
-//   @JoinColumn({ name: 'register_id'})
-//   @Expose({name: 'register_id'})
-//   register?: Register
+  @Column({ nullable: true})
+  @Field({ nullable: true})
+  register_id?: string
 
-//   @Column({type: 'char'})
-//   role!: Role;
-// }
+  @Column({type: 'char'})
+  @Field()
+  role?: Role;
+
+  @CreateDateColumn()
+  @Field({ nullable: true})
+  expiration_date?: Date = (() => {
+    const result = new Date(Date.now());
+    result.setDate(result.getDate() + 14);
+    return result;
+  })();
+}
