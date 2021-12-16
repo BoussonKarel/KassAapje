@@ -1,4 +1,4 @@
 node_modules
 dist
 
-src/config/Auth/settings.ts
+src/config/firebaseConfig.ts
