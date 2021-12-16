@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { prevent_default } from 'svelte/internal'
+  import NavigationBar from '../../NavigationBar.svelte'
+import { prevent_default } from 'svelte/internal'
 
 
   async function handleSubmit(event) {
@@ -10,6 +11,13 @@
 </script>
 
 <div>
+
+
+
+<div class="c-page">
+  <div class="c-navigation">
+    <NavigationBar/>
+  </div>
   <form class="c-form" name="AddOrganisation" on:submit|preventDefault={handleSubmit}>
     <div class="c-form-edit">
       
@@ -62,4 +70,6 @@
       <button class="c-button-edit"> Bewerken </button>
     </div>
   </form>
+</div>
+
 </div>

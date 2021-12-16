@@ -1,4 +1,5 @@
 <script lang="ts">
+  import NavigationBar from '../../NavigationBar.svelte';
 
 
 
@@ -10,7 +11,11 @@ async function handleSubmit(event) {
     
 </script>
 
-<div>
+<div class="c-page">
+
+  <div class="c-navigation">
+    <NavigationBar />
+  </div>
     <form class="c-form" name="AddOrganisation" on:submit|preventDefault={handleSubmit}>
       <div class="c-form-edit">
         <p class="c-form-edit-label">Naam:</p>
