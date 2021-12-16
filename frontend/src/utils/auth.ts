@@ -1,5 +1,12 @@
-import type { SignupEntity } from 'src/models/SignupEntity'
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import { firebaseConfig } from '../config/firebaseConfig';
+
+import type { SignupEntity } from '../models/SignupEntity'
 import { restAPI } from './restAPI'
+
+firebase.initializeApp(firebaseConfig)
+export const auth = firebase.auth()
 
 export const authHelper = {
   signup: async (newUser: SignupEntity) => {
@@ -11,5 +18,6 @@ export const authHelper = {
       .catch(error => {
         throw error
       })
-  },
+  }
 }
+

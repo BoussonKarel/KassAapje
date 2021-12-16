@@ -23,6 +23,7 @@
 
   const handleSubmit = async () => {
     valid = true
+    errors.submit = null
 
     if (!validateEmail(values.email.trim())) {
       valid = false

@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { authHelper } from '../../../utils/auth'
-  import type { SignupEntity } from '../../../models/SignupEntity'
+  import { auth } from '../../../utils/auth'
   import { formHelper } from '../../../utils/formHelper'
   import {Link} from 'yrv'
 
@@ -25,6 +24,7 @@
 
   const handleSubmit = async () => {
     let valid = true
+    errors.submit = null
 
     if (!validateEmail(values.email.trim())) {
       valid = false
@@ -36,12 +36,13 @@
       errors.password = DEFAULT_ERROR.password
     } else errors.password = null
 
-    if (valid) console.log('Login now')
-      // await authHelper.signup(values).then((e) => {
-      //   // NEXT STEP??
-      // }).catch((e) => {
-      //   errors.submit = e.message;
-      // })
+    if (valid) {
+      auth.signInWithEmailAndPassword(values.email, values.password).then((userCredential) => {
+        console.log('Logged in')
+      }).catch((error) => {
+        errors.submit = `Er ging iets fout bij het inloggen: ${error.message}`;
+      })
+    }
   }
 
   const handleInput = e => {
