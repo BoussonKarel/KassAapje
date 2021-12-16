@@ -1,0 +1,36 @@
+name: Deploy KassAapje frontend
+
+on:
+  push:
+    branches:
+    - main
+    paths:
+      - 'frontend/**'
+  workflow_dispatch:
+
+jobs:
+  build-and-k8s:
+    runs-on: self-hosted
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Log in to the Container registry
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v2
+      with:
+        context: ./frontend
+        push: true
+        tags: ghcr.io/boussonkarel/kassaapje-frontend:latest
+    
+    - name: Deploy frontend to kubernetes
+      run: kubectl apply -f k8/frontend.yml
+      
+    - name: Deploy frontend service to kubernetes
+      run: kubectl apply -f k8/frontend-svc.yml

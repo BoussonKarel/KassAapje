@@ -1,0 +1,26 @@
+# express-api.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kassaapje-frontend
+  namespace: kassaapje # Change to your own namespace!
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: apps.deployment-kassaapje-frontend # Change to anything you like, but keep it same as line 15
+  template:
+    metadata:
+      labels:
+        app: kassaapje-frontend
+        workload.user.cattle.io/workloadselector: apps.deployment-kassaapje-frontend # Change to anything you like, but keep it same as line 11
+    spec:
+      containers:
+      - image: ghcr.io/boussonkarel/kassaapje-frontend # Change to your image
+        name: frontend-container
+        # No env for now
+        ports:
+        - containerPort: 8080 # The interal port of the app
+          name: 8080tcp
+          protocol: TCP
+      nodeName: bousson-karel # Change the name of your node!
