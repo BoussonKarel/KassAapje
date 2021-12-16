@@ -2,6 +2,7 @@
   import { authHelper } from '../../../utils/auth'
   import type { SignupEntity } from '../../../models/SignupEntity'
   import { formHelper } from '../../../utils/formHelper'
+  import {Link} from 'yrv'
 
   const { validateEmail, validateUsername, validatePassword, DEFAULT_ERROR } = formHelper()
 
@@ -72,7 +73,7 @@
 <div class="c-register-holder">
   <div class="c-register">
     <div class="c-register__title">
-      <p>Aanmelden</p>
+      <p>Registreren</p>
     </div>
   
     <form class="c-register__form" on:submit|preventDefault={handleSubmit}>
@@ -131,5 +132,9 @@
         </span>
       </div>
     </form>
+    
+    <div class="c-register__switch">
+      Al een account? <Link class="link" href="/login">Log in</Link>
+    </div>
   </div>  
 </div>
