@@ -35,6 +35,22 @@
     }
   }
 
+  &-numberinput {
+    background-color: white;
+    border-radius: calc($global-border-radius / 2);
+    border: solid 1px;
+    border-color: map-get($colors-neutral, '800');
+    height: 2em;
+    width: 4em;
+    margin-bottom: 16px;
+    padding-left: 8px;
+
+    &::placeholder {
+      color: map-get($colors-neutral, '600');
+      font-style: italic;
+    }
+  }
+
   &-edit {
     display: grid;
     grid-template-columns: 30% auto;
