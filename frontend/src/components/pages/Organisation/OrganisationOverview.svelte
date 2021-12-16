@@ -10,7 +10,7 @@
   let orgsFound = true;
 </script>
 
-<div>
+<div class="c-page">
   {#if orgsFound}
     <CardList />
   {:else}

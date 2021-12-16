@@ -1,4 +1,5 @@
 <script lang="ts">
+  import NavigationBar from '../../NavigationBar.svelte'
   import ChromaPicker from 'svelte-chroma-picker'
   import { onMount, prevent_default } from 'svelte/internal'
 
@@ -19,7 +20,11 @@
   }
 </script>
 
-<div>
+<div class="c-page">
+  <div class="c-navigation">
+    <NavigationBar />
+  </div>
+
   <form class="c-form" name="AddOrganisation" on:submit|preventDefault={handleSubmit}>
     <div class="c-form-textinputs">
       <label class="c-form-label" for="Name"> Naam: </label>
@@ -54,7 +59,7 @@
 
         <div class="c-colorpicker">
           <ChromaPicker bind:color />
-          <div class="c-colorpicker-bar"/>
+          <div class="c-colorpicker-bar" />
         </div>
       </div>
 

@@ -1,4 +1,6 @@
 <script lang="ts">
+import NavigationBar from '../../NavigationBar.svelte';
+
   import ArrowLeftThick from 'svelte-material-icons/ArrowLeftThick.svelte'
   import Pencil from 'svelte-material-icons/Pencil.svelte'
 
@@ -8,7 +10,11 @@
   }
 </script>
 
-<div>
+<div class="c-page">
+
+  <div class="c-navigation">
+    <NavigationBar/>
+  </div>
 
   <form class="c-form" name="AddOrganisation" on:submit|preventDefault={handleSubmit}>
     <div class="c-form-edit">
