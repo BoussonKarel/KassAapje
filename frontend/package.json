@@ -26,7 +26,7 @@
     "svelte-chroma-picker": "^1.1.1",
     "svelte-color-picker": "^1.0.7",
     "svelte-material-icons": "^1.0.3",
-    "svelte-routing": "^1.6.0",
-    "vite-plugin-svelte-svg": "^1.0.0"
+    "vite-plugin-svelte-svg": "^1.0.0",
+    "yrv": "^0.0.50"
   }
 }

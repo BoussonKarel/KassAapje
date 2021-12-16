@@ -1,7 +1,7 @@
 <script lang="ts">
   import './styles/screen.scss'
 
-  import { Route, Router } from 'svelte-routing'
+  import { Router, Route, Link, router } from 'yrv'
 
   import Login from './components/pages/Auth/Login.svelte'
   import Register from './components/pages/Auth/Register.svelte'
@@ -16,42 +16,49 @@
   import RegisterInfo from './components/pages/Register/RegisterInfo.svelte'
   import OrderScreen from './components/pages/Order/OrderScreen.svelte'
 
-  export let url = ''
   let isAuthenticated = true
 </script>
 
-<Router {url}>
+<Router path="/">
   <main class="c-app">
     {#if isAuthenticated}
       <Sidebar />
-      <Route path="/">
+      <Route exact>
         <OrganisationOverview />
       </Route>
-      <Route path="/organisation/add">
+      <Route path="/add-organisation">
         <AddOrganisation />
       </Route>
-      <Route path="/orgid/info">
-        <OrganisationInfo />
-      </Route>
-      <Route path="/orgid">
-        <RegisterOverview />
-      </Route>
-      <Route path="/orgid/register/add">
-        <AddRegister />
-      </Route>
-      <Route path="/orgid/registerid/info">
-        <RegisterInfo />
-      </Route>
-      <Route path="/orgid/registerid">
-        <OrderScreen />
-      </Route>
 
-      <Route path="/userid/">
-        <UserInfo />
-      </Route>
-      <Route path="/userid/edit">
-        <EditUser />
-      </Route>
+      <Router path="/orgid">
+        <Route exact>
+          <RegisterOverview />
+        </Route>
+        <Route path="/info">
+          <OrganisationInfo />
+        </Route>
+        <Route path="/add-register">
+          <AddRegister />
+        </Route>
+
+        <Router path="/registerid">
+          <Route exact>
+          <OrderScreen />
+        </Route>
+        <Route path="/info">
+          <RegisterInfo />
+        </Route>    
+        </Router>
+      </Router>
+
+      <Router path="/userid">
+        <Route exact>
+          <UserInfo />
+        </Route>
+        <Route path="/edit">
+          <EditUser />
+        </Route>
+      </Router>
     {:else}
       <Route path="/login">
         <Login />
