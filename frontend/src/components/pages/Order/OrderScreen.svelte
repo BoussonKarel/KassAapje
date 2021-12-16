@@ -1,28 +1,28 @@
 <script lang="ts">
-  import NavigationBar from '../../NavigationBar.svelte'
-  import ShoppingBasket from '../../ShoppingBasket.svelte'
-  import ProductCardList from '../../Cards/ProductCardList.svelte'
-  import SearchBar from '../../SearchBar.svelte'
+   import NavigationBar from '../../NavigationBar.svelte'
+   import ShoppingBasket from '../../ShoppingBasket.svelte'
+   import ProductCardList from '../../Cards/ProductCardList.svelte'
+   import SearchBar from '../../SearchBar.svelte'
 </script>
 
 <div class="c-page">
-  <div class="c-navigation">
-    <NavigationBar />
-  </div>
-  <div class="c-orderscreen">
-    <div>
+   <div class="c-navigation">
+      <NavigationBar />
+   </div>
+   <div class="c-orderscreen">
       <div>
-        <SearchBar />
+         <div>
+            <SearchBar />
+         </div>
+
+         <div>
+            <ProductCardList />
+         </div>
+      </div>
+      <div>
+         <ShoppingBasket />
       </div>
 
-      <div>
-        <ProductCardList />
-      </div>
-    </div>
-    <div>
-      <ShoppingBasket />
-    </div>
-
-    <!-- <OrderPopup/> -->
-  </div>
+      <!-- <OrderPopup/> -->
+   </div>
 </div>

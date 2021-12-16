@@ -6,7 +6,5 @@
    <div class="c-navigation">
       <NavigationBar />
    </div>
-   <h1>
-       Add Product
-   </h1>
+   <h1>Add Product</h1>
 </div>

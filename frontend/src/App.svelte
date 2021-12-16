@@ -32,8 +32,6 @@
             <AddOrganisation />
          </Route>
 
-         
-
          <Router path="/orgid">
             <Route exact>
                <RegisterOverview />
@@ -52,18 +50,14 @@
                <Route path="/info">
                   <RegisterInfo />
                </Route>
-               
                <Route path="/products">
-                <ProductOverview />
-             </Route>
-             <Route path="/add-product">
-                <AddProduct />
-             </Route>
-
+                  <ProductOverview />
+               </Route>
+               <Route path="/add-product">
+                  <AddProduct />
+               </Route>
             </Route>
          </Router>
-
-         
 
          <Router path="/userid">
             <Route exact>
