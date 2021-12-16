@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kassaapje-frontend-svc
+  namespace: kassaapje
+spec:
+  selector:
+    app: kassaapje-frontend
+  ports:
+    - name: 30280tcp
+      nodePort: 30280
+      port: 30280
+      protocol: TCP
+      targetPort: 8080
+  type: NodePort

@@ -49,20 +49,29 @@ export class RoleManager {
     return false
   }
 
-  async hasOrganizationRole(user: User, organization_id: string, roles: Role[]) {
-    if (!user.permissions || user.permissions.length < 1) throw Error('You do not have any permissions.')
+  async hasOrganizationRole(
+    user: User,
+    organization_id: string,
+    roles: Role[],
+  ) {
+    if (!user.permissions || user.permissions.length < 1)
+      throw Error('You do not have any permissions.')
     // Check roles in this organization_id
     const permissionsHere = user.permissions.filter(
       p => p.organization && p.organization.organization_id === organization_id,
     )
     // Check if role is present in those permissions
     const hasPermission = this.permissionsContainRole(permissionsHere, roles)
-    if (hasPermission) return true;
-    else throw Error('You do not have the right permissions on that register / organization (or it does not exist).')
+    if (hasPermission) return true
+    else
+      throw Error(
+        'You do not have the right permissions on that register / organization (or it does not exist).',
+      )
   }
 
   async hasRegisterRole(user: User, register_id: string, roles: Role[]) {
-    if (!user.permissions || user.permissions.length < 1) throw Error('You do not have any permissions.')
+    if (!user.permissions || user.permissions.length < 1)
+      throw Error('You do not have any permissions.')
 
     // Get organization_id
     // Also kind of a check if the register exists
@@ -89,17 +98,48 @@ export class RoleManager {
       )
       // Check if role is present in those permissions
       const hasPermission = this.permissionsContainRole(permissionsHere, roles)
-      if (hasPermission) return true;
-      else throw Error('You do not have the right permissions on that register / organization.')
+      if (hasPermission) return true
+      else
+        throw Error(
+          'You do not have the right permissions on that register / organization.',
+        )
     }
   }
 
   async addPermission(permission: Permission): Promise<void> {
     const { uid } = permission.user
-    // Add role to database
-    const savedPermission = await this.manager.save(Permission, permission)
-    if (!savedPermission)
-      throw new Error('Could not save permission to database.')
+    const permissionsToSave = [permission];
+
+    // IS IT A REGISTER ROLE?
+    if (permission.register_id) {
+      // SET AS ORGANIZATION USER TOO
+      const registerWithOrgId = await this.manager
+        .createQueryBuilder(Register, 'r')
+        .select('r.organization_id')
+        .where('r.register_id = :id', { id: permission.register_id })
+        .getOneOrFail()
+        .catch(() => {
+          throw new Error(
+            'Could not set permissions for organization belonging to that register.',
+          )
+        })
+      
+      // DOES USER HAVE ROLE IN THIS ORGANIZATION
+      const permCountThere = await this.manager.createQueryBuilder(Permission, 'p')
+      .select('p.organization_id').where('p.uid = :uid', {uid: uid}).andWhere('p.organization_id = :organization_id', {organization_id: registerWithOrgId.organization_id}).getCount();
+
+      if (permCountThere < 1) {
+        permissionsToSave.push(this.manager.create(Permission, {
+        user: permission.user,
+        role: Role.USER,
+        organization_id: registerWithOrgId.organization_id
+      }))}
+    }
+
+    // Add perms to database
+    const savedPermissions = await this.manager.save(Permission, permissionsToSave)
+    if (!savedPermissions)
+      throw new Error('Could not save permissions to database.')
 
     // Success > Add role to firebase claims
     // Get user's permissions from database
