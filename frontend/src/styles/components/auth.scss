@@ -1,4 +1,4 @@
-.c-register {
+.c-auth {
     &-holder {
         background-color: map-get($colors-theme, 'selection');
         width: 100%;
@@ -38,6 +38,7 @@
     }
 
     &__switch {
-        margin-top: em(8px);
+        text-align: center;
+        margin-top: em(12px);
     }
   }

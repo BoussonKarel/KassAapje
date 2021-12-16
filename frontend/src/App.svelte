@@ -1,14 +1,4 @@
 <script lang="ts">
-<<<<<<< HEAD
-import Register from './components/pages/Auth/Register.svelte';
-
-  import './styles/screen.scss'
-</script>
-
-<main class="c-app">
-  <Register />
-</main>
-=======
    import './styles/screen.scss'
 
    import { Router, Route, Link, router } from 'yrv'
@@ -28,7 +18,7 @@ import Register from './components/pages/Auth/Register.svelte';
    import ProductOverview from './components/pages/Product/ProductOverview.svelte'
    import AddProduct from './components/pages/Product/AddProduct.svelte'
 
-   let isAuthenticated = true
+   let isAuthenticated = false
 </script>
 
 <Router path="/">
@@ -87,4 +77,3 @@ import Register from './components/pages/Auth/Register.svelte';
       {/if}
    </main>
 </Router>
->>>>>>> develop

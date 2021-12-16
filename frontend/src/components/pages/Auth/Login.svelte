@@ -1,45 +1,116 @@
 <script lang="ts">
-  import { userAPI } from '../../../utils/userAPI'
+  import { authHelper } from '../../../utils/auth'
+  import type { SignupEntity } from '../../../models/SignupEntity'
+  import { formHelper } from '../../../utils/formHelper'
+  import {Link} from 'yrv'
 
-  let email
-  let password
+  const { validateEmail, DEFAULT_ERROR } = formHelper()
 
-  const submitLogin = () => {
-    const submission = {
-      password,
-      email,
+  DEFAULT_ERROR.password = "Wachtwoord te kort"
+  const validatePassword = (value: string) => {
+    if (value.length < 8) return false;
+    return true;
+  }
+
+  let errors = {
+    email: null,
+    password: null,
+    submit: null
+  }
+
+  let values: {email:string, password:string} = {
+    email: '',
+    password: '',
+  }
+
+  const handleSubmit = async () => {
+    let valid = true
+
+    if (!validateEmail(values.email.trim())) {
+      valid = false
+      errors.email = DEFAULT_ERROR.email
+    } else errors.email = null
+
+    if (!validatePassword(values.password.trim())) {
+      valid = false
+      errors.password = DEFAULT_ERROR.password
+    } else errors.password = null
+
+    if (valid) console.log('Login now')
+      // await authHelper.signup(values).then((e) => {
+      //   // NEXT STEP??
+      // }).catch((e) => {
+      //   errors.submit = e.message;
+      // })
+  }
+
+  const handleInput = e => {
+    switch (e.target.name) {
+      case 'email':
+        if (!validateEmail(values.email.trim())) {
+          errors.email = DEFAULT_ERROR.email
+        } else errors.email = null
+        break
+      case 'password':
+        if (!validatePassword(values.password.trim())) {
+          errors.password = DEFAULT_ERROR.password
+        } else errors.password = null
+        break
+      default:
+        break
     }
-    console.log(submission)
   }
 </script>
 
-<div class="c-register-container">
-  <div class="c-register">
-    <div class="c-register-title">
-        <p >Inloggen</p>
+<div class="c-auth-holder">
+  <div class="c-auth">
+    <div class="c-auth__title">
+      <p>Inloggen</p>
+    </div>
+  
+    <form class="c-auth__form" on:submit|preventDefault={handleSubmit}>
+      <div class="c-form-field">
+        <label class="c-form-label" for="email">Email:</label>
+        <input
+          class="c-input {errors.email ? 'has-error' : ''}"
+          bind:value={values.email}
+          on:input={handleInput}
+          type="text"
+          name="email"
+          id="email"
+          placeholder="email@adres.com"
+        />
+        <span class="c-form-error">
+          {errors.email ? errors.email : ''}
+        </span>
       </div>
-    <form action="register" class="c-register-form">
-      <label class="c-form-label" for="email">Email:</label>
-      <input
-        class="c-form-textinput"
-        bind:value={email}
-        type="text"
-        name="email"
-        id="email"
-        placeholder="email@adres.com"
-      />
-      <label class="c-form-label" for="password">Wachtwoord:</label>
-      <input
-        class="c-form-textinput"
-        bind:value={password}
-        type="password"
-        name="password"
-        id="password"
-        placeholder="Wachtwoord"
-      />
-      <button class="c-button-save" on:click|preventDefault={submitLogin}> Inloggen </button>
-
-      <a href="url">Wachtwoord vergeten?</a>
+  
+      <div class="c-form-field">
+        <label class="c-form-label" for="password">Wachtwoord:</label>
+        <input
+          class="c-input {errors.password ? 'has-error' : ''}"
+          bind:value={values.password}
+          on:input={handleInput}
+          type="password"
+          name="password"
+          id="password"
+          placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
+        />
+        <span class="c-form-error">
+          {errors.password ? errors.password : ''}
+        </span>
+      </div>
+  
+      <div class="c-form-field u-mb-0">
+        <button class="c-form-submit">Inloggen</button>
+        <span class="c-form-error">
+          {errors.submit ? errors.submit : ''}
+        </span>
+      </div>
     </form>
-  </div>
+    
+    <div class="c-auth__switch">
+      Nog geen account? <Link class="link" href="/register">Registreer</Link>
+    </div>
+  </div>  
 </div>

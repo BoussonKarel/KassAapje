@@ -70,13 +70,13 @@
   }
 </script>
 
-<div class="c-register-holder">
-  <div class="c-register">
-    <div class="c-register__title">
+<div class="c-auth-holder">
+  <div class="c-auth">
+    <div class="c-auth__title">
       <p>Registreren</p>
     </div>
   
-    <form class="c-register__form" on:submit|preventDefault={handleSubmit}>
+    <form class="c-auth__form" on:submit|preventDefault={handleSubmit}>
       <div class="c-form-field">
         <label class="c-form-label" for="name">Naam:</label>
         <input
@@ -126,14 +126,14 @@
       </div>
   
       <div class="c-form-field u-mb-0">
-        <button class="c-form-submit">Registreren </button>
+        <button class="c-form-submit">Registreren</button>
         <span class="c-form-error">
           {errors.submit ? errors.submit : ''}
         </span>
       </div>
     </form>
     
-    <div class="c-register__switch">
+    <div class="c-auth__switch">
       Al een account? <Link class="link" href="/login">Log in</Link>
     </div>
   </div>  
