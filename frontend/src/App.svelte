@@ -41,14 +41,14 @@
           <AddRegister />
         </Route>
 
-        <Router path="/registerid">
+        <Route path="/registerid">
           <Route exact>
-          <OrderScreen />
+            <OrderScreen />
+          </Route>
+          <Route path="/info">
+            <RegisterInfo />
+          </Route>
         </Route>
-        <Route path="/info">
-          <RegisterInfo />
-        </Route>    
-        </Router>
       </Router>
 
       <Router path="/userid">
