@@ -14,9 +14,10 @@
    import RegisterOverview from './components/pages/Register/RegisterOverview.svelte'
    import AddRegister from './components/pages/Register/AddRegister.svelte'
    import RegisterInfo from './components/pages/Register/RegisterInfo.svelte'
-   import OrderScreen from './components/pages/Order/OrderScreen.svelte'
+   import AddOrder from './components/pages/Order/AddOrder.svelte'
    import ProductOverview from './components/pages/Product/ProductOverview.svelte'
    import AddProduct from './components/pages/Product/AddProduct.svelte'
+   import OrderOverview from './components/pages/Order/OrderOverview.svelte'
 
    let isAuthenticated = true
 </script>
@@ -45,7 +46,10 @@
 
             <Route path="/registerid">
                <Route exact>
-                  <OrderScreen />
+                  <AddOrder />
+               </Route>
+               <Route path="/orders">
+                  <OrderOverview />
                </Route>
                <Route path="/info">
                   <RegisterInfo />
