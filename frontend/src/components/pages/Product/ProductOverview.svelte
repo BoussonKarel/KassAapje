@@ -1,4 +1,6 @@
 <script lang="ts">
+   // import ProductTable from 'src/components/ProductTable.svelte'
+   import ProductTable from '../../ProductTable.svelte'
    import NavigationBar from '../../NavigationBar.svelte'
 </script>
 
@@ -6,5 +8,5 @@
    <div class="c-navigation">
       <NavigationBar />
    </div>
-   <h1>Product Overview</h1>
+   <ProductTable />
 </div>
