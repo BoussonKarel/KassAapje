@@ -9,7 +9,7 @@
 
 <div class="c-page">
    <div class="c-navigation">
-      <NavigationBar />
+      <NavigationBar title={"Order toevoegen"} />
    </div>
    <form class="c-form" name="AddOrganisation" on:submit|preventDefault={handleSubmit}>
     <div class="c-form-textinputs">
