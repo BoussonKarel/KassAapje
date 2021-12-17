@@ -1,4 +1,15 @@
 .c-register {
+    &-holder {
+        background-color: map-get($colors-theme, 'selection');
+        width: 100%;
+        min-height:100vh;
+    }
+
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: em(480px);
+
     padding: 48px;
     background-color: map-get($colors-neutral, '100' );
     border-radius: $global-border-radius;
@@ -10,20 +21,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
 
-    &-form {
-        display: flex;
-        flex-direction: column;
-       
-    }
-
-    &-container {
-        width: 100vw;
-        height: 100vh;
-        background-color: map-get($colors-theme, 'selection');
-    }
-
-    &-title {
-
+    &__title {
         margin: 0;
         padding-bottom: 1em;
         font-family: inherit;
@@ -37,5 +35,9 @@
         & p {
             margin: 0;
         }
+    }
+
+    &__switch {
+        margin-top: em(8px);
     }
   }
