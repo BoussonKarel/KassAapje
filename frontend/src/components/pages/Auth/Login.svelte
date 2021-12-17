@@ -2,6 +2,7 @@
   import { Link } from 'svelte-navigator'
   import { auth } from '../../../utils/auth'
   import { formHelper } from '../../../utils/formHelper'
+  import { currentUser } from '../../../stores/currentUser';
 
   const { validateEmail, DEFAULT_ERROR } = formHelper()
 
@@ -39,6 +40,7 @@
     if (valid) {
       auth.signInWithEmailAndPassword(values.email, values.password).then((userCredential) => {
         console.log('Logged in')
+        currentUser.set(userCredential)
       }).catch((error) => {
         errors.submit = `Er ging iets fout bij het inloggen: ${error.message}`;
       })

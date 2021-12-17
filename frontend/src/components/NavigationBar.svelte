@@ -17,7 +17,9 @@
     </button>
   </div>
 
-  <h1 class="c-navigation-title">{title}</h1>
+  <h1 class="c-navigation-title">
+    {title}
+  </h1>
   <div class="c-navigation-settings">
     <Settings />
   </div>

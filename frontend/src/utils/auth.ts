@@ -8,6 +8,11 @@ import { restAPI } from './restAPI'
 firebase.initializeApp(firebaseConfig)
 export const auth = firebase.auth()
 
+export const decodePermissions = (user) => {
+  const permsSplit = user.perms.split('_');
+  console.log(permsSplit);
+}
+
 export const authHelper = {
   signup: async (newUser: SignupEntity) => {
     return await restAPI

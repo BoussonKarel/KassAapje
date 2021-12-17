@@ -1,8 +1,8 @@
 <script lang="ts">
+   import type firebase from 'firebase/compat/app';
    import './styles/screen.scss'
    import { Router, Route } from 'svelte-navigator'
 
-   import { auth } from './utils/auth'
    import Register from './components/pages/Auth/Register.svelte'
    import Login from './components/pages/Auth/Login.svelte'
    import Sidebar from './components/Sidebar.svelte'
@@ -15,17 +15,22 @@
    import AddProduct from './components/pages/Product/AddProduct.svelte'
    import RegisterOverview from './components/pages/Register/RegisterOverview.svelte'
    import AddOrder from './components/pages/Order/AddOrder.svelte';
+   import { currentUser } from './stores/currentUser';
 
-   let loggedIn = () => (auth.currentUser ? true : false)
+   let user : firebase.User;
+
+   currentUser.subscribe(value => {
+      user = value
+   })
 </script>
 
 <main class="c-app">
    <Router>
-      {#if !loggedIn}
+      {#if !currentUser}
          <Route path="/register">
             <Register />
          </Route>
-         <Route path="/login">
+         <Route>
             <Login />
          </Route>
       {:else}
