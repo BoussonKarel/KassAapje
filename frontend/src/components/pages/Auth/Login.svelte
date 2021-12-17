@@ -1,9 +1,11 @@
 <script lang="ts">
-  import { Link } from 'svelte-navigator'
+  import { Link, useNavigate } from 'svelte-navigator'
   import { auth } from '../../../utils/auth'
   import { formHelper } from '../../../utils/formHelper'
 
   const { validateEmail, DEFAULT_ERROR } = formHelper()
+
+  const navigate = useNavigate();
 
   DEFAULT_ERROR.password = "Wachtwoord te kort"
   const validatePassword = (value: string) => {
@@ -37,8 +39,8 @@
     } else errors.password = null
 
     if (valid) {
-      auth.signInWithEmailAndPassword(values.email, values.password).then((userCredential) => {
-        console.log('Logged in')
+      auth.signInWithEmailAndPassword(values.email, values.password).then(() => {
+        navigate('/')
       }).catch((error) => {
         errors.submit = `Er ging iets fout bij het inloggen: ${error.message}`;
       })

@@ -1,12 +1,17 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-import { firebaseConfig } from '../config/FirebaseConfig';
+import { firebaseConfig } from '../config/firebaseConfig'
 
 import type { SignupEntity } from '../models/SignupEntity'
 import { restAPI } from './restAPI'
 
 firebase.initializeApp(firebaseConfig)
 export const auth = firebase.auth()
+
+export const decodePermissions = (user) => {
+  const permsSplit = user.perms.split('_');
+  console.log(permsSplit);
+}
 
 export const authHelper = {
   signup: async (newUser: SignupEntity) => {
