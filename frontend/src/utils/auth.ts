@@ -1,6 +1,6 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-import { firebaseConfig } from '../config/firebaseConfig';
+import { firebaseConfig } from '../config/FirebaseConfig';
 
 import type { SignupEntity } from '../models/SignupEntity'
 import { restAPI } from './restAPI'
