@@ -1,0 +1,23 @@
+.c-selector {
+   display: flex;
+   align-items: center;
+   max-width: 100%;
+
+   &-title {
+      margin-right: 1em;
+   }
+
+   &-unit {
+       height: 3em;
+       padding-left: .5em;
+       padding-right: .5em;
+       border-radius: $global-border-radius;
+
+       
+   &:hover {
+    cursor: pointer;
+}
+   }
+
+
+}
