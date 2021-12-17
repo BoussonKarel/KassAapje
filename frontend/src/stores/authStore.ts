@@ -1,9 +1,9 @@
 import { writable } from 'svelte/store'
-import type firebase from 'firebase/auth'
+import type { UserInfo } from 'firebase/auth'
 
 export const authStore = writable<{
   isLoggedIn: boolean,
-  user?: firebase.UserInfo
+  user?: UserInfo
 }>({
   isLoggedIn: false
 })

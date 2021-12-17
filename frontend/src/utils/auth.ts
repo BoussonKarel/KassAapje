@@ -1,13 +1,11 @@
-import { getAuth } from '@firebase/auth';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
+import { getAuth } from 'firebase/auth';
+import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '../config/firebaseConfig'
 
 import type { SignupEntity } from '../models/SignupEntity'
 import { restAPI } from './restAPI'
 
-firebase.initializeApp(firebaseConfig)
-export const auth = firebase.auth()
+initializeApp(firebaseConfig)
 
 export enum Role {
   OWNER = '*',

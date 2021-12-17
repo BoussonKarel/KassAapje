@@ -1,5 +1,3 @@
-import { restAPI } from "./restAPI";
-
 export const formHelper = () => {
   const validateEmail = (value: string) => {
     // http://emailregex.com/

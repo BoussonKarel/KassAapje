@@ -1,6 +1,6 @@
 <script lang="ts">
+  import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
   import { Link, useNavigate } from 'svelte-navigator'
-  import { auth } from '../../../utils/auth'
   import { formHelper } from '../../../utils/formHelper'
 
   const { validateEmail, DEFAULT_ERROR } = formHelper()
@@ -39,7 +39,7 @@
     } else errors.password = null
 
     if (valid) {
-      auth.signInWithEmailAndPassword(values.email, values.password).then(() => {
+      signInWithEmailAndPassword(getAuth(), values.email, values.password).then(() => {
         navigate('/')
       }).catch((error) => {
         errors.submit = `Er ging iets fout bij het inloggen: ${error.message}`;

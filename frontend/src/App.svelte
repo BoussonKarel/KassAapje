@@ -8,10 +8,9 @@
    import AddOrganisation from './components/pages/Organisation/AddOrganisation.svelte'
    import { onMount } from 'svelte'
    import { useNavigate } from 'svelte-navigator'
-   import { getAuth, onAuthStateChanged } from '@firebase/auth'
    import { authStore } from './stores/authStore'
-   import { getPermissions } from './utils/auth'
-import OrganizationRoutes from './components/OrganizationRoutes.svelte';
+   import OrganizationRoutes from './components/OrganizationRoutes.svelte';
+   import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
    onMount(() => {
       onAuthStateChanged(getAuth(), user => {

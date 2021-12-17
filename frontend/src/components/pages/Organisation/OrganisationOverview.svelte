@@ -8,6 +8,10 @@
   }
 
   let orgsFound = true;
+
+  // onMount(async () => {
+  //   const res = query();
+  // });
 </script>
 
 <div class="c-page">

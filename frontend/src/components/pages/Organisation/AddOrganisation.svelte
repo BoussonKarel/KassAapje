@@ -1,7 +1,5 @@
 <script lang="ts">
   import NavigationBar from '../../NavigationBar.svelte'
-  import ChromaPicker from 'svelte-chroma-picker'
-  import { onMount, prevent_default } from 'svelte/internal'
 
   let color = '#fff'
 
@@ -58,7 +56,6 @@
         <label class="c-form-label" for="Color"> Kleur:</label>
 
         <div class="c-colorpicker">
-          <ChromaPicker bind:color />
           <div class="c-colorpicker-bar" />
         </div>
       </div>
