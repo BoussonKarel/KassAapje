@@ -1,14 +1,11 @@
 .c-orderscreen {
-    
-    display: grid;
-    height: 88%;
+   display: grid;
+   height: 88%;
 
-    grid-template-columns: 65% auto;
-
+   grid-template-columns: 65% auto;
 }
 
 .u-blur {
-    
-    filter: blur(8px);
-    -webkit-filter: blur(8px);
+   filter: blur(3px);
+   -webkit-filter: blur(3px);
 }
