@@ -1,6 +1,8 @@
 <script lang="ts">
    import NavigationBar from '../../NavigationBar.svelte'
 
+   export let id;
+
    async function handleSubmit(event) {
       console.log('submitted')
       console.log(event)
@@ -9,7 +11,7 @@
 
 <div class="c-page">
    <div class="c-navigation">
-      <NavigationBar />
+      <NavigationBar title={id} />
    </div>
    <form class="c-form" name="AddOrganisation" on:submit|preventDefault={handleSubmit}>
       <div class="c-form-edit">
