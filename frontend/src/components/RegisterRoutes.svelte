@@ -33,14 +33,18 @@
    <Route path="/info">
       <RegisterInfo id={$params.regId} />
    </Route>
-   <Route path="/products/*">
-      <Route path="/">
-         <ProductOverview />
+   {#if isUser}
+      <Route path="/products/*">
+         <Route path="/">
+            <ProductOverview />
+         </Route>
+         <Route path="/add">
+            <AddProduct />
+         </Route>
       </Route>
-      <Route path="/add">
-         <AddProduct />
-      </Route>
-   </Route>
+   {:else}
+      No permission.
+   {/if}
 {:else}
-  No permission.
+   No permission.
 {/if}
