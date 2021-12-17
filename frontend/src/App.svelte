@@ -1,8 +1,6 @@
 <script lang="ts">
-   import type firebase from 'firebase/compat/app';
    import './styles/screen.scss'
-   import { Router, Route } from 'svelte-navigator'
-
+   import { Router, Route, navigate } from 'svelte-navigator'
    import Register from './components/pages/Auth/Register.svelte'
    import Login from './components/pages/Auth/Login.svelte'
    import Sidebar from './components/Sidebar.svelte'
@@ -14,24 +12,44 @@
    import ProductOverview from './components/pages/Product/ProductOverview.svelte'
    import AddProduct from './components/pages/Product/AddProduct.svelte'
    import RegisterOverview from './components/pages/Register/RegisterOverview.svelte'
-   import AddOrder from './components/pages/Order/AddOrder.svelte';
-   import { currentUser } from './stores/currentUser';
+   import AddOrder from './components/pages/Order/AddOrder.svelte'
+   import { onMount } from 'svelte'
+   import { useNavigate } from "svelte-navigator";
+   import { getAuth, onAuthStateChanged } from '@firebase/auth'
+   import { authStore } from './stores/authStore'
 
-   let user : firebase.User;
-
-   currentUser.subscribe(value => {
-      user = value
+   onMount(() => {
+      onAuthStateChanged(getAuth(), user => {
+         authStore.set({
+            isLoggedIn: user != null,
+            user,
+         })
+      })
    })
+
+   const signOut = async () => {
+      const navigate = useNavigate();
+      await getAuth().signOut()
+      navigate('/')
+   }
+
+   $: loggedIn = $authStore.isLoggedIn
 </script>
 
 <main class="c-app">
    <Router>
-      {#if !currentUser}
+      {#if !loggedIn}
+         <Route>
+            <Login />
+         </Route>
          <Route path="/register">
             <Register />
          </Route>
-         <Route>
-            <Login />
+         <Route path="/login">
+            {(() => {
+               const navigate = useNavigate();
+               navigate('/')
+            })()}
          </Route>
       {:else}
          <Sidebar />
@@ -40,6 +58,9 @@
          </Route>
          <Route path="/new">
             <AddOrganisation />
+         </Route>
+         <Route path="/signout">
+            {signOut()}
          </Route>
          <Route path="/:orgId/*" let:params>
             <!-- Check permission in organization -->

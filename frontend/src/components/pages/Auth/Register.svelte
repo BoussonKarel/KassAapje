@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Link } from 'svelte-navigator'
+  import { Link, useNavigate } from 'svelte-navigator'
   import { authHelper } from '../../../utils/auth'
   import type { SignupEntity } from '../../../models/SignupEntity'
   import { formHelper } from '../../../utils/formHelper'
@@ -42,7 +42,8 @@
 
     if (valid)
       await authHelper.signup(values).then((e) => {
-        // NEXT STEP??
+        const navigate = useNavigate();
+        navigate('/login')
       }).catch((e) => {
         errors.submit = e.message;
       })
