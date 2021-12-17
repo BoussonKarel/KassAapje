@@ -6,6 +6,8 @@
 
   const { validateEmail, validateUsername, validatePassword, DEFAULT_ERROR } = formHelper()
 
+  const navigate = useNavigate();
+
   let errors = {
     name: null,
     email: null,
@@ -42,7 +44,6 @@
 
     if (valid)
       await authHelper.signup(values).then((e) => {
-        const navigate = useNavigate();
         navigate('/login')
       }).catch((e) => {
         errors.submit = e.message;

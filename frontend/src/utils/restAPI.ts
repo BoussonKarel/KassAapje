@@ -39,7 +39,7 @@ export const restAPI = {
             if (body.error) throw Error(body.error);
             else throw Error(response.statusText);
           }
-          return response.json();
+          return body;
         })
         .catch((error: any) => {
           throw error;
