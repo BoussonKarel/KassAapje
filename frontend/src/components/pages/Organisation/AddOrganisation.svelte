@@ -22,7 +22,7 @@
 
 <div class="c-page">
   <div class="c-navigation">
-    <NavigationBar />
+    <NavigationBar title={"Nieuwe organisatie"} />
   </div>
 
   <form class="c-form" name="AddOrganisation" on:submit|preventDefault={handleSubmit}>

@@ -1,8 +1,8 @@
 <script lang="ts">
+  import { Link } from 'svelte-navigator'
   import { authHelper } from '../../../utils/auth'
   import type { SignupEntity } from '../../../models/SignupEntity'
   import { formHelper } from '../../../utils/formHelper'
-  import {Link} from 'yrv'
 
   const { validateEmail, validateUsername, validatePassword, DEFAULT_ERROR } = formHelper()
 
@@ -135,7 +135,7 @@
     </form>
     
     <div class="c-auth__switch">
-      Al een account? <Link class="link" href="/login">Log in</Link>
+      Al een account? <Link class="link" to="/login">Log in</Link>
     </div>
   </div>  
 </div>

@@ -1,7 +1,7 @@
 <script lang="ts">
+  import { Link } from 'svelte-navigator'
   import { auth } from '../../../utils/auth'
   import { formHelper } from '../../../utils/formHelper'
-  import {Link} from 'yrv'
 
   const { validateEmail, DEFAULT_ERROR } = formHelper()
 
@@ -111,7 +111,7 @@
     </form>
     
     <div class="c-auth__switch">
-      Nog geen account? <Link class="link" href="/register">Registreer</Link>
+      Nog geen account? <Link class="link" to="/register">Registreer</Link>
     </div>
   </div>  
 </div>
