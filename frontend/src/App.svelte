@@ -14,6 +14,7 @@
    import ProductOverview from './components/pages/Product/ProductOverview.svelte'
    import AddProduct from './components/pages/Product/AddProduct.svelte'
    import RegisterOverview from './components/pages/Register/RegisterOverview.svelte'
+   import AddOrder from './components/pages/Order/AddOrder.svelte';
 
    let loggedIn = () => (auth.currentUser ? true : false)
 </script>
@@ -46,7 +47,9 @@
 
             <Route path="/:regId/*">
                <!-- Check permission in register -->
-               <Route path="/">Orders</Route>
+               <Route path="/">
+                  <AddOrder />
+               </Route>
                <Route path="/orders">
                   <OrderOverview />
                </Route>
