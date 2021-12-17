@@ -1,11 +1,7 @@
 <script lang="ts">
   import AccountCircleOutline from 'svelte-material-icons/AccountCircleOutline.svelte'
   import LogoutVariant from 'svelte-material-icons/LogoutVariant.svelte'
-  import ChevronUp from 'svelte-material-icons/ChevronUp.svelte'
   import ChevronDown from 'svelte-material-icons/ChevronDown.svelte'
-  import ArrowCollapseLeft from 'svelte-material-icons/ArrowCollapseLeft.svelte'
-  import ArrowCollapseRight from 'svelte-material-icons/ArrowCollapseRight.svelte'
-  import ArrowCollapse from 'svelte-material-icons/ArrowCollapse.svelte'
 
   async function handleProfileClick(event) {
     console.log('Profile Click')
@@ -76,14 +72,5 @@
         <li class="c-sidebar-organisations-list-org-item">Tea Day</li>
       </ul>
     </ul>
-  </div>
-
-  <div class="c-sidebar-collapse">
-    <div class="c-sidebar-collapse-button">
-      <div class="c-sidebar-collapse-button-icon">
-        <ArrowCollapseRight />
-      </div>
-      <div class="c-sidebar-collapse-button-text">Verkleinen</div>
-    </div>
   </div>
 </div>
