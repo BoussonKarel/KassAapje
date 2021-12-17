@@ -1,5 +1,6 @@
 .c-popup {
   &-order {
+    
     background-color: map-get($colors-neutral, '100');
 
     position: absolute;
@@ -18,13 +19,27 @@
 
     display: flex;
     flex-direction: column;
+    align-items: center;
     padding-left: 2em;
     padding-right: 2em;
 
-    &-title {
+    &__title {
       font-weight: bold;
       font-size: em(20px);
       color: map-get($colors-theme, 'base');
     }
+
+    &__amount {
+      width: 100%;
+      justify-content: space-between;
+      margin-left: 1em;
+      margin-right: 1em;
+    }
   }
+}
+
+.u-popup-submit {
+  position: fixed;
+  bottom: 0;
+  margin-bottom: 1em;
 }

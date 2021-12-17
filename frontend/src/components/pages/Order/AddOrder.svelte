@@ -5,7 +5,7 @@
    import SearchBar from '../../SearchBar.svelte'
    import OrderPopup from '../../OrderPopup.svelte'
 
-   let finishOrder = false;
+   let finishOrder = true;
 </script>
 
 <div class="c-page">
