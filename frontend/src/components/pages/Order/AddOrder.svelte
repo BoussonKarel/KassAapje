@@ -7,7 +7,7 @@
 
 <div class="c-page">
    <div class="c-navigation">
-      <NavigationBar />
+      <NavigationBar title={"Order toevoegen"} />
    </div>
    <div class="c-orderscreen">
       <div>

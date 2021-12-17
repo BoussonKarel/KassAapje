@@ -4,7 +4,7 @@
  
  <div class="c-page">
     <div class="c-navigation">
-       <NavigationBar />
+       <NavigationBar title={""} />
     </div>
     <h1>Order Overview</h1>
  </div>
