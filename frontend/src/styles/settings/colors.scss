@@ -1,21 +1,28 @@
-$colors-neutral: (
-  '100': #fff,
-  '200': #fafafa,
-  '300': #e3e3e3,
-  '400': #d9d9d9,
-  '500': #b9b9b9,
-  '600': #a1a1a1,
-  '700': #777777,
-  '800': #4e4e4e,
-  '900': #212121,
-  'shadow': rgba(50, 50, 50, 0.2),
+$colors-theme: (
+  "100": #FFE5C8,
+  "200": #FFC685,
+  "300": #FFA543,
+  "400": #FF931C,
+  "500": #E97B00,
+  "600": #C76902,
+  "700": #8A4A03,
+  '800': #633400,
+  "shadow": #1C0F00 // 50%
 );
 
-$colors-theme: (
-  'xx-light': #F9DDBE,
-  'x-light': #F5C38B,
-  'base': #e97b00,
-  'selection': #ff931c,
-  'shadow': #e97b0033, // 50%
+$colors-status: (
   'error': #ff0000
+);
+
+$colors-neutral: (
+   '100': #fff,
+   '200': #fafafa,
+   '300': #e3e3e3,
+   '400': #d9d9d9,
+   '500': #b9b9b9,
+   '600': #a1a1a1,
+   '700': #777777,
+   '800': #4e4e4e,
+   '900': #212121,
+   'shadow': rgba(0, 0, 0, 0.2),
 );

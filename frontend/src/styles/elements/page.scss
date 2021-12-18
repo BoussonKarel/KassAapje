@@ -9,13 +9,30 @@ html {
   min-height: 100vh;
 
   ::selection {
-    background-color: map-get($colors-theme, "400");
+    background-color: map-get($colors-theme, "500");
     color: white;
   }
 }
 
 * {
   box-sizing: border-box;
+}
+
+:root {
+  --global-baseline: 8px;
+  --global-whitespace-2: calc(var(--global-baseline) * 2);
+  --global-whitespace-3: calc(var(--global-baseline) * 3);
+  --global-whitespace-4: calc(var(--global-baseline) * 4);
+  --global-whitespace-5: calc(var(--global-baseline) * 5);
+  --global-whitespace-6: calc(var(--global-baseline) * 6);
+}
+
+.c-page {
+  width: 100%;
+  display: block;
+  margin-left: 2em;
+  max-height: 100vh;
+  
 }
 
 h1, h2, h3, h4, h5, h6 {
