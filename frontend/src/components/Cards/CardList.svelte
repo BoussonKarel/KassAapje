@@ -40,5 +40,6 @@ import RegisterCard from "./RegisterCard.svelte"
 <OrganisationCard/>
 
 
-<AddCard/>
+<AddCard page={'registers'}/>
+<AddCard page={'organisations'}/>
 </div>
