@@ -1,190 +1,208 @@
+$global-card-height: 230px;
+$global-card-width: 300px;
+
 .c-cardlist {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(380px, auto));
-  margin-top: 2em;
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(calc($global-card-width - 20px), auto));
+   margin: 2em;
 
-  gap: 2em;
+   gap: 2em;
+
+   //   &::-webkit-scrollbar {
+   //     display: none;
+   //  }
+
+   //  -ms-overflow-style: none;
+   //  scrollbar-width: none; /* Firefox */
 }
 
-.c-organisation-card {
-  width: 380px;
-  height: 250px;
-  border-radius: $global-border-radius;
+.c-organisationcard {
+   width: $global-card-width;
+   height: $global-card-height;
+   border-radius: $global-border-radius;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 
-  font-size: rem(32px);
-  font-weight: 500;
+   font-size: rem(28px);
+   font-weight: 500;
 
-  background-color: #e97b0080;
-  color: #e97b00;
-  box-shadow: $default-shadow;
+   background-color: #e97b0080;
+   color: #e97b00;
+   box-shadow: $default-shadow;
 }
 
-.c-register-card {
-  width: 380px;
-  height: 250px;
-  border-radius: $global-border-radius;
-  display: grid;
-  grid-template-rows: 50% 50%;
+.c-registercard {
+   width: $global-card-width;
+   height: $global-card-height;
+   border-radius: $global-border-radius;
+   display: grid;
+   grid-template-rows: 50% 50%;
 
-  font-size: rem(32px);
-  font-weight: 500;
+   font-size: rem(28px);
+   font-weight: 500;
 
-  background-color: #088f8f80;
+   background-color: #088f8f80;
 
-  box-shadow: $default-shadow;
+   box-shadow: $default-shadow;
 
-  &-title {
-    padding-left: 1rem;
-    margin-top: 20%;
-    color: #088f8f;
-  }
-
-  &-info {
-    background-color: white;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    border-radius: 0 0 $global-border-radius $global-border-radius;
-    font-size: $base-font-size;
-    font-weight: 400;
-
-    overflow: hidden;
-
-    &-desc {
-      color: map-get($colors-neutral, '600');
-      margin-top: 0.5rem;
-      margin-bottom: 0.8rem;
-    }
-
-    &-org {
+   &__title {
+      padding-left: 1rem;
+      margin-top: 20%;
       color: #088f8f;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
+   }
 
-    &-admin {
-      display: flex;
+   &__info {
+      background-color: white;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      border-radius: 0 0 $global-border-radius $global-border-radius;
+      font-size: $base-font-size;
+      font-weight: 400;
 
-      &-name {
-        color: #088f8f;
-        padding-left: 0.5rem;
+      overflow: hidden;
+
+      &--desc {
+         color: map-get($colors-neutral, '600');
+         margin-top: 0.5rem;
+         margin-bottom: 0.8rem;
       }
-    }
-  }
 
-  &-icon {
-    &-cog {
-      color: white;
-      float: right;
-      padding: 0.5rem;
-
-      svg {
-        width: 1em;
-        height: 1em;
+      &--org {
+         color: #088f8f;
+         font-weight: 700;
+         margin-bottom: 0.5rem;
       }
-    }
 
-    &-star {
-      color: #088f8f;
+      &--admin {
+         display: flex;
 
-      svg {
-        width: 1.5em;
-        height: 1.5em;
+         &-name {
+            color: #088f8f;
+            padding-left: 0.5rem;
+         }
       }
-    }
-  }
+   }
+
+   &__icon {
+      &-cog {
+         color: white;
+         float: right;
+         padding: 0.5rem;
+
+         svg {
+            width: 1em;
+            height: 1em;
+         }
+      }
+
+      &-star {
+         color: #088f8f;
+
+         svg {
+            width: 1.5em;
+            height: 1.5em;
+         }
+      }
+   }
 }
 
 .c-addcard {
-  width: 380px;
-  height: 250px;
-  border-radius: $global-border-radius;
+   width: $global-card-width;
+   height: $global-card-height;
+   border-radius: $global-border-radius;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 
-  background-color: map-get($colors-neutral, '200');
-  box-shadow: $default-shadow;
+   background-color: map-get($colors-neutral, '200');
+   box-shadow: $default-shadow;
 
-  &-icon {
-    display: flex;
-    align-items: center;
-    padding-left: 1em;
-    padding-right: 1em;
+   &__icon {
+      display: flex;
+      align-items: center;
+      padding-left: 1em;
+      padding-right: 1em;
 
-    svg {
-      color: map-get($colors-theme, 'base');
-      width: 4em;
-      height: 4em;
-    }
-  }
+      svg {
+         color: map-get($colors-theme, '500');
+         width: 4em;
+         height: 4em;
+      }
+   }
 
-  &:hover {
-    background-color: map-get($colors-neutral, '100');
-  }
+   &:hover {
+      background-color: map-get($colors-neutral, '100');
+      cursor: pointer;
+      & .c-addcard__icon {
+         svg {
+            width: 4.5em;
+            height: 4.5em;
+            transition: width 0.1s ease-out;
+         }
+      }
+   }
 }
 
 .c-product-cardlist {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, auto));
-  margin-top: 2em;
-  max-height: 500px;
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(200px, auto));
+   margin-top: 2em;
+   max-height: 500px;
 
-  row-gap: 1.5em;
-  column-gap: 1em;
+   row-gap: 1.5em;
+   column-gap: 1em;
 
-  overflow-y: scroll;
+   overflow-y: scroll;
 
-  &::-webkit-scrollbar {
-    display: none;
-  }
+   &::-webkit-scrollbar {
+      display: none;
+   }
 
-  -ms-overflow-style: none;
-  scrollbar-width: none; /* Firefox */
+   -ms-overflow-style: none;
+   scrollbar-width: none; /* Firefox */
 }
 
 .c-product-card {
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  align-items: center;
-  // justify-content: center;
+   display: flex;
+   position: relative;
+   flex-direction: column;
+   align-items: center;
+   // justify-content: center;
 
-  font-size: em(24px);
+   font-size: em(24px);
 
-  width: 200px;
-  height: 130px;
-  border-radius: $global-border-radius;
+   width: 200px;
+   height: 130px;
+   border-radius: $global-border-radius;
 
-  background-color: map-get($colors-theme, 'selection');
+   background-color: map-get($colors-theme, 'selection');
 
-  &-title {
-    color: map-get($colors-neutral, '100');
-  }
+   &-title {
+      color: map-get($colors-neutral, '100');
+   }
 
-  &-button {
-    display: flex;
-    position: absolute;
-    bottom: 0;
-    justify-content: center;
-    align-items: center;
-    border-radius: 0 0 $global-border-radius $global-border-radius;
-    width: 100%;
+   &-button {
+      display: flex;
+      position: absolute;
+      bottom: 0;
+      justify-content: center;
+      align-items: center;
+      border-radius: 0 0 $global-border-radius $global-border-radius;
+      width: 100%;
 
-    color: map-get($colors-neutral, '100');
+      color: map-get($colors-neutral, '100');
 
-    background-color: map-get($colors-theme, 'base');
+      background-color: map-get($colors-theme, 'base');
 
-    & svg {
-      width: 2em;
-      height: 2em;
-    }
-    &:hover {
-      background-color: map-get($colors-theme, 'selection');
-    }
-  }
+      & svg {
+         width: 2em;
+         height: 2em;
+      }
+      &:hover {
+         background-color: map-get($colors-theme, 'selection');
+      }
+   }
 }

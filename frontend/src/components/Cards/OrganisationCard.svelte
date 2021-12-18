@@ -1,6 +1,6 @@
 <script lang="ts">
 </script>
 
-<div class="c-organisation-card">
-  <p>Scouts Beselare</p>
+<div class="c-organisationcard">
+  <p class="c-organisationcard__title">Scouts Beselare</p>
 </div>

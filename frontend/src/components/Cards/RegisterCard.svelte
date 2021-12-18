@@ -3,23 +3,23 @@
   import Star from 'svelte-material-icons/Star.svelte'
 </script>
 
-<div class="c-register-card">
+<div class="c-registercard">
   <div>
-    <div class="c-register-card-icon-cog">
+    <div class="c-registercard__icon-cog">
       <Settings />
     </div>
 
-    <p class="c-register-card-title">Kerstmarkt</p>
+    <p class="c-registercard__title">Kerstmarkt</p>
   </div>
 
-  <div class="c-register-card-info">
-    <div class="c-register-card-info-desc">Kassa voor de kerstmarkt 2021</div>
-    <div class="c-register-card-info-org">Scouts Beselare</div>
-    <div class="c-register-card-info-admin">
-      <div class="c-register-card-icon-star">
+  <div class="c-registercard__info">
+    <div class="c-registercard__info--desc">Kassa voor de kerstmarkt 2021</div>
+    <div class="c-registercard__info--org">Scouts Beselare</div>
+    <div class="c-registercard__info--admin">
+      <div class="c-registercard__icon-star">
         <Star />
       </div>
-      <div class="c-register-card-info-admin-name">Michiel De Roovere</div>
+      <div class="c-registercard__info--admin-name">Michiel De Roovere</div>
     </div>
   </div>
 </div>

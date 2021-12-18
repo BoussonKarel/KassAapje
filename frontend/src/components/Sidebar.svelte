@@ -10,7 +10,7 @@
    let orgsCollapse = false
    let smallScreen = false
 
-   const minScreenSize = 992;
+   const minScreenSize = 992; //tablet standard
    const screenSize = window.matchMedia(`(max-width: ${minScreenSize}px)`)
 
    if (screenSize.matches) {

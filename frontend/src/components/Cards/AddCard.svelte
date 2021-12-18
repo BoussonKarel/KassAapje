@@ -3,7 +3,7 @@
 </script>
 
 <div class="c-addcard">
-    <div class="c-addcard-icon">
+    <div class="c-addcard__icon">
         <Plus />
     </div>
 </div>

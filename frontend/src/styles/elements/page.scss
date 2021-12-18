@@ -31,7 +31,15 @@ html {
   width: 100%;
   display: block;
   margin-left: 2em;
-  max-height: 100vh;
+  max-height: auto;
+  overflow: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+ }
+
+ -ms-overflow-style: none;
+ scrollbar-width: none; /* Firefox */
   
 }
 
