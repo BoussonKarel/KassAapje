@@ -2,7 +2,9 @@
    import AccountCircleOutline from 'svelte-material-icons/AccountCircleOutline.svelte'
    import LogoutVariant from 'svelte-material-icons/LogoutVariant.svelte'
    import ChevronUp from 'svelte-material-icons/ChevronUp.svelte'
+   import ArrowCollapseLeft from 'svelte-material-icons/ArrowCollapseLeft.svelte'
    import OrganisationList from './OrganisationList.svelte'
+import ArrowCollapse from 'svelte-material-icons/ArrowCollapse.svelte';
 
    let sidebarCollapse = false
    let orgsCollapse = false
@@ -17,30 +19,46 @@
    }
    function toggleOrgsCollapse() {
       orgsCollapse = !orgsCollapse
+   }
 
-      console.log('collapsed all orgs')
+   function toggleSidebarCollapse() {
+      sidebarCollapse = !sidebarCollapse
 
-      console.log(orgsCollapse)
+      console.log('collapsed sidebar')
+      console.log(sidebarCollapse)
    }
 </script>
 
-<div class="c-sidebar">
-   <div class="c-sidebar__title">KassAapje</div>
+<div class="c-sidebar {sidebarCollapse ? 'u-collapsed': ''}">
+   <div class="c-sidebar__title">
+      {#if sidebarCollapse}
+      K
+      {:else}
+      KassAapje
+      {/if}
+   </div>
 
    <div on:click={handleProfileClick} class="c-sidebar__profile">
       <div class="c-sidebar__profile--icon">
          <AccountCircleOutline />
       </div>
+
+      {#if !sidebarCollapse}
       <div class="c-sidebar__profile--name">Michiel</div>
+      {/if}
    </div>
 
    <div on:click={handleLogoutClick} class="c-sidebar__logout">
       <div class="c-sidebar__logout--icon">
          <LogoutVariant />
       </div>
-      <div class="c-sidebar__logout--text u-collapsible">Uitloggen</div>
-   </div>
 
+      {#if !sidebarCollapse}
+      <div class="c-sidebar__logout--text u-collapsible">Uitloggen</div>
+      {/if}
+
+   </div>
+   {#if !sidebarCollapse}
    <div class="c-sidebar__orglist">
       <div on:click={toggleOrgsCollapse} class="c-sidebar__orglist--title">
          <div class="c-sidebar__orglist--title-text">Verenigingen</div>
@@ -51,4 +69,20 @@
 
       <OrganisationList {orgsCollapse} />
    </div>
+   {/if}
+
+
+
+   <div on:click={toggleSidebarCollapse} class="c-sidebar__collapse">
+      <div class="c-sidebar__collapse--icon {sidebarCollapse ? 'u-flip' :'' }">
+         <ArrowCollapseLeft />
+      </div>
+
+      {#if !sidebarCollapse}
+      <div class="c-sidebar__collapse--text u-collapsible">Inklappen</div>
+      {/if}
+
+   </div>
+
+
 </div>

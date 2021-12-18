@@ -25,10 +25,8 @@
    &__profile {
       display: flex;
       align-items: center;
-      padding-left: 1em;
-      padding-right: 1em;
       padding-top: 0.5em;
-      padding-bottom: 0.5em;
+      padding-bottom: 1em;
 
       &--icon {
          display: flex;
@@ -63,10 +61,8 @@
    &__logout {
       display: flex;
       align-items: center;
-      padding-left: 1em;
-      padding-right: 1em;
       padding-top: 0.5em;
-      padding-bottom: 0.5em;
+      padding-bottom: 1em;
 
       &--icon {
          display: flex;
@@ -128,9 +124,7 @@
          list-style: none;
          font-size: rem(16px);
 
-
          max-height: 90%;
-
 
          overflow: scroll;
 
@@ -191,6 +185,39 @@
             background-color: map-get($colors-theme, '400');
             border-radius: 20px 0 0 20px;
          }
+      }
+   }
+
+   &__collapse {
+      display: flex;
+      align-items: center;
+      padding-top: 0.5em;
+      padding-bottom: 0.5em;
+      margin-top: auto;
+
+      bottom: 0;
+
+      &--icon {
+         display: flex;
+         align-items: center;
+         padding-left: 1em;
+         padding-right: 1em;
+
+         svg {
+            color: map-get($colors-neutral, '100');
+            width: 2em;
+            height: 2em;
+         }
+      }
+      &--text {
+         color: map-get($colors-neutral, '100');
+         font-size: rem(20px);
+         font-weight: 400;
+      }
+
+      &:hover {
+         background-color: map-get($colors-theme, '400');
+         cursor: pointer;
       }
    }
 }
