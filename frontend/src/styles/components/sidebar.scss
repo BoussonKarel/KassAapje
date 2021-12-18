@@ -98,13 +98,17 @@
          display: flex;
          justify-content: space-around;
          margin-left: 0.5em;
-         margin-top: 1em;
          margin-bottom: 0;
+         padding-top: 8px;
+         padding-bottom: 8px;
 
          font-size: rem(20px);
 
          &:hover {
             cursor: pointer;
+
+            background-color: map-get($colors-theme, '400');
+            border-radius: 20px 0 0 20px;
          }
 
          &-chevron {
@@ -123,6 +127,7 @@
          flex-direction: column;
          list-style: none;
          font-size: rem(16px);
+         margin-top: 0;
 
          max-height: 90%;
 
@@ -139,6 +144,8 @@
 
    &__org {
       margin-bottom: var(--global-whitespace-2);
+      margin: 0;
+
       &--title {
          list-style: none;
          display: flex;
@@ -148,6 +155,8 @@
          white-space: nowrap;
          overflow: hidden;
          text-overflow: ellipsis;
+         padding-top: 6px;
+         padding-bottom: 6px;
 
          &:hover {
             cursor: pointer;

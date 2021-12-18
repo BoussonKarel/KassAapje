@@ -1,7 +1,7 @@
 <script lang="ts">
    import ChevronUp from 'svelte-material-icons/ChevronUp.svelte'
 
-   let orgCollapse = false
+   let orgCollapse = true
 
    function toggleOrgCollapse() {
       orgCollapse = !orgCollapse

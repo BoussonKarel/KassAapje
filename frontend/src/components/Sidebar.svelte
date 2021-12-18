@@ -4,16 +4,36 @@
    import ChevronUp from 'svelte-material-icons/ChevronUp.svelte'
    import ArrowCollapseLeft from 'svelte-material-icons/ArrowCollapseLeft.svelte'
    import OrganisationList from './OrganisationList.svelte'
-import ArrowCollapse from 'svelte-material-icons/ArrowCollapse.svelte';
+   import ArrowCollapse from 'svelte-material-icons/ArrowCollapse.svelte'
 
    let sidebarCollapse = false
    let orgsCollapse = false
+   let smallScreen = false
 
-   async function handleProfileClick(event) {
+   const minScreenSize = window.matchMedia('(max-width: 992px)')
+
+   if (minScreenSize.matches) {
+      sidebarCollapse = true
+      smallScreen = true
+   } else {
+      sidebarCollapse = false
+   }
+
+   window.onresize = function () {
+      if (minScreenSize.matches) {
+         sidebarCollapse = true
+         smallScreen = true
+      } else {
+         smallScreen = false
+         sidebarCollapse = false
+      }
+   }
+
+   function handleProfileClick(event) {
       console.log('Profile Click')
       console.log(event)
    }
-   async function handleLogoutClick(event) {
+   function handleLogoutClick(event) {
       console.log('Logout Click')
       console.log(event)
    }
@@ -29,12 +49,12 @@ import ArrowCollapse from 'svelte-material-icons/ArrowCollapse.svelte';
    }
 </script>
 
-<div class="c-sidebar {sidebarCollapse ? 'u-collapsed': ''}">
+<div class="c-sidebar {sidebarCollapse ? 'u-collapsed' : ''}">
    <div class="c-sidebar__title">
       {#if sidebarCollapse}
-      K
+         K
       {:else}
-      KassAapje
+         KassAapje
       {/if}
    </div>
 
@@ -44,7 +64,7 @@ import ArrowCollapse from 'svelte-material-icons/ArrowCollapse.svelte';
       </div>
 
       {#if !sidebarCollapse}
-      <div class="c-sidebar__profile--name">Michiel</div>
+         <div class="c-sidebar__profile--name">Michiel</div>
       {/if}
    </div>
 
@@ -54,35 +74,31 @@ import ArrowCollapse from 'svelte-material-icons/ArrowCollapse.svelte';
       </div>
 
       {#if !sidebarCollapse}
-      <div class="c-sidebar__logout--text u-collapsible">Uitloggen</div>
+         <div class="c-sidebar__logout--text u-collapsible">Uitloggen</div>
       {/if}
-
    </div>
    {#if !sidebarCollapse}
-   <div class="c-sidebar__orglist">
-      <div on:click={toggleOrgsCollapse} class="c-sidebar__orglist--title">
-         <div class="c-sidebar__orglist--title-text">Verenigingen</div>
-         <div class="c-sidebar__orglist--title-chevron {orgsCollapse ? 'u-flip' : ''}">
-            <ChevronUp />
+      <div class="c-sidebar__orglist">
+         <div on:click={toggleOrgsCollapse} class="c-sidebar__orglist--title">
+            <div class="c-sidebar__orglist--title-text">Verenigingen</div>
+            <div class="c-sidebar__orglist--title-chevron {orgsCollapse ? 'u-flip' : ''}">
+               <ChevronUp />
+            </div>
          </div>
-      </div>
 
-      <OrganisationList {orgsCollapse} />
-   </div>
+         <OrganisationList {orgsCollapse} />
+      </div>
    {/if}
 
+   {#if !smallScreen}
+      <div on:click={toggleSidebarCollapse} class="c-sidebar__collapse">
+         <div class="c-sidebar__collapse--icon {sidebarCollapse ? 'u-flip' : ''}">
+            <ArrowCollapseLeft />
+         </div>
 
-
-   <div on:click={toggleSidebarCollapse} class="c-sidebar__collapse">
-      <div class="c-sidebar__collapse--icon {sidebarCollapse ? 'u-flip' :'' }">
-         <ArrowCollapseLeft />
+         {#if !sidebarCollapse}
+            <div class="c-sidebar__collapse--text u-collapsible">Inklappen</div>
+         {/if}
       </div>
-
-      {#if !sidebarCollapse}
-      <div class="c-sidebar__collapse--text u-collapsible">Inklappen</div>
-      {/if}
-
-   </div>
-
-
+   {/if}
 </div>
