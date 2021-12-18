@@ -10,9 +10,10 @@
    let orgsCollapse = false
    let smallScreen = false
 
-   const minScreenSize = window.matchMedia('(max-width: 992px)')
+   const minScreenSize = 992;
+   const screenSize = window.matchMedia(`(max-width: ${minScreenSize}px)`)
 
-   if (minScreenSize.matches) {
+   if (screenSize.matches) {
       sidebarCollapse = true
       smallScreen = true
    } else {
@@ -20,7 +21,7 @@
    }
 
    window.onresize = function () {
-      if (minScreenSize.matches) {
+      if (screenSize.matches) {
          sidebarCollapse = true
          smallScreen = true
       } else {
