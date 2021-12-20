@@ -24,6 +24,7 @@ $global-card-width: 300px;
    display: flex;
    justify-content: center;
    align-items: center;
+   text-align: center;
 
    font-size: rem(28px);
    font-weight: 500;
@@ -31,6 +32,17 @@ $global-card-width: 300px;
    background-color: #e97b0080;
    color: #e97b00;
    box-shadow: $default-shadow;
+
+   &__title {
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+   }
 }
 
 .c-registercard {
@@ -66,13 +78,24 @@ $global-card-width: 300px;
       &--desc {
          color: map-get($colors-neutral, '600');
          margin-top: 0.5rem;
-         margin-bottom: 0.8rem;
+         height: 2rem;
+         line-height: 1;
+
+         overflow: hidden;
+         text-overflow: ellipsis;
+         display: -webkit-box;
+         -webkit-line-clamp: 2;
+         -webkit-box-orient: vertical;
       }
 
       &--org {
          color: #088f8f;
          font-weight: 700;
          margin-bottom: 0.5rem;
+
+         white-space: nowrap;
+         overflow: hidden;
+         text-overflow: ellipsis;
       }
 
       &--admin {
@@ -81,6 +104,10 @@ $global-card-width: 300px;
          &-name {
             color: #088f8f;
             padding-left: 0.5rem;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
          }
       }
    }
