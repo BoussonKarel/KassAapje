@@ -3,10 +3,11 @@ $global-card-width: 300px;
 
 .c-cardlist {
    display: grid;
-   grid-template-columns: repeat(auto-fill, minmax(calc($global-card-width - 20px), auto));
-   margin: 2em;
 
+   grid-template-columns: repeat(auto-fill, minmax(calc($global-card-width - 20px), auto));
    gap: 2em;
+
+   margin: 2em;
 
    //   &::-webkit-scrollbar {
    //     display: none;
@@ -59,20 +60,34 @@ $global-card-width: 300px;
 
    box-shadow: $default-shadow;
 
+   &__upper {
+      max-width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+   }
+
    &__title {
       padding-left: 1rem;
       margin-top: 20%;
       color: #088f8f;
+
+      // max-width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
    }
 
    &__info {
-      background-color: white;
+      background-color: map-get($colors-neutral, '100');
       padding-left: 1rem;
       padding-right: 1rem;
       border-radius: 0 0 $global-border-radius $global-border-radius;
       font-size: $base-font-size;
       font-weight: 400;
 
+      max-width: 100%;
       overflow: hidden;
 
       &--desc {
@@ -81,6 +96,7 @@ $global-card-width: 300px;
          height: 2rem;
          line-height: 1;
 
+         max-width: 100%;
          overflow: hidden;
          text-overflow: ellipsis;
          display: -webkit-box;
@@ -93,6 +109,7 @@ $global-card-width: 300px;
          font-weight: 700;
          margin-bottom: 0.5rem;
 
+         max-width: 100%;
          white-space: nowrap;
          overflow: hidden;
          text-overflow: ellipsis;
@@ -100,6 +117,8 @@ $global-card-width: 300px;
 
       &--admin {
          display: flex;
+         max-width: 100%;
+         overflow: hidden;
 
          &-name {
             color: #088f8f;
@@ -114,7 +133,7 @@ $global-card-width: 300px;
 
    &__icon {
       &-cog {
-         color: white;
+         color: map-get($colors-neutral, '100');
          float: right;
          padding: 0.5rem;
 
