@@ -13,13 +13,13 @@
   </div>
 
   <div class="c-registercard__info">
-    <div class="c-registercard__info--desc">Kassa voor de kerstmarkt 2021 met heel veel adjes voor de sfeer</div>
-    <div class="c-registercard__info--org">Scouts Beselare waar kinderen komen om zich te amuseren enzo boysss</div>
+    <div class="c-registercard__info--desc">Kassa voor de kerstmarkt 2021r</div>
+    <div class="c-registercard__info--org">Scouts Beselare</div>
     <div class="c-registercard__info--admin">
       <div class="c-registercard__icon-star">
         <Star />
       </div>
-      <div class="c-registercard__info--admin-name">Michiel De Roovere die wel nog cool is enzo gekke man swag 4000</div>
+      <div class="c-registercard__info--admin-name">Michiel De Roovere</div>
     </div>
   </div>
 </div>
