@@ -13,11 +13,14 @@
    import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
    onMount(() => {
-      onAuthStateChanged(getAuth(), user => {
-         authStore.set({
-            isLoggedIn: user != null,
-            user,
-         })
+      getAuth().onAuthStateChanged(async user => {
+         if (user) {
+            const token = await user.getIdTokenResult();
+            authStore.set(token.claims);
+         }
+         else {
+            authStore.set(null)
+         }
       })
    })
 
@@ -26,25 +29,23 @@
       await getAuth().signOut()
       navigate('/')
    }
-
-   $: loggedIn = $authStore.isLoggedIn
 </script>
 
 <main class="c-app">
    <Router>
-      {#if !loggedIn}
+      {#if !$authStore}
          <Route>
             <Login />
          </Route>
          <Route path="/register">
             <Register />
          </Route>
-         <Route path="/login">
+         <!-- <Route path="/login">
             {(() => {
                const navigate = useNavigate()
                navigate('/')
             })()}
-         </Route>
+         </Route> -->
       {:else}
          <Sidebar />
          <Route path="/">

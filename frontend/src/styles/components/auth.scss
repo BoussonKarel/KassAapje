@@ -1,6 +1,6 @@
 .c-auth {
     &-holder {
-        background-color: map-get($colors-theme, 'selection');
+        background-color: map-get($colors-theme, '300');
         width: 100%;
         min-height:100vh;
     }
@@ -11,7 +11,7 @@
     max-width: em(480px);
 
     padding: 48px;
-    background-color: map-get($colors-neutral, '100' );
+    background-color: map-get($colors-neutral, '100');
     border-radius: $global-border-radius;
     box-shadow: $default-shadow;
 
@@ -27,7 +27,7 @@
         font-family: inherit;
         font-size: 32px;
         font-weight: bold;
-        color: map-get($colors-theme, 'base' );
+        color: map-get($colors-theme, '500' );
         
         display: flex;
         justify-content: center;

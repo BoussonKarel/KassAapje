@@ -48,7 +48,7 @@
 
   &-error {
     font-size: rem(14px);
-    color: map-get($colors-theme, 'error');
+    color: map-get($colors-status, 'error');
   }
 
   &-textinputs {
@@ -79,7 +79,7 @@
 
   &-submit {
     margin-top: em(16px);
-    background-color: map-get($colors-theme, 'base');
+    background-color: map-get($colors-theme, '500');
     color: map-get($colors-neutral, '100');
     font-size: rem(28px);
     font-weight: 500;
@@ -89,7 +89,7 @@
     border-radius: $global-border-radius;
 
     &:hover {
-      background-color: map-get($colors-theme, 'selection');
+      background-color: map-get($colors-theme, '400');
       cursor: pointer;
     }
   }
@@ -143,6 +143,6 @@
 }
 
 .has-error {
-  border-color: map-get($colors-theme, 'error');
-  color: map-get($colors-theme, 'error');
+  border-color: map-get($colors-status, 'error');
+  color: map-get($colors-status, 'error');
 }
