@@ -8,15 +8,14 @@
    import AddOrganisation from './components/pages/Organisation/AddOrganisation.svelte'
    import { onMount } from 'svelte'
    import { useNavigate } from 'svelte-navigator'
-   import { authStore } from './stores/authStore'
    import OrganizationRoutes from './components/OrganizationRoutes.svelte';
-   import { getAuth, onAuthStateChanged } from 'firebase/auth';
+   import { getAuth } from 'firebase/auth';
+   import { authStore, setAuthStore } from './utils/auth';
 
    onMount(() => {
       getAuth().onAuthStateChanged(async user => {
          if (user) {
-            const token = await user.getIdTokenResult();
-            authStore.set(token.claims);
+            setAuthStore(user)
          }
          else {
             authStore.set(null)
