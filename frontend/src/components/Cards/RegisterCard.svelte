@@ -9,11 +9,11 @@
       <Settings />
     </div>
 
-    <p class="c-registercard__title">kerstmarkt</p>
+    <span class="c-registercard__title">kerstmarkt</span>
   </div>
 
   <div class="c-registercard__info">
-    <div class="c-registercard__info--desc">Kassa voor de kerstmarkt 2021r</div>
+    <div class="c-registercard__info--desc">Kassa voor de kerstmarkt 2021</div>
     <div class="c-registercard__info--org">Scouts Beselare</div>
     <div class="c-registercard__info--admin">
       <div class="c-registercard__icon-star">
