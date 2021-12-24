@@ -12,7 +12,7 @@ export const authStore = writable<{ user?: any; roles?: any }>(null)
 
 export const setAuthStore = async (user: User) => {
   const token = await user.getIdTokenResult();
-  authStore.set({user: token.claims, roles: await getPermissions(token.claims)})
+  authStore.set({user: token.claims, roles: await getRoles(token.claims)})
 }
 
 export enum Role {
@@ -20,7 +20,7 @@ export enum Role {
    USER = 'u',
 }
 
-export const getPermissions = async (claims) => {
+const getRoles = async (claims) => {
    const perms = claims.perms as string;
 
    const permsSplit = perms.split('_')

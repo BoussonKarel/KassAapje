@@ -1,7 +1,7 @@
 <script lang="ts">
    import { Route } from 'svelte-navigator'
 
-   import { getPermissions, Role } from '../utils/auth'
+   import { authStore, Role } from '../utils/auth'
    import { useParams } from 'svelte-navigator'
    import AddOrder from './pages/Order/AddOrder.svelte'
    import OrderOverview from './pages/Order/OrderOverview.svelte'
@@ -15,7 +15,7 @@
    $: isOwner = false
 
    const checkRegisterPermissions = async (register_id: string) => {
-      const perms = await getPermissions()
+      const perms = $authStore.roles;
       isUser = perms.registers.some(o => o.id === register_id)
       isOwner = perms.registers.some(o => o.id === register_id && o.role === Role.OWNER)
    }
