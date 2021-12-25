@@ -19,6 +19,7 @@
     <NavigationBar title={id}/>
   </div>
   <form class="c-form" name="AddOrganisation" on:submit|preventDefault={handleSubmit}>
+    
     <div class="c-form-edit">
       
       <p class="c-form-edit-label">Naam:</p>

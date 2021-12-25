@@ -3,7 +3,7 @@
   import Star from 'svelte-material-icons/Star.svelte'
 </script>
 
-<div class="c-registercard">
+<div class="c-card c-registercard">
   <div class="c-registercard__upper">
     <div class="c-registercard__icon-cog">
       <Settings />

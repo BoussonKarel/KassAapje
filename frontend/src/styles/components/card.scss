@@ -1,6 +1,5 @@
 $global-card-height: 230px;
 
-
 .c-cardlist {
    display: grid;
 
@@ -20,11 +19,17 @@ $global-card-height: 230px;
    //  scrollbar-width: none; /* Firefox */
 }
 
-.c-organisationcard {
+.c-card {
    width: 100%;
    height: $global-card-height;
    border-radius: $global-border-radius;
 
+   background-color: map-get($colors-neutral, '300');
+   box-shadow: $default-shadow;
+
+}
+
+.c-organisationcard {
    display: flex;
    justify-content: center;
    align-items: center;
@@ -33,9 +38,8 @@ $global-card-height: 230px;
    font-size: rem(28px);
    font-weight: 500;
 
-   background-color: #e97b0080;
+   background-color: map-get($colors-theme, '200');
    color: #e97b00;
-   box-shadow: $default-shadow;
 
    &__title {
       margin-left: 0.5rem;
@@ -50,9 +54,6 @@ $global-card-height: 230px;
 }
 
 .c-registercard {
-   width: 100%;
-   height: $global-card-height;
-   border-radius: $global-border-radius;
    display: grid;
    grid-template-rows: 50% 50%;
 
@@ -61,22 +62,17 @@ $global-card-height: 230px;
 
    background-color: #088f8f80;
 
-   box-shadow: $default-shadow;
-
    &__upper {
-      
       max-width: 100%;
       height: 100%;
       white-space: nowrap;
-      
+
       overflow: hidden;
       text-overflow: ellipsis;
 
       display: flex;
       flex-direction: column;
       justify-content: space-around;
-
-
    }
 
    &__title {
@@ -145,7 +141,7 @@ $global-card-height: 230px;
          display: flex;
          justify-content: end;
          color: map-get($colors-neutral, '100');
-         
+
          padding: 0.5rem;
 
          svg {
@@ -166,16 +162,11 @@ $global-card-height: 230px;
 }
 
 .c-addcard {
-   width: 100%;
-   height: $global-card-height;
-   border-radius: $global-border-radius;
-
    display: flex;
    justify-content: center;
    align-items: center;
 
    background-color: map-get($colors-neutral, '200');
-   box-shadow: $default-shadow;
 
    &__icon {
       display: flex;

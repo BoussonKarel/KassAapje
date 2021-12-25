@@ -30,7 +30,7 @@
 }
 
 .c-form {
-  width: auto;
+  width: 100%;
   display: grid;
   grid-template-columns: 50% 50%;
   margin-top: 1em;
@@ -48,34 +48,13 @@
 
   &-error {
     font-size: rem(14px);
-    color: map-get($colors-theme, 'error');
+    color: map-get($colors-status, 'error');
   }
 
   &-textinputs {
     display: flex;
     flex-direction: column;
   }
-
-  &-altinputs {
-    margin-left: 50%;
-  }
-
-  
-
-  // &-textinput {
-  //   background-color: white;
-  //   border-radius: calc($global-border-radius / 2);
-  //   border: solid 1px;
-  //   border-color: map-get($colors-neutral, '800');
-  //   padding: em(11px) em(8px);
-  //   width: inherit;
-  //   padding-left: 8px;
-
-  //   &::placeholder {
-  //     color: map-get($colors-neutral, '600');
-  //     // font-style: italic;
-  //   }
-  // }
 
   &-submit {
     margin-top: em(16px);

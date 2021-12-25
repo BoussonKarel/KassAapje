@@ -13,7 +13,7 @@
     }
 </script>
 
-<div on:click={handleAddCard} class="c-addcard">
+<div on:click={handleAddCard} class="c-card c-addcard">
     <div class="c-addcard__icon">
         <Plus />
     </div>
