@@ -5,18 +5,9 @@ $global-card-height: 230px;
 
    grid-template-columns: repeat(auto-fill, minmax(280px, auto));
 
-   // grid-template-columns: repeat(auto-fill, minmax(auto, calc($global-card-width - 20px)));
-
    gap: 2em;
 
    margin: 2em;
-
-   //   &::-webkit-scrollbar {
-   //     display: none;
-   //  }
-
-   //  -ms-overflow-style: none;
-   //  scrollbar-width: none; /* Firefox */
 }
 
 .c-card {
