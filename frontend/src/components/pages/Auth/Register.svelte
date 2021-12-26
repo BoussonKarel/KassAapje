@@ -85,7 +85,7 @@
         <input
           class="c-input {errors.name ? 'has-error' : ''}"
           bind:value={values.name}
-          on:input={handleInput}
+          on:blur={handleInput}
           type="text"
           name="name"
           id="name"
@@ -101,7 +101,7 @@
         <input
           class="c-input {errors.email ? 'has-error' : ''}"
           bind:value={values.email}
-          on:input={handleInput}
+          on:blur={handleInput}
           type="text"
           name="email"
           id="email"
@@ -117,7 +117,7 @@
         <input
           class="c-input {errors.password ? 'has-error' : ''}"
           bind:value={values.password}
-          on:input={handleInput}
+          on:blur={handleInput}
           type="password"
           name="password"
           id="password"

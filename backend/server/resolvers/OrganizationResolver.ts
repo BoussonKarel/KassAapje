@@ -78,9 +78,7 @@ export class OrganizationResolver {
       return await this.roleManager
         .hasOrganizationRole(user, id, [Role.OWNER])
         .then(async () => {
-          return await this.manager.findOne(Organization, id, {
-            relations: ['registers'],
-          })
+          return await this.manager.findOne(Organization, id)
         })
     } catch (error: any) {
       console.error(`⛔ (${user.email}) ` + error.message)

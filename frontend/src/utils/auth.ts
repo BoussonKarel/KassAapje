@@ -1,5 +1,7 @@
-import { getAuth } from 'firebase/auth';
-import { initializeApp } from 'firebase/app';
+import { writable } from 'svelte/store'
+import { getAuth } from 'firebase/auth'
+import type { User } from 'firebase/auth'
+import { initializeApp } from 'firebase/app'
 import { firebaseConfig } from '../config/firebaseConfig'
 
 import type { SignupEntity } from '../models/SignupEntity'
@@ -7,58 +9,66 @@ import { restAPI } from './restAPI'
 
 initializeApp(firebaseConfig)
 
-export enum Role {
-  OWNER = '*',
-  USER = 'u'
+export const authStore = writable<{ user?: any; roles?: any }>(null)
+
+export const setAuthStore = async (user: User) => {
+  const token = await user.getIdTokenResult();
+  authStore.set({user: token.claims, roles: await getRoles(token.claims)})
 }
 
-export const getPermissions = async () => {
-  const perms = await getAuth()
-    .currentUser.getIdTokenResult()
-    .then((idTokenResult) => idTokenResult.claims.perms as string);
+export const getToken = async () => {
+   return getAuth().currentUser.getIdToken();
+}
 
-  const permsSplit = perms.split('_');
-  const orgPerms = permsSplit[0].split(',');
-  const regPerms = permsSplit[1].split(',');
+export enum Role {
+   OWNER = '*',
+   USER = 'u',
+}
 
-  const roles = {
-    organizations: [],
-    registers: []
-  };
+const getRoles = async (claims) => {
+   const perms = claims.perms as string;
 
-  for (const org of orgPerms) {
-    const parts = org.split('/');
-    const organization_id = parts[0];
-    const role = parts[1];
-    roles.organizations.push({
-      id: organization_id,
-      role: role
-    })
-  }
+   const permsSplit = perms.split('_')
+   const orgPerms = permsSplit[0].split(',')
+   const regPerms = permsSplit[1].split(',')
 
-  for (const reg of regPerms) {
-    const parts = reg.split('/');
-    const register_id = parts[0];
-    const role = parts[1];
-    roles.registers.push({
-      id: register_id,
-      role: role
-    })
-  }
+   const roles = {
+      organizations: [],
+      registers: [],
+   }
 
-  return roles;
+   for (const org of orgPerms) {
+      const parts = org.split('/')
+      const organization_id = parts[0]
+      const role = parts[1]
+      roles.organizations.push({
+         id: organization_id,
+         role: role,
+      })
+   }
+
+   for (const reg of regPerms) {
+      const parts = reg.split('/')
+      const register_id = parts[0]
+      const role = parts[1]
+      roles.registers.push({
+         id: register_id,
+         role: role,
+      })
+   }
+
+   return roles
 }
 
 export const authHelper = {
-  signup: async (newUser: SignupEntity) => {
-    return await restAPI
-      .post('signup', newUser)
-      .then(data => {
-        return data
-      })
-      .catch(error => {
-        throw error
-      })
-  }
+   signup: async (newUser: SignupEntity) => {
+      return await restAPI
+         .post('signup', newUser)
+         .then(data => {
+            return data
+         })
+         .catch(error => {
+            throw error
+         })
+   },
 }
-

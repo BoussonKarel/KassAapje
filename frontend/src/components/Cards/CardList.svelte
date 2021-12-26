@@ -5,7 +5,8 @@ import RegisterCard from "./RegisterCard.svelte"
 </script>
 
 <div class="c-cardlist">
-<OrganisationCard/>
+  <slot />
+<!-- <OrganisationCard/>
 <OrganisationCard/>
 <RegisterCard/>
 <OrganisationCard/>
@@ -40,6 +41,6 @@ import RegisterCard from "./RegisterCard.svelte"
 <OrganisationCard/>
 
 
-<AddCard page={'registers'}/>
-<AddCard page={'organisations'}/>
+<AddCard page={'registers'}/> -->
+
 </div>
