@@ -62,7 +62,7 @@ export class Organization extends BaseEntity {
   email?: string
 
   @Field(() => [Register], { nullable: true })
-  @OneToMany(() => Register, r => r.organization)
+  @OneToMany(() => Register, r => r.organization, {eager: true})
   registers?: Register[]
 
   @OneToMany(() => Permission, p => p.organization)

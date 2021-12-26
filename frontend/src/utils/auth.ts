@@ -1,4 +1,5 @@
 import { writable } from 'svelte/store'
+import { getAuth } from 'firebase/auth'
 import type { User } from 'firebase/auth'
 import { initializeApp } from 'firebase/app'
 import { firebaseConfig } from '../config/firebaseConfig'
@@ -13,6 +14,10 @@ export const authStore = writable<{ user?: any; roles?: any }>(null)
 export const setAuthStore = async (user: User) => {
   const token = await user.getIdTokenResult();
   authStore.set({user: token.claims, roles: await getRoles(token.claims)})
+}
+
+export const getToken = async () => {
+   return getAuth().currentUser.getIdToken();
 }
 
 export enum Role {

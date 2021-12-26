@@ -1,4 +1,4 @@
-const URI = 'http://localhost:8888';
+import { baseUrl } from "../config/api";
 
 const default_headers = (accessToken: string = null) => {
   const headers = new Headers();
@@ -32,7 +32,7 @@ export const restAPI = {
         body: requestBody,
       };
 
-      return fetch(`${URI}/${endpoint}`, options)
+      return fetch(`${baseUrl}/${endpoint}`, options)
         .then(async (response) => {
           const body = await response.json();
           if (!response.ok) {

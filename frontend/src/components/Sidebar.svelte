@@ -4,13 +4,16 @@
    import ChevronUp from 'svelte-material-icons/ChevronUp.svelte'
    import ArrowCollapseLeft from 'svelte-material-icons/ArrowCollapseLeft.svelte'
    import OrganisationList from './OrganisationList.svelte'
+   import OrganisationListItem from './OrganisationListItem.svelte'
    import ArrowCollapse from 'svelte-material-icons/ArrowCollapse.svelte'
+   import { onMount } from 'svelte'
+   import { gqlHelper } from '../utils/graphQL'
 
    let sidebarCollapse = false
    let orgsCollapse = false
    let smallScreen = false
 
-   const minScreenSize = 992; //tablet standard
+   const minScreenSize = 992 //tablet standard
    const screenSize = window.matchMedia(`(max-width: ${minScreenSize}px)`)
 
    if (screenSize.matches) {
@@ -48,6 +51,20 @@
       console.log('collapsed sidebar')
       console.log(sidebarCollapse)
    }
+
+   let loading = 0, errors = undefined, organizations = []
+
+   onMount(async () => {
+      loading += 1
+      organizations = await gqlHelper.queries
+         .organizationsWithRegisters()
+         .catch(e => {
+            errors = e
+         })
+         .finally(() => {
+            loading -= 1
+         })
+   })
 </script>
 
 <div class="c-sidebar {sidebarCollapse ? 'u-collapsed' : ''}">
@@ -79,6 +96,7 @@
       {/if}
    </div>
    {#if !sidebarCollapse}
+      {#if organizations.length > 0}
       <div class="c-sidebar__orglist">
          <div on:click={toggleOrgsCollapse} class="c-sidebar__orglist--title">
             <div class="c-sidebar__orglist--title-text">Verenigingen</div>
@@ -87,8 +105,13 @@
             </div>
          </div>
 
-         <OrganisationList {orgsCollapse} />
+         <OrganisationList {orgsCollapse}>
+            {#each organizations as organization}
+               <OrganisationListItem {organization} />
+            {/each}
+         </OrganisationList>
       </div>
+      {/if}
    {/if}
 
    {#if !smallScreen}

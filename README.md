@@ -40,6 +40,10 @@ Het bevat de mogelijkheid om een vereniging aan te maken en daarbinnen meerdere 
 * Backend
   * User: docent@howest.be
   * Password: P@ssw0rd
+### Ports (k8s)
+* **Backend:** http://localhost:30201
+* **Frontend:** http://localhost:30280
+* **Adminer:** http://localhost:30299
 ## Team Verdeling
 * Karel Bousson
   * Focus op backend 
