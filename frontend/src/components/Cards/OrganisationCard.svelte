@@ -1,6 +1,7 @@
 <script lang="ts">
+  export let name;
 </script>
 
 <div class="c-organisationcard">
-  <p class="c-organisationcard__title">Scouts Beselare</p>
+  <p class="c-organisationcard__title">{name}</p>
 </div>
