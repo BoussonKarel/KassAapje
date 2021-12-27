@@ -2,6 +2,6 @@
   export let name;
 </script>
 
-  <p class="c card c-organisationcard__title">{name}</p>
-<div class="c-organisationcard">
+<div class="c-card c-organisationcard">
+  <p class="c-organisationcard__title">{name}</p>
 </div>
