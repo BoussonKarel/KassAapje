@@ -7,7 +7,7 @@
    import OrganisationListItem from './OrganisationListItem.svelte'
    import { onMount } from 'svelte'
    import { gqlHelper } from '../utils/graphQL'
-   import { Link } from 'svelte-navigator';
+   import { Link } from 'svelte-navigator'
    import { authStore } from '../utils/auth'
 
    let sidebarCollapsed = false
@@ -53,18 +53,19 @@
       console.log(sidebarCollapsed)
    }
 
-   let fetchingState = "", organizations = []
+   let fetchingState = '',
+      organizations = []
 
    const getOrganizationsEtc = async () => {
-      fetchingState = "loading";
+      fetchingState = 'loading'
 
       organizations = await gqlHelper.queries
          .organizationsWithRegisters()
          .catch(e => {
-            fetchingState = "error";
+            fetchingState = 'error'
          })
          .finally(() => {
-            fetchingState = "";
+            fetchingState = ''
          })
    }
 
@@ -82,23 +83,28 @@
       {/if}
    </div>
 
-   <Link to="#" class={`c-sidebar__button ${sidebarCollapsed ? 'c-sidebar__button--collapsed' : ''}`}>
-      <div class="c-sidebar__button-icon">
+   <Link
+      to="#"
+      class={`c-sb-button ${sidebarCollapsed ? 'c-sb-button--collapsed' : ''}`}
+   >
+      <div class="c-sb-button__icon">
          <AccountCircleOutline />
       </div>
 
-      <div class="c-sidebar__button-text">{$authStore.user.name || 'Onbekend'}</div>
+      <div class="c-sb-button__text">{$authStore.user.name || 'Onbekend'}</div>
    </Link>
 
-   <Link to="/signout" class={`c-sidebar__button ${sidebarCollapsed ? 'c-sidebar__button--collapsed' : ''}`}>
-      <div class="c-sidebar__button-icon">
+   <Link
+      to="/signout"
+      class={`c-sb-button ${sidebarCollapsed ? 'c-sb-button--collapsed' : ''}`}
+   >
+      <div class="c-sb-button__icon">
          <LogoutVariant />
       </div>
 
-      <div class="c-sidebar__button-text">Uitloggen</div>
+      <div class="c-sb-button__text">Uitloggen</div>
    </Link>
-   {#if !sidebarCollapsed}
-      {#if fetchingState === "" && organizations && organizations.length > 0}
+   {#if fetchingState === '' && organizations && organizations.length > 0}
       <div class="c-sidebar__section c-sb-section">
          <div on:click={toggleOrgsCollapse} class="c-sb-section__header">
             <div class="c-sb-section__title">Verenigingen</div>
@@ -113,18 +119,18 @@
             {/each}
          </OrganisationList>
       </div>
-      {/if}
    {/if}
 
    {#if !smallScreen}
-      <div on:click={toggleSidebarCollapse} class="c-sidebar__collapse">
-         <div class="c-sidebar__collapse--icon {sidebarCollapsed ? 'u-flip' : ''}">
+      <div
+         on:click={toggleSidebarCollapse}
+         class={`c-sb-button c-sb-button--bottom ${sidebarCollapsed ? 'c-sb-button--collapsed' : ''}`}
+      >
+         <div class="c-sb-button__icon {sidebarCollapsed ? 'u-flip' : ''}">
             <ArrowCollapseLeft />
          </div>
 
-         {#if !sidebarCollapsed}
-            <div class="c-sidebar__collapse--text u-collapsible">Inklappen</div>
-         {/if}
+         <div class="c-sb-button__text u-collapsible">Inklappen</div>
       </div>
    {/if}
 </div>

@@ -10,6 +10,10 @@
       width: $menu-width--collapsed;
    }
 
+   &--collapsed &__section {
+      display: none;
+   }
+
    &__title {
       color: map-get($colors-neutral, '100');
       display: flex;
@@ -22,46 +26,48 @@
       padding-bottom: 0.5em;
    }
 }
-.c-sidebar {
-   &__button {
-      text-decoration: none;
+.c-sb-button {
+   text-decoration: none;
 
+   display: flex;
+   align-items: center;
+   padding: 0.75em;
+
+   &__icon {
       display: flex;
       align-items: center;
-      padding: 0.75em;
 
-      &-icon {
-         display: flex;
-         align-items: center;
-
-         svg {
-            color: map-get($colors-neutral, '100');
-            width: 2em;
-            height: 2em;
-         }
-      }
-
-      &--collapsed {
-         justify-content: center;
-      }
-
-      &--collapsed &-text {
-         display: none;
-      }
-
-      &-text {
-         margin-left: 1em;
+      svg {
          color: map-get($colors-neutral, '100');
-         font-size: rem(20px);
-         font-weight: 400;
-         overflow: hidden;
-         text-overflow: ellipsis;
+         width: 2em;
+         height: 2em;
       }
+   }
 
-      &:hover {
-         background-color: map-get($colors-theme, '400');
-         cursor: pointer;
-      }
+   &--collapsed {
+      justify-content: center;
+   }
+
+   &--collapsed &__text {
+      display: none;
+   }
+
+   &__text {
+      margin-left: 1em;
+      color: map-get($colors-neutral, '100');
+      font-size: rem(20px);
+      font-weight: 400;
+      overflow: hidden;
+      text-overflow: ellipsis;
+   }
+
+   &:hover {
+      background-color: map-get($colors-theme, '400');
+      cursor: pointer;
+   }
+
+   &--bottom {
+      margin-top: auto;
    }
 }
 
@@ -173,39 +179,6 @@
          background-color: map-get($colors-theme, '400');
          border-radius: 20px 0 0 20px;
       }
-   }
-}
-
-.c-sidebar__collapse {
-   display: flex;
-   align-items: center;
-   padding-top: 0.5em;
-   padding-bottom: 0.5em;
-   margin-top: auto;
-
-   bottom: 0;
-
-   &--icon {
-      display: flex;
-      align-items: center;
-      padding-left: 1em;
-      padding-right: 1em;
-
-      svg {
-         color: map-get($colors-neutral, '100');
-         width: 2em;
-         height: 2em;
-      }
-   }
-   &--text {
-      color: map-get($colors-neutral, '100');
-      font-size: rem(20px);
-      font-weight: 400;
-   }
-
-   &:hover {
-      background-color: map-get($colors-theme, '400');
-      cursor: pointer;
    }
 }
 
