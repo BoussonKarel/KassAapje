@@ -4,7 +4,6 @@
    import Register from './components/pages/Auth/Register.svelte'
    import Login from './components/pages/Auth/Login.svelte'
    import Sidebar from './components/Sidebar.svelte'
-   import OrganisationOverview from './components/pages/Organisation/OrganisationOverview.svelte'
    import AddOrganisation from './components/pages/Organisation/AddOrganisation.svelte'
    import { onMount } from 'svelte'
    import { useNavigate } from 'svelte-navigator'
@@ -12,6 +11,7 @@
    import { getAuth } from 'firebase/auth'
    import { authStore, setAuthStore } from './utils/auth'
    import PageLoading from './components/Loading/PageLoading.svelte';
+   import OrganizationSelector from './components/pages/Organisation/OrganizationSelector.svelte';
 
    onMount(() => {
       getAuth().onAuthStateChanged(async user => {
@@ -51,7 +51,7 @@
          {:else}
             <Sidebar />
             <Route path="/">
-               <OrganisationOverview />
+               <OrganizationSelector />
             </Route>
             <Route path="/new">
                <AddOrganisation />

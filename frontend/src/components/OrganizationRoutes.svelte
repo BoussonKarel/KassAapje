@@ -3,7 +3,7 @@
 
    import { authStore, Role } from '../utils/auth'
    import OrganisationInfo from './pages/Organisation/organisationInfo.svelte'
-   import RegisterOverview from './pages/Register/RegisterOverview.svelte'
+   import RegisterSelector from './pages/Register/RegisterSelector.svelte'
    import { useParams } from 'svelte-navigator'
    import RegisterRoutes from './RegisterRoutes.svelte'
 
@@ -28,7 +28,7 @@
       <OrganisationInfo id={$params.orgId} />
    </Route>
    <Route path="/registers">
-      <RegisterOverview />
+      <RegisterSelector />
    </Route>
    <Route path="/:regId/*" let:params>
       <RegisterRoutes />
