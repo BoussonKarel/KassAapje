@@ -5,33 +5,39 @@
    import { onMount } from 'svelte'
    import { gqlHelper } from '../../../utils/graphQL'
    import Plus from 'svelte-material-icons/Plus.svelte'
+   import { writable } from 'svelte/store'
 
-   let loading = 0, errors = undefined, organizations = []
+   let fetchingState = "", organizations = undefined
 
    const addOrganisation = () => {}
 
-   onMount(async () => {
-      loading += 1
+   const getOrganizations = async () => {
+      fetchingState = "loading";
+
       organizations = await gqlHelper.queries
          .organizations()
          .catch(e => {
-            errors = e
+            fetchingState = "error";
          })
          .finally(() => {
-            loading -= 1
+            fetchingState = "";
          })
+   }
+
+   onMount(() => {
+      getOrganizations()
    })
 </script>
 
 <div class="c-page">
-   {#if loading > 0}
+   {#if fetchingState === "loading"}
       Loading
-   {:else if errors}
-      Could not fetch organizations
-   {:else if organizations.length > 0}
+   {:else if fetchingState === "error"}
+      Kon organisaties niet ophalen.
+   {:else if organizations && organizations.length > 0}
       <CardList>
          {#each organizations as organization}
-            <OrganisationCard name={organization.name} />
+            <OrganisationCard organization={organization} />
          {/each}
          <AddCard page={'organisations'} />
       </CardList>

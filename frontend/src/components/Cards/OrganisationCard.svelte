@@ -1,7 +1,11 @@
 <script lang="ts">
-  export let name;
+   import { Link } from 'svelte-navigator'
+
+   export let organization
 </script>
 
-<div class="c-card c-organisationcard">
-  <p class="c-organisationcard__title">{name}</p>
-</div>
+<Link to={`/${organization.organization_id}`}>
+  <div class="c-card c-organisationcard">
+      <p class="c-organisationcard__title">{organization.name}</p>
+   </div>
+</Link>

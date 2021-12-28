@@ -10,27 +10,33 @@
       console.log(event)
    }
 
-   let loading = 0,
-      errors = undefined,
+   let fetchingState = "",
       organization = undefined
 
-   onMount(async () => {
-      loading += 1
-      organization = await gqlHelper.queries
+   const getOrganizationInfo = async () => {
+      fetchingState = "loading";
+
+      organizations = await gqlHelper.queries
          .organization(id)
          .catch(e => {
-            errors = e
+            fetchingState = "error";
          })
          .finally(() => {
-            loading -= 1
+            fetchingState = "";
          })
+   }
+
+   onMount(async () => {
+      getOrganizationInfo()
    })
 </script>
 
 <div>
    <div class="c-page">
-      {#if loading > 0}
+      {#if fetchingState === "loading"}
          Loading
+      {:else if fetchingState === "error"}
+         Error getting organization
       {:else if organization}
          <div class="c-navigation">
             <NavigationBar title={organization.name} />
@@ -84,8 +90,6 @@
                <button class="c-button-edit"> Bewerken </button>
             </div>
          </form>
-      {:else}
-         Error?
       {/if}
    </div>
 </div>

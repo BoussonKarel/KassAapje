@@ -52,18 +52,23 @@
       console.log(sidebarCollapse)
    }
 
-   let loading = 0, errors = undefined, organizations = []
+   let fetchingState = "", organizations = []
 
-   onMount(async () => {
-      loading += 1
+   const getOrganizationsEtc = async () => {
+      fetchingState = "loading";
+
       organizations = await gqlHelper.queries
          .organizationsWithRegisters()
          .catch(e => {
-            errors = e
+            fetchingState = "error";
          })
          .finally(() => {
-            loading -= 1
+            fetchingState = "";
          })
+   }
+
+   onMount(async () => {
+      getOrganizationsEtc()
    })
 </script>
 
@@ -96,7 +101,7 @@
       {/if}
    </div>
    {#if !sidebarCollapse}
-      {#if organizations.length > 0}
+      {#if fetchingState === "" && organizations && organizations.length > 0}
       <div class="c-sidebar__orglist">
          <div on:click={toggleOrgsCollapse} class="c-sidebar__orglist--title">
             <div class="c-sidebar__orglist--title-text">Verenigingen</div>

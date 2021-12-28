@@ -2,7 +2,7 @@ import { getAuth } from 'firebase/auth'
 import { baseUrl } from '../config/api'
 
 const query = async (name: string, query: string, variables?: Object) => {
-   const res = await fetch(`${baseUrl}/v1/graphQL`, {
+   return await fetch(`${baseUrl}/v1/graphQL`, {
       method: 'POST',
       headers: {
          'Content-Type': 'application/json',
@@ -10,15 +10,14 @@ const query = async (name: string, query: string, variables?: Object) => {
       },
       body: JSON.stringify({
          query,
-         variables
-      })
+         variables,
+      }),
    })
       .then(res => res.json())
-      .catch(error => console.error({ error }))
-
-      console.log({res})
-
-      return res.data[name]
+      .then(json => {
+         if (json.errors) throw json.errors[0]
+         else return json.data[name]
+      })
 }
 
 export const gqlQueries = {
@@ -29,7 +28,7 @@ export const gqlQueries = {
         color
       }
     }`,
-    organizationsWithRegisters: `query {
+   organizationsWithRegisters: `query {
       getOrganizations {
         organization_id,
         name,
@@ -41,28 +40,19 @@ export const gqlQueries = {
         }
       }
     }`,
-    organization: `query ($id: String!) {
+   organization: `query ($id: String!) {
       getOrganizationById(id: $id) {
          name,
          color
       }
-   }`
+   }`,
 }
 
 export const gqlHelper = {
    queries: {
-      organizations: () => query(
-         'getOrganizations',
-         gqlQueries.organizations,
-      ),
-      organizationsWithRegisters: () => query(
-        'getOrganizations',
-        gqlQueries.organizationsWithRegisters
-      ),
-      organization: (id: string) => query(
-         'getOrganizationById',
-         gqlQueries.organization,
-         {id}
-      )
+      organizations: () => query('getOrganizations', gqlQueries.organizations),
+      organizationsWithRegisters: () =>
+         query('getOrganizations', gqlQueries.organizationsWithRegisters),
+      organization: (id: string) => query('getOrganizationById', gqlQueries.organization, { id }),
    },
 }
