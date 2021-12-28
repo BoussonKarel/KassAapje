@@ -13,18 +13,18 @@
    }
 </script>
 
-<div  class="c-sidebar__org">
-   <div on:click={toggleOrgCollapse} class="c-sidebar__org--title">
-      <li class="c-sidebar__org--title-text">{organization.name}</li>
-      <div class="c-sidebar__org--title-chevron {orgCollapse ? 'u-flip' : ''}">
+<div  class="c-sb-org">
+   <div on:click={toggleOrgCollapse} class="c-sb-org__header">
+      <li class="c-sb-org__title">{organization.name}</li>
+      <div class="c-sb-org__chevron">
          <ChevronUp />
       </div>
    </div>
 
-   <ul class=" c-sidebar__org--list {orgCollapse ? 'u-hidden' : ''}">
+   <ul class=" c-sb-regs">
       {#if organization.registers && organization.registers.length > 0}
          {#each organization.registers as register}
-         <li class="c-sidebar__org--item">{register.name}</li>
+         <li class="c-sb-reg">{register.name}</li>
          {/each}
       {/if}
    </ul>

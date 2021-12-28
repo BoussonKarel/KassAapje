@@ -3,7 +3,7 @@
    import { Router, Route } from 'svelte-navigator'
    import Register from './components/pages/Auth/Register.svelte'
    import Login from './components/pages/Auth/Login.svelte'
-   import Sidebar from './components/Sidebar.svelte'
+   import Sidebar from './components/sidebar/Sidebar.svelte'
    import AddOrganisation from './components/pages/Organisation/AddOrganisation.svelte'
    import { onMount } from 'svelte'
    import { useNavigate } from 'svelte-navigator'

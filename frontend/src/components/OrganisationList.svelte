@@ -1,8 +1,7 @@
 <script lang="ts">
-
-   export let orgsCollapse
+   export let collapsed
 </script>
 
-<ul class="c-sidebar__orgs--list {orgsCollapse ? 'u-hidden' : ''}">
+<ul class="c-sb-orgs {collapsed ? 'u-hidden' : ''}">
    <slot />
 </ul>

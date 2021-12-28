@@ -26,6 +26,7 @@
       padding-bottom: 0.5em;
    }
 }
+
 .c-sb-button {
    text-decoration: none;
 
@@ -80,6 +81,7 @@
    &__header {
       display: flex;
       justify-content: space-around;
+      align-items: center;
       margin-left: 0.5em;
       margin-bottom: 0;
       padding-top: 8px;
@@ -88,26 +90,30 @@
       font-size: rem(20px);
    }
 
-   &__title {
-      &:hover {
-         cursor: pointer;
+   &--expanded &__header,
+   &__header:hover {
+      cursor: pointer;
 
-         background-color: map-get($colors-theme, '400');
-         border-radius: 20px 0 0 20px;
-      }
+      background-color: map-get($colors-theme, '400');
+      border-radius: 20px 0 0 20px;
+   }
+
+   &--expanded &__chevron {
+      transform: rotate(180deg);
    }
 
    &__chevron {
       display: flex;
       align-items: center;
       justify-content: center;
+
       & svg {
          width: 1.5em;
          height: 1.5em;
       }
    }
 
-   &--list {
+   &__content {
       display: flex;
       flex-direction: column;
       list-style: none;
@@ -127,11 +133,11 @@
    }
 }
 
-.c-sidebar__org {
+.c-sb-org {
    margin-bottom: var(--global-whitespace-2);
    margin: 0;
 
-   &--title {
+   &__header {
       list-style: none;
       display: flex;
       justify-content: space-around;
@@ -142,50 +148,47 @@
       text-overflow: ellipsis;
       padding-top: 6px;
       padding-bottom: 6px;
-
-      &:hover {
-         cursor: pointer;
-
-         background-color: map-get($colors-theme, '400');
-         border-radius: 20px 0 0 20px;
-      }
-      &-text {
-         overflow: hidden;
-         text-overflow: ellipsis;
-      }
-
-      &-chevron {
-         display: flex;
-         justify-content: center;
-         align-items: center;
-         & svg {
-            color: map-get($colors-neutral, '100');
-            width: 1.5em;
-            height: 1.5em;
-         }
-      }
    }
 
-   &--item {
-      padding-top: 2px;
-      padding-bottom: 2px;
-      padding-left: 8px;
-      white-space: nowrap;
+   &__header:hover {
+      cursor: pointer;
+
+      background-color: map-get($colors-theme, '400');
+      border-radius: 20px 0 0 20px;
+   }
+
+   &__title {
       overflow: hidden;
       text-overflow: ellipsis;
+   }
 
-      &:hover {
-         cursor: pointer;
-         background-color: map-get($colors-theme, '400');
-         border-radius: 20px 0 0 20px;
+   &__chevron {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      & svg {
+         color: map-get($colors-neutral, '100');
+         width: 1.5em;
+         height: 1.5em;
       }
+   }
+}
+
+.c-sb-reg {
+   padding-top: 2px;
+   padding-bottom: 2px;
+   padding-left: 8px;
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+
+   &:hover {
+      cursor: pointer;
+      background-color: map-get($colors-theme, '400');
+      border-radius: 20px 0 0 20px;
    }
 }
 
 .u-hidden {
    display: none;
-}
-
-.u-flip {
-   transform: rotate(180deg);
 }
