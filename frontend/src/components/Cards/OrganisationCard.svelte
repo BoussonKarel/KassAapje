@@ -4,7 +4,7 @@
    export let organization
 </script>
 
-<Link to={`/${organization.organization_id}`}>
+<Link class="u-unset" to={`/${organization.organization_id}`}>
   <div class="c-card c-organisationcard">
       <p class="c-organisationcard__title">{organization.name}</p>
    </div>

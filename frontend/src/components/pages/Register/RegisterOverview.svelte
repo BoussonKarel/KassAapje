@@ -5,8 +5,10 @@
 
 <div class="c-page">
   <div class="c-navigation">
-    <NavigationBar />
+    <NavigationBar title="Registers" />
   </div>
 
-  <CardList />
+  <CardList>
+    
+  </CardList>
 </div>

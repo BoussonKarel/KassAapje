@@ -16,7 +16,7 @@
    const getOrganizationInfo = async () => {
       fetchingState = "loading";
 
-      organizations = await gqlHelper.queries
+      organization = await gqlHelper.queries
          .organization(id)
          .catch(e => {
             fetchingState = "error";
