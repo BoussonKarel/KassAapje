@@ -33,7 +33,7 @@
    <Route path="/info">
       <RegisterInfo id={$params.regId} />
    </Route>
-   {#if isUser}
+   {#if isOwner}
       <Route path="/products/*">
          <Route path="/">
             <ProductOverview />
@@ -43,8 +43,8 @@
          </Route>
       </Route>
    {:else}
-      No permission.
+   You don't have permission to work in the register catalogue.
    {/if}
 {:else}
-   No permission.
+   You don't have permission to work in this register.
 {/if}

@@ -34,5 +34,5 @@
       <RegisterRoutes />
    </Route>
 {:else}
-   No permission.
+   You don't have permission to work in this organization.
 {/if}
