@@ -5,11 +5,12 @@
    import ArrowCollapseLeft from 'svelte-material-icons/ArrowCollapseLeft.svelte'
    import OrganisationList from './OrganisationList.svelte'
    import OrganisationListItem from './OrganisationListItem.svelte'
-   import ArrowCollapse from 'svelte-material-icons/ArrowCollapse.svelte'
    import { onMount } from 'svelte'
    import { gqlHelper } from '../utils/graphQL'
+   import { Link } from 'svelte-navigator';
+   import { authStore } from '../utils/auth'
 
-   let sidebarCollapse = false
+   let sidebarCollapsed = false
    let orgsCollapse = false
    let smallScreen = false
 
@@ -17,19 +18,19 @@
    const screenSize = window.matchMedia(`(max-width: ${minScreenSize}px)`)
 
    if (screenSize.matches) {
-      sidebarCollapse = true
+      sidebarCollapsed = true
       smallScreen = true
    } else {
-      sidebarCollapse = false
+      sidebarCollapsed = false
    }
 
    window.onresize = function () {
       if (screenSize.matches) {
-         sidebarCollapse = true
+         sidebarCollapsed = true
          smallScreen = true
       } else {
          smallScreen = false
-         sidebarCollapse = false
+         sidebarCollapsed = false
       }
    }
 
@@ -46,10 +47,10 @@
    }
 
    function toggleSidebarCollapse() {
-      sidebarCollapse = !sidebarCollapse
+      sidebarCollapsed = !sidebarCollapsed
 
       console.log('collapsed sidebar')
-      console.log(sidebarCollapse)
+      console.log(sidebarCollapsed)
    }
 
    let fetchingState = "", organizations = []
@@ -72,40 +73,36 @@
    })
 </script>
 
-<div class="c-sidebar {sidebarCollapse ? 'u-collapsed' : ''}">
+<div class="c-sidebar {sidebarCollapsed ? 'c-sidebar--collapsed' : ''}">
    <div class="c-sidebar__title">
-      {#if sidebarCollapse}
+      {#if sidebarCollapsed}
          K
       {:else}
          KassAapje
       {/if}
    </div>
 
-   <div on:click={handleProfileClick} class="c-sidebar__profile">
-      <div class="c-sidebar__profile--icon">
+   <Link to="#" class={`c-sidebar__button ${sidebarCollapsed ? 'c-sidebar__button--collapsed' : ''}`}>
+      <div class="c-sidebar__button-icon">
          <AccountCircleOutline />
       </div>
 
-      {#if !sidebarCollapse}
-         <div class="c-sidebar__profile--name">Michiel</div>
-      {/if}
-   </div>
+      <div class="c-sidebar__button-text">{$authStore.user.name || 'Onbekend'}</div>
+   </Link>
 
-   <div on:click={handleLogoutClick} class="c-sidebar__logout">
-      <div class="c-sidebar__logout--icon">
+   <Link to="/signout" class={`c-sidebar__button ${sidebarCollapsed ? 'c-sidebar__button--collapsed' : ''}`}>
+      <div class="c-sidebar__button-icon">
          <LogoutVariant />
       </div>
 
-      {#if !sidebarCollapse}
-         <div class="c-sidebar__logout--text u-collapsible">Uitloggen</div>
-      {/if}
-   </div>
-   {#if !sidebarCollapse}
+      <div class="c-sidebar__button-text">Uitloggen</div>
+   </Link>
+   {#if !sidebarCollapsed}
       {#if fetchingState === "" && organizations && organizations.length > 0}
-      <div class="c-sidebar__orglist">
-         <div on:click={toggleOrgsCollapse} class="c-sidebar__orglist--title">
-            <div class="c-sidebar__orglist--title-text">Verenigingen</div>
-            <div class="c-sidebar__orglist--title-chevron {orgsCollapse ? 'u-flip' : ''}">
+      <div class="c-sidebar__section c-sb-section">
+         <div on:click={toggleOrgsCollapse} class="c-sb-section__header">
+            <div class="c-sb-section__title">Verenigingen</div>
+            <div class="c-c-sb-section__chevron {orgsCollapse ? 'u-flip' : ''}">
                <ChevronUp />
             </div>
          </div>
@@ -121,11 +118,11 @@
 
    {#if !smallScreen}
       <div on:click={toggleSidebarCollapse} class="c-sidebar__collapse">
-         <div class="c-sidebar__collapse--icon {sidebarCollapse ? 'u-flip' : ''}">
+         <div class="c-sidebar__collapse--icon {sidebarCollapsed ? 'u-flip' : ''}">
             <ArrowCollapseLeft />
          </div>
 
-         {#if !sidebarCollapse}
+         {#if !sidebarCollapsed}
             <div class="c-sidebar__collapse--text u-collapsible">Inklappen</div>
          {/if}
       </div>

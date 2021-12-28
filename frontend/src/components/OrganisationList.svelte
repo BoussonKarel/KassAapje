@@ -3,6 +3,6 @@
    export let orgsCollapse
 </script>
 
-<ul class="c-sidebar__orglist--list {orgsCollapse ? 'u-hidden' : ''}">
+<ul class="c-sidebar__orgs--list {orgsCollapse ? 'u-hidden' : ''}">
    <slot />
 </ul>

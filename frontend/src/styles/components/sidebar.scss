@@ -4,11 +4,11 @@
    flex-direction: column;
    min-width: $menu-width;
    height: 100vh;
-   min-height: 100vh;
-   max-height: 100vh;
-   margin: none;
-   padding: none;
-   // position: relative;
+
+   &--collapsed {
+      min-width: $menu-width--collapsed;
+      width: $menu-width--collapsed;
+   }
 
    &__title {
       color: map-get($colors-neutral, '100');
@@ -21,18 +21,18 @@
       padding-top: 0.5em;
       padding-bottom: 0.5em;
    }
+}
+.c-sidebar {
+   &__button {
+      text-decoration: none;
 
-   &__profile {
       display: flex;
       align-items: center;
-      padding-top: 0.5em;
-      padding-bottom: 1em;
+      padding: 0.75em;
 
-      &--icon {
+      &-icon {
          display: flex;
          align-items: center;
-         padding-left: 1em;
-         padding-right: 1em;
 
          svg {
             color: map-get($colors-neutral, '100');
@@ -41,187 +41,21 @@
          }
       }
 
-      &--name {
-         color: map-get($colors-neutral, '100');
-
-         font-size: rem(20px);
-         font-weight: 400;
-
-         white-space: nowrap;
-         overflow: hidden;
-         text-overflow: ellipsis;
+      &--collapsed {
+         justify-content: center;
       }
 
-      &:hover {
-         background-color: map-get($colors-theme, '400');
-         cursor: pointer;
+      &--collapsed &-text {
+         display: none;
       }
-   }
 
-   &__logout {
-      display: flex;
-      align-items: center;
-      padding-top: 0.5em;
-      padding-bottom: 1em;
-
-      &--icon {
-         display: flex;
-         align-items: center;
-         padding-left: 1em;
-         padding-right: 1em;
-
-         svg {
-            color: map-get($colors-neutral, '100');
-            width: 2em;
-            height: 2em;
-         }
-      }
-      &--text {
+      &-text {
+         margin-left: 1em;
          color: map-get($colors-neutral, '100');
          font-size: rem(20px);
          font-weight: 400;
-      }
-
-      &:hover {
-         background-color: map-get($colors-theme, '400');
-         cursor: pointer;
-      }
-   }
-
-   &__orglist {
-      color: map-get($colors-neutral, '100');
-
-      max-height: 100%;
-      overflow: hidden;
-
-      &--title {
-         display: flex;
-         justify-content: space-around;
-         margin-left: 0.5em;
-         margin-bottom: 0;
-         padding-top: 8px;
-         padding-bottom: 8px;
-
-         font-size: rem(20px);
-
-         &:hover {
-            cursor: pointer;
-
-            background-color: map-get($colors-theme, '400');
-            border-radius: 20px 0 0 20px;
-         }
-
-         &-chevron {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            & svg {
-               width: 1.5em;
-               height: 1.5em;
-            }
-         }
-      }
-
-      &--list {
-         display: flex;
-         flex-direction: column;
-         list-style: none;
-         font-size: rem(16px);
-         margin-top: 0;
-
-         max-height: 90%;
-
-         overflow: scroll;
-
-         &::-webkit-scrollbar {
-            display: none;
-         }
-
-         -ms-overflow-style: none;
-         scrollbar-width: none; /* Firefox */
-      }
-   }
-
-   &__org {
-      margin-bottom: var(--global-whitespace-2);
-      margin: 0;
-
-      &--title {
-         list-style: none;
-         display: flex;
-         justify-content: space-around;
-         align-items: center;
-         padding-left: 8px;
-         white-space: nowrap;
          overflow: hidden;
          text-overflow: ellipsis;
-         padding-top: 6px;
-         padding-bottom: 6px;
-
-         &:hover {
-            cursor: pointer;
-
-            background-color: map-get($colors-theme, '400');
-            border-radius: 20px 0 0 20px;
-         }
-         &-text {
-            overflow: hidden;
-            text-overflow: ellipsis;
-         }
-
-         &-chevron {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            & svg {
-               color: map-get($colors-neutral, '100');
-               width: 1.5em;
-               height: 1.5em;
-            }
-         }
-      }
-
-      &--item {
-         padding-top: 2px;
-         padding-bottom: 2px;
-         padding-left: 8px;
-         white-space: nowrap;
-         overflow: hidden;
-         text-overflow: ellipsis;
-
-         &:hover {
-            cursor: pointer;
-            background-color: map-get($colors-theme, '400');
-            border-radius: 20px 0 0 20px;
-         }
-      }
-   }
-
-   &__collapse {
-      display: flex;
-      align-items: center;
-      padding-top: 0.5em;
-      padding-bottom: 0.5em;
-      margin-top: auto;
-
-      bottom: 0;
-
-      &--icon {
-         display: flex;
-         align-items: center;
-         padding-left: 1em;
-         padding-right: 1em;
-
-         svg {
-            color: map-get($colors-neutral, '100');
-            width: 2em;
-            height: 2em;
-         }
-      }
-      &--text {
-         color: map-get($colors-neutral, '100');
-         font-size: rem(20px);
-         font-weight: 400;
       }
 
       &:hover {
@@ -231,9 +65,148 @@
    }
 }
 
-.u-collapsed {
-   min-width: $menu-width--collapsed;
-   width: $menu-width--collapsed;
+.c-sb-section {
+   color: map-get($colors-neutral, '100');
+
+   max-height: 100%;
+   overflow: hidden;
+
+   &__header {
+      display: flex;
+      justify-content: space-around;
+      margin-left: 0.5em;
+      margin-bottom: 0;
+      padding-top: 8px;
+      padding-bottom: 8px;
+
+      font-size: rem(20px);
+   }
+
+   &__title {
+      &:hover {
+         cursor: pointer;
+
+         background-color: map-get($colors-theme, '400');
+         border-radius: 20px 0 0 20px;
+      }
+   }
+
+   &__chevron {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      & svg {
+         width: 1.5em;
+         height: 1.5em;
+      }
+   }
+
+   &--list {
+      display: flex;
+      flex-direction: column;
+      list-style: none;
+      font-size: rem(16px);
+      margin-top: 0;
+
+      max-height: 90%;
+
+      overflow: scroll;
+
+      &::-webkit-scrollbar {
+         display: none;
+      }
+
+      -ms-overflow-style: none;
+      scrollbar-width: none; /* Firefox */
+   }
+}
+
+.c-sidebar__org {
+   margin-bottom: var(--global-whitespace-2);
+   margin: 0;
+
+   &--title {
+      list-style: none;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding-left: 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-top: 6px;
+      padding-bottom: 6px;
+
+      &:hover {
+         cursor: pointer;
+
+         background-color: map-get($colors-theme, '400');
+         border-radius: 20px 0 0 20px;
+      }
+      &-text {
+         overflow: hidden;
+         text-overflow: ellipsis;
+      }
+
+      &-chevron {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         & svg {
+            color: map-get($colors-neutral, '100');
+            width: 1.5em;
+            height: 1.5em;
+         }
+      }
+   }
+
+   &--item {
+      padding-top: 2px;
+      padding-bottom: 2px;
+      padding-left: 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      &:hover {
+         cursor: pointer;
+         background-color: map-get($colors-theme, '400');
+         border-radius: 20px 0 0 20px;
+      }
+   }
+}
+
+.c-sidebar__collapse {
+   display: flex;
+   align-items: center;
+   padding-top: 0.5em;
+   padding-bottom: 0.5em;
+   margin-top: auto;
+
+   bottom: 0;
+
+   &--icon {
+      display: flex;
+      align-items: center;
+      padding-left: 1em;
+      padding-right: 1em;
+
+      svg {
+         color: map-get($colors-neutral, '100');
+         width: 2em;
+         height: 2em;
+      }
+   }
+   &--text {
+      color: map-get($colors-neutral, '100');
+      font-size: rem(20px);
+      font-weight: 400;
+   }
+
+   &:hover {
+      background-color: map-get($colors-theme, '400');
+      cursor: pointer;
+   }
 }
 
 .u-hidden {
