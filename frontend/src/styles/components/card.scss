@@ -18,6 +18,10 @@ $global-card-height: 230px;
    background-color: map-get($colors-neutral, '300');
    box-shadow: $default-shadow;
 
+   &:hover {
+      opacity: 80%;
+    }
+
 }
 
 .c-organisationcard {
