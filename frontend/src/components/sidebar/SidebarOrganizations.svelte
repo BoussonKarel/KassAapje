@@ -1,8 +1,6 @@
 <script lang="ts">
    import { gqlHelper } from '../../utils/graphQL'
    import { onMount } from 'svelte'
-   import OrganisationList from '../OrganisationList.svelte'
-   import OrganisationListItem from '../OrganisationListItem.svelte'
    import ChevronDown from 'svelte-material-icons/ChevronDown.svelte'
 
    let collapsed = false
@@ -31,21 +29,24 @@
    })
 </script>
 
+
+
 <div class="c-sidebar__section c-sb-section {!collapsed ? 'c-sb-section--expanded' : ''}">
    <div on:click={toggleCollapse} class="c-sb-section__header">
-      <div class="c-sb-section__title">Verenigingen</div>
+      <div class="c-sb-section__title">KSA Kriko</div>
       <div class="c-sb-section__chevron">
          <ChevronDown />
       </div>
    </div>
 
+   <!-- Registers -->
    {#if fetchingState === '' && organizations && organizations.length > 0}
       <div class="c-sb-section__content">
-         <OrganisationList {collapsed}>
+         <!-- <SbOrganizationList {collapsed}>
             {#each organizations as organization}
-               <OrganisationListItem {organization} />
+               <SbOrganizationListItem {organization} />
             {/each}
-         </OrganisationList>
+         </SbOrganizationList> -->
       </div>
    {/if}
 </div>

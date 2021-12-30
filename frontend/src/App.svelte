@@ -3,6 +3,7 @@
    import { Router, Route } from 'svelte-navigator'
    import Register from './components/pages/Auth/Register.svelte'
    import Login from './components/pages/Auth/Login.svelte'
+   import Signout from './components/pages/Auth/Signout.svelte'
    import Sidebar from './components/sidebar/Sidebar.svelte'
    import AddOrganisation from './components/pages/Organisation/AddOrganisation.svelte'
    import { onMount } from 'svelte'
@@ -23,31 +24,19 @@
       })
    })
 
-   const signOut = async () => {
-      const navigate = useNavigate()
-      await getAuth().signOut()
-      navigate('/')
-   }
-
    $: loading = false;
 </script>
 
 <main class="c-app">
    <PageLoading loading={loading}>
       <Router>
-         {#if !$authStore}
+         {#if $authStore == null}
             <Route>
                <Login />
             </Route>
             <Route path="/register">
                <Register />
             </Route>
-            <!-- <Route path="/login">
-            {(() => {
-               const navigate = useNavigate()
-               navigate('/')
-            })()}
-         </Route> -->
          {:else}
             <Sidebar />
             <Route path="/">
@@ -57,7 +46,7 @@
                <AddOrganisation />
             </Route>
             <Route path="/signout">
-               {signOut()}
+               <Signout />
             </Route>
             <Route path="/:orgId/*" let:params>
                <OrganizationRoutes />
