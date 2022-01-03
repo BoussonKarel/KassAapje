@@ -27,6 +27,13 @@
    <Route path="/">
       <OrganisationInfo id={$params.orgId} />
    </Route>
+   {#if isOwner}
+      <Route path="/edit">
+         Edit organization
+      </Route>
+   {:else}
+      No owner perms to edit organization
+   {/if}
    <Route path="/registers">
       <RegisterSelector />
    </Route>
