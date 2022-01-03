@@ -1,13 +1,13 @@
 <script lang="ts">
    import { Route } from 'svelte-navigator'
 
-   import { authStore, Role } from '../utils/auth'
+   import { authStore, Role } from '../../utils/auth'
    import { useParams } from 'svelte-navigator'
-   import AddOrder from './pages/Order/AddOrder.svelte'
-   import OrderOverview from './pages/Order/OrderOverview.svelte'
-   import RegisterInfo from './pages/Register/RegisterInfo.svelte'
-   import ProductOverview from './pages/Product/ProductOverview.svelte'
-   import AddProduct from './pages/Product/AddProduct.svelte'
+   import AddOrder from '../pages/Order/AddOrder.svelte'
+   import OrderOverview from '../pages/Order/OrderOverview.svelte'
+   import RegisterInfo from '../pages/Register/RegisterInfo.svelte'
+   import ProductOverview from '../pages/Product/ProductOverview.svelte'
+   import AddProduct from '../pages/Product/AddProduct.svelte'
 
    const params = useParams()
 

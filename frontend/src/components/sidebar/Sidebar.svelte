@@ -4,8 +4,10 @@
    import SidebarCollapse from './SidebarCollapse.svelte'
    import { Link } from 'svelte-navigator'
    import { authStore } from '../../utils/auth'
-   import SidebarOrganizations from './SidebarOrganizations.svelte'
+   import SidebarOrganization from './SidebarOrganization.svelte'
    import Logo from '../Logo.svelte'
+   import { onMount } from 'svelte';
+   import { gqlHelper } from '../../utils/graphQL';
 
    let sidebarCollapsed = false,
       smallScreen = false
@@ -36,6 +38,26 @@
       console.log('collapsed sidebar')
       console.log(sidebarCollapsed)
    }
+
+   let fetchingState = '',
+      organizations = []
+
+   const getOrganizations = async () => {
+      fetchingState = 'loading'
+
+      organizations = await gqlHelper.queries
+         .organizationsWithRegisters()
+         .catch(e => {
+            fetchingState = 'error'
+         })
+         .finally(() => {
+            fetchingState = ''
+         })
+   }
+
+   onMount(async () => {
+      getOrganizations()
+   })
 </script>
 
 <div class="c-sidebar {sidebarCollapsed ? 'c-sidebar--collapsed' : ''}">
@@ -67,7 +89,11 @@
       <div class="c-sb-button__text">Uitloggen</div>
    </Link>
 
-   <SidebarOrganizations />
+   <div class="c-sidebar__organizations">
+      {#each organizations as organization}
+         <SidebarOrganization {organization} />
+      {/each}
+   </div>
 
    {#if !smallScreen}
       <SidebarCollapse on:collapse={toggleSidebarCollapse} {sidebarCollapsed} />

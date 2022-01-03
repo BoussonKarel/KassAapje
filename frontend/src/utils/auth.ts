@@ -30,9 +30,9 @@ const getRoles = async (claims) => {
 
    if (!perms) return [];
 
-   const permsSplit = perms.split('_')
-   const orgPerms = permsSplit[0].split(',')
-   const regPerms = permsSplit[1].split(',')
+   const permsSplit = perms.split('_') || []
+   const orgPerms = permsSplit[0].split(',') || []
+   const regPerms = permsSplit[1].split(',') || []
 
    const roles = {
       organizations: [],
