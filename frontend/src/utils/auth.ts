@@ -6,6 +6,7 @@ import { firebaseConfig } from '../config/firebaseConfig'
 
 import type { SignupEntity } from '../models/SignupEntity'
 import { restAPI } from './restAPI'
+import { navigate } from 'svelte-navigator'
 
 initializeApp(firebaseConfig)
 
@@ -73,4 +74,9 @@ export const authHelper = {
             throw error
          })
    },
+   signout: async () => {
+      await getAuth().signOut().then(() => {
+        navigate('/')
+      })
+    }
 }

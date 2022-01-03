@@ -45,7 +45,7 @@ export const gqlQueries = {
          name,
          color
       }
-   }`,
+   }`
 }
 
 export const gqlHelper = {

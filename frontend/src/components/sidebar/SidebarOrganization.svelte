@@ -7,29 +7,15 @@
 
    export let organization
 
-   let fetchingState = '',
-      registers = [{ register_id: 'test', name: 'test' }]
+   let registers;
 
    let collapsed = true
    function toggleCollapse() {
       collapsed = !collapsed
    }
 
-   // const getRegisters = async () => {
-   //    fetchingState = 'loading'
-
-   //    registers = await gqlHelper.queries
-   //       .getRegisters()
-   //       .catch(e => {
-   //          fetchingState = 'error'
-   //       })
-   //       .finally(() => {
-   //          fetchingState = ''
-   //       })
-   // }
-
    onMount(async () => {
-      // getRegisters()
+      registers = organization.registers
    })
 </script>
 
@@ -43,7 +29,7 @@
 
    <!-- Registers -->
    <ul class="c-sb-org__content">
-      {#if fetchingState === '' && registers && registers.length > 0}
+      {#if registers && registers.length > 0}
          {#each registers as register}
             <li class="c-sb-org__item">
                <Link to="/{organization.organization_id}/{register.register_id}"

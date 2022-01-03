@@ -3,7 +3,7 @@
    import LogoutVariant from 'svelte-material-icons/LogoutVariant.svelte'
    import SidebarCollapse from './SidebarCollapse.svelte'
    import { Link } from 'svelte-navigator'
-   import { authStore } from '../../utils/auth'
+   import { authHelper, authStore } from '../../utils/auth'
    import SidebarOrganization from './SidebarOrganization.svelte'
    import Logo from '../Logo.svelte'
    import { onMount } from 'svelte';
@@ -81,13 +81,13 @@
       <div class="c-sb-button__text">{$authStore.user.name || 'Onbekend'}</div>
    </Link>
 
-   <Link to="/signout" class="c-sb-button {sidebarCollapsed ? 'c-sb-button--collapsed' : ''}">
+   <a href="/" on:click={authHelper.signout} class="c-sb-button {sidebarCollapsed ? 'c-sb-button--collapsed' : ''}">
       <div class="c-sb-button__icon">
          <LogoutVariant />
       </div>
 
       <div class="c-sb-button__text">Uitloggen</div>
-   </Link>
+   </a>
 
    <div class="c-sidebar__organizations">
       {#each organizations as organization}

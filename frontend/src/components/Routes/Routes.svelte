@@ -1,15 +1,14 @@
 <script lang="ts">
    import { Route, Router } from 'svelte-navigator'
    import { onMount } from 'svelte'
-   import { getAuth } from 'firebase/auth'
+   import { getAuth, signOut } from 'firebase/auth'
    import PageLoading from '../Loading/PageLoading.svelte';
-   import { authStore, setAuthStore } from '../../utils/auth';
+   import { authHelper, authStore, setAuthStore } from '../../utils/auth';
 
    import Login from '../pages/Auth/Login.svelte'
    import Register from '../pages/Auth/Register.svelte'
 
    import OrganizationRoutes from './OrganizationRoutes.svelte'
-   import Signout from '../pages/Auth/Signout.svelte'
    import AddOrganisation from '../pages/Organisation/AddOrganisation.svelte'
    import OrganizationSelector from '../pages/Organisation/OrganizationSelector.svelte'
    import Sidebar from '../sidebar/Sidebar.svelte'
@@ -45,7 +44,7 @@
             <AddOrganisation />
          </Route>
          <Route path="/signout">
-            <Signout />
+            {() => authHelper.signout()}
          </Route>
          <Route path="/:orgId/*" let:params>
             <OrganizationRoutes />
