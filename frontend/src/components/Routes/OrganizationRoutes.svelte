@@ -1,9 +1,9 @@
 <script lang="ts">
    import { Route } from 'svelte-navigator'
 
-   import { authStore, Role } from '../utils/auth'
-   import OrganisationInfo from './pages/Organisation/organisationInfo.svelte'
-   import RegisterSelector from './pages/Register/RegisterSelector.svelte'
+   import { authStore, Role } from '../../utils/auth'
+   import OrganisationInfo from '../pages/Organisation/organisationInfo.svelte'
+   import RegisterSelector from '../pages/Register/RegisterSelector.svelte'
    import { useParams } from 'svelte-navigator'
    import RegisterRoutes from './RegisterRoutes.svelte'
 
