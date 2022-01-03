@@ -31,22 +31,23 @@
 
 
 
-<div class="c-sidebar__section c-sb-section {!collapsed ? 'c-sb-section--expanded' : ''}">
-   <div on:click={toggleCollapse} class="c-sb-section__header">
-      <div class="c-sb-section__title">KSA Kriko</div>
-      <div class="c-sb-section__chevron">
+<div class="c-sidebar__org c-sb-org {!collapsed ? 'c-sb-org--expanded' : ''}">
+   <button on:click={toggleCollapse} class="u-button-reset c-sb-org__header">
+      <div class="c-sb-org__title">KSA Kriko</div>
+      <div class="c-sb-org__chevron">
          <ChevronDown />
       </div>
-   </div>
+   </button>
 
    <!-- Registers -->
    {#if fetchingState === '' && organizations && organizations.length > 0}
-      <div class="c-sb-section__content">
-         <!-- <SbOrganizationList {collapsed}>
-            {#each organizations as organization}
-               <SbOrganizationListItem {organization} />
-            {/each}
-         </SbOrganizationList> -->
-      </div>
+      <ul class="c-sb-org__content">
+         <li class="c-sb-org__item">
+
+         </li>
+         <li class="c-sb-org__item c-sb-org__item--setting">
+
+         </li>
+      </ul>
    {/if}
 </div>

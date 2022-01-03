@@ -10,7 +10,7 @@
       width: $menu-width--collapsed;
    }
 
-   &--collapsed &__section {
+   &--collapsed &__org {
       display: none;
    }
 }
@@ -103,13 +103,9 @@
    }
 }
 
-.c-sb-section {
+.c-sb-org {
    color: map-get($colors-neutral, '100');
    overflow-y: hidden;
-
-   &--expanded {
-      // background-color: map-get($colors-theme, '400');
-   }
 
    &__header {
       font-size: rem(20px);
@@ -140,8 +136,13 @@
       }
    }
 
-   &__content {
+   &--expanded &__content {
       display: flex;
+   }
+
+   &__content {
+      display: none;
+
       flex-direction: column;
       list-style: none;
       font-size: rem(16px);
@@ -160,51 +161,51 @@
    }
 }
 
-.c-sb-orgs {
-   margin: 0;
-   padding: 0;
-   padding-left: em(24px);
-}
+// .c-sb-orgs {
+//    margin: 0;
+//    padding: 0;
+//    padding-left: em(24px);
+// }
 
-.c-sb-org {
-   // margin-bottom: var(--global-whitespace-2);
-   // margin: 0;
+// .c-sb-org {
+//    // margin-bottom: var(--global-whitespace-2);
+//    // margin: 0;
 
-   &__header {
-      list-style: none;
+//    &__header {
+//       list-style: none;
 
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+//       display: flex;
+//       justify-content: space-between;
+//       align-items: center;
 
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      padding: em(8px);
+//       white-space: nowrap;
+//       overflow: hidden;
+//       text-overflow: ellipsis;
+//       padding: em(8px);
 
-      border-radius: 20px 0 0 20px;
-      &:hover {
-         cursor: pointer;
+//       border-radius: 20px 0 0 20px;
+//       &:hover {
+//          cursor: pointer;
 
-         background-color: map-get($colors-theme, '400');
-      }
-   }
+//          background-color: map-get($colors-theme, '400');
+//       }
+//    }
 
-   &__title {
-      overflow: hidden;
-      text-overflow: ellipsis;
-   }
+//    &__title {
+//       overflow: hidden;
+//       text-overflow: ellipsis;
+//    }
 
-   &__chevron {
-      display: flex;
+//    &__chevron {
+//       display: flex;
 
-      & svg {
-         color: map-get($colors-neutral, '100');
-         width: 1.5em;
-         height: 1.5em;
-      }
-   }
-}
+//       & svg {
+//          color: map-get($colors-neutral, '100');
+//          width: 1.5em;
+//          height: 1.5em;
+//       }
+//    }
+// }
 
 .c-sb-regs {
    padding-left: em(24px);
