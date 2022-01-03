@@ -28,6 +28,8 @@ export enum Role {
 const getRoles = async (claims) => {
    const perms = claims.perms as string;
 
+   if (!perms) return [];
+
    const permsSplit = perms.split('_')
    const orgPerms = permsSplit[0].split(',')
    const regPerms = permsSplit[1].split(',')
