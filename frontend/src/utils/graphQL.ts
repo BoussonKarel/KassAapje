@@ -25,27 +25,33 @@ export const gqlQueries = {
       getOrganizations {
         organization_id,
         name,
-        color
       }
     }`,
    organizationsWithRegisters: `query {
       getOrganizations {
         organization_id,
         name,
-        color,
         registers {
           register_id,
           name,
-          color
         }
       }
     }`,
    organization: `query ($id: String!) {
       getOrganizationById(id: $id) {
          name,
-         color
       }
-   }`
+   }`,
+   userOrganizationsWithRegisters: `query {
+      getUserOrganizations {
+        organization_id,
+        name,
+        registers {
+          register_id,
+          name,
+        }
+      }
+    }`,
 }
 
 export const gqlHelper = {
