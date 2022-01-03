@@ -27,6 +27,12 @@ export const gqlQueries = {
         name,
       }
     }`,
+   userOrganizations: `query {
+      getUserOrganizations {
+        organization_id,
+        name,
+      }
+    }`,
    organizationsWithRegisters: `query {
       getOrganizations {
         organization_id,
@@ -57,8 +63,11 @@ export const gqlQueries = {
 export const gqlHelper = {
    queries: {
       organizations: () => query('getOrganizations', gqlQueries.organizations),
+      userOrganizations: () => query('getUserOrganizations', gqlQueries.userOrganizations),
       organizationsWithRegisters: () =>
          query('getOrganizations', gqlQueries.organizationsWithRegisters),
+      userOrganizationsWithRegisters: () =>
+         query('getUserOrganizations', gqlQueries.userOrganizationsWithRegisters),
       organization: (id: string) => query('getOrganizationById', gqlQueries.organization, { id }),
    },
 }

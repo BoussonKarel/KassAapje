@@ -46,7 +46,7 @@
       fetchingState = 'loading'
 
       organizations = await gqlHelper.queries
-         .organizationsWithRegisters()
+         .userOrganizationsWithRegisters()
          .catch(e => {
             fetchingState = 'error'
          })
