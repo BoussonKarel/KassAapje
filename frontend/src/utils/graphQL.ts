@@ -25,34 +25,49 @@ export const gqlQueries = {
       getOrganizations {
         organization_id,
         name,
-        color
+      }
+    }`,
+   userOrganizations: `query {
+      getUserOrganizations {
+        organization_id,
+        name,
       }
     }`,
    organizationsWithRegisters: `query {
       getOrganizations {
         organization_id,
         name,
-        color,
         registers {
           register_id,
           name,
-          color
         }
       }
     }`,
    organization: `query ($id: String!) {
       getOrganizationById(id: $id) {
          name,
-         color
       }
    }`,
+   userOrganizationsWithRegisters: `query {
+      getUserOrganizations {
+        organization_id,
+        name,
+        registers {
+          register_id,
+          name,
+        }
+      }
+    }`,
 }
 
 export const gqlHelper = {
    queries: {
       organizations: () => query('getOrganizations', gqlQueries.organizations),
+      userOrganizations: () => query('getUserOrganizations', gqlQueries.userOrganizations),
       organizationsWithRegisters: () =>
          query('getOrganizations', gqlQueries.organizationsWithRegisters),
+      userOrganizationsWithRegisters: () =>
+         query('getUserOrganizations', gqlQueries.userOrganizationsWithRegisters),
       organization: (id: string) => query('getOrganizationById', gqlQueries.organization, { id }),
    },
 }
