@@ -1,17 +1,23 @@
 .u-input-street {
 display: grid;
 width: inherit;
-grid-template-columns: 80% 20%;
+grid-template-columns: 70% 15% 15%;
 
 
-    &-1 {
+&-1 {
         display: flex;
         flex-direction: column;
-        max-width: 95%;
+        margin-right: var( --global-baseline);
        
 
 }
 &-2 {
+    display: flex;
+    flex-direction: column;
+    margin-right: var( --global-baseline);
+
+}
+&-3 {
     display: flex;
     flex-direction: column;
 

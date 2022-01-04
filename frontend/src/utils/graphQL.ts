@@ -49,6 +49,7 @@ export const gqlQueries = {
          website,
          email,
          zip,
+         box,
          country,
          street,
          street_number,
@@ -68,6 +69,15 @@ export const gqlQueries = {
     }`,
 }
 
+export const gqlMutations = {
+   addOrganization: `mutation ($organization: OrganizationInput!) {
+      addOrganization(organization: $organization) {
+         organization_id,
+         name
+      }
+   }`
+}
+
 export const gqlHelper = {
    queries: {
       organizations: () => query('getOrganizations', gqlQueries.organizations),
@@ -78,4 +88,7 @@ export const gqlHelper = {
          query('getUserOrganizations', gqlQueries.userOrganizationsWithRegisters),
       organization: (id: string) => query('getOrganizationById', gqlQueries.organization, { id }),
    },
+   mutations: {
+      addOrganization: (organization) => query('addOrganization', gqlMutations.addOrganization, { organization })
+   }
 }

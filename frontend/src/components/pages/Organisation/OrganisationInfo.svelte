@@ -3,7 +3,7 @@
    import { onMount } from 'svelte'
    import { gqlHelper } from '../../../utils/graphQL'
    import Login from '../Auth/Login.svelte'
- export let id
+   export let id
 
    async function handleSubmit(event) {
       console.log('submitted')
@@ -62,8 +62,15 @@
                <p class="c-form-edit-label">Straat:</p>
                <div class="c-form-edit-field">
                   <p class="c-form-edit-field-output">
-                     {organization.street}
-                     {organization.street_number}
+                     {#if organization.box}
+                        {`${organization.street}
+                     ${organization.street_number}${organization.box}
+                     `}
+                     {:else}
+                        {`${organization.street}
+                     ${organization.street_number}
+                     `}
+                     {/if}
                   </p>
                </div>
 
