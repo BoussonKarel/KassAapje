@@ -1,9 +1,8 @@
 <script lang="ts">
    import { Route, Router } from 'svelte-navigator'
    import { onMount } from 'svelte'
-   import { getAuth, signOut } from 'firebase/auth'
-   import PageLoading from '../Loading/PageLoading.svelte';
-   import { authHelper, authStore, setAuthStore } from '../../utils/auth';
+   import { getAuth } from 'firebase/auth'
+   import { authHelper, authStore, setAuthStore } from '../../utils/auth'
 
    import Login from '../pages/Auth/Login.svelte'
    import Register from '../pages/Auth/Register.svelte'
@@ -22,33 +21,29 @@
          }
       })
    })
-
-   $: loading = false
 </script>
 
-<PageLoading {loading}>
-   <Router>
-      {#if $authStore == null}
-         <Route>
-            <Login />
-         </Route>
-         <Route path="/register">
-            <Register />
-         </Route>
-      {:else}
-         <Sidebar />
-         <Route path="/">
-            <OrganizationSelector />
-         </Route>
-         <Route path="/new">
-            <AddOrganisation />
-         </Route>
-         <Route path="/signout">
-            {() => authHelper.signout()}
-         </Route>
-         <Route path="/:orgId/*" let:params>
-            <OrganizationRoutes />
-         </Route>
-      {/if}
-   </Router>
-</PageLoading>
+<Router>
+   {#if $authStore == null}
+      <Route>
+         <Login />
+      </Route>
+      <Route path="/register">
+         <Register />
+      </Route>
+   {:else}
+      <Sidebar />
+      <Route path="/">
+         <OrganizationSelector />
+      </Route>
+      <Route path="/new">
+         <AddOrganisation />
+      </Route>
+      <Route path="/signout">
+         {() => authHelper.signout()}
+      </Route>
+      <Route path="/:orgId/*" let:params>
+         <OrganizationRoutes />
+      </Route>
+   {/if}
+</Router>

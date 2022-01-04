@@ -10,6 +10,22 @@ $global-card-height: 230px;
    margin: 2em;
 }
 
+.c-card-button {
+   background: transparent;
+   border: none;
+   padding: 0;
+}
+
+.c-card-link {
+   text-decoration: none;
+
+   &:hover, &:focus, &:active {
+      outline: none;
+      color: inherit;
+      text-decoration: none;
+   }
+}
+
 .c-card {
    width: 100%;
    height: $global-card-height;
@@ -18,17 +34,64 @@ $global-card-height: 230px;
    background-color: map-get($colors-neutral, '300');
    box-shadow: $default-shadow;
 
+   &-link:focus &,
    &:hover {
       opacity: 80%;
-    }
-
+      cursor: pointer;
+   }
 }
+
+.c-skeletoncard {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+   font-size: rem(28px);
+   font-weight: 500;
+
+   // background: linear-gradient(
+   //       -45deg,
+   //       map-get($colors-neutral, '500') 40%,
+   //       map-get($colors-neutral, '400') 50%,
+   //       map-get($colors-neutral, '500') 60%,
+   // );
+
+   // background-size: 400% 400%;
+
+   &__title {
+      background-color: map-get($colors-neutral, "600");
+      animation: opacityfade 2s infinite;
+
+      border-radius: 4px;
+
+      margin: 0;
+      width: 12ch;
+      max-width: 100%;
+      overflow: hidden;
+      text-align: center;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+   }
+
+   cursor: default !important;
+}
+
+@keyframes opacityfade {
+   0% {
+      opacity: .6;
+   }
+   60% {
+      opacity: 1;
+   }
+   100% {
+      opacity: .6;
+   }
+ }
 
 .c-organisationcard {
    display: flex;
    justify-content: center;
    align-items: center;
-   text-align: center;
 
    font-size: rem(28px);
    font-weight: 500;
@@ -36,11 +99,12 @@ $global-card-height: 230px;
    background-color: map-get($colors-theme, '200');
    color: #e97b00;
 
-   &__title {
-      margin-left: 0.5rem;
-      margin-right: 0.5rem;
+   padding: 1rem 0.5rem;
 
+   &__title {
+      margin: 0;
       overflow: hidden;
+      text-align: center;
       text-overflow: ellipsis;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -178,7 +242,7 @@ $global-card-height: 230px;
 
    &:hover {
       background-color: map-get($colors-neutral, '100');
-      cursor: pointer;
+
       & .c-addcard__icon {
          svg {
             width: 4.5em;

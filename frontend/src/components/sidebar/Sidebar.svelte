@@ -8,6 +8,7 @@
    import Logo from '../Logo.svelte'
    import { onMount } from 'svelte';
    import { gqlHelper } from '../../utils/graphQL';
+   import Loading from '../Loading/Loading.svelte';
 
    let sidebarCollapsed = false,
       smallScreen = false
@@ -91,9 +92,9 @@
 
    <div class="c-sidebar__organizations">
       {#if fetchingState == '' && organizations && organizations.length > 0}
-      {#each organizations as organization}
-         <SidebarOrganization {organization} />
-      {/each}
+         {#each organizations as organization}
+            <SidebarOrganization {organization} />
+         {/each}
       {/if}
    </div>
 

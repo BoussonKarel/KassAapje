@@ -42,8 +42,13 @@
 }
 
 .c-sb-button {
+   // reset button & link stuff
+   color: inherit;
    text-decoration: none;
-
+   background: transparent;
+   border: none;
+   padding: 0;
+   
    display: flex;
    align-items: center;
    padding: 0.75em;
@@ -81,7 +86,9 @@
       text-overflow: ellipsis;
    }
 
-   &:hover {
+   &:hover,
+   &:focus {
+      outline: none;
       background-color: map-get($colors-theme, '400');
       cursor: pointer;
    }
@@ -124,7 +131,9 @@
       align-items: center;
    }
 
-   &__header:hover {
+   &__header:hover,
+   &__header:focus {
+      outline: none;
       cursor: pointer;
       background-color: map-get($colors-theme, '400');
       // border-radius: 20px 0 0 20px;
@@ -165,37 +174,40 @@
    }
 
    &__item {
-      color: map-get($colors-neutral, '100');
-      font-size: rem(16px);
-      font-weight: 300;
-
-      padding-top: 2px;
-      padding-bottom: 2px;
-      padding-left: 16px;
-
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-
-      &--noreg {
-         font-weight: 400;
+      a, a:visited, a:focus {
+         outline: none;
+         text-decoration: none;
       }
 
-      a,
-      a:active,
-      a:visited {
-         text-decoration: none;
-         color: inherit;
-
+      a {
          display: flex;
          gap: 8px;
          align-items: center;
+
+   
+         color: map-get($colors-neutral, '100');
+         font-size: rem(16px);
+         font-weight: 300;
+   
+         padding-top: 2px;
+         padding-bottom: 2px;
+         padding-left: 16px;
+   
+         white-space: nowrap;
+         overflow: hidden;
+         text-overflow: ellipsis;
+      }
+
+      &--noreg a {
+         font-weight: 400;
       }
    }
 
-   &__item:hover {
+   &__item a:hover,
+   &__item a:focus {
       cursor: pointer;
       background-color: map-get($colors-theme, '400');
+
       border-radius: 20px 0 0 20px;
    }
 }
