@@ -6,6 +6,8 @@
    import { gqlHelper } from '../../../utils/graphQL'
    import Plus from 'svelte-material-icons/Plus.svelte'
    import { writable } from 'svelte/store'
+   import SectionLoading from '../../Loading/SectionLoading.svelte'
+   import SkeletonCard from '../../Cards/SkeletonCard.svelte';
 
    let fetchingState = "", organizations = undefined
 
@@ -31,7 +33,11 @@
 
 <div class="c-page">
    {#if fetchingState === "loading"}
-      Loading
+      <!-- <SectionLoading /> -->
+
+      <CardList>
+         <SkeletonCard />
+      </CardList>
    {:else if fetchingState === "error"}
       Kon organisaties niet ophalen.
    {:else if organizations && organizations.length > 0}

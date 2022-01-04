@@ -1,5 +1,5 @@
-.c-loading {
-  position: fixed;
+.c-loading-section {
+  position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
@@ -7,7 +7,9 @@
   z-index: 10;
       
   background-color: map-get($colors-neutral, "shadow");
+}
 
+.c-loading {
   display: flex;
   justify-content: center;
   align-items: center;

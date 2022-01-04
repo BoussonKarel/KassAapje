@@ -8,7 +8,7 @@
    const dispatch = createEventDispatcher()
 </script>
 
-<div
+<button
    on:click={() => dispatch('collapse')}
    class="c-sb-button c-sb-button--bottom {sidebarCollapsed ? 'c-sb-button--collapsed' : ''}"
 >
@@ -17,4 +17,4 @@
    </div>
 
    <div class="c-sb-button__text u-collapsible">Inklappen</div>
-</div>
+</button>

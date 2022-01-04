@@ -1,9 +1,7 @@
 <script lang="ts">
   import Loading from "./Loading.svelte";
-  export let loading = false;
 </script>
 
-{#if loading}
+<div class="c-loading-section">
   <Loading size={2} />
-{/if}
-<slot />
+</div>
