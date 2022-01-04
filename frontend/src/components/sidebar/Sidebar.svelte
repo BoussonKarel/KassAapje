@@ -90,9 +90,11 @@
    </a>
 
    <div class="c-sidebar__organizations">
+      {#if fetchingState == '' && organizations && organizations.length > 0}
       {#each organizations as organization}
          <SidebarOrganization {organization} />
       {/each}
+      {/if}
    </div>
 
    {#if !smallScreen}
