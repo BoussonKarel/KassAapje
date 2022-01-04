@@ -4,6 +4,7 @@
    import { navigate } from 'svelte-navigator';
 
    export let title
+   export let settings
 
 </script>
 
@@ -17,7 +18,10 @@
   <h1 class="c-navigation-title">
     {title}
   </h1>
+  {#if settings}
   <div class="c-navigation-settings">
     <Settings />
+
   </div>
+  {/if}
 </div>
