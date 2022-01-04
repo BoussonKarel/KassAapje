@@ -70,6 +70,7 @@ export class RegisterResolver {
             where: {
               organization: { organization_id: organization_id },
             },
+            relations: ['organization']
           })
         })
     } catch (error: any) {

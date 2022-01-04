@@ -58,6 +58,17 @@ export const gqlQueries = {
         }
       }
     }`,
+    registers: `query ($organization_id: String!) {
+      getRegistersByOrganization(organization_id: $organization_id) {
+        register_id,
+        name,
+        description,
+        organization {
+           organization_id,
+           name
+        }
+      }
+    }`,
 }
 
 export const gqlHelper = {
@@ -69,5 +80,6 @@ export const gqlHelper = {
       userOrganizationsWithRegisters: () =>
          query('getUserOrganizations', gqlQueries.userOrganizationsWithRegisters),
       organization: (id: string) => query('getOrganizationById', gqlQueries.organization, { id }),
+      registers: (organization_id: string) => query('getRegistersByOrganization', gqlQueries.registers, {organization_id})
    },
 }

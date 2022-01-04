@@ -86,7 +86,6 @@ export class OrganizationResolver {
         throw new Error('Could not fetch organizations for user.')
       });
 
-      console.log({data})
       return data;
     }
     catch (error: any) {

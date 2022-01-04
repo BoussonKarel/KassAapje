@@ -25,6 +25,9 @@
 {#if isUser}
    <!-- Check permission in organization -->
    <Route path="/">
+      <RegisterSelector organization_id={$params.orgId} />
+   </Route>
+   <Route path="/info">
       <OrganisationInfo id={$params.orgId} />
    </Route>
    {#if isOwner}
@@ -34,9 +37,6 @@
    {:else}
       No owner perms to edit organization
    {/if}
-   <Route path="/registers">
-      <RegisterSelector />
-   </Route>
    <Route path="/:regId/*" let:params>
       <RegisterRoutes />
    </Route>

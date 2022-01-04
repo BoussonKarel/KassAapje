@@ -29,8 +29,11 @@ html {
 
 .c-page {
   width: 100%;
-  display: block;
-  padding-left: 1em;
+  
+  display: flex;
+  flex-direction: column;
+
+  padding: 1em;
   max-height: auto;
   overflow-y: scroll;
 
