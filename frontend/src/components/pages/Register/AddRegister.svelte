@@ -1,7 +1,6 @@
 <script lang="ts">
    import NavigationBar from '../../NavigationBar.svelte'
 
-   import ChromaPicker from 'svelte-chroma-picker'
    import { prevent_default } from 'svelte/internal'
 
    let color = '#fff'
@@ -16,7 +15,7 @@
 
 <div class="c-page">
    <div class="c-navigation">
-      <NavigationBar />
+      <NavigationBar title={"Kassa toevoegen"} settings={false} />
    </div>
 
    <form class="c-form" name="AddOrganisation" on:submit|preventDefault={handleSubmit}>
@@ -33,9 +32,7 @@
 
          <div>
             <label class="c-form-label" for="Color"> Kleur:</label>
-
-            <ChromaPicker bind:color />
-            <div>Current color bar</div>
+            <div>Color picker placeholder</div>
          </div>
       </div>
       <div class="c-form-altinputs">
