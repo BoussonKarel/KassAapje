@@ -2,7 +2,7 @@
    import NavigationBar from '../../NavigationBar.svelte'
    import { onMount } from 'svelte'
    import { gqlHelper } from '../../../utils/graphQL'
-
+   import Login from '../Auth/Login.svelte'
    export let id
 
    async function handleSubmit(event) {
@@ -10,20 +10,21 @@
       console.log(event)
    }
 
-   let fetchingState = "",
+   let fetchingState = '',
       organization = undefined
 
    const getOrganizationInfo = async () => {
-      fetchingState = "loading";
+      fetchingState = 'loading'
 
       organization = await gqlHelper.queries
          .organization(id)
          .catch(e => {
-            fetchingState = "error";
+            fetchingState = 'error'
          })
          .finally(() => {
-            fetchingState = "";
+            fetchingState = ''
          })
+      console.log(organization)
    }
 
    onMount(async () => {
@@ -33,60 +34,62 @@
 
 <div>
    <div class="c-page">
-      {#if fetchingState === "loading"}
+      {#if fetchingState === 'loading'}
          Loading
-      {:else if fetchingState === "error"}
+      {:else if fetchingState === 'error'}
          Error getting organization
       {:else if organization}
          <div class="c-navigation">
-            <NavigationBar title={organization.name} />
+            <NavigationBar title={organization.name} settings={true} />
          </div>
          <form class="c-form" name="AddOrganisation" on:submit|preventDefault={handleSubmit}>
             <div class="c-form-edit">
                <p class="c-form-edit-label">Naam:</p>
                <div class="c-form-edit-field">
-                  <p class="c-form-edit-field-output">Scouts Beselare</p>
+                  <p class="c-form-edit-field-output">{organization.name}</p>
                </div>
 
                <p class="c-form-edit-label">Website:</p>
                <div class="c-form-edit-field">
-                  <p class="c-form-edit-field-output">www.scoutsbeselare.be</p>
+                  <p class="c-form-edit-field-output">{organization.website}</p>
                </div>
 
                <p class="c-form-edit-label">Email:</p>
                <div class="c-form-edit-field">
-                  <p class="c-form-edit-field-output">scoutsbeselare@gmail.com</p>
+                  <p class="c-form-edit-field-output">{organization.email}</p>
                </div>
 
                <p class="c-form-edit-label">Straat:</p>
                <div class="c-form-edit-field">
-                  <p class="c-form-edit-field-output">Oude Kortrijkstraat 46</p>
+                  <p class="c-form-edit-field-output">
+                     {#if organization.box}
+                        {`${organization.street}
+                     ${organization.street_number}${organization.box}
+                     `}
+                     {:else}
+                        {`${organization.street}
+                     ${organization.street_number}
+                     `}
+                     {/if}
+                  </p>
                </div>
 
                <p class="c-form-edit-label">Stad:</p>
                <div class="c-form-edit-field">
-                  <p class="c-form-edit-field-output">Beselare</p>
+                  <p class="c-form-edit-field-output">{organization.city}</p>
                </div>
 
                <p class="c-form-edit-label">Postcode:</p>
                <div class="c-form-edit-field">
-                  <p class="c-form-edit-field-output">8980</p>
+                  <p class="c-form-edit-field-output">{organization.zip}</p>
                </div>
 
                <p class="c-form-edit-label">Land:</p>
                <div class="c-form-edit-field">
-                  <p class="c-form-edit-field-output">Belgïe</p>
+                  <p class="c-form-edit-field-output">{organization.country}</p>
                </div>
             </div>
             <div class="c-form-altinputs">
-               <div>image processing tool placeholder</div>
-
-               <div>
-                  <label class="c-form-label" for="Color"> Kleur:</label>
-
-                  <div>Current color bar placeholder</div>
-               </div>
-
                <button class="c-button-edit"> Bewerken </button>
             </div>
          </form>

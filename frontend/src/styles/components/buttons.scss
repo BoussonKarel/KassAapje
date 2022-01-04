@@ -1,5 +1,5 @@
 .c-button-save {
-  background-color: map-get($colors-theme, 'base');
+  background-color: map-get($colors-theme, '500');
   color: map-get($colors-neutral, '100');
   font-size: rem(28px);
   font-weight: 500;
@@ -17,9 +17,15 @@
   }
 }
 
-.c-button-addcard {
+.u-button-disabled {
+  background-color: map-get($colors-neutral, '500');
+}
+
+.c-button-addorg {
 
   display: flex;
+  justify-content: center;
+  align-items: center;
   width: 6em;
   height: 6em;
 
@@ -32,10 +38,21 @@
     background-color: map-get($colors-neutral, '200');
     cursor: pointer;
   }
+
+  &__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & svg {
+      color: map-get($colors-theme, '500');
+      height: 3em;
+      width: 3em;
+    }
+  }
 }
 
 .c-button-edit {
-  background-color: map-get($colors-neutral, '600');
+  background-color: map-get($colors-theme, '500');
   color: map-get($colors-neutral, '100');
   font-size: rem(28px);
   font-weight: 500;
