@@ -46,6 +46,14 @@ export const gqlQueries = {
    organization: `query ($id: String!) {
       getOrganizationById(id: $id) {
          name,
+         website,
+         email,
+         zip,
+         country,
+         street,
+         street_number,
+         city,
+      
       }
    }`,
    userOrganizationsWithRegisters: `query {

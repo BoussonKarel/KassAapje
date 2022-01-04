@@ -2,10 +2,8 @@
    import NavigationBar from '../../NavigationBar.svelte'
    import { onMount } from 'svelte'
    import { gqlHelper } from '../../../utils/graphQL'
-   import Logo from 'src/components/Logo.svelte'
    import Login from '../Auth/Login.svelte'
-
-   export let id
+ export let id
 
    async function handleSubmit(event) {
       console.log('submitted')
@@ -26,7 +24,6 @@
          .finally(() => {
             fetchingState = ''
          })
-
       console.log(organization)
    }
 
