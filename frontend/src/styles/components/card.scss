@@ -49,30 +49,42 @@ $global-card-height: 230px;
    font-size: rem(28px);
    font-weight: 500;
 
-   background: linear-gradient(
-         -45deg,
-         map-get($colors-neutral, '500') 40%,
-         map-get($colors-neutral, '400') 50%,
-         map-get($colors-neutral, '500') 60%,
-   );
+   // background: linear-gradient(
+   //       -45deg,
+   //       map-get($colors-neutral, '500') 40%,
+   //       map-get($colors-neutral, '400') 50%,
+   //       map-get($colors-neutral, '500') 60%,
+   // );
 
-   background-size: 400% 400%;
+   // background-size: 400% 400%;
 
-   animation: backgroundhue 3s infinite;
+   &__title {
+      background-color: map-get($colors-neutral, "600");
+      animation: opacityfade 2s infinite;
+
+      border-radius: 4px;
+
+      margin: 0;
+      width: 12ch;
+      max-width: 100%;
+      overflow: hidden;
+      text-align: center;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+   }
+
+   cursor: default !important;
 }
 
-@keyframes backgroundhue {
+@keyframes opacityfade {
    0% {
-      background-position: 120% 50%;
+      opacity: .6;
    }
-   10% {
-     background-position: 120% 50%;
-   }
-   90% {
-      background-position: -20% 50%;
+   60% {
+      opacity: 1;
    }
    100% {
-      background-position: -20% 50%;
+      opacity: .6;
    }
  }
 

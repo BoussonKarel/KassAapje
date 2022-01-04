@@ -33,7 +33,7 @@
 
 <div class="c-page">
    {#if fetchingState === "loading"}
-      <!-- <SectionLoading /> -->
+      <SectionLoading />
 
       <CardList>
          <SkeletonCard />

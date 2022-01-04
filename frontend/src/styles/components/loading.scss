@@ -5,6 +5,10 @@
   bottom: 0;
   right: 0;
   z-index: 10;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
       
   background-color: map-get($colors-neutral, "shadow");
 }
