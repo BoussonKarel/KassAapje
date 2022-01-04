@@ -1,20 +1,29 @@
 <script lang="ts">
-    import Plus from 'svelte-material-icons/Plus.svelte'
+   import Plus from 'svelte-material-icons/Plus.svelte'
+   import { Link } from 'svelte-navigator'
 
-    export let page;
+   export let page
 
-    const handleAddCard = () => {
-        if(page == 'organisations'){
-            console.log('clicked organisations')
-        }else{
-            console.log('clicked registers')
-        }
-        
-    }
+   const handleAddCard = () => {
+      if (page == 'organisations') {
+         console.log('clicked organisations')
+      } else if (page == 'registers') {
+         console.log('clicked registers')
+      }
+   }
 </script>
 
-<div on:click={handleAddCard} class="c-card c-addcard">
-    <div class="c-addcard__icon">
-        <Plus />
-    </div>
-</div>
+{#if page == 'organisations'}
+   <Link to="/new" class="c-card c-addcard">
+      <div class="c-addcard__icon">
+         <Plus />
+      </div>
+   </Link>
+{/if}
+{#if page == 'registers'}
+   <Link to="/new" class="c-card c-addcard">
+      <div class="c-addcard__icon">
+         <Plus />
+      </div>
+   </Link>
+{/if}
