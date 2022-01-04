@@ -80,7 +80,7 @@
 }
 
 .c-button-edit {
-  background-color: map-get($colors-neutral, '600');
+  background-color: map-get($colors-theme, '500');
   color: map-get($colors-neutral, '100');
   font-size: rem(28px);
   font-weight: 500;
