@@ -1,19 +1,9 @@
 <script lang="ts">
   import NavigationBar from '../../NavigationBar.svelte'
 
-  let color = '#fff'
-
-  $: {
-    console.log(`change detected: ${color}`)
-  }
 
   async function handleSubmit(event) {
     console.log('submitted')
-    console.log(event)
-  }
-
-  function changeColor(event) {
-    console.log('fix color change')
     console.log(event)
   }
 </script>
@@ -50,17 +40,7 @@
       <input class="c-form-textinput" type="text" name="Country" placeholder="Land" />
     </div>
     <div class="c-form-altinputs">
-      <div>image processing tool placeholder</div>
-
-      <div>
-        <label class="c-form-label" for="Color"> Kleur:</label>
-
-        <div class="c-colorpicker">
-          <div class="c-colorpicker-bar" />
-        </div>
-      </div>
-
-      <button class="c-button-save"> Opslaan </button>
+      <button class="c-button-save u-button-disabled"> Opslaan </button>
     </div>
   </form>
 </div>

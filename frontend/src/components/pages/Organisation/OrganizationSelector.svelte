@@ -6,10 +6,10 @@
    import { gqlHelper } from '../../../utils/graphQL'
    import Plus from 'svelte-material-icons/Plus.svelte'
    import { writable } from 'svelte/store'
+   import { Link } from 'svelte-navigator'
 
    let fetchingState = "", organizations = undefined
 
-   const addOrganisation = () => {}
 
    const getOrganizations = async () => {
       fetchingState = "loading";
@@ -45,11 +45,13 @@
       <div class="o-container-center">
          <h2>Geen verenigingen gevonden...</h2>
 
-         <div on:click={addOrganisation} class="c-button-addcard">
-            <div class="c-addcard-icon">
-               <Plus />
-            </div>
-         </div>
+         <Link to='/new' class="c-button-addorg">
+               <div class="c-button-addorg__icon">
+                  <Plus />
+               </div>
+         </Link>
+
+         
       </div>
    {/if}
 </div>

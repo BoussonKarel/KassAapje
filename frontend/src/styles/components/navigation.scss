@@ -24,12 +24,12 @@
     
 
     &-title {
-        color: map-get($colors-theme, 'base' );
+        color: map-get($colors-theme, '500' );
         min-width: fit-content;
     }
 
     &-settings {
-        color: map-get($colors-theme, 'base' );
+        color: map-get($colors-theme, '500' );
         
 
         & svg {
