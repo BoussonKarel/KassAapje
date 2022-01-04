@@ -1,11 +1,10 @@
 <script lang="ts">
    import ArrowLeftThick from 'svelte-material-icons/ArrowLeftThick.svelte'
    import Settings from 'svelte-material-icons/Settings.svelte'
-   import { navigate } from 'svelte-navigator';
+   import { navigate } from 'svelte-navigator'
 
    export let title
    export let settings
-
 </script>
 
 <div class="c-navigation-bar">
@@ -15,13 +14,12 @@
       </button>
    </div>
 
-  <h1 class="c-navigation-title">
-    {title}
-  </h1>
-  {#if settings}
-  <div class="c-navigation-settings">
-    <Settings />
-
-  </div>
-  {/if}
+   <h1 class="c-navigation-title">
+      {title}
+   </h1>
+   {#if settings}
+      <div class="c-navigation-settings">
+         <Settings />
+      </div>
+   {/if}
 </div>
