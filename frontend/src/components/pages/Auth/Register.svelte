@@ -44,7 +44,7 @@
 
     if (valid)
       await authHelper.signup(values).then((e) => {
-        navigate('/login')
+        navigate(`/login${location.search}`)
       }).catch((e) => {
         errors.submit = e.message;
       })
@@ -73,7 +73,7 @@
   }
 </script>
 
-<div class="c-auth-holder">
+<div class="c-page c-page--color">
   <div class="c-auth">
     <div class="c-auth__title">
       <p>Registreren</p>
@@ -129,7 +129,7 @@
       </div>
   
       <div class="c-form-field u-mb-0">
-        <button class="c-form-submit">Registreren</button>
+        <button class="c-button c-button--submit">Registreren</button>
         <span class="c-form-error">
           {errors.submit ? errors.submit : ''}
         </span>
@@ -137,7 +137,7 @@
     </form>
     
     <div class="c-auth__switch">
-      Al een account? <Link class="link" to="/login">Log in</Link>
+      Al een account? <Link class="link" to="/login{location.search}">Log in</Link>
     </div>
   </div>  
 </div>

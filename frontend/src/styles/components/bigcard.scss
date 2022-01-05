@@ -21,6 +21,11 @@
     }
   }
 
+  &__buttons {
+    display: inline-flex;
+    gap: 1em;
+  }
+
   &--error {
     background-color: map-get($colors-theme, '100');
   }

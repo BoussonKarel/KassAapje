@@ -6,7 +6,7 @@ const query = async (name: string, query: string, variables?: Object) => {
       method: 'POST',
       headers: {
          'Content-Type': 'application/json',
-         Authorization: `Bearer ${await getAuth().currentUser?.getIdToken()}`,
+         Authorization: `Bearer ${await getAuth().currentUser?.getIdToken(true)}`,
       },
       body: JSON.stringify({
          query,
@@ -15,9 +15,11 @@ const query = async (name: string, query: string, variables?: Object) => {
    })
       .then(res => res.json())
       .then(json => {
-         console.log(json.data)
          if (json.errors) throw json.errors[0]
          else return json.data[name]
+      }).catch(e => {
+         console.error({e});
+         throw new Error('Er ging iets fout bij het uitvoeren van de query/mutation.');
       })
 }
 
@@ -79,6 +81,21 @@ export const gqlQueries = {
         }
       }
     }`,
+    invitation: `query ($invitation_id: String!) {
+      getInvitationInfo(id: $invitation_id) {
+        invitation_id,
+        register {
+           register_id,
+           name
+        },
+        organization {
+           organization_id,
+           name
+        },
+        role,
+        expiration_date
+      }
+    }`,
 }
 
 export const gqlMutations = {
@@ -94,6 +111,9 @@ export const gqlMutations = {
          name
       }
    }`,
+   acceptInvitation: `mutation ($invitation_id: String!) {
+      acceptInvitation(id: $invitation_id)
+   }`
 }
 
 export const gqlHelper = {
@@ -107,10 +127,12 @@ export const gqlHelper = {
       organization: (id: string) => query('getOrganizationById', gqlQueries.organization, { id }),
       registers: (organization_id: string) =>
          query('getRegistersByOrganization', gqlQueries.registers, { organization_id }),
+      invitation: (invitation_id: string) => query('getInvitationInfo', gqlQueries.invitation, { invitation_id }),
    },
    mutations: {
       addOrganization: organization =>
          query('addOrganization', gqlMutations.addOrganization, { organization }),
       addRegister: register => query('addRegister', gqlMutations.addRegister, { register }),
+      acceptInvitation: (invitation_id: string) => query('acceptInvitation', gqlMutations.acceptInvitation, { invitation_id }),
    },
 }

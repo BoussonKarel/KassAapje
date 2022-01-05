@@ -1,3 +1,31 @@
+.c-button {
+  display: inline-block;
+  background-color: map-get($colors-theme, '500');
+  color: map-get($colors-neutral, '100');
+  font-size: rem(20px);
+  text-transform: uppercase;
+  font-weight: 500;
+  border: none;
+
+  padding: 0.5em 1em;
+  border-radius: $global-border-radius;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: map-get($colors-theme, '400');
+  }
+
+  &--submit {
+    padding-top: 0.75em;
+    padding-bottom: 0.75em;
+    margin-top: em(8px);
+    width: 100%;
+  }
+}
+
 .c-button-save {
   background-color: map-get($colors-theme, '500');
   color: map-get($colors-neutral, '100');
