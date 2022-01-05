@@ -8,8 +8,8 @@
    import Register from '../pages/Auth/Register.svelte'
 
    import OrganizationRoutes from './OrganizationRoutes.svelte'
-   import AddOrganisation from '../pages/Organisation/AddOrganisation.svelte'
-   import OrganizationSelector from '../pages/Organisation/OrganizationSelector.svelte'
+   import AddOrganisation from '../pages/Organization/AddOrganization.svelte'
+   import OrganizationSelector from '../pages/Organization/OrganizationSelector.svelte'
    import Sidebar from '../sidebar/Sidebar.svelte'
    import AcceptInvitation from '../pages/AcceptInvitation.svelte';
 

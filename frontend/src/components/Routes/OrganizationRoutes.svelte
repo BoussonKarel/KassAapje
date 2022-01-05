@@ -2,11 +2,12 @@
    import { Route } from 'svelte-navigator'
 
    import { authStore, Role } from '../../utils/auth'
-   import OrganisationInfo from '../pages/Organisation/organisationInfo.svelte'
+   import OrganizationInfo from '../pages/Organization/OrganizationInfo.svelte'
+   import EditOrganization from '../pages/Organization/EditOrganization.svelte'
    import RegisterSelector from '../pages/Register/RegisterSelector.svelte'
    import { useParams } from 'svelte-navigator'
    import RegisterRoutes from './RegisterRoutes.svelte'
-import AddRegister from '../pages/Register/AddRegister.svelte'
+   import AddRegister from '../pages/Register/AddRegister.svelte'
 
    const params = useParams()
 
@@ -14,7 +15,7 @@ import AddRegister from '../pages/Register/AddRegister.svelte'
    $: isOwner = false
 
    const checkOrganizationPermission = async (organization_id: string) => {
-      const perms = $authStore.roles;
+      const perms = $authStore.roles
       isUser = perms.organizations.some(o => o.id === organization_id)
       isOwner = perms.organizations.some(o => o.id === organization_id && o.role === Role.OWNER)
       console.log(isUser)
@@ -29,14 +30,14 @@ import AddRegister from '../pages/Register/AddRegister.svelte'
       <RegisterSelector organization_id={$params.orgId} />
    </Route>
    <Route path="/info">
-      <OrganisationInfo id={$params.orgId} />
+      <OrganizationInfo id={$params.orgId} />
    </Route>
    {#if isOwner}
       <Route path="/edit">
-         Edit organization
+         <EditOrganization  id={$params.orgId} />
       </Route>
       <Route path="/new">
-        <AddRegister organization_id={$params.orgId}/>
+         <AddRegister organization_id={$params.orgId} />
       </Route>
    {:else}
       No owner perms to edit organization

@@ -2,6 +2,7 @@
    import NavigationBar from '../../NavigationBar.svelte'
    import { onMount } from 'svelte'
    import { gqlHelper } from '../../../utils/graphQL'
+   import { Link } from 'svelte-navigator'
    import Login from '../Auth/Login.svelte'
    export let id
 
@@ -90,7 +91,10 @@
                </div>
             </div>
             <div class="c-form-altinputs">
-               <button class="c-button-edit"> Bewerken </button>
+               <Link to="/{id}/edit">
+                  <button class="c-button-edit"> Bewerken </button>
+               </Link>
+               
             </div>
          </form>
       {/if}

@@ -1,4 +1,5 @@
-export interface OrganizationInput {
+export interface OrganizationUpdateInput {
+    organization_id?: string,
     name?: string,
     street?: string,
     street_number?: number,

@@ -39,7 +39,7 @@
          {/each}
       {/if}
       <li class="c-sb-org__item c-sb-org__item--noreg">
-         <Link to="/{organization.organization_id}/edit">
+         <Link to="/{organization.organization_id}/info">
             <Settings />
             Instellingen
          </Link>

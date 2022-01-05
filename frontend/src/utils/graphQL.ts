@@ -105,6 +105,11 @@ export const gqlMutations = {
          name
       }
    }`,
+   updateOrganization: `mutation ($organization: OrganizationUpdateInput!) {
+      updateOrganization(organization: $organization) {
+         organization_id
+      }
+   }`,
    addRegister: `mutation ($register: RegisterInput!) {
       addRegister(register: $register) {
          register_id,
@@ -132,6 +137,8 @@ export const gqlHelper = {
    mutations: {
       addOrganization: organization =>
          query('addOrganization', gqlMutations.addOrganization, { organization }),
+      updateOrganization: organization =>
+         query('updateOrganization', gqlMutations.updateOrganization, { organization }),
       addRegister: register => query('addRegister', gqlMutations.addRegister, { register }),
       acceptInvitation: (invitation_id: string) => query('acceptInvitation', gqlMutations.acceptInvitation, { invitation_id }),
    },
