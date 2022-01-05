@@ -15,9 +15,11 @@ const query = async (name: string, query: string, variables?: Object) => {
    })
       .then(res => res.json())
       .then(json => {
-         console.log(json.data)
          if (json.errors) throw json.errors[0]
          else return json.data[name]
+      }).catch(e => {
+         console.error({e});
+         throw new Error('Er ging iets fout bij het ophalen van de data.');
       })
 }
 
@@ -79,6 +81,21 @@ export const gqlQueries = {
         }
       }
     }`,
+    invitation: `query ($invitation_id: String!) {
+      getInvitationInfo(id: $invitation_id) {
+        invitation_id,
+        register {
+           register_id,
+           name
+        },
+        organization {
+           organization_id,
+           name
+        },
+        role,
+        expiration_date
+      }
+    }`,
 }
 
 export const gqlMutations = {
@@ -107,6 +124,7 @@ export const gqlHelper = {
       organization: (id: string) => query('getOrganizationById', gqlQueries.organization, { id }),
       registers: (organization_id: string) =>
          query('getRegistersByOrganization', gqlQueries.registers, { organization_id }),
+      invitation: (invitation_id: string) => query('getInvitationInfo', gqlQueries.invitation, { invitation_id }),
    },
    mutations: {
       addOrganization: organization =>
