@@ -13,7 +13,7 @@
    </Link>
 {/if}
 {#if page == 'registers'}
-   <Link to=":orgid/new" class="c-card c-addcard">
+   <Link to="new" class="c-card c-addcard">
       <div class="c-addcard__icon">
          <Plus />
       </div>
