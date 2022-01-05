@@ -11,15 +11,26 @@
    import AddOrganisation from '../pages/Organization/AddOrganization.svelte'
    import OrganizationSelector from '../pages/Organization/OrganizationSelector.svelte'
    import Sidebar from '../sidebar/Sidebar.svelte'
-   import AcceptInvitation from '../pages/AcceptInvitation.svelte';
+   import AcceptInvitation from '../pages/AcceptInvitation.svelte'
+
+   const updateAuthStore = async user => {
+      console.log('Store update')
+      console.log(user)
+      if (user) {
+         setAuthStore(user)
+      } else {
+         authStore.set(null)
+      }
+   }
 
    onMount(() => {
-      getAuth().onAuthStateChanged(async user => {
-         if (user) {
-            setAuthStore(user)
-         } else {
-            authStore.set(null)
-         }
+      getAuth().onAuthStateChanged((u) => {
+         console.log("Auth change")
+         updateAuthStore(u)
+      })
+      getAuth().onIdTokenChanged((u) => {
+         console.log("Token change")
+         updateAuthStore(u)
       })
    })
 </script>

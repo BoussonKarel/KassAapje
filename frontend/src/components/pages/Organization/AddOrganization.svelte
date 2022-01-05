@@ -7,6 +7,7 @@
    import { gqlHelper } from '../../../utils/graphQL'
 
    import NavigationBar from '../../NavigationBar.svelte'
+   import { authHelper } from '../../../utils/auth';
 
    // INPUTS
    let name
@@ -41,7 +42,7 @@
             console.log(e)
          })
          .finally(() => {
-            console.log('org added')
+            authHelper.refresh();
             navigate('/')
          })
       console.log(body)

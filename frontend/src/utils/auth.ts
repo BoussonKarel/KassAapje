@@ -78,5 +78,8 @@ export const authHelper = {
       await getAuth().signOut().then(() => {
         navigate('/')
       })
+    },
+    refresh: async () => {
+       getAuth().currentUser.getIdToken(true)
     }
 }

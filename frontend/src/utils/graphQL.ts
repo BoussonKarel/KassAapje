@@ -6,7 +6,7 @@ const query = async (name: string, query: string, variables?: Object) => {
       method: 'POST',
       headers: {
          'Content-Type': 'application/json',
-         Authorization: `Bearer ${await getAuth().currentUser?.getIdToken(true)}`,
+         Authorization: `Bearer ${await getAuth().currentUser?.getIdToken()}`,
       },
       body: JSON.stringify({
          query,

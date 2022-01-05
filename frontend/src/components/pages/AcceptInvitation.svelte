@@ -5,7 +5,7 @@
   import Loading from "../Loading/Loading.svelte";
   import type { Invitation } from "../../models/Invitation";
   import { RoleHuman } from "../../models/Role";
-  import { authStore } from "../../utils/auth";
+  import { authHelper, authStore } from "../../utils/auth";
   import { Link } from "svelte-navigator";
 
   export let invitation_id: string;
@@ -32,8 +32,8 @@
       fetchingState = 'loading'
       // accept
       gqlHelper.mutations.acceptInvitation(invitation_id).then(() => {
-        console.log('Accepted')
         fetchingState = 'accepted'
+        authHelper.refresh();
       })
     }
   }
