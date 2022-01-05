@@ -22,7 +22,7 @@
       align-items: center;
 
       svg {
-         color: map-get($colors-theme, 'base');
+         color: map-get($colors-theme, '500');
          width: 100%;
          height: auto;
       }
@@ -34,11 +34,11 @@
 
    &__title {
       font-size: rem(28px);
-      color: map-get($colors-theme, 'base');
+      color: map-get($colors-theme, '500');
    }
 
    &__settings {
-      color: map-get($colors-theme, 'base');
+      color: map-get($colors-theme, '500');
 
       & svg {
          display: block;
