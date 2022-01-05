@@ -14,8 +14,6 @@
    import AcceptInvitation from '../pages/AcceptInvitation.svelte'
 
    const updateAuthStore = async user => {
-      console.log('Store update')
-      console.log(user)
       if (user) {
          setAuthStore(user)
       } else {
@@ -25,11 +23,9 @@
 
    onMount(() => {
       getAuth().onAuthStateChanged((u) => {
-         console.log("Auth change")
          updateAuthStore(u)
       })
       getAuth().onIdTokenChanged((u) => {
-         console.log("Token change")
          updateAuthStore(u)
       })
    })

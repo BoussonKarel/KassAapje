@@ -18,7 +18,6 @@
       const perms = $authStore.roles
       isUser = perms.organizations.some(o => o.id === organization_id)
       isOwner = perms.organizations.some(o => o.id === organization_id && o.role === Role.OWNER)
-      console.log(isUser)
    }
 
    $: checkOrganizationPermission($params.orgId)
