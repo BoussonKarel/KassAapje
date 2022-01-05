@@ -50,7 +50,7 @@
 
 <div class="c-page">
    <div class="c-navigation">
-      <NavigationBar title={'Organisatie toevoegen'} settings={false} />
+      <NavigationBar title={'Organisatie toevoegen'} />
    </div>
 
    <form class="c-form" name="AddOrganisation" on:submit|preventDefault={handleSubmit}>
