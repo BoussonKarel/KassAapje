@@ -5,6 +5,8 @@
   import Loading from "../Loading/Loading.svelte";
   import type { Invitation } from "../../models/Invitation";
   import { RoleHuman } from "../../models/Role";
+  import { authStore } from "../../utils/auth";
+  import { Link } from "svelte-navigator";
 
   export let invitation_id: string;
 
@@ -26,12 +28,20 @@
          })
   };
 
+  const acceptInvitation = async () => {
+    if (invitation) {
+
+    }
+  }
+
+  $: authorized = $authStore ? true : false;
+
   onMount(() => {
     getInvitationDetails();
   })
 </script>
 
-<div class="c-page">
+<div class="c-page {authorized ? '' : 'c-page--color'}">
   <div class="o-container-center">
     <div class="c-bigcard {fetchingState === 'error' ? 'c-bigcard--error' : ''}">
         {#if fetchingState === 'loading'}
@@ -44,9 +54,23 @@
               Je bent uitgenodigd voor de rol <strong>{RoleHuman[invitation.role]}</strong> in de kassa <strong>{invitation.register.name}</strong>.
             {/if}
           </div>
-          <button class="c-button">
-            Accepteren
-         </button>
+
+          {#if authorized}
+            <div class="c-bigcard__buttons">
+              <button on:click={acceptInvitation} class="c-button">
+                Accepteren
+              </button>
+            </div>
+          {:else}
+            <div class="c-bigcard__buttons">
+              <Link to="/?redirect={location.pathname}" class="c-button">
+                INLOGGEN
+              </Link>
+              <Link to="/signup?redirect={location.pathname}" class="c-button">
+                REGISTREREN
+              </Link>
+            </div>
+          {/if}
         {:else}
           <div class="c-bigcard__text">
             {#if fetchingState === 'error'}

@@ -1,4 +1,5 @@
 .c-button {
+  display: inline-block;
   background-color: map-get($colors-theme, '500');
   color: map-get($colors-neutral, '100');
   font-size: rem(20px);
@@ -8,6 +9,8 @@
 
   padding: 0.5em 1em;
   border-radius: $global-border-radius;
+
+  text-decoration: none;
 
   cursor: pointer;
 

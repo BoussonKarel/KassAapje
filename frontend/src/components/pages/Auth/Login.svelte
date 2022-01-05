@@ -7,6 +7,8 @@
 
   const navigate = useNavigate();
 
+  const URLparams = new URLSearchParams(location.search);
+
   DEFAULT_ERROR.password = "Wachtwoord te kort"
   const validatePassword = (value: string) => {
     if (value.length < 8) return false;
@@ -40,7 +42,8 @@
 
     if (valid) {
       signInWithEmailAndPassword(getAuth(), values.email, values.password).then(() => {
-        navigate('/')
+        if (URLparams.has('redirect')) navigate(URLparams.get('redirect'))
+        else navigate('/')
       }).catch((error) => {
         errors.submit = `Er ging iets fout bij het inloggen: ${error.message}`;
       })
@@ -65,7 +68,7 @@
   }
 </script>
 
-<div class="c-auth-holder">
+<div class="c-page c-page--color">
   <div class="c-auth">
     <div class="c-auth__title">
       <p>Inloggen</p>
@@ -113,7 +116,7 @@
     </form>
     
     <div class="c-auth__switch">
-      Nog geen account? <Link class="link" to="/register">Registreer</Link>
+      Nog geen account? <Link class="link" to="/register{location.search}">Registreer</Link>
     </div>
   </div>  
 </div>
