@@ -1,0 +1,22 @@
+.c-bigcard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: map-get($colors-neutral, '100');
+
+  box-shadow: $default-shadow;
+  border-radius: $global-border-radius;
+
+  padding: 2em;
+  gap: 1em;
+
+  &__text {
+    font-size: rem(22px);
+
+    &--big {
+      font-size: rem(28px);
+    }
+  }
+}

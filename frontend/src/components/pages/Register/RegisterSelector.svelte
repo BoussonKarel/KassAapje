@@ -18,6 +18,8 @@
    const getRegisters = async () => {
       fetchingState = 'loading'
 
+      console.log(organization_id)
+
       registers = await gqlHelper.queries
          .registers(organization_id)
          .catch(e => {
@@ -26,6 +28,8 @@
          .finally(() => {
             fetchingState = ''
          })
+      
+         console.log(registers)
 
       // Filter which ones he has perms??
    }
@@ -56,14 +60,16 @@
          <AddCard page={'registers'} />
       </CardList>
    {:else}
-      <div class="o-container-center">
-         <h2>Geen kassa's gevonden...</h2>
+   <div class="o-container-center">
+      <div class="c-bigcard">
+         <span class="c-bigcard__text c-bigcard__text--big">Geen kassa's gevonden...</span>
 
-         <Link to="new" class="c-button-addorg">
+         <Link to='new' class="c-button-addorg">
             <div class="c-button-addorg__icon">
                <Plus />
             </div>
          </Link>
       </div>
+   </div>
    {/if}
 </div>

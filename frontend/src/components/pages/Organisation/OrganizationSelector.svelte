@@ -49,15 +49,15 @@
       </CardList>
    {:else}
       <div class="o-container-center">
-         <h2>Geen verenigingen gevonden...</h2>
+         <div class="c-bigcard">
+            <span class="c-bigcard__text c-bigcard__text--big">Geen verenigingen gevonden...</span>
 
-         <Link to='/new' class="c-button-addorg">
+            <Link to='/new' class="c-button-addorg">
                <div class="c-button-addorg__icon">
                   <Plus />
                </div>
-         </Link>
-
-         
+            </Link>
+         </div>
       </div>
    {/if}
 </div>

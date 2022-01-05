@@ -6,7 +6,7 @@
   export let register;
 </script>
 
-<Link to="/{register.organization.organization_id}/{register.register_id}" class="c-card-link">
+<Link to="{register.register_id}" class="c-card-link">
   <div class="c-card c-registercard">
     <div class="c-registercard__upper">
       <div class="c-registercard__icon-cog">

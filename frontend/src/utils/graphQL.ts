@@ -15,6 +15,7 @@ const query = async (name: string, query: string, variables?: Object) => {
    })
       .then(res => res.json())
       .then(json => {
+         console.log(json.data)
          if (json.errors) throw json.errors[0]
          else return json.data[name]
       })

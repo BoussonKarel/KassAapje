@@ -22,20 +22,21 @@
 }
 
 .c-button-addorg {
-
+  cursor: pointer;
+  
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 6em;
-  height: 6em;
+  width: 4em;
+  height: 4em;
 
   border-radius: 100%;
 
-  background-color: map-get($colors-neutral, '100');
+  background-color: map-get($colors-theme, '500');
   box-shadow: $default-shadow;
 
   &:hover {
-    background-color: map-get($colors-neutral, '200');
+    background-color: map-get($colors-theme, '400');
     cursor: pointer;
   }
 
@@ -44,9 +45,9 @@
     justify-content: center;
     align-items: center;
     & svg {
-      color: map-get($colors-theme, '500');
-      height: 3em;
-      width: 3em;
+      color: map-get($colors-neutral, '100');
+      height: 2em;
+      width: 2em;
     }
   }
 }
