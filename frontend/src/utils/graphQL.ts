@@ -6,7 +6,7 @@ const query = async (name: string, query: string, variables?: Object) => {
       method: 'POST',
       headers: {
          'Content-Type': 'application/json',
-         Authorization: `Bearer ${await getAuth().currentUser?.getIdToken()}`,
+         Authorization: `Bearer ${await getAuth().currentUser?.getIdToken(true)}`,
       },
       body: JSON.stringify({
          query,
@@ -19,7 +19,7 @@ const query = async (name: string, query: string, variables?: Object) => {
          else return json.data[name]
       }).catch(e => {
          console.error({e});
-         throw new Error('Er ging iets fout bij het ophalen van de data.');
+         throw new Error('Er ging iets fout bij het uitvoeren van de query/mutation.');
       })
 }
 
@@ -111,6 +111,9 @@ export const gqlMutations = {
          name
       }
    }`,
+   acceptInvitation: `mutation ($invitation_id: String!) {
+      acceptInvitation(id: $invitation_id)
+   }`
 }
 
 export const gqlHelper = {
@@ -130,5 +133,6 @@ export const gqlHelper = {
       addOrganization: organization =>
          query('addOrganization', gqlMutations.addOrganization, { organization }),
       addRegister: register => query('addRegister', gqlMutations.addRegister, { register }),
+      acceptInvitation: (invitation_id: string) => query('acceptInvitation', gqlMutations.acceptInvitation, { invitation_id }),
    },
 }

@@ -20,7 +20,6 @@
          .invitation(invitation_id)
          .then(result => {
             fetchingState = ''
-            console.log(result)
             return result;
          })
          .catch(() => {
@@ -30,7 +29,12 @@
 
   const acceptInvitation = async () => {
     if (invitation) {
-
+      fetchingState = 'loading'
+      // accept
+      gqlHelper.mutations.acceptInvitation(invitation_id).then(() => {
+        console.log('Accepted')
+        fetchingState = 'accepted'
+      })
     }
   }
 
@@ -46,6 +50,15 @@
     <div class="c-bigcard {fetchingState === 'error' ? 'c-bigcard--error' : ''}">
         {#if fetchingState === 'loading'}
           <Loading size={1} />
+        {:else if fetchingState === 'accepted'}
+          <div class="c-bigcard__text">
+            Je hebt de uitnodiging geaccepteerd.
+          </div>
+          <div class="c-bigcard__buttons">
+            <Link to="/" class="c-button">
+              Terug naar home
+            </Link>
+          </div>
         {:else if invitation}
           <div class="c-bigcard__text">
             {#if invitation.organization}
