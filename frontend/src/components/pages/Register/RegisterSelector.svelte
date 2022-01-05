@@ -43,7 +43,7 @@
 </script>
 
 <div class="c-page">
-   <NavigationBar title="Kassa's" />
+   <NavigationBar title={"Kassa's"} />
 
    {#if fetchingState === 'loading'}
       <SectionLoading />
