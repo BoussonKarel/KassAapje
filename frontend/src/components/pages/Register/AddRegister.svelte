@@ -7,6 +7,7 @@
    const navigate = useNavigate()
 
    import { prevent_default } from 'svelte/internal'
+   import { authHelper } from '../../../utils/auth';
 
    export let organization_id
 
@@ -29,10 +30,8 @@
             console.log(e)
          })
          .finally(() => {
-            console.log('register added')
-            navigate('/')
+            authHelper.refresh();
          })
-      console.log('submitted')
       console.log(body)
       navigate(-1)
    }
