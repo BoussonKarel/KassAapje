@@ -10,17 +10,17 @@
    import AddProduct from '../pages/Product/AddProduct.svelte'
 
    const params = useParams()
-   export let orgId: string;
+   export let orgId: string
 
    $: isUser = false
    $: isOwner = false
 
    const checkRegisterPermissions = async (organization_id: string, register_id: string) => {
-      const perms = $authStore.roles;
-      isOwner = perms.registers.some(o => o.id === register_id && o.role === Role.OWNER) // Owner in register
-         || perms.organizations.some(o => o.id === organization_id && o.role === Role.OWNER) // Owner in organization
+      const perms = $authStore.roles
+      isOwner =
+         perms.registers.some(o => o.id === register_id && o.role === Role.OWNER) || // Owner in register
+         perms.organizations.some(o => o.id === organization_id && o.role === Role.OWNER) // Owner in organization
 
-         
       isUser = isOwner || perms.registers.some(o => o.id === register_id)
    }
 
@@ -47,8 +47,16 @@
          </Route>
       </Route>
    {:else}
-   You don't have permission to work in the register catalogue.
+      You don't have permission to work in the register catalogue.
    {/if}
 {:else}
-   You don't have permission to work in this register.
+<div class="c-page">
+   <div class="o-container-center">
+      <div class="c-bigcard c-bigcard--error">
+         <div class="c-bigcard__text">
+            You don't have permission to work in this register.
+         </div>
+      </div>
+   </div>
+</div>
 {/if}

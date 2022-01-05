@@ -33,7 +33,7 @@
    </Route>
    {#if isOwner}
       <Route path="/edit">
-         <EditOrganization  id={$params.orgId} />
+         <EditOrganization id={$params.orgId} />
       </Route>
       <Route path="/new">
          <AddRegister organization_id={$params.orgId} />
@@ -45,5 +45,13 @@
       <RegisterRoutes orgId={$params.orgId} />
    </Route>
 {:else}
-   You don't have permission to work in this organization.
+   <div class="c-page">
+      <div class="o-container-center">
+         <div class="c-bigcard c-bigcard--error">
+            <div class="c-bigcard__text">
+               You don't have permission to work in this organization.
+            </div>
+         </div>
+      </div>
+   </div>
 {/if}
