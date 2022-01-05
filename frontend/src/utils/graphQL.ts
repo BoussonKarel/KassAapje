@@ -88,10 +88,9 @@ export const gqlMutations = {
          name
       }
    }`,
-   updateOrganization: `mutation ($organization: OrganizationInput!) {
+   updateOrganization: `mutation ($organization: OrganizationUpdateInput!) {
       updateOrganization(organization: $organization) {
-         organization_id,
-         name
+         organization_id
       }
    }`,
    addRegister: `mutation ($register: RegisterInput!) {

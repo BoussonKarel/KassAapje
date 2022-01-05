@@ -2,12 +2,13 @@
    import { useNavigate } from 'svelte-navigator'
 
    const navigate = useNavigate()
-   import type { OrganizationInput } from 'src/models/OrganizationInput'
+   import type { OrganizationUpdateInput } from '../../../models/OrganizationUpdateInput';
 
    import { gqlHelper } from '../../../utils/graphQL'
 
    import NavigationBar from '../../NavigationBar.svelte'
    import { identity, onMount } from 'svelte/internal'
+
    export let id
 
    let fetchingState = '',
@@ -26,7 +27,7 @@
    let email
 
    async function handleSubmit() {
-      let body: OrganizationInput = {
+      let body: OrganizationUpdateInput = {
          organization_id: id,
          name: name,
          street: street,
