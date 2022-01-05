@@ -18,13 +18,13 @@
    const checkRegisterPermissions = async (organization_id: string, register_id: string) => {
       const perms = $authStore.roles;
       isOwner = perms.registers.some(o => o.id === register_id && o.role === Role.OWNER) // Owner in register
-         || perms.organizations.some(o => o.id === orgId && o.role === Role.OWNER) // Owner in organization
+         || perms.organizations.some(o => o.id === organization_id && o.role === Role.OWNER) // Owner in organization
 
          
       isUser = isOwner || perms.registers.some(o => o.id === register_id)
    }
 
-   $: checkRegisterPermissions($params.orgId, $params.regId)
+   $: checkRegisterPermissions(orgId, $params.regId)
 </script>
 
 {#if isUser}
