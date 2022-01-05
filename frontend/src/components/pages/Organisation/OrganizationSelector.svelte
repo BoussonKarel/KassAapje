@@ -8,21 +8,22 @@
    import { writable } from 'svelte/store'
    import { Link } from 'svelte-navigator'
    import SectionLoading from '../../Loading/SectionLoading.svelte'
-   import SkeletonCard from '../../Cards/SkeletonCard.svelte';
+   import SkeletonCard from '../../Cards/SkeletonCard.svelte'
 
-   let fetchingState = "", organizations = undefined
-
+   let fetchingState = '',
+      organizations = undefined
 
    const getOrganizations = async () => {
-      fetchingState = "loading";
+      fetchingState = 'loading'
 
       organizations = await gqlHelper.queries
          .userOrganizations()
-         .catch(e => {
-            fetchingState = "error";
+         .then(result => {
+            fetchingState = ''
+            return result;
          })
-         .finally(() => {
-            fetchingState = "";
+         .catch(() => {
+            fetchingState = 'error'
          })
    }
 
@@ -32,31 +33,32 @@
 </script>
 
 <div class="c-page">
-   {#if fetchingState === "loading"}
+   {#if fetchingState === 'loading'}
       <SectionLoading />
 
       <CardList>
          <SkeletonCard />
       </CardList>
-   {:else if fetchingState === "error"}
-      Kon organisaties niet ophalen.
    {:else if organizations && organizations.length > 0}
       <CardList>
          {#each organizations as organization}
-            <OrganisationCard organization={organization} />
+            <OrganisationCard {organization} />
          {/each}
          <AddCard page={'organisations'} />
       </CardList>
    {:else}
       <div class="o-container-center">
-         <div class="c-bigcard">
-            <span class="c-bigcard__text c-bigcard__text--big">Geen verenigingen gevonden...</span>
-
-            <Link to='/new' class="c-button-addorg">
-               <div class="c-button-addorg__icon">
-                  <Plus />
-               </div>
-            </Link>
+         <div class="c-bigcard {fetchingState === 'error' ? 'c-bigcard--error' : ''}">
+            {#if fetchingState === 'error'}
+               <span class="c-bigcard__text">Er ging iets fout bij het ophalen van de verenigingen.<br />Probeer het later opnieuw of neem contact met ons op.</span>
+            {:else}
+               <span class="c-bigcard__text c-bigcard__text--big">Geen verenigingen gevonden...</span>
+               <Link to="/new" class="c-button-add">
+                  <div class="c-button-add__icon">
+                     <Plus />
+                  </div>
+               </Link>
+            {/if}
          </div>
       </div>
    {/if}

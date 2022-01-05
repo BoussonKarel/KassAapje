@@ -22,11 +22,12 @@
 
       registers = await gqlHelper.queries
          .registers(organization_id)
-         .catch(e => {
-            fetchingState = 'error'
-         })
-         .finally(() => {
+         .then(result => {
             fetchingState = ''
+            return result;
+         })
+         .catch(() => {
+            fetchingState = 'error'
          })
       
          console.log(registers)
@@ -50,8 +51,6 @@
       <CardList>
          <SkeletonCard />
       </CardList>
-   {:else if fetchingState === 'error'}
-      Kon organisaties niet ophalen.
    {:else if registers && registers.length > 0}
       <CardList>
          {#each registers as register}
@@ -61,14 +60,18 @@
       </CardList>
    {:else}
    <div class="o-container-center">
-      <div class="c-bigcard">
-         <span class="c-bigcard__text c-bigcard__text--big">Geen kassa's gevonden...</span>
+      <div class="c-bigcard {fetchingState === 'error' ? 'c-bigcard--error' : ''}">
+         {#if fetchingState === 'error'}
+            <span class="c-bigcard__text">Er ging iets fout bij het ophalen van de kassa's.</span>
+         {:else}
+            <span class="c-bigcard__text c-bigcard__text--big">Geen kassa's gevonden...</span>
 
-         <Link to='new' class="c-button-addorg">
-            <div class="c-button-addorg__icon">
-               <Plus />
-            </div>
-         </Link>
+            <Link to='new' class="c-button-add">
+               <div class="c-button-add__icon">
+                  <Plus />
+               </div>
+            </Link>
+         {/if}
       </div>
    </div>
    {/if}

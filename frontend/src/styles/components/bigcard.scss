@@ -14,9 +14,14 @@
 
   &__text {
     font-size: rem(22px);
+    text-align: center;
 
     &--big {
       font-size: rem(28px);
     }
+  }
+
+  &--error {
+    background-color: map-get($colors-theme, '100');
   }
 }
