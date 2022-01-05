@@ -42,8 +42,8 @@
    {:else}
       No owner perms to edit organization
    {/if}
-   <Route path="/:regId/*" let:params>
-      <RegisterRoutes />
+   <Route path="/:regId/*">
+      <RegisterRoutes orgId={$params.orgId} />
    </Route>
 {:else}
    You don't have permission to work in this organization.

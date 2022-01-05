@@ -10,6 +10,7 @@
    import AddProduct from '../pages/Product/AddProduct.svelte'
 
    const params = useParams()
+   export let orgId: string;
 
    $: isUser = false
    $: isOwner = false
@@ -17,11 +18,10 @@
    const checkRegisterPermissions = async (organization_id: string, register_id: string) => {
       const perms = $authStore.roles;
       isOwner = perms.registers.some(o => o.id === register_id && o.role === Role.OWNER) // Owner in register
-         || perms.organizations.some(o => o.id === organization_id && o.role === Role.OWNER) // Owner in organization
+         || perms.organizations.some(o => o.id === orgId && o.role === Role.OWNER) // Owner in organization
 
          
       isUser = isOwner || perms.registers.some(o => o.id === register_id)
-      console.log($params)
    }
 
    $: checkRegisterPermissions($params.orgId, $params.regId)

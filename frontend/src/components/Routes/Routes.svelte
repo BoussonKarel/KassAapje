@@ -54,7 +54,7 @@
       <Route path="/signout">
          {() => authHelper.signout()}
       </Route>
-      <Route path="/:orgId/*" let:params>
+      <Route path="/:orgId/*">
          <OrganizationRoutes />
       </Route>
    {/if}
