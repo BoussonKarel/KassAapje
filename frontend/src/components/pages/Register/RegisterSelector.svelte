@@ -1,12 +1,14 @@
 <script lang="ts">
    import NavigationBar from '../../NavigationBar.svelte'
    import CardList from '../../Cards/CardList.svelte'
+   import AddCard from '../../Cards/AddCard.svelte'
    import RegisterCard from '../../Cards/RegisterCard.svelte'
    import { onMount } from 'svelte'
    import SectionLoading from '../../Loading/SectionLoading.svelte'
    import SkeletonCard from '../../Cards/SkeletonCard.svelte'
-   import Plus from 'svelte-material-icons/Plus.svelte';
-   import { gqlHelper } from '../../../utils/graphQL';
+   import Plus from 'svelte-material-icons/Plus.svelte'
+   import { gqlHelper } from '../../../utils/graphQL'
+   import { Link } from 'svelte-navigator'
 
    export let organization_id
 
@@ -14,15 +16,15 @@
       registers = undefined
 
    const getRegisters = async () => {
-      fetchingState = "loading";
+      fetchingState = 'loading'
 
       registers = await gqlHelper.queries
          .registers(organization_id)
          .catch(e => {
-            fetchingState = "error";
+            fetchingState = 'error'
          })
          .finally(() => {
-            fetchingState = "";
+            fetchingState = ''
          })
 
       // Filter which ones he has perms??
@@ -51,16 +53,17 @@
          {#each registers as register}
             <RegisterCard {register} />
          {/each}
+         <AddCard page={'registers'} />
       </CardList>
    {:else}
       <div class="o-container-center">
          <h2>Geen kassa's gevonden...</h2>
 
-         <div on:click={addRegister} class="c-button-addcard">
-            <div class="c-addcard-icon">
+         <Link to="new" class="c-button-addorg">
+            <div class="c-button-addorg__icon">
                <Plus />
             </div>
-         </div>
+         </Link>
       </div>
    {/if}
 </div>

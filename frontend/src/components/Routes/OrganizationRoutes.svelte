@@ -6,6 +6,7 @@
    import RegisterSelector from '../pages/Register/RegisterSelector.svelte'
    import { useParams } from 'svelte-navigator'
    import RegisterRoutes from './RegisterRoutes.svelte'
+import AddRegister from '../pages/Register/AddRegister.svelte'
 
    const params = useParams()
 
@@ -33,6 +34,9 @@
    {#if isOwner}
       <Route path="/edit">
          Edit organization
+      </Route>
+      <Route path="/new">
+        <AddRegister organization_id={$params.orgId}/>
       </Route>
    {:else}
       No owner perms to edit organization

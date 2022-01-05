@@ -67,7 +67,7 @@ export const gqlQueries = {
         }
       }
     }`,
-    registers: `query ($organization_id: String!) {
+   registers: `query ($organization_id: String!) {
       getRegistersByOrganization(organization_id: $organization_id) {
         register_id,
         name,
@@ -86,7 +86,13 @@ export const gqlMutations = {
          organization_id,
          name
       }
-   }`
+   }`,
+   addRegister: `mutation ($register: RegisterInput!) {
+      addRegister(register: $register) {
+         register_id,
+         name
+      }
+   }`,
 }
 
 export const gqlHelper = {
@@ -98,9 +104,12 @@ export const gqlHelper = {
       userOrganizationsWithRegisters: () =>
          query('getUserOrganizations', gqlQueries.userOrganizationsWithRegisters),
       organization: (id: string) => query('getOrganizationById', gqlQueries.organization, { id }),
-      registers: (organization_id: string) => query('getRegistersByOrganization', gqlQueries.registers, {organization_id})
+      registers: (organization_id: string) =>
+         query('getRegistersByOrganization', gqlQueries.registers, { organization_id }),
    },
    mutations: {
-      addOrganization: (organization) => query('addOrganization', gqlMutations.addOrganization, { organization })
-   }
+      addOrganization: organization =>
+         query('addOrganization', gqlMutations.addOrganization, { organization }),
+      addRegister: register => query('addRegister', gqlMutations.addRegister, { register }),
+   },
 }
