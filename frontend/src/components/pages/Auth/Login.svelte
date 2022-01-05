@@ -105,7 +105,7 @@
       </div>
   
       <div class="c-form-field u-mb-0">
-        <button class="c-form-submit">Inloggen</button>
+        <button class="c-button c-button--submit">Inloggen</button>
         <span class="c-form-error">
           {errors.submit ? errors.submit : ''}
         </span>

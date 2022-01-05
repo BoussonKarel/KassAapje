@@ -129,7 +129,7 @@
       </div>
   
       <div class="c-form-field u-mb-0">
-        <button class="c-form-submit">Registreren</button>
+        <button class="c-button c-button--submit">Registreren</button>
         <span class="c-form-error">
           {errors.submit ? errors.submit : ''}
         </span>
