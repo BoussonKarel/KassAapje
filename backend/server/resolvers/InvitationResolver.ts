@@ -1,10 +1,10 @@
-import { Arg, Mutation, Resolver } from 'type-graphql'
+import { Arg, Mutation, Query, Resolver } from 'type-graphql'
 import { EntityManager, getManager } from 'typeorm'
 import { Role, RoleManager } from '../auth/roleManagement'
 import { Organization } from '../entity/organization'
 import { Permission } from '../entity/permission'
 import { Register } from '../entity/register'
-import { Invitation, InvitationInfo } from '../entity/roleInvitation'
+import { Invitation, InvitationInput } from '../entity/roleInvitation'
 import { User } from '../entity/user'
 import { CurrentUser } from '../middleware/currentUserParamDecorator'
 
@@ -18,7 +18,7 @@ export class InvitationResolver {
   // -------
   @Mutation(() => Invitation)
   async createInvitation(
-    @Arg('invitation') invitationData: Invitation,
+    @Arg('invitation') invitationData: InvitationInput,
     @CurrentUser() user: User,
   ) {
     try {
@@ -105,17 +105,15 @@ export class InvitationResolver {
   // -------
   // READ
   // -------
-  @Mutation(() => InvitationInfo)
+  @Query(() => Invitation)
   async getInvitationInfo(@Arg('id') invitationId: string) {
     try {
       const invitation = await this.manager
         .findOneOrFail(Invitation, invitationId)
-        .catch(e => {
-          console.error(e)
+        .catch(() => {
           throw new Error('Could not find that invitation.')
         })
 
-      console.log({ invitation })
       return invitation
     } catch (error: any) {
       console.error(`⛔ (GUEST) ` + error.message)
