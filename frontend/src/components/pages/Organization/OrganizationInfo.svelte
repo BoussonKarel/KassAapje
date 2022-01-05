@@ -6,11 +6,6 @@
    import Login from '../Auth/Login.svelte'
    export let id
 
-   async function handleSubmit(event) {
-      console.log('submitted')
-      console.log(event)
-   }
-
    let fetchingState = '',
       organization = undefined
 
@@ -43,7 +38,7 @@
          <div class="c-navigation">
             <NavigationBar title={organization.name} />
          </div>
-         <form class="c-form" name="AddOrganisation" on:submit|preventDefault={handleSubmit}>
+         <form class="c-form" name="OrganisationInfo">
             <div class="c-form-edit">
                <p class="c-form-edit-label">Naam:</p>
                <div class="c-form-edit-field">

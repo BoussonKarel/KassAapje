@@ -81,6 +81,12 @@ export const gqlQueries = {
         }
       }
     }`,
+    register: `query ($register_id: String!){
+      getRegisterById(id: $register_id) {
+          name,
+          description
+      }
+  }` ,
     invitation: `query ($invitation_id: String!) {
       getInvitationInfo(id: $invitation_id) {
         invitation_id,
@@ -132,6 +138,7 @@ export const gqlHelper = {
       organization: (id: string) => query('getOrganizationById', gqlQueries.organization, { id }),
       registers: (organization_id: string) =>
          query('getRegistersByOrganization', gqlQueries.registers, { organization_id }),
+         register: (register_id: string) => query('getRegisterById', gqlQueries.register, {register_id}),
       invitation: (invitation_id: string) => query('getInvitationInfo', gqlQueries.invitation, { invitation_id }),
    },
    mutations: {
