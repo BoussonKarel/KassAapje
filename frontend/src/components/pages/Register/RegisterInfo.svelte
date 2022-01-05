@@ -4,12 +4,13 @@ import { Link } from 'svelte-navigator';
    import { gqlHelper } from '../../../utils/graphQL'
    import NavigationBar from '../../NavigationBar.svelte'
 
-   export let id
+   export let id;
+   export let orgId;
 
    let fetchingState = '',
       register = undefined
 
-   const getOrganizationInfo = async () => {
+   const getRegisterInfo = async () => {
       fetchingState = 'loading'
 
       register = await gqlHelper.queries
@@ -24,7 +25,7 @@ import { Link } from 'svelte-navigator';
    }
 
    onMount(async () => {
-      getOrganizationInfo()
+      getRegisterInfo()
    })
 </script>
 
@@ -54,7 +55,7 @@ import { Link } from 'svelte-navigator';
          <div class="c-form-altinputs">
             <div>Roles Overview placeholder</div>
 
-            <Link to="/{id}/edit">
+            <Link to="/{orgId}/{id}/edit">
                   <button class="c-button-edit"> Bewerken </button>
                </Link>
          </div>
