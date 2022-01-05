@@ -1,5 +1,5 @@
 <script lang="ts">
-   import { Route, Router } from 'svelte-navigator'
+   import { Route, Router, useParams } from 'svelte-navigator'
    import { onMount } from 'svelte'
    import { getAuth } from 'firebase/auth'
    import { authHelper, authStore, setAuthStore } from '../../utils/auth'
@@ -11,6 +11,7 @@
    import AddOrganisation from '../pages/Organisation/AddOrganisation.svelte'
    import OrganizationSelector from '../pages/Organisation/OrganizationSelector.svelte'
    import Sidebar from '../sidebar/Sidebar.svelte'
+   import AcceptInvitation from '../pages/AcceptInvitation.svelte';
 
    onMount(() => {
       getAuth().onAuthStateChanged(async user => {
@@ -46,4 +47,7 @@
          <OrganizationRoutes />
       </Route>
    {/if}
+   <Route path="/invitation/:invId" let:params>
+      <AcceptInvitation invitation_id={params.invId} />
+   </Route>
 </Router>
