@@ -21,6 +21,7 @@
 
          
       isUser = isOwner || perms.registers.some(o => o.id === register_id)
+      console.log($params)
    }
 
    $: checkRegisterPermissions($params.orgId, $params.regId)

@@ -18,7 +18,6 @@
    const getRegisters = async () => {
       fetchingState = 'loading'
 
-      console.log(organization_id)
 
       registers = await gqlHelper.queries
          .registers(organization_id)
@@ -30,7 +29,6 @@
             fetchingState = 'error'
          })
       
-         console.log(registers)
 
       // Filter which ones he has perms??
    }
