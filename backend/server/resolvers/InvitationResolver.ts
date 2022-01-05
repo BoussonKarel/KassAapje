@@ -1,8 +1,10 @@
 import { Arg, Mutation, Resolver } from 'type-graphql'
 import { EntityManager, getManager } from 'typeorm'
 import { Role, RoleManager } from '../auth/roleManagement'
+import { Organization } from '../entity/organization'
 import { Permission } from '../entity/permission'
-import { Invitation } from '../entity/roleInvitation'
+import { Register } from '../entity/register'
+import { Invitation, InvitationInfo } from '../entity/roleInvitation'
 import { User } from '../entity/user'
 import { CurrentUser } from '../middleware/currentUserParamDecorator'
 
@@ -44,9 +46,9 @@ export class InvitationResolver {
       const newInvitation = this.manager.create(Invitation, invitationData)
 
       // SET EXPIRATION DATE
-      const expDate = new Date(Date.now());
+      const expDate = new Date(Date.now())
       expDate.setDate(expDate.getDate() + 14)
-      newInvitation.expiration_date = expDate;
+      newInvitation.expiration_date = expDate
 
       return await this.manager.save(newInvitation)
     } catch (error: any) {
@@ -62,12 +64,14 @@ export class InvitationResolver {
   ) {
     try {
       // Search for invitation
-      const invitation = await this.manager.findOneOrFail(Invitation, invitationId).catch(() => {
-        throw new Error('Could not find that invitation.')
-      })
+      const invitation = await this.manager
+        .findOneOrFail(Invitation, invitationId)
+        .catch(() => {
+          throw new Error('Could not find that invitation.')
+        })
 
       // Expired?
-      const expired = invitation.expiration_date < new Date(Date.now());
+      const expired = invitation.expiration_date < new Date(Date.now())
 
       if (expired) throw new Error('Invitation has expired.')
       else {
@@ -76,18 +80,21 @@ export class InvitationResolver {
           user: user,
           role: invitation.role,
           organization_id: invitation.organization_id,
-          register_id: invitation.register_id
+          register_id: invitation.register_id,
         })
 
-        return await this.roleManager.addPermission(perms).then(async () => {
-          // SUCCESS > REMOVE INVITATION FROM DATABASE
-          await this.manager.delete(Invitation, invitationId);
-          return true;
-        }).catch(async error => {
-          // FAIL
-          console.error({error})
-          throw new Error('Something went wrong saving your new permissions.')
-        })
+        return await this.roleManager
+          .addPermission(perms)
+          .then(async () => {
+            // SUCCESS > REMOVE INVITATION FROM DATABASE
+            await this.manager.delete(Invitation, invitationId)
+            return true
+          })
+          .catch(async error => {
+            // FAIL
+            console.error({ error })
+            throw new Error('Something went wrong saving your new permissions.')
+          })
       }
     } catch (error: any) {
       console.error(`⛔ (${user.email}) ` + error.message)
@@ -98,6 +105,23 @@ export class InvitationResolver {
   // -------
   // READ
   // -------
+  @Mutation(() => InvitationInfo)
+  async getInvitationInfo(@Arg('id') invitationId: string) {
+    try {
+      const invitation = await this.manager
+        .findOneOrFail(Invitation, invitationId)
+        .catch(e => {
+          console.error(e)
+          throw new Error('Could not find that invitation.')
+        })
+
+      console.log({ invitation })
+      return invitation
+    } catch (error: any) {
+      console.error(`⛔ (GUEST) ` + error.message)
+      throw error
+    }
+  }
 
   // -------
   // UPDATE

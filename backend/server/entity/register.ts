@@ -13,6 +13,7 @@ import { Order } from './order'
 import { Organization } from './organization'
 import { Permission } from './permission'
 import { Product } from './product'
+import { Invitation } from './roleInvitation'
 
 @ObjectType()
 @Entity('registers')
@@ -52,6 +53,9 @@ export class Register extends BaseEntity {
 
   @OneToMany(() => Permission, p => p.register )
   permissions?: Permission[]
+
+  @OneToMany(() => Invitation, p => p.register)
+  invitations?: Invitation[]
 }
 
 @InputType('RegisterInput')
