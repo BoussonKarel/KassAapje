@@ -74,7 +74,6 @@
          valid = true
       } else {
          valid = false
-         console.log('hier loopt er iets mis')
          console.log('errors', errors)
          errors.submit = DEFAULT_ERROR.submit
       }
