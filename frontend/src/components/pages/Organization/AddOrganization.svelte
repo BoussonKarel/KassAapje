@@ -20,7 +20,7 @@
       name: '',
       street: '',
       street_number: null,
-      box: undefined,
+      box: '',
       zip: null,
       city: '',
       country: '',
@@ -45,19 +45,54 @@
    }
 
    async function handleSubmit() {
-      let body: OrganizationInput = values
+      for (let field in values) {
+         if (field == 'zip' || field == 'street_number') {
+            console.log('nummer getarget')
+            if (!validateNumber(values[field])) {
+               errors[field] = DEFAULT_ERROR.number
+            } else {
+               errors[field] = null
+            }
+         } else if (field == 'email') {
+            if (!validateEmail(values[field])) {
+               errors[field] = DEFAULT_ERROR.email
+            } else {
+               errors[field] = null
+            }
+         } else if(field == 'box'){
+            errors[field] = null
+         }else{
+            if (!validateNotEmpty(values[field])) {
+               errors[field] = DEFAULT_ERROR.empty
+            } else {
+               errors[field] = null
+            }
+         }
+      }
 
-      // await gqlHelper.mutations
-      //    .addOrganization(body)
-      //    .catch(e => {
-      //       console.log(e)
-      //    })
-      //    .finally(() => {
-      //       authHelper.refresh()
+      if (noErrors()) {
+         valid = true
+      } else {
+         valid = false
+         console.log("hier loopt er iets mis")
+         console.log("errors", errors)
+         errors.submit = `Niet alle velden zijn ingevuld, vul aan en probeer opnieuw.`
+      }
 
-      //    })
-      console.log(body)
-      // navigate('/')
+      if (valid) {
+         let body: OrganizationInput = values
+
+         await gqlHelper.mutations
+            .addOrganization(body)
+            .catch(e => {
+               console.log(e)
+            })
+            .finally(() => {
+               authHelper.refresh()
+            })
+         console.log(body)
+         navigate('/')
+      }
    }
 
    const noErrors = () => {
@@ -91,10 +126,21 @@
          }
       }
 
-      // if (!errors.name && !errors.description && !errors.color) {
-      //    console.log("alle errors weggewerkt")
-      //    errors.submit = null
-      // }
+      if (
+         !errors.name &&
+         !errors.street &&
+         !errors.street_number &&
+         !errors.zip &&
+         !errors.city &&
+         !errors.country &&
+         !errors.website &&
+         !errors.logo &&
+         !errors.color &&
+         !errors.email
+      ) {
+         console.log('alle errors weggewerkt')
+         errors.submit = null
+      }
    }
 </script>
 
@@ -236,7 +282,10 @@
       <p class="c-form__info">(*) Verplicht veld</p>
 
       <div class="c-form-altinputs">
-         <button class="c-button-save u-button-disabled"> Opslaan </button>
+         <span class="c-form-error">
+            {errors.submit ? errors.submit : ''}
+         </span>
+         <button class="c-button-save"> Opslaan </button>
       </div>
    </form>
 </div>

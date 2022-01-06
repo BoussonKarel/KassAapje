@@ -63,11 +63,10 @@
                authHelper.refresh()
             })
 
-         console.log("body", body)
+         console.log('body', body)
 
          navigate(-1)
       }
-
    }
 
    const noErrors = () => {
@@ -87,10 +86,10 @@
          errors[field] = null
       }
 
-      console.log("errors", errors)
+      console.log('errors', errors)
 
       if (!errors.name && !errors.description && !errors.color) {
-         console.log("verwijder submit error")
+         console.log('verwijder submit error')
          errors.submit = null
       }
    }
@@ -113,7 +112,7 @@
          .finally(() => {
             fetchingState = ''
          })
-      console.log("register", register)
+      console.log('register', register)
       setRegisterInfo()
    }
 
@@ -130,9 +129,7 @@
    <form class="c-form" name="EditRegister" on:submit|preventDefault={handleSubmit}>
       <div class="c-form-textinputs">
          <label class="c-form-label" for="Name"> Naam: *</label>
-         <span class="c-form-error">
-            {errors.name ? errors.name : ''}
-         </span>
+
          <input
             class="c-form-textinput c-input {errors.name ? 'has-error' : ''}"
             type="text"
@@ -140,10 +137,11 @@
             bind:value={values.name}
             on:blur={handleInput}
          />
-         <label class="c-form-label" for="Description"> Beschrijving: *</label>
          <span class="c-form-error">
-            {errors.description ? errors.description : ''}
+            {errors.name ? errors.name : ''}
          </span>
+         <label class="c-form-label" for="Description"> Beschrijving: *</label>
+
          <textarea
             class="c-form-textinput c-input u-description {errors.description ? 'has-error' : ''}"
             name="description"
@@ -153,12 +151,14 @@
             bind:value={values.description}
             on:blur={handleInput}
          />
+         <span class="c-form-error">
+            {errors.description ? errors.description : ''}
+         </span>
       </div>
 
       <p class="c-form__info">(*) Verplicht veld</p>
 
       <div class="c-form-altinputs">
-
          <span class="c-form-error">
             {errors.submit ? errors.submit : ''}
          </span>

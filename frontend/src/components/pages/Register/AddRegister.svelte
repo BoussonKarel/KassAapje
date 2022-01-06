@@ -82,7 +82,7 @@
       }
 
       if (!errors.name && !errors.description && !errors.color) {
-         console.log("alle errors weggewerkt")
+         console.log('alle errors weggewerkt')
          errors.submit = null
       }
    }
@@ -96,9 +96,7 @@
    <form class="c-form" name="AddOrganisation" on:submit|preventDefault={handleSubmit}>
       <div class="c-form-textinputs">
          <label class="c-form-label" for="Name"> Naam: *</label>
-         <span class="c-form-error">
-            {errors.name ? errors.name : ''}
-         </span>
+
          <input
             class="c-form-textinput c-input {errors.name ? 'has-error' : ''}"
             type="text"
@@ -107,11 +105,12 @@
             bind:value={values.name}
             on:blur={handleInput}
          />
+         <span class="c-form-error">
+            {errors.name ? errors.name : ''}
+         </span>
 
          <label class="c-form-label" for="Description"> Beschrijving: *</label>
-         <span class="c-form-error">
-            {errors.description ? errors.description : ''}
-         </span>
+
          <textarea
             class="c-form-textinput c-input u-description {errors.description ? 'has-error' : ''}"
             name="description"
@@ -122,6 +121,9 @@
             bind:value={values.description}
             on:blur={handleInput}
          />
+         <span class="c-form-error">
+            {errors.description ? errors.description : ''}
+         </span>
       </div>
       <p class="c-form__info">(*) Verplicht veld</p>
       <div class="c-form-altinputs">

@@ -23,9 +23,8 @@ export const formHelper = () => {
     if(value.length >= 1) return true;
     return false;
   }
-  const validateNumber = (value: number | null ) => {
-    console.log(value)
-    if(value == null || value < 1){
+  const validateNumber = (value: number | null | undefined) => {
+    if(value == null || value == undefined || value < 1){
         return false;
     }
     return true;
