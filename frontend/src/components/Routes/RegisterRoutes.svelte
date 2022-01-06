@@ -49,7 +49,7 @@
          </Route>
 
          <Route path="/add">
-            <AddProduct />
+            <AddProduct register_id={$params.regId} />
          </Route>
       </Route>
    {:else}

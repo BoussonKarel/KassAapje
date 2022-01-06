@@ -129,6 +129,11 @@ export const gqlMutations = {
    }`,
    acceptInvitation: `mutation ($invitation_id: String!) {
       acceptInvitation(id: $invitation_id)
+   }`,
+   addProduct: `mutation ($product: ProductInput!) {
+      addProduct(product: $product) {
+         product_id
+      }
    }`
 }
 
@@ -154,5 +159,6 @@ export const gqlHelper = {
       addRegister: register => query('addRegister', gqlMutations.addRegister, { register }),
       updateRegister: register => query('updateRegister', gqlMutations.updateRegister, { register }),
       acceptInvitation: (invitation_id: string) => query('acceptInvitation', gqlMutations.acceptInvitation, { invitation_id }),
+      addProduct: product => query('addProduct', gqlMutations.addProduct, { product})
    },
 }
