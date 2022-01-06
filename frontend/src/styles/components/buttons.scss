@@ -6,6 +6,7 @@
   text-transform: uppercase;
   font-weight: 500;
   border: none;
+  outline: none;
 
   padding: 0.5em 1em;
   border-radius: $global-border-radius;
@@ -14,7 +15,7 @@
 
   cursor: pointer;
 
-  &:hover {
+  &:hover, &:focus {
     background-color: map-get($colors-theme, '400');
   }
 
