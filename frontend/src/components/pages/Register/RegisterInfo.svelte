@@ -1,11 +1,12 @@
 <script lang="ts">
    import { onMount } from 'svelte'
-import { Link } from 'svelte-navigator';
+   import { Link } from 'svelte-navigator'
    import { gqlHelper } from '../../../utils/graphQL'
    import NavigationBar from '../../NavigationBar.svelte'
 
-   export let id;
-   export let orgId;
+   export let id
+   export let orgId
+   export let isOwner
 
    let fetchingState = '',
       register = undefined
@@ -55,9 +56,11 @@ import { Link } from 'svelte-navigator';
          <div class="c-form-altinputs">
             <div>Roles Overview placeholder</div>
 
-            <Link to="/{orgId}/{id}/edit">
+            {#if isOwner}
+               <Link to="/{orgId}/{id}/edit">
                   <button class="c-button-edit"> Bewerken </button>
                </Link>
+            {/if}
          </div>
       </form>
    {/if}

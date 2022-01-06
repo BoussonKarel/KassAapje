@@ -29,7 +29,7 @@
       <RegisterSelector organization_id={$params.orgId} />
    </Route>
    <Route path="/info">
-      <OrganizationInfo id={$params.orgId} />
+      <OrganizationInfo id={$params.orgId} {isOwner} />
    </Route>
    {#if isOwner}
       <Route path="/edit">

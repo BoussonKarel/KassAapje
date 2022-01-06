@@ -4,7 +4,11 @@
    import { gqlHelper } from '../../../utils/graphQL'
    import { Link } from 'svelte-navigator'
    import Login from '../Auth/Login.svelte'
+   import { authStore, Role } from '../../../utils/auth'
+
    export let id
+   export let isOwner
+
 
    let fetchingState = '',
       organization = undefined
@@ -86,9 +90,14 @@
                </div>
             </div>
             <div class="c-form-altinputs">
+
+               {#if isOwner}
                <Link to="/{id}/edit">
                   <button class="c-button-edit"> Bewerken </button>
                </Link>
+               {/if}
+
+               
                
             </div>
          </form>

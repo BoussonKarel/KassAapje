@@ -36,7 +36,7 @@
       <OrderOverview />
    </Route>
    <Route path="/info">
-      <RegisterInfo id={$params.regId} {orgId} />
+      <RegisterInfo id={$params.regId} {orgId} {isOwner} />
    </Route>
 
    {#if isOwner}
