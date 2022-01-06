@@ -17,9 +17,10 @@ const query = async (name: string, query: string, variables?: Object) => {
       .then(json => {
          if (json.errors) throw json.errors[0]
          else return json.data[name]
-      }).catch(e => {
-         console.error({e});
-         throw new Error('Er ging iets fout bij het uitvoeren van de query/mutation.');
+      })
+      .catch(e => {
+         console.error({ e })
+         throw new Error('Er ging iets fout bij het uitvoeren van de query/mutation.')
       })
 }
 
@@ -81,13 +82,13 @@ export const gqlQueries = {
         }
       }
     }`,
-    register: `query ($register_id: String!){
+   register: `query ($register_id: String!){
       getRegisterById(id: $register_id) {
           name,
           description
       }
-  }` ,
-    invitation: `query ($invitation_id: String!) {
+  }`,
+   invitation: `query ($invitation_id: String!) {
       getInvitationInfo(id: $invitation_id) {
         invitation_id,
         register {
@@ -102,6 +103,13 @@ export const gqlQueries = {
         expiration_date
       }
     }`,
+   product: `query ($product_id: String!){
+      getProductById(id: $product_id) {
+          name,
+          price,
+          stock_quantity
+      }
+  }`,
 }
 
 export const gqlMutations = {
@@ -139,7 +147,7 @@ export const gqlMutations = {
       updateProduct(product: $product) {
          product_id
       }
-   }`
+   }`,
 }
 
 export const gqlHelper = {
@@ -153,8 +161,11 @@ export const gqlHelper = {
       organization: (id: string) => query('getOrganizationById', gqlQueries.organization, { id }),
       registers: (organization_id: string) =>
          query('getRegistersByOrganization', gqlQueries.registers, { organization_id }),
-         register: (register_id: string) => query('getRegisterById', gqlQueries.register, {register_id}),
-      invitation: (invitation_id: string) => query('getInvitationInfo', gqlQueries.invitation, { invitation_id }),
+      register: (register_id: string) =>
+         query('getRegisterById', gqlQueries.register, { register_id }),
+      invitation: (invitation_id: string) =>
+         query('getInvitationInfo', gqlQueries.invitation, { invitation_id }),
+      product: (product_id: string) => query('getProductById', gqlQueries.product, { product_id }),
    },
    mutations: {
       addOrganization: organization =>
@@ -162,9 +173,11 @@ export const gqlHelper = {
       updateOrganization: organization =>
          query('updateOrganization', gqlMutations.updateOrganization, { organization }),
       addRegister: register => query('addRegister', gqlMutations.addRegister, { register }),
-      updateRegister: register => query('updateRegister', gqlMutations.updateRegister, { register }),
-      acceptInvitation: (invitation_id: string) => query('acceptInvitation', gqlMutations.acceptInvitation, { invitation_id }),
+      updateRegister: register =>
+         query('updateRegister', gqlMutations.updateRegister, { register }),
+      acceptInvitation: (invitation_id: string) =>
+         query('acceptInvitation', gqlMutations.acceptInvitation, { invitation_id }),
       addProduct: product => query('addProduct', gqlMutations.addProduct, { product }),
-      updateProduct: product => query('updateProduct', gqlMutations.updateProduct, { product })
+      updateProduct: product => query('updateProduct', gqlMutations.updateProduct, { product }),
    },
 }

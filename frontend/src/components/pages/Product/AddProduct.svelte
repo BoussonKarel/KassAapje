@@ -16,7 +16,7 @@
    // INPUTS
    let valid = false
 
-   export let product_id = ''
+   export let product_id = 'e1d4f4f6-e1ef-4f52-86b6-601bfe9d31fb'
 
    export let register_id
 
@@ -33,6 +33,9 @@
       stock_quantity: null,
       submit: null,
    }
+
+   let fetchingState = '',
+      product = undefined
 
    async function handleSubmit() {
       for (let field in values) {
@@ -138,67 +141,99 @@
       }
    }
 
+   const setProductInfo = async () => {
+      values.register_id = register_id
+      values.name = product.name
+      values.price = product.price
+      values.stock_quantity = product.stock_quantity
+   }
+
+   const getProductInfo = async () => {
+      fetchingState = 'loading'
+
+      product = await gqlHelper.queries
+         .product(product_id)
+         .catch(e => {
+            fetchingState = 'error'
+         })
+         .finally(() => {
+            fetchingState = ''
+         })
+      console.log(product)
+      setProductInfo()
+   }
+
    onMount(async () => {
       if (product_id != '') {
          //getValues
+         getProductInfo()
          //setValues
       }
    })
 </script>
 
 <div class="c-page">
-   <div class="c-navigation">
-      <NavigationBar title={'Product toevoegen'} />
+
+   {#if fetchingState === 'loading'}
+   Loading
+{:else if fetchingState === 'error'}
+   Error getting organization
+{:else if product || product_id == ''}
+<div class="c-navigation">
+      
+   <NavigationBar title={'Product toevoegen'} />
+</div>
+<form class="c-form" name="AddOrganisation" on:submit|preventDefault={handleSubmit}>
+   <div class="c-form-textinputs">
+      <label class="c-form-label" for="name"> Naam: *</label>
+      <input
+         class="c-form-textinput c-input {errors.name ? 'has-error' : ''}"
+         type="text"
+         name="name"
+         placeholder="Naam"
+         bind:value={values.name}
+         on:blur={handleInput}
+      />
+      <span class="c-form-error">
+         {errors.name ? errors.name : ''}
+      </span>
+
+      <label class="c-form-label" for="price"> Prijs: *</label>
+      <input
+         class="c-form-numberinput c-input {errors.price ? 'has-error' : ''}"
+         type="number"
+         name="price"
+         placeholder="1"
+         bind:value={values.price}
+         on:blur={handleInput}
+      />
+      <span class="c-form-error">
+         {errors.price ? errors.price : ''}
+      </span>
+
+      <label class="c-form-label" for="stock_quantity"> Hoeveelheid: *</label>
+      <input
+         class="c-form-numberinput c-input {errors.stock_quantity ? 'has-error' : ''}"
+         type="number"
+         name="stock_quantity"
+         placeholder="1"
+         bind:value={values.stock_quantity}
+         on:blur={handleInput}
+      />
+
+      <span class="c-form-error">
+         {errors.stock_quantity ? errors.stock_quantity : ''}
+      </span>
+
+      <p class="c-form__info">(*) Verplicht veld</p>
+
+      <span class="c-form-error">
+         {errors.submit ? errors.submit : ''}
+      </span>
+
+      <button class="c-button-save"> {product_id == '' ? 'opslaan' : 'Bewerken'} </button>
    </div>
-   <form class="c-form" name="AddOrganisation" on:submit|preventDefault={handleSubmit}>
-      <div class="c-form-textinputs">
-         <label class="c-form-label" for="name"> Naam: *</label>
-         <input
-            class="c-form-textinput c-input {errors.name ? 'has-error' : ''}"
-            type="text"
-            name="name"
-            placeholder="Naam"
-            bind:value={values.name}
-            on:blur={handleInput}
-         />
-         <span class="c-form-error">
-            {errors.name ? errors.name : ''}
-         </span>
-
-         <label class="c-form-label" for="price"> Prijs: *</label>
-         <input
-            class="c-form-numberinput c-input {errors.price ? 'has-error' : ''}"
-            type="number"
-            name="price"
-            placeholder="1"
-            bind:value={values.price}
-            on:blur={handleInput}
-         />
-         <span class="c-form-error">
-            {errors.price ? errors.price : ''}
-         </span>
-
-         <label class="c-form-label" for="stock_quantity"> Hoeveelheid: *</label>
-         <input
-            class="c-form-numberinput c-input {errors.stock_quantity ? 'has-error' : ''}"
-            type="number"
-            name="stock_quantity"
-            placeholder="1"
-            bind:value={values.stock_quantity}
-            on:blur={handleInput}
-         />
-
-         <span class="c-form-error">
-            {errors.stock_quantity ? errors.stock_quantity : ''}
-         </span>
-
-         <p class="c-form__info">(*) Verplicht veld</p>
-
-         <span class="c-form-error">
-            {errors.submit ? errors.submit : ''}
-         </span>
-
-         <button class="c-button-save"> {product_id == '' ? 'opslaan' : 'Bewerken'} </button>
-      </div>
-   </form>
+</form>
+{/if}
+   
 </div>
