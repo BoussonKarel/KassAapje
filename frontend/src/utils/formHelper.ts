@@ -19,16 +19,23 @@ export const formHelper = () => {
     )
   }
 
+  const validateNotEmpty = (value: string ) => {
+    if(value.length >= 1) return true;
+    return false;
+  }
   const DEFAULT_ERROR: any = {
     email: 'Gelieve een geldig e-mailadres op te geven.',
-    username: 'Gelieve een geldig naam op te geven (6 - 24 karakters).',
-    password: 'Een geldig wachtwoord is minstens 8 karakters lang en bevat minstens één letter, cijfer en symbool.'
+    username: 'Gelieve een geldige naam op te geven (6 - 24 karakters).',
+    password: 'Een geldig wachtwoord is minstens 8 karakters lang en bevat minstens één letter, cijfer en symbool.',
+    empty: 'Dit veld mag niet leeg blijven.',
+    submit: 'Er ging iets mis, controleer de gegevens en probeer opnieuw.'
   };
 
   return {
     validateEmail,
     validateUsername,
     validatePassword,
+    validateNotEmpty,
     DEFAULT_ERROR
   }
 }
