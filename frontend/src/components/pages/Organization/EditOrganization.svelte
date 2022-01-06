@@ -2,7 +2,7 @@
    import { useNavigate } from 'svelte-navigator'
 
    const navigate = useNavigate()
-   import type { OrganizationUpdateInput } from '../../../models/OrganizationUpdateInput';
+   import type { OrganizationUpdateInput } from '../../../models/OrganizationUpdateInput'
 
    import { gqlHelper } from '../../../utils/graphQL'
 
@@ -42,15 +42,15 @@
          email: email,
       }
 
-       await gqlHelper.mutations
-          .updateOrganization(body)
-          .catch(e => {
-             console.log(e)
-          })
-          .finally(() => {
-             console.log('org updated')
-             navigate(`/${id}/info`)
-          })
+      await gqlHelper.mutations
+         .updateOrganization(body)
+         .catch(e => {
+            console.log(e)
+         })
+         .finally(() => {
+            console.log('org updated')
+            navigate(`/${id}/info`)
+         })
       console.log(body)
    }
 
@@ -96,22 +96,22 @@
 
       <form class="c-form" name="AddOrganisation" on:submit|preventDefault={handleSubmit}>
          <div class="c-form-textinputs">
-            <label class="c-form-label" for="Name"> Naam: </label>
+            <label class="c-form-label" for="Name"> Naam: * </label>
             <input class="c-form-textinput" type="text" name="Name" bind:value={name} />
 
-            <label class="c-form-label" for="Website"> Website: </label>
+            <label class="c-form-label" for="Website"> Website: * </label>
             <input class="c-form-textinput" type="text" name="Website" bind:value={website} />
 
-            <label class="c-form-label" for="Email"> Email: </label>
+            <label class="c-form-label" for="Email"> Email: * </label>
             <input class="c-form-textinput" type="text" name="Email" bind:value={email} />
 
             <div class="u-input-street">
                <div class="u-input-street-1">
-                  <label class="c-form-label" for="Straat"> Straat: </label>
+                  <label class="c-form-label" for="Straat"> Straat: *</label>
                   <input class="c-form-textinput" type="text" name="Straat" bind:value={street} />
                </div>
                <div class="u-input-street-2">
-                  <label class="c-form-label" for="Number"> Nr. </label>
+                  <label class="c-form-label" for="Number"> Nr. *</label>
                   <input
                      class="c-form-textinput"
                      type="number"
@@ -125,15 +125,18 @@
                </div>
             </div>
 
-            <label class="c-form-label" for="City"> Stad: </label>
+            <label class="c-form-label" for="City"> Stad: *</label>
             <input class="c-form-textinput" type="text" name="City" bind:value={city} />
 
-            <label class="c-form-label" for="Postal"> Postcode: </label>
+            <label class="c-form-label" for="Postal"> Postcode: *</label>
             <input class="c-form-textinput" type="number" name="Postal" bind:value={zip} />
 
-            <label class="c-form-label" for="Country"> Land: </label>
+            <label class="c-form-label" for="Country"> Land: *</label>
             <input class="c-form-textinput" type="text" name="Country" bind:value={country} />
          </div>
+
+         <p class="c-form__info">(*) Verplicht veld</p>
+
          <div class="c-form-altinputs">
             <button class="c-button-save u-button-disabled"> Opslaan </button>
          </div>

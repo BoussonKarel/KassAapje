@@ -45,15 +45,14 @@
 
    <form class="c-form" name="AddOrganisation" on:submit|preventDefault={handleSubmit}>
       <div class="c-form-textinputs">
-         <label class="c-form-label" for="Name"> Naam: </label>
+         <label class="c-form-label" for="Name"> Naam: *</label>
          <input class="c-form-textinput" type="text" name="Name" placeholder="Naam" bind:value={name} />
-         <label class="c-form-label" for="Description"> Beschrijving: </label>
+         <label class="c-form-label" for="Description"> Beschrijving: *</label>
          <textarea class="c-form-textinput u-description" name="Description" id="desc" cols="30" rows="10" placeholder="Beschrijving" bind:value={desc}></textarea>
 
       </div>
+      <p class="c-form__info">(*) Verplicht veld</p>
       <div class="c-form-altinputs">
-         <div>Roles Assignment Placeholder</div>
-
          <button class="c-button-save"> Opslaan </button>
       </div>
    </form>

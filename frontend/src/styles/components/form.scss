@@ -124,6 +124,11 @@
       }
     }
   }
+
+  &__info {
+    font-size: rem(14px);
+    color: map-get($colors-neutral, '700' )
+  }
 }
 
 .has-error {
