@@ -1,11 +1,16 @@
 <script lang="ts">
-   import { formatHelper } from '../../utils/formatHelper';
+   import { formatHelper } from '../../utils/formatHelper'
    import Delete from 'svelte-material-icons/Delete.svelte'
    import POSBasketItem from './POSBasketItem.svelte'
+   import { basketStore, setupNewBasket } from '../../utils/basket'
 
    const product = {
-      name: "Appeljenever",
-      price: 10.00
+      name: 'Appeljenever',
+      price: 10.0,
+   }
+
+   const clearBasket = () => {
+      setupNewBasket($basketStore.register_id);
    }
 </script>
 
@@ -18,10 +23,13 @@
    </div>
 
    <div class="c-basket-list">
-      <!-- <span class="c-basket-empty">Je mandje is leeg</span> -->
-       {#each Array(5) as i}
-        <POSBasketItem {product} />
-       {/each}
+      {#if $basketStore && $basketStore.order_items && $basketStore.order_items.length > 0}
+         {#each $basketStore.order_items as order_item}
+            <POSBasketItem product={order_item.product} />
+         {/each}
+      {:else}
+         <span class="c-basket-empty">Je mandje is leeg</span>
+      {/if}
    </div>
 
    <div class="c-basket-total">

@@ -30,7 +30,7 @@
 
 {#if isUser}
    <Route path="/">
-      <OrderScreen />
+      <OrderScreen register_id={$params.regId} />
    </Route>
    <Route path="/orders">
       <OrderOverview />
