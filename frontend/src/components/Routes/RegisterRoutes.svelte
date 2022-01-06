@@ -51,6 +51,9 @@
          <Route path="/add">
             <AddProduct register_id={$params.regId} />
          </Route>
+         <Route path="/:prodId">
+            <AddProduct register_id={$params.regId} product_id={$params.prodId} />
+         </Route>
       </Route>
    {:else}
       You don't have permission to work in the register catalogue.

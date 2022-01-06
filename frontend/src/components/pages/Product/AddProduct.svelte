@@ -1,9 +1,10 @@
 <script lang="ts">
    import type { ProductInput } from '../../../models/ProductInput'
+   import type { ProductUpdateInput } from '../../../models/ProductUpdateInput'
    import { gqlHelper } from '../../../utils/graphQL'
    import { useNavigate } from 'svelte-navigator'
    const navigate = useNavigate()
-   import { prevent_default } from 'svelte/internal'
+   import { onMount, prevent_default } from 'svelte/internal'
    import { authHelper } from '../../../utils/auth'
 
    import NavigationBar from '../../NavigationBar.svelte'
@@ -14,6 +15,8 @@
 
    // INPUTS
    let valid = false
+
+   export let product_id = ''
 
    export let register_id
 
@@ -58,21 +61,49 @@
       }
 
       if (valid) {
-         let body: ProductInput = values
+         if (product_id != '') {
+            //update existing product
 
-         await gqlHelper.mutations
-            .addProduct(body)
-            .catch(e => {
-               errors.submit = `Er ging iets fout: ${e.message}`
-               console.log(e)
-            })
-            .finally(() => {
-               authHelper.refresh()
-            })
+            let body: ProductUpdateInput = {
+               product_id: product_id,
+               name: values.name,
+               price: values.price,
+               stock_quantity: values.stock_quantity,
+            }
+            console.log('body', body)
 
-         console.log(body)
+            await gqlHelper.mutations
+               .updateProduct(body)
+               .catch(e => {
+                  errors.submit = `Er ging iets fout: ${e.message}`
+                  console.log(e)
+               })
+               .finally(() => {
+                  authHelper.refresh()
+               })
 
-         navigate(-1)
+            console.log(body)
+
+            navigate(-1)
+         } else {
+            //new product add
+
+            let body: ProductInput = values
+
+            await gqlHelper.mutations
+               .addProduct(body)
+               .catch(e => {
+                  errors.submit = `Er ging iets fout: ${e.message}`
+                  console.log(e)
+               })
+               .finally(() => {
+                  authHelper.refresh()
+               })
+
+            console.log(body)
+
+            navigate(-1)
+         }
       }
    }
 
@@ -106,6 +137,13 @@
          errors.submit = null
       }
    }
+
+   onMount(async () => {
+      if (product_id != '') {
+         //getValues
+         //setValues
+      }
+   })
 </script>
 
 <div class="c-page">
@@ -160,7 +198,7 @@
             {errors.submit ? errors.submit : ''}
          </span>
 
-         <button class="c-button-save"> Opslaan </button>
+         <button class="c-button-save"> {product_id == '' ? 'opslaan' : 'Bewerken'} </button>
       </div>
    </form>
 </div>
