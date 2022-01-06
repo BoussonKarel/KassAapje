@@ -6,7 +6,7 @@
    import OrderOverview from '../pages/Order/OrderOverview.svelte'
    import RegisterInfo from '../pages/Register/RegisterInfo.svelte'
    import ProductOverview from '../pages/Product/ProductOverview.svelte'
-   import AddProduct from '../pages/Product/AddProduct.svelte'
+   import AddEditProduct from '../pages/Product/AddEditProduct.svelte'
    import EditRegister from '../pages/Register/EditRegister.svelte'
    import OrderScreen from '../pages/Order/OrderScreen.svelte'
 
@@ -49,10 +49,10 @@
          </Route>
 
          <Route path="/add">
-            <AddProduct register_id={$params.regId} />
+            <AddEditProduct register_id={$params.regId} />
          </Route>
          <Route path="/:prodId">
-            <AddProduct register_id={$params.regId} product_id={$params.prodId} />
+            <AddEditProduct register_id={$params.regId} product_id={$params.prodId} />
          </Route>
       </Route>
    {:else}

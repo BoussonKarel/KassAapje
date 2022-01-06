@@ -16,7 +16,7 @@
    // INPUTS
    let valid = false
 
-   export let product_id = 'e1d4f4f6-e1ef-4f52-86b6-601bfe9d31fb'
+   export let product_id = ''
 
    export let register_id
 
