@@ -103,13 +103,20 @@ export const gqlQueries = {
         expiration_date
       }
     }`,
+   products: `query ($register_id: String!){
+      getProducts(register_id: $register_id) {
+         name,
+         price,
+         stock_quantity
+      }
+   }`,
    product: `query ($product_id: String!){
       getProductById(id: $product_id) {
           name,
           price,
           stock_quantity
       }
-  }`,
+   }`,
 }
 
 export const gqlMutations = {
@@ -165,6 +172,7 @@ export const gqlHelper = {
          query('getRegisterById', gqlQueries.register, { register_id }),
       invitation: (invitation_id: string) =>
          query('getInvitationInfo', gqlQueries.invitation, { invitation_id }),
+      products: (register_id: string) => query('getProducts', gqlQueries.products, { register_id }),
       product: (product_id: string) => query('getProductById', gqlQueries.product, { product_id }),
    },
    mutations: {

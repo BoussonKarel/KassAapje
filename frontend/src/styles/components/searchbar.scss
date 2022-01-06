@@ -2,7 +2,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-height: 10%;
 
     border-radius: $global-border-radius;
     background-color: map-get($colors-neutral, '100');

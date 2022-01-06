@@ -49,15 +49,6 @@ $global-card-height: 230px;
    font-size: rem(28px);
    font-weight: 500;
 
-   // background: linear-gradient(
-   //       -45deg,
-   //       map-get($colors-neutral, '500') 40%,
-   //       map-get($colors-neutral, '400') 50%,
-   //       map-get($colors-neutral, '500') 60%,
-   // );
-
-   // background-size: 400% 400%;
-
    &__title {
       background-color: map-get($colors-neutral, "600");
       animation: opacityfade 2s infinite;
@@ -67,26 +58,10 @@ $global-card-height: 230px;
       margin: 0;
       width: 12ch;
       max-width: 100%;
-      overflow: hidden;
-      text-align: center;
-      text-overflow: ellipsis;
-      display: -webkit-box;
    }
 
    cursor: default !important;
 }
-
-@keyframes opacityfade {
-   0% {
-      opacity: .6;
-   }
-   60% {
-      opacity: 1;
-   }
-   100% {
-      opacity: .6;
-   }
- }
 
 .c-organisationcard {
    display: flex;

@@ -17,12 +17,47 @@
    max-width: 500px;
 }
 
+.c-pos-status {
+   padding: 3em;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   &--error {
+      color: map-get($colors-theme, '500');
+      font-weight: 500;
+   }
+}
+
 .c-pos-list {
    display: grid;
    grid-template-columns: repeat(auto-fill, minmax(175px, auto));
    padding-top: 1em;
    row-gap: 1.5em;
    column-gap: 1em;
+}
+
+
+.c-pos-skeletonproduct {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 130px;
+
+   border-radius: $global-border-radius;
+
+   background-color: map-get($colors-neutral, '300');;
+
+   &__title {
+      background-color: map-get($colors-neutral, "600");
+      animation: opacityfade 2s infinite;
+
+      border-radius: 4px;
+
+      margin: 0;
+      width: 12ch;
+      max-width: 100%;
+   }
 }
 
 .c-pos-product {
