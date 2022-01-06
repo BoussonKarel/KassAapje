@@ -1,6 +1,6 @@
 <script lang="ts">
    import Delete from 'svelte-material-icons/Delete.svelte'
-   import BasketItem from '../Basket/BasketItem.svelte'
+   import POSBasketItem from './POSBasketItem.svelte'
 </script>
 
 <div class="c-basket">
@@ -13,7 +13,7 @@
 
    <div class="c-basket-list">
        {#each Array(5) as i}
-        <BasketItem />
+        <POSBasketItem />
        {/each}
    </div>
 

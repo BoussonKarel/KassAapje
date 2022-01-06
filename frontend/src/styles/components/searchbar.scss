@@ -1,29 +1,39 @@
 .c-searchbar {
     display: flex;
     align-items: center;
-    // margin-top: 1em;
+    justify-content: space-between;
     max-height: 10%;
+
+    border-radius: $global-border-radius;
+    background-color: map-get($colors-neutral, '100');
     
-    &-input {
-        height: 2.5em;
-        min-width: 300px;
-        width: 40%;
+    box-shadow: $default-shadow;
+    
+    height: 2.5em;
+
+    width: 100%;
+
+    &__input {
+        background-color: transparent;
+
+        border-radius: $global-border-radius;
+
+        height: 100%;
         padding-left: 1em;
 
+        flex-grow: 1;
+
         border: none;
-        border-radius: $global-border-radius;
-        box-shadow: $default-shadow;
 
         &:focus {
            outline: none;
-           
         }
     }
 
-    &-icon {
-        // background-color: green;
-        margin-left: -2em;
-        margin-top: 8px;
+    &__icon {
+        display: flex;
+        align-items: center;
+        padding: 0 .5em;
        
         & svg {
             width: 28px;
