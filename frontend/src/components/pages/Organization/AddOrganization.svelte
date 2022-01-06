@@ -59,9 +59,9 @@
             } else {
                errors[field] = null
             }
-         } else if(field == 'box'){
+         } else if (field == 'box') {
             errors[field] = null
-         }else{
+         } else {
             if (!validateNotEmpty(values[field])) {
                errors[field] = DEFAULT_ERROR.empty
             } else {
@@ -74,9 +74,9 @@
          valid = true
       } else {
          valid = false
-         console.log("hier loopt er iets mis")
-         console.log("errors", errors)
-         errors.submit = `Niet alle velden zijn ingevuld, vul aan en probeer opnieuw.`
+         console.log('hier loopt er iets mis')
+         console.log('errors', errors)
+         errors.submit = DEFAULT_ERROR.submit
       }
 
       if (valid) {
@@ -280,11 +280,10 @@
       </div>
 
       <p class="c-form__info">(*) Verplicht veld</p>
-
+      <span class="c-form-error">
+         {errors.submit ? errors.submit : ''}
+      </span>
       <div class="c-form-altinputs">
-         <span class="c-form-error">
-            {errors.submit ? errors.submit : ''}
-         </span>
          <button class="c-button-save"> Opslaan </button>
       </div>
    </form>

@@ -34,7 +34,8 @@ export const formHelper = () => {
     username: 'Gelieve een geldige naam op te geven (6 - 24 karakters).',
     password: 'Een geldig wachtwoord is minstens 8 karakters lang en bevat minstens één letter, cijfer en symbool.',
     empty: 'Dit veld mag niet leeg blijven.',
-    number: 'Ongeldig nummer.'
+    number: 'Ongeldig nummer.',
+    submit: `Niet alle verplichte velden zijn correct ingevuld, vul aan en probeer opnieuw.`
   };
 
   return {

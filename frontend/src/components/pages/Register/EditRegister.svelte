@@ -47,7 +47,7 @@
          valid = true
       } else {
          valid = false
-         errors.submit = `Niet alle velden zijn ingevuld, vul aan en probeer opnieuw.`
+         errors.submit = DEFAULT_ERROR.submit
       }
 
       if (valid) {
@@ -157,12 +157,10 @@
       </div>
 
       <p class="c-form__info">(*) Verplicht veld</p>
-
+      <span class="c-form-error">
+         {errors.submit ? errors.submit : ''}
+      </span>
       <div class="c-form-altinputs">
-         <span class="c-form-error">
-            {errors.submit ? errors.submit : ''}
-         </span>
-
          <button class="c-button-save"> Opslaan </button>
       </div>
    </form>
