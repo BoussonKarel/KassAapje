@@ -16,7 +16,7 @@
    <NavigationBar title={'Order toevoegen'} />
    <div class="c-orderscreen {finishOrder ? 'u-blur' : ''}">
       <div class="c-orderscreen__catalogue">
-         <SearchBar extraClass="c-pos__search" />
+         <SearchBar extraClass="c-pos-search" />
          <POSProductList on:addorsubtract={addOrSubtractAmount} />
       </div>
       <div class="c-orderscreen__basket">

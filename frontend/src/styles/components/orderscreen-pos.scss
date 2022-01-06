@@ -13,6 +13,10 @@
    -webkit-filter: blur(3px);
 }
 
+.c-pos-search {
+   max-width: 500px;
+}
+
 .c-pos-list {
    display: grid;
    grid-template-columns: repeat(auto-fill, minmax(175px, auto));
