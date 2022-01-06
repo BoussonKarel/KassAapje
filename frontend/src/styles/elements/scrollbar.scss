@@ -1,21 +1,28 @@
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 20px;
+  margin-left: 5px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: map-get($colors-theme, '300');
+  background-color: map-get($colors-theme, '200');
   border-radius: 10px;
+  
+  background-clip: content-box;
+  border: solid 6px transparent;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: map-get($colors-theme, '600');
+  background-color: map-get($colors-theme, '500');
   border-radius: 10px;
+
+  background-clip: content-box;
+  border: solid 6px transparent;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: map-get($colors-theme, '700');
+  background-color: map-get($colors-theme, '400');
 }

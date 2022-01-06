@@ -3,12 +3,12 @@
 
    import { authStore, Role } from '../../utils/auth'
    import { useParams } from 'svelte-navigator'
-   import AddOrder from '../pages/Order/AddOrder.svelte'
    import OrderOverview from '../pages/Order/OrderOverview.svelte'
    import RegisterInfo from '../pages/Register/RegisterInfo.svelte'
    import ProductOverview from '../pages/Product/ProductOverview.svelte'
    import AddProduct from '../pages/Product/AddProduct.svelte'
    import EditRegister from '../pages/Register/EditRegister.svelte'
+   import OrderScreen from '../pages/Order/OrderScreen.svelte';
 
    const params = useParams()
    export let orgId: string
@@ -30,7 +30,7 @@
 
 {#if isUser}
    <Route path="/">
-      <AddOrder />
+      <OrderScreen />
    </Route>
    <Route path="/orders">
       <OrderOverview />

@@ -2,10 +2,11 @@
 import { useDeviceLanguage } from "@firebase/auth";
 import PopupTable from "./PopupTable.svelte";
 
+export let hidden;
 
 </script>
 
-<div class="c-popup-order">
+<div class="c-popup-order {hidden ? 'c-popup-order--hidden' : ''}">
     <p class="c-popup-order__title">
         Bestelling afronden
     </p>

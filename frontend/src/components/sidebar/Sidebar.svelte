@@ -33,11 +33,12 @@
       }
    }
 
+   export const setSidebarCollapse = (value: boolean) => {
+      sidebarCollapsed = value;
+   }
+
    function toggleSidebarCollapse() {
       sidebarCollapsed = !sidebarCollapsed
-
-      console.log('collapsed sidebar')
-      console.log(sidebarCollapsed)
    }
 
    let fetchingState = '',
