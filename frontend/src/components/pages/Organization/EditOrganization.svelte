@@ -9,66 +9,162 @@
    import NavigationBar from '../../NavigationBar.svelte'
    import { identity, onMount } from 'svelte/internal'
 
-   export let id
+   import { formHelper } from '../../../utils/formHelper'
+
+   const { DEFAULT_ERROR, validateNotEmpty, validateEmail, validateNumber } = formHelper()
+
+   export let organization_id
 
    let fetchingState = '',
       organization = undefined
 
    // INPUTS
-   let name
-   let street
-   let street_number
-   let box
-   let zip
-   let city
-   let country
-   let website
-   let logo = 'empty'
-   let email
+
+   let valid = false
+
+   let values: OrganizationUpdateInput = {
+      organization_id: organization_id,
+      name: '',
+      street: '',
+      street_number: null,
+      box: '',
+      zip: null,
+      city: '',
+      country: '',
+      website: '',
+      logo: 'empty',
+      color: '#fff',
+      email: '',
+   }
+
+   let errors = {
+      name: null,
+      street: null,
+      street_number: null,
+      zip: null,
+      city: null,
+      country: null,
+      website: null,
+      logo: null,
+      color: null,
+      email: null,
+      submit: null,
+   }
 
    async function handleSubmit() {
-      let body: OrganizationUpdateInput = {
-         organization_id: id,
-         name: name,
-         street: street,
-         street_number: street_number,
-         box: box,
-         zip: zip,
-         city: city,
-         country: country,
-         website: website,
-         logo: logo,
-         color: '#AABBDD',
-         email: email,
+      for (let field in values) {
+         if (field == 'zip' || field == 'street_number') {
+            console.log('nummer getarget')
+            if (!validateNumber(values[field])) {
+               errors[field] = DEFAULT_ERROR.number
+            } else {
+               errors[field] = null
+            }
+         } else if (field == 'email') {
+            if (!validateEmail(values[field])) {
+               errors[field] = DEFAULT_ERROR.email
+            } else {
+               errors[field] = null
+            }
+         } else if (field == 'box') {
+            errors[field] = null
+         } else {
+            if (!validateNotEmpty(values[field])) {
+               errors[field] = DEFAULT_ERROR.empty
+            } else {
+               errors[field] = null
+            }
+         }
       }
 
-      await gqlHelper.mutations
-         .updateOrganization(body)
-         .catch(e => {
-            console.log(e)
-         })
-         .finally(() => {
-            console.log('org updated')
-            navigate(`/${id}/info`)
-         })
-      console.log(body)
+      if (noErrors()) {
+         valid = true
+      } else {
+         valid = false
+         console.log('hier loopt er iets mis')
+         console.log('errors', errors)
+         errors.submit = DEFAULT_ERROR.submit
+      }
+
+      if (valid) {
+         let body: OrganizationUpdateInput = values
+
+         await gqlHelper.mutations
+            .updateOrganization(body)
+            .catch(e => {
+               console.log(e)
+            })
+            .finally(() => {
+               console.log('org updated')
+            })
+         console.log(body)
+         navigate(`/${organization_id}/info`)
+      }
+   }
+
+   const noErrors = () => {
+      for (var error in errors) {
+         if (errors[error] !== null && errors[error] !== '') return false
+      }
+      return true
+   }
+
+   const handleInput = e => {
+      var field: string = e.target.name
+
+      if (field == 'zip' || field == 'street_number') {
+         console.log('nummer getarget')
+         if (!validateNumber(values[field])) {
+            errors[field] = DEFAULT_ERROR.number
+         } else {
+            errors[field] = null
+         }
+      } else if (field == 'email') {
+         if (!validateEmail(values[field])) {
+            errors[field] = DEFAULT_ERROR.email
+         } else {
+            errors[field] = null
+         }
+      } else {
+         if (!validateNotEmpty(values[field])) {
+            errors[field] = DEFAULT_ERROR.empty
+         } else {
+            errors[field] = null
+         }
+      }
+
+      if (
+         !errors.name &&
+         !errors.street &&
+         !errors.street_number &&
+         !errors.zip &&
+         !errors.city &&
+         !errors.country &&
+         !errors.website &&
+         !errors.logo &&
+         !errors.color &&
+         !errors.email
+      ) {
+         console.log('alle errors weggewerkt')
+         errors.submit = null
+      }
    }
 
    const setOrganizationInfo = async () => {
-      name = organization.name
-      website = organization.website
-      email = organization.email
-      street = organization.street
-      street_number = organization.street_number
-      box = organization.box
-      city = organization.city
-      zip = organization.zip
-      country = organization.country
+      values.name = organization.name
+      values.website = organization.website
+      values.email = organization.email
+      values.street = organization.street
+      values.street_number = organization.street_number
+      values.box = organization.box
+      values.city = organization.city
+      values.zip = organization.zip
+      values.country = organization.country
    }
 
    const getOrganizationInfo = async () => {
       organization = await gqlHelper.queries
-         .organization(id)
+         .organization(organization_id)
          .catch(e => {
             fetchingState = 'error'
          })
@@ -96,49 +192,127 @@
 
       <form class="c-form" name="AddOrganisation" on:submit|preventDefault={handleSubmit}>
          <div class="c-form-textinputs">
-            <label class="c-form-label" for="Name"> Naam: * </label>
-            <input class="c-form-textinput" type="text" name="Name" bind:value={name} />
+            <label class="c-form-label" for="name"> Naam: * </label>
+            <input
+               class="c-form-textinput c-input {errors.name ? 'has-error' : ''}"
+               type="text"
+               name="name"
+               bind:value={values.name}
+               on:blur={handleInput}
+            />
+            <span class="c-form-error">
+               {errors.name ? errors.name : ''}
+            </span>
 
             <label class="c-form-label" for="Website"> Website: * </label>
-            <input class="c-form-textinput" type="text" name="Website" bind:value={website} />
+            <input
+               class="c-form-textinput c-input {errors.website ? 'has-error' : ''}"
+               type="text"
+               name="website"
+               bind:value={values.website}
+               on:blur={handleInput}
+            />
+            <span class="c-form-error">
+               {errors.website ? errors.website : ''}
+            </span>
 
             <label class="c-form-label" for="Email"> Email: * </label>
-            <input class="c-form-textinput" type="text" name="Email" bind:value={email} />
+            <input
+               class="c-form-textinput c-input {errors.email ? 'has-error' : ''}"
+               type="text"
+               name="email"
+               bind:value={values.email}
+               on:blur={handleInput}
+            />
+            <span class="c-form-error">
+               {errors.email ? errors.email : ''}
+            </span>
 
             <div class="u-input-street">
                <div class="u-input-street-1">
-                  <label class="c-form-label" for="Straat"> Straat: *</label>
-                  <input class="c-form-textinput" type="text" name="Straat" bind:value={street} />
+                  <label class="c-form-label" for="street"> Straat: *</label>
+                  <input
+                     class="c-form-textinput c-input {errors.street ? 'has-error' : ''}"
+                     type="text"
+                     name="street"
+                     bind:value={values.street}
+                     on:blur={handleInput}
+                  />
+
+                  <span class="c-form-error">
+                     {errors.street ? errors.street : ''}
+                  </span>
                </div>
                <div class="u-input-street-2">
-                  <label class="c-form-label" for="Number"> Nr. *</label>
+                  <label class="c-form-label" for="street_number"> Nr. *</label>
                   <input
-                     class="c-form-textinput"
+                     class="c-form-textinput c-input {errors.street_number ? 'has-error' : ''}"
                      type="number"
-                     name="Number"
-                     bind:value={street_number}
+                     name="street_number"
+                     bind:value={values.street_number}
+                     on:blur={handleInput}
                   />
+                  <span class="c-form-error">
+                     {errors.street_number ? errors.street_number : ''}
+                  </span>
                </div>
                <div class="u-input-street-3">
-                  <label class="c-form-label" for="Box"> Bus: </label>
-                  <input class="c-form-textinput" type="text" name="Box" bind:value={box} />
+                  <label class="c-form-label" for="box"> Bus: </label>
+                  <input
+                     class="c-form-textinput c-input "
+                     type="text"
+                     name="box"
+                     bind:value={values.box}
+                  />
                </div>
             </div>
 
-            <label class="c-form-label" for="City"> Stad: *</label>
-            <input class="c-form-textinput" type="text" name="City" bind:value={city} />
+            <label class="c-form-label" for="city"> Stad: *</label>
+            <input
+               class="c-form-textinput c-input {errors.city ? 'has-error' : ''}"
+               type="text"
+               name="city"
+               bind:value={values.city}
+               on:blur={handleInput}
+            />
+            <span class="c-form-error">
+               {errors.city ? errors.city : ''}
+            </span>
 
-            <label class="c-form-label" for="Postal"> Postcode: *</label>
-            <input class="c-form-textinput" type="number" name="Postal" bind:value={zip} />
+            <label class="c-form-label" for="zip"> Postcode: *</label>
+            <input
+               class="c-form-textinput c-input {errors.zip ? 'has-error' : ''}"
+               type="number"
+               name="zip"
+               bind:value={values.zip}
+               on:blur={handleInput}
+            />
 
-            <label class="c-form-label" for="Country"> Land: *</label>
-            <input class="c-form-textinput" type="text" name="Country" bind:value={country} />
+            <span class="c-form-error">
+               {errors.zip ? errors.zip : ''}
+            </span>
+
+            <label class="c-form-label" for="country"> Land: *</label>
+            <input
+               class="c-form-textinput c-input {errors.country ? 'has-error' : ''}"
+               type="text"
+               name="country"
+               bind:value={values.country}
+               on:blur={handleInput}
+            />
+            <span class="c-form-error">
+               {errors.country ? errors.country : ''}
+            </span>
          </div>
 
          <p class="c-form__info">(*) Verplicht veld</p>
 
+         <span class="c-form-error">
+            {errors.submit ? errors.submit : ''}
+         </span>
+
          <div class="c-form-altinputs">
-            <button class="c-button-save u-button-disabled"> Opslaan </button>
+            <button class="c-button-save"> Opslaan </button>
          </div>
       </form>
    {/if}

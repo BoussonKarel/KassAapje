@@ -46,6 +46,7 @@
   &-label {
     color: map-get($colors-neutral, '800');
     font-size: rem(18px);
+    margin-top: 12px;
   }
 
   &-error {
@@ -71,10 +72,8 @@
     }
   }
 
-
   &-textinput {
     padding: .5em;
-    margin-bottom: 12px;
 
   }
 

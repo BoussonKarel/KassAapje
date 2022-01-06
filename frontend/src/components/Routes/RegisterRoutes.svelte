@@ -39,7 +39,7 @@
       <RegisterInfo id={$params.regId}  orgId={orgId} />
    </Route>
    <Route path="/edit">
-      <EditRegister id={$params.regId} />
+      <EditRegister register_id={$params.regId} />
    </Route>
    {#if isOwner}
       <Route path="/products/*">

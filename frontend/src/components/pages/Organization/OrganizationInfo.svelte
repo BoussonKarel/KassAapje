@@ -28,7 +28,7 @@
    })
 </script>
 
-<div>
+
    <div class="c-page">
       {#if fetchingState === 'loading'}
          Loading
@@ -94,4 +94,4 @@
          </form>
       {/if}
    </div>
-</div>
+

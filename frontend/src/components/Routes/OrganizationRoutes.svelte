@@ -33,7 +33,7 @@
    </Route>
    {#if isOwner}
       <Route path="/edit">
-         <EditOrganization id={$params.orgId} />
+         <EditOrganization organization_id={$params.orgId} />
       </Route>
       <Route path="/new">
          <AddRegister organization_id={$params.orgId} />
