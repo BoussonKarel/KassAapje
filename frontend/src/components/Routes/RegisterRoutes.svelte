@@ -55,5 +55,13 @@
       You don't have permission to work in the register catalogue.
    {/if}
 {:else}
-   You don't have permission to work in this register.
+<div class="c-page">
+   <div class="o-container-center">
+      <div class="c-bigcard c-bigcard--error">
+         <div class="c-bigcard__text">
+            You don't have permission to work in this register.
+         </div>
+      </div>
+   </div>
+</div>
 {/if}
