@@ -8,12 +8,14 @@
 
    import { formHelper } from '../../../utils/formHelper'
 
-   const { DEFAULT_ERROR } = formHelper()
+   const { DEFAULT_ERROR, validateNotEmpty } = formHelper()
 
    import { prevent_default } from 'svelte/internal'
    import { authHelper } from '../../../utils/auth'
 
    export let organization_id
+
+   let valid = false
 
    let values: RegisterInput = {
       organization_id: organization_id,
@@ -30,24 +32,58 @@
    }
 
    async function handleSubmit(event) {
-      let valid = true
-      errors.submit = null
+      for (let value in values) {
+         const input = values[value]
+         if (!validateNotEmpty(input)) {
+            errors[value] = DEFAULT_ERROR.empty
+         }
+      }
 
-      let body: RegisterInput = values
+      if (noErrors()) {
+         valid = true
+      } else {
+         valid = false
+         errors.submit = `Niet alle velden zijn ingevuld, vul aan en probeer opnieuw.`
+      }
 
-      // await gqlHelper.mutations
-      //    .addRegister(body)
-      //    .catch(e => {
-      //       console.log('failed')
-      //       console.log(e)
-      //    })
-      //    .finally(() => {
-      //       authHelper.refresh();
-      //    })
+      if (valid) {
+         let body: RegisterInput = values
 
-      console.log(body)
+         await gqlHelper.mutations
+            .addRegister(body)
+            .catch(e => {
+               errors.submit = `Er ging iets fout: ${e.message}`
+               console.log(e)
+            })
+            .finally(() => {
+               authHelper.refresh()
+            })
 
-      // navigate(-1)
+         console.log(body)
+
+         navigate(-1)
+      }
+   }
+
+   const noErrors = () => {
+      for (var error in errors) {
+         if (errors[error] !== null && errors[error] !== '') return false
+      }
+      return true
+   }
+
+   const handleInput = e => {
+      var field: string = e.target.name
+
+      if (!validateNotEmpty(values[field].trim())) {
+         errors[field] = DEFAULT_ERROR.empty
+      } else {
+         errors[field] = null
+      }
+
+      if (!errors.name && !errors.description && !errors.color) {
+         errors.submit = null
+      }
    }
 </script>
 
@@ -59,32 +95,39 @@
    <form class="c-form" name="AddOrganisation" on:submit|preventDefault={handleSubmit}>
       <div class="c-form-textinputs">
          <label class="c-form-label" for="Name"> Naam: *</label>
+         <span class="c-form-error">
+            {errors.name ? errors.name : ''}
+         </span>
          <input
             class="c-form-textinput c-input {errors.name ? 'has-error' : ''}"
             type="text"
-            name="Name"
+            name="name"
             placeholder="Naam"
             bind:value={values.name}
+            on:blur={handleInput}
          />
+
          <label class="c-form-label" for="Description"> Beschrijving: *</label>
+         <span class="c-form-error">
+            {errors.description ? errors.description : ''}
+         </span>
          <textarea
             class="c-form-textinput c-input u-description {errors.description ? 'has-error' : ''}"
-            name="Description"
+            name="description"
             id="desc"
             cols="30"
             rows="10"
             placeholder="Beschrijving"
             bind:value={values.description}
+            on:blur={handleInput}
          />
       </div>
       <p class="c-form__info">(*) Verplicht veld</p>
       <div class="c-form-altinputs">
-         <button class="c-button-save"> Opslaan </button>
          <span class="c-form-error">
-            {errors.submit
-               ? errors.submit
-               : ''}
+            {errors.submit ? errors.submit : ''}
          </span>
+         <button class="c-button-save "> Opslaan </button>
       </div>
    </form>
 </div>

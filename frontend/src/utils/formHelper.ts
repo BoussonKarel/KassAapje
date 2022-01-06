@@ -27,8 +27,7 @@ export const formHelper = () => {
     email: 'Gelieve een geldig e-mailadres op te geven.',
     username: 'Gelieve een geldige naam op te geven (6 - 24 karakters).',
     password: 'Een geldig wachtwoord is minstens 8 karakters lang en bevat minstens één letter, cijfer en symbool.',
-    empty: 'Dit veld mag niet leeg blijven.',
-    submit: 'Er ging iets mis, controleer de gegevens en probeer opnieuw.'
+    empty: 'Dit veld mag niet leeg blijven.'
   };
 
   return {
