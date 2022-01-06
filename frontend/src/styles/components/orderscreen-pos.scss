@@ -13,6 +13,10 @@
    -webkit-filter: blur(3px);
 }
 
+.c-pos-search {
+   max-width: 500px;
+}
+
 .c-pos-list {
    display: grid;
    grid-template-columns: repeat(auto-fill, minmax(175px, auto));
@@ -22,6 +26,12 @@
 }
 
 .c-pos-product {
+   outline: none;
+   border: none;
+   padding: 0;
+
+   cursor: pointer;
+
    display: flex;
    flex-direction: column;
 
@@ -32,6 +42,15 @@
    background-color: map-get($colors-theme, '400');
 
    color: map-get($colors-neutral, '100');
+
+   &:hover, &:focus {
+      background-color: map-get($colors-theme, '500');
+   }
+   
+   &:hover &__amount,
+   &:focus &__amount {
+      background-color: map-get($colors-theme, '400');
+   }
 
    &__title {
       font-size: em(24px);
@@ -99,28 +118,6 @@
    &__count {
       padding: 0 1.5em;
    }
-
-   // &__button {
-   //    display: flex;
-   //    position: absolute;
-   //    bottom: 0;
-   //    justify-content: center;
-   //    align-items: center;
-   //    border-radius: 0 0 $global-border-radius $global-border-radius;
-   //    width: 100%;
-
-   //    color: map-get($colors-neutral, '100');
-
-   
-
-   //    & svg {
-   //       width: 2em;
-   //       height: 2em;
-   //    }
-   //    &:hover {
-   //       background-color: map-get($colors-theme, 'selection');
-   //    }
-   // }
 }
 
 .c-basket {
@@ -184,6 +181,11 @@
       overflow-y: auto;
    }
 
+   &-empty {
+      width: 100%;
+      text-align: center;
+   }
+
    &-item {
       --button-size: 1.2em;
       display: grid;
@@ -193,13 +195,18 @@
       width: 100%;
       flex-wrap: nowrap;
 
-      div {
+      div, button {
          margin: auto 0;
          display: flex;
          align-items: center;
       }
 
       &__button {
+         padding: 0;
+         border: none;
+         background-color: transparent;
+         outline: none;
+
          justify-content: center;
          cursor: pointer;
 
@@ -215,7 +222,7 @@
 
          color: map-get($colors-neutral, '700');
 
-         &:hover {
+         &:hover, &:focus {
             color: map-get($colors-neutral, '800');
          }
 
@@ -223,7 +230,7 @@
             border-radius: $global-border-radius;
             color: map-get($colors-neutral, '100');
             
-            &:hover {
+            &:hover, &:focus {
                color: map-get($colors-neutral, '100');
             }
          }
@@ -231,7 +238,7 @@
          &--minus {
             background-color: map-get($colors-neutral, '700');
 
-            &:hover {
+            &:hover, &:focus {
                background-color: map-get($colors-neutral, '800');
             }
          }
@@ -239,7 +246,7 @@
          &--plus {
             background-color: map-get($colors-theme, '400');
 
-            &:hover {
+            &:hover, &:focus {
                background-color: map-get($colors-theme, '500');
             }
          }
@@ -295,64 +302,3 @@
       margin-top: 1em;
    }
 }
-
-.c-shoppingbasket { 
-   &-divider {
-     align-items: flex-start;
-     display: flex;
- 
-     justify-content: center;
- 
-     &-line {
-       height: 1px;
-       width: 80%;
-       background-color: map-get($colors-neutral, '700');
-     }
-   }
- 
-   &-total {
-
-
-     display: flex;
-     align-items: center;
-     margin-left: 1em;
-     margin-right: 1em;
-     margin-top: 8px;
-     justify-content: space-between;
- 
-     &-title {
-       font-weight: 500;
-     }
- 
-     &-amount {
-       font-weight: 500;
-     }
-   }
- 
-   &-checkout {
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     height: auto;
-     width: auto;
- 
-     &-button {
-       height: 3em;
-       padding-left: 1em;
-       padding-right: 1em;
-       border: none;
-       border-radius: $global-border-radius;
- 
-       background-color: map-get($colors-theme, 'base');
-       color: map-get($colors-neutral, '100');
- 
-       font-size: em(20px);
-       font-weight: 500;
- 
-       &:hover {
-         background-color: map-get($colors-theme, 'selection');
-       }
-     }
-   }
- }
- 
