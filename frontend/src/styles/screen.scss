@@ -17,9 +17,6 @@
 @import "./elements/link.scss";
 @import "./elements/scrollbar.scss";
 
-
-
-
 // OBJECTS
 @import "./objects/container.scss";
 
@@ -27,7 +24,7 @@
 @import "./components/activity.scss";
 @import "./components/app.scss";
 @import "./components/sidebar.scss";
-
+@import "./components/basket.scss";
 @import "./components/card.scss";
 @import "./components/bigcard.scss";
 @import "./components/buttons.scss";
@@ -41,8 +38,6 @@
 @import "./components/table.scss";
 @import "./components/selector.scss";
 @import "./components/loading.scss";
-
-
 
 // UTILITIES
 @import "./utilities/textinput.scss";

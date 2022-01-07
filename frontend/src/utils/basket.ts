@@ -15,17 +15,36 @@ export const setupNewBasket = (register_id: string) => {
   })
 }
 
-export const addToBasket = (product: Product, quantity: number = 1) => {
+export const updateBasketProduct = (product: Product, quantity: number = 1) => {
   basketStore.update((o) => {
-    const newItem : OrderItem = {
-      product_id: product.name,
-      product: product,
-      quantity: quantity,
-      price: quantity * product.price
+    // Is this item already in the basket?
+    const thisOrderItem = o.order_items.find(oi => oi.product_id === product.product_id);
+    // All other items (except this if it exists)
+    const newOrderItems = o.order_items.filter(oi => oi.product_id != product.product_id);
+
+    if (thisOrderItem) {
+      // Update this item if it exists
+      if (thisOrderItem.quantity + quantity != 0) {
+        // This if: if the new quantity becomes 0, don't add the order item to the new list
+        newOrderItems.push({
+        ...thisOrderItem,
+        quantity: thisOrderItem.quantity + quantity,
+        price: thisOrderItem.price + quantity * product.price
+      })}
     }
+    else {
+      // Add a new item if it doesn't
+      newOrderItems.push({
+        product_id: product.product_id,
+        product: product,
+        quantity: quantity,
+        price: quantity * product.price
+      });
+    }
+
     return {
       ...o,
-      order_items: [...o.order_items, newItem]
+      order_items: newOrderItems
     }
   })
 }

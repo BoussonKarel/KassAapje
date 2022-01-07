@@ -8,11 +8,11 @@
    import { basketStore, setupNewBasket } from '../../../utils/basket'
    import { onMount } from 'svelte';
    import { gqlHelper } from '../../../utils/graphQL';
-import type { Product } from '../../../models/Product';
+   import type { Product } from '../../../models/Product';
 
    export let register_id;
 
-   let finishOrder = false;
+   let finishing = false;
 
    let fetchingState = '',
       products : Product[] = undefined,
@@ -52,7 +52,7 @@ import type { Product } from '../../../models/Product';
 
 <div class="c-page">
    <NavigationBar title={'Order toevoegen'} />
-   <div class="c-orderscreen {finishOrder ? 'u-blur' : ''}">
+   <div class="c-orderscreen {finishing ? 'u-blur' : ''}">
       <div class="c-orderscreen__catalogue">
          <SearchBar on:search={(e) => searchFilter(e.detail.target.value)} extraClass="c-pos-search" />
             {#if fetchingState === 'loading'}
@@ -87,8 +87,7 @@ import type { Product } from '../../../models/Product';
          <POSBasket />
       </div>
    </div>
-   {#if finishOrder}
-   <OrderPopup hidden={!finishOrder}/>
+   {#if finishing}
+      <OrderPopup hidden={!finishing}/>
    {/if}
-   
 </div>
