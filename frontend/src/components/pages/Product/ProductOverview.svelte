@@ -19,5 +19,5 @@
       {/if}
    </div>
 
-   <ProductTable />
+   <ProductTable {isOwner} />
 </div>
