@@ -59,7 +59,7 @@
       <NavigationBar title={'Order toevoegen'} />
       {#if isOwner}
          <Link to="products">
-            <div class="c-button__register-settings">
+            <div class="c-button__navigation-right">
                <Settings />
             </div>
          </Link>
