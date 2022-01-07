@@ -45,7 +45,16 @@
         if (URLparams.has('redirect')) navigate(URLparams.get('redirect'))
         else navigate('/')
       }).catch((error) => {
-        errors.submit = `Er ging iets fout bij het inloggen: ${error.message}`;
+        switch (error.code) {
+          case "auth/user-not-found":
+            errors.submit = "Kon deze gebruiker niet vinden.";
+            break;
+          case "auth/wrong-password":
+            errors.submit = "Verkeerd wachtwoord.";
+            break;
+          default:
+            errors.submit = "Er ging iets fout bij het inloggen."
+        }
       })
     }
   }
