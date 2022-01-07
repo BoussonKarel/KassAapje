@@ -45,7 +45,7 @@
       </Route>
       <Route path="/products/*">
          <Route path="/">
-            <ProductOverview  {isOwner} />
+            <ProductOverview register_id={$params.regId} {isOwner} />
          </Route>
 
          <Route path="/add">

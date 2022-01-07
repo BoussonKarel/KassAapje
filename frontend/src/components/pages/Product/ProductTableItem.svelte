@@ -3,21 +3,25 @@
    import { Link } from 'svelte-navigator'
 
    export let isOwner
+   export let product
 </script>
 
 <div class="c-table-products__item">
-   <div>Appeljenever</div>
+   <div>{product.name}</div>
 
    <div class="c-table-products__item--price">
-      <div>€</div>
-      <div>40</div>
+      <div>€ </div>
+      <div> {product.price}</div>
    </div>
 
-   <div class="c-table-products__item--stock">250</div>
+   <div class="c-table-products__item--stock">{product.stock_quantity}</div>
    <div class="c-table-products__item--edit">
       {#if isOwner}
-         <Link to="edit">
-            <Pencil />
+         <Link to="{product.product_id}/edit">
+            <div class="c-button__product-edit">
+               <Pencil />
+            </div>
+            
          </Link>
       {/if}
    </div>
