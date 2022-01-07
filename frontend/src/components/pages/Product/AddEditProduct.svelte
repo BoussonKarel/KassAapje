@@ -165,9 +165,8 @@
 
    onMount(async () => {
       if (product_id != '') {
-         //getValues
          getProductInfo()
-         //setValues
+         console.log(product_id)
       }
    })
 </script>

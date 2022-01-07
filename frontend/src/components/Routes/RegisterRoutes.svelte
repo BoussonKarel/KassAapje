@@ -51,7 +51,7 @@
          <Route path="/add">
             <AddEditProduct register_id={$params.regId} />
          </Route>
-         <Route path="/:prodId">
+         <Route path="/:prodId/edit">
             <AddEditProduct register_id={$params.regId} product_id={$params.prodId} />
          </Route>
       </Route>
