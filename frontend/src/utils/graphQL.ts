@@ -1,4 +1,5 @@
 import { getAuth } from 'firebase/auth'
+import type { Order } from '../models/Order'
 import { baseUrl } from '../config/api'
 
 const query = async (name: string, query: string, variables?: Object) => {
@@ -103,13 +104,21 @@ export const gqlQueries = {
         expiration_date
       }
     }`,
+   products: `query ($register_id: String!){
+      getProducts(register_id: $register_id) {
+         product_id,
+         name,
+         price,
+         stock_quantity
+      }
+   }`,
    product: `query ($product_id: String!){
       getProductById(id: $product_id) {
           name,
           price,
           stock_quantity
       }
-  }`,
+   }`,
 }
 
 export const gqlMutations = {
@@ -148,6 +157,11 @@ export const gqlMutations = {
          product_id
       }
    }`,
+   addOrder: `mutation ($order: OrderInput!) {
+      addOrder(order: $order) {
+         order_id
+      }
+   }`
 }
 
 export const gqlHelper = {
@@ -165,6 +179,7 @@ export const gqlHelper = {
          query('getRegisterById', gqlQueries.register, { register_id }),
       invitation: (invitation_id: string) =>
          query('getInvitationInfo', gqlQueries.invitation, { invitation_id }),
+      products: (register_id: string) => query('getProducts', gqlQueries.products, { register_id }),
       product: (product_id: string) => query('getProductById', gqlQueries.product, { product_id }),
    },
    mutations: {
@@ -179,5 +194,9 @@ export const gqlHelper = {
          query('acceptInvitation', gqlMutations.acceptInvitation, { invitation_id }),
       addProduct: product => query('addProduct', gqlMutations.addProduct, { product }),
       updateProduct: product => query('updateProduct', gqlMutations.updateProduct, { product }),
+      addOrder: (order: Order) => {
+         console.log({order})
+         return query('addOrder', gqlMutations.addOrder, { order })
+      },
    },
 }

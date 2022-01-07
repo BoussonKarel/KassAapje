@@ -15,6 +15,15 @@
 
   cursor: pointer;
 
+  &:disabled {
+    cursor: default;
+    background-color: map-get($colors-neutral, '500');
+
+    &:hover, &:focus {
+      background-color: map-get($colors-neutral, '500')
+    }
+  }
+
   &:hover, &:focus {
     background-color: map-get($colors-theme, '400');
   }

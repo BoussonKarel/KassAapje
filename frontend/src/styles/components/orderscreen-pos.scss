@@ -4,7 +4,7 @@
    padding: 1em;
    gap: 2em;
 
-   grid-template-columns: 7fr minmax(auto, 3fr);
+   grid-template-columns: 1fr 450px;
    max-height: 100%;
 }
 
@@ -17,6 +17,18 @@
    max-width: 500px;
 }
 
+.c-pos-status {
+   padding: 3em;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   &--error {
+      color: map-get($colors-theme, '500');
+      font-weight: 500;
+   }
+}
+
 .c-pos-list {
    display: grid;
    grid-template-columns: repeat(auto-fill, minmax(175px, auto));
@@ -25,13 +37,30 @@
    column-gap: 1em;
 }
 
+
+.c-pos-skeletonproduct {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 130px;
+
+   border-radius: $global-border-radius;
+
+   background-color: map-get($colors-neutral, '300');;
+
+   &__title {
+      background-color: map-get($colors-neutral, "600");
+      animation: opacityfade 2s infinite;
+
+      border-radius: 4px;
+
+      margin: 0;
+      width: 12ch;
+      max-width: 100%;
+   }
+}
+
 .c-pos-product {
-   outline: none;
-   border: none;
-   padding: 0;
-
-   cursor: pointer;
-
    display: flex;
    flex-direction: column;
 
@@ -53,6 +82,14 @@
    }
 
    &__title {
+      outline: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      background-color: inherit;
+      border-radius: inherit;
+      color: inherit;
+
       font-size: em(24px);
    }
 
@@ -115,190 +152,13 @@
       }
    }
 
+   &:hover &__button {
+      &:hover, &:focus {
+         background-color: map-get($colors-theme, '500');
+      }
+   }
+
    &__count {
       padding: 0 1.5em;
-   }
-}
-
-.c-basket {
-   background-color: map-get($colors-neutral, '100');
-   box-shadow: $default-shadow;
-   // width: 100%;
-   border-radius: $global-border-radius;
-
-   padding: 1em;
-
-   &-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      margin: em(20px) 0;
-
-      &__title {
-         font-weight: bold;
-         font-size: em(20px);
-         color: map-get($colors-theme, '500');
-      }
-
-      &__clear {
-         border: none;
-         background: transparent;
-         cursor: pointer;
-
-         border-radius: $global-border-radius;
-
-         display: flex;
-         align-items: center;
-         justify-content: center;
-
-         color: map-get($colors-theme, '400');
-
-         & svg {
-            height: 1.5em;
-            width: 1.5em;
-         }
-
-         &:hover,
-         &:focus {
-            color: map-get($colors-theme, '500');
-         }
-
-         &:focus {
-            outline-color: map-get($colors-theme, '200');
-            outline-width: 1px;
-         }
-      }
-   }
-
-   &-list {
-      margin: 1em 0;
-      display: flex;
-      flex-direction: column;
-      gap: 1em;
-
-      max-height: 60vh;
-      overflow-y: auto;
-   }
-
-   &-empty {
-      width: 100%;
-      text-align: center;
-   }
-
-   &-item {
-      --button-size: 1.2em;
-      display: grid;
-      grid-template-columns: var(--button-size) minmax(10ch, auto) var(--button-size) 3ch var(--button-size) 10ch;
-      gap: 1ch;
-      flex-wrap: nowrap;
-      width: 100%;
-      flex-wrap: nowrap;
-
-      div, button {
-         margin: auto 0;
-         display: flex;
-         align-items: center;
-      }
-
-      &__button {
-         padding: 0;
-         border: none;
-         background-color: transparent;
-         outline: none;
-
-         justify-content: center;
-         cursor: pointer;
-
-         border-radius: 100%;
-
-         width: var(--button-size);
-         height: var(--button-size);
-
-         & svg {
-            width: 1em;
-            height: 1em;
-         }
-
-         color: map-get($colors-neutral, '700');
-
-         &:hover, &:focus {
-            color: map-get($colors-neutral, '800');
-         }
-
-         &--minus, &--plus {
-            border-radius: $global-border-radius;
-            color: map-get($colors-neutral, '100');
-            
-            &:hover, &:focus {
-               color: map-get($colors-neutral, '100');
-            }
-         }
-
-         &--minus {
-            background-color: map-get($colors-neutral, '700');
-
-            &:hover, &:focus {
-               background-color: map-get($colors-neutral, '800');
-            }
-         }
-
-         &--plus {
-            background-color: map-get($colors-theme, '400');
-
-            &:hover, &:focus {
-               background-color: map-get($colors-theme, '500');
-            }
-         }
-      }
-
-      &__name {
-         width: 100%;
-         overflow: hidden;
-         text-overflow: ellipsis;
-         -webkit-line-clamp: 2; /* number of lines to show */
-         -webkit-box-orient: vertical;
-      }
-
-      &__count {
-         justify-content: center;
-         width: 3ch;
-         text-align: center;
-      }
-
-      &__price {
-         width: minmax(auto, 10ch);
-         justify-content: end;
-      }
-   }
-
-   &-total {
-      display: flex;
-      justify-content: space-between;
-
-      position: relative;
-
-      margin-top: 1em;
-      padding-top: 1em;
-
-      &::before {
-         position: absolute;
-         top: 0;
-         left: 0;
-         right: 0;
-         height: em(1.5px);
-         border-radius: em(1.5px);
-         margin: 0 2em;
-         background-color: map-get($colors-neutral, '700');
-         content: '';
-         padding: 0 2em;
-      }
-   }
-
-   &-checkout {
-      display: flex;
-      justify-content: center;
-
-      margin-top: 1em;
    }
 }
