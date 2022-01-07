@@ -1,4 +1,6 @@
 <script lang="ts">
+import Pencil from 'svelte-material-icons/Pencil.svelte';
+
    import NavigationBar from '../../NavigationBar.svelte'
    import OrderTable from './OrderTable.svelte'
 </script>
@@ -24,5 +26,30 @@
       </div>
    </div>
 
-   <OrderTable />
+   <div class="c-orderlist">
+      {#each Array(10) as _}
+         <div class="c-order">
+            <div class="c-order__header">
+               <div class="c-order__title">
+                  Order # 123456
+               </div>
+               <div class="c-order__edit">
+                  <Pencil />
+               </div>
+            </div>
+            <div class="c-order__summary">
+               <div class="c-order__content">
+                  1x div<br />
+                  1x ap<br />
+                  2x pc<br />
+               </div>
+               <div class="c-order__price">
+                  € 120,00
+               </div>
+            </div>
+         </div>
+      {/each}
+   </div>
+
+   <!-- <OrderTable /> -->
 </div>

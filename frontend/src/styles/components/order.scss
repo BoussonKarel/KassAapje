@@ -1,0 +1,43 @@
+.c-orderlist {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, auto));
+  gap: 1em;
+}
+
+.c-order {
+  background-color: map-get($colors-neutral, '100');
+  border-radius: $global-border-radius;
+  box-shadow: $default-shadow;
+
+  &__header {
+    padding: 1em;
+    background-color: map-get($colors-neutral, '300');
+    
+    border-radius: $global-border-radius $global-border-radius 0 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+
+  }
+
+  &__summary {
+    padding: 1em;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__content {
+  }
+
+  &__edit {
+    & svg {
+
+    }
+  }
+}
