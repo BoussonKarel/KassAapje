@@ -133,6 +133,11 @@ export const gqlMutations = {
          organization_id
       }
    }`,
+
+   removeOrganization: `mutation ($organization_id: String!) {
+      removeOrganization(id: $organization_id)
+   }`,
+
    addRegister: `mutation ($register: RegisterInput!) {
       addRegister(register: $register) {
          register_id,
@@ -144,9 +149,14 @@ export const gqlMutations = {
          register_id
       }
    }`,
+   removeRegister: `mutation ($register_id: String!) {
+      removeRegister(id: $register_id)
+   }`,
+
    acceptInvitation: `mutation ($invitation_id: String!) {
       acceptInvitation(id: $invitation_id)
    }`,
+
    addProduct: `mutation ($product: ProductInput!) {
       addProduct(product: $product) {
          product_id
@@ -157,11 +167,15 @@ export const gqlMutations = {
          product_id
       }
    }`,
+   removeProduct: `mutation ($product_id: String!) {
+      removeProduct(id: $product_id)
+   }`,
+
    addOrder: `mutation ($order: OrderInput!) {
       addOrder(order: $order) {
          order_id
       }
-   }`
+   }`,
 }
 
 export const gqlHelper = {
@@ -187,15 +201,21 @@ export const gqlHelper = {
          query('addOrganization', gqlMutations.addOrganization, { organization }),
       updateOrganization: organization =>
          query('updateOrganization', gqlMutations.updateOrganization, { organization }),
+      removeOrganization: (organization_id: string) =>
+         query('removeOrganization', gqlMutations.removeOrganization, { organization_id }),
       addRegister: register => query('addRegister', gqlMutations.addRegister, { register }),
       updateRegister: register =>
          query('updateRegister', gqlMutations.updateRegister, { register }),
+      removeRegister: (register_id: string) =>
+         query('removeRegister', gqlMutations.removeRegister, { register_id }),
       acceptInvitation: (invitation_id: string) =>
          query('acceptInvitation', gqlMutations.acceptInvitation, { invitation_id }),
       addProduct: product => query('addProduct', gqlMutations.addProduct, { product }),
       updateProduct: product => query('updateProduct', gqlMutations.updateProduct, { product }),
+      removeProduct: (product_id: string) =>
+         query('removeProduct', gqlMutations.removeProduct, { product_id }),
       addOrder: (order: Order) => {
-         console.log({order})
+         console.log({ order })
          return query('addOrder', gqlMutations.addOrder, { order })
       },
    },
