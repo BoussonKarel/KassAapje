@@ -12,6 +12,7 @@
    import OrganizationSelector from '../pages/Organization/OrganizationSelector.svelte'
    import Sidebar from '../sidebar/Sidebar.svelte'
    import AcceptInvitation from '../pages/AcceptInvitation.svelte'
+   import ForgotPassword from '../pages/Auth/ForgotPassword.svelte';
 
    const updateAuthStore = async user => {
       if (user) {
@@ -38,6 +39,9 @@
       </Route>
       <Route path="/register">
          <Register />
+      </Route>
+      <Route path="/forgotpassword">
+         <ForgotPassword />
       </Route>
    {:else}
       <Sidebar />

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+  import { getAuth, sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth';
   import { Link, useNavigate } from 'svelte-navigator'
   import { formHelper } from '../../../utils/formHelper'
 
@@ -117,6 +117,9 @@
     
     <div class="c-auth__switch">
       Nog geen account? <Link class="link" to="/register{location.search}">Registreer</Link>
+    </div>
+    <div class="c-auth__switch">
+      <Link class="link" to="/forgotpassword">Wachtwoord vergeten?</Link>
     </div>
   </div>  
 </div>
