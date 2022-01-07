@@ -4,8 +4,7 @@
 </script>
 
 <div class="c-page">
-   <div class="c-navigation">
-      <NavigationBar title={'Producten'} />
-   </div>
+   <NavigationBar title={'Producten'} />
+
    <ProductTable />
 </div>

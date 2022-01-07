@@ -178,11 +178,8 @@
    Loading
 {:else if fetchingState === 'error'}
    Error getting organization
-{:else if product || product_id == ''}
-<div class="c-navigation">
-      
+{:else if product || product_id == ''}  
    <NavigationBar title={'Product toevoegen'} />
-</div>
 <form class="c-form" name="AddOrganisation" on:submit|preventDefault={handleSubmit}>
    <div class="c-form-textinputs">
       <label class="c-form-label" for="name"> Naam: *</label>

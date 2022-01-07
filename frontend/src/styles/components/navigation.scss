@@ -37,13 +37,11 @@
       color: map-get($colors-theme, '500');
    }
 
-   &__settings {
-      color: map-get($colors-theme, '500');
-
-      & svg {
-         display: block;
-         width: 2em;
-         height: 2em;
-      }
+   &__order {
+      justify-content: space-between;
+      align-items: center;
+      display: flex;
+      margin-right: 24px;
    }
+
 }

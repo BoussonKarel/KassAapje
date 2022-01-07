@@ -126,3 +126,11 @@ height: 50px;
     cursor: pointer;
   }
 }
+
+.c-button__register-settings {
+ & svg {
+   color: map-get($colors-theme, '500');
+   width: 2em;
+   height: 2em;
+ }
+}
