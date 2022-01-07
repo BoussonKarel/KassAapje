@@ -42,6 +42,10 @@ export const updateBasketProduct = (product: Product, quantity: number = 1) => {
       });
     }
 
+    newOrderItems.sort((a, b) =>
+      (a.product.name < b.product.name) ? -1 : (a.product.name > b.product.name) ? 1 : 0
+    )
+
     return {
       ...o,
       order_items: newOrderItems
