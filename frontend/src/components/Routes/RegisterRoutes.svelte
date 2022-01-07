@@ -45,7 +45,7 @@
       </Route>
       <Route path="/products/*">
          <Route path="/">
-            <ProductOverview />
+            <ProductOverview  {isOwner} />
          </Route>
 
          <Route path="/add">

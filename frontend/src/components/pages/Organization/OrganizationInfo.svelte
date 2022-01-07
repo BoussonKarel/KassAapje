@@ -89,7 +89,7 @@
          <div class="c-form-altinputs">
             {#if isOwner}
                <Link to="/{id}/edit">
-                  <button class="c-button-edit"> Bewerken </button>
+                  <button class="c-button"> Bewerken </button>
                </Link>
             {/if}
          </div>

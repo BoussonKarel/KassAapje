@@ -128,9 +128,16 @@ height: 50px;
 }
 
 .c-button__navigation-right {
- & svg {
-   color: map-get($colors-theme, '500');
-   width: 2em;
-   height: 2em;
- }
+  &__settings {
+    & svg {
+      color: map-get($colors-theme, '500');
+      width: 2em;
+      height: 2em;
+    }
+  }
+
+  &__add-product {
+    
+  }
+
 }

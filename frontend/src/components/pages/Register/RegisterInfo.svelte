@@ -36,7 +36,7 @@
    {:else if fetchingState === 'error'}
       Error getting organization
    {:else if register}
-      <NavigationBar title={register.name} />
+         <NavigationBar title={register.name} />
 
       <form class="c-form" name="RegisterInfo">
          <div class="c-form-edit">
@@ -57,7 +57,7 @@
 
             {#if isOwner}
                <Link to="/{orgId}/{id}/edit">
-                  <button class="c-button-edit"> Bewerken </button>
+                  <button class="c-button"> Bewerken </button>
                </Link>
             {/if}
          </div>

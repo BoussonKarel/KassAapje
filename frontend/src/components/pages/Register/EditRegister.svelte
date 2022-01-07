@@ -159,7 +159,7 @@
          {errors.submit ? errors.submit : ''}
       </span>
       <div class="c-form-altinputs">
-         <button class="c-button-save"> Opslaan </button>
+         <button class="c-button"> Opslaan </button>
       </div>
    </form>
 </div>

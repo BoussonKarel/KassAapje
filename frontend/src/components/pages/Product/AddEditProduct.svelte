@@ -228,7 +228,7 @@
                {errors.submit ? errors.submit : ''}
             </span>
 
-            <button class="c-button-save"> {product_id == '' ? 'opslaan' : 'Bewerken'} </button>
+            <button class="c-button"> {product_id == '' ? 'opslaan' : 'Bewerken'} </button>
          </div>
       </form>
    {/if}

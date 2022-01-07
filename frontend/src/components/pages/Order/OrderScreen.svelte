@@ -55,11 +55,11 @@
 </script>
 
 <div class="c-page">
-   <div class="c-navigation__order">
+   <div class="c-navigation__with-buttons">
       <NavigationBar title={'Order toevoegen'} />
       {#if isOwner}
          <Link to="products">
-            <div class="c-button__navigation-right">
+            <div class="c-button__navigation-right__settings">
                <Settings />
             </div>
          </Link>
