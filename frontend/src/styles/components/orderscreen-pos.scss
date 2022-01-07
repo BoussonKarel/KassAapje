@@ -4,7 +4,7 @@
    padding: 1em;
    gap: 2em;
 
-   grid-template-columns: 1fr 450px;
+   grid-template-columns: 1fr minmax(450px, auto);
    max-height: 100%;
 }
 
