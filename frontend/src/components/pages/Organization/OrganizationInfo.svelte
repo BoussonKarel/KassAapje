@@ -9,7 +9,6 @@
    export let id
    export let isOwner
 
-
    let fetchingState = '',
       organization = undefined
 
@@ -32,75 +31,68 @@
    })
 </script>
 
+<div class="c-page">
+   {#if fetchingState === 'loading'}
+      Loading
+   {:else if fetchingState === 'error'}
+      Error getting organization
+   {:else if organization}
+      <NavigationBar title={organization.name} />
 
-   <div class="c-page">
-      {#if fetchingState === 'loading'}
-         Loading
-      {:else if fetchingState === 'error'}
-         Error getting organization
-      {:else if organization}
-         <div class="c-navigation">
-            <NavigationBar title={organization.name} />
-         </div>
-         <form class="c-form" name="OrganisationInfo">
-            <div class="c-form-edit">
-               <p class="c-form-edit-label">Naam:</p>
-               <div class="c-form-edit-field">
-                  <p class="c-form-edit-field-output">{organization.name}</p>
-               </div>
+      <form class="c-form" name="OrganisationInfo">
+         <div class="c-form-edit">
+            <p class="c-form-edit-label">Naam:</p>
+            <div class="c-form-edit-field">
+               <p class="c-form-edit-field-output">{organization.name}</p>
+            </div>
 
-               <p class="c-form-edit-label">Website:</p>
-               <div class="c-form-edit-field">
-                  <p class="c-form-edit-field-output">{organization.website}</p>
-               </div>
+            <p class="c-form-edit-label">Website:</p>
+            <div class="c-form-edit-field">
+               <p class="c-form-edit-field-output">{organization.website}</p>
+            </div>
 
-               <p class="c-form-edit-label">Email:</p>
-               <div class="c-form-edit-field">
-                  <p class="c-form-edit-field-output">{organization.email}</p>
-               </div>
+            <p class="c-form-edit-label">Email:</p>
+            <div class="c-form-edit-field">
+               <p class="c-form-edit-field-output">{organization.email}</p>
+            </div>
 
-               <p class="c-form-edit-label">Straat:</p>
-               <div class="c-form-edit-field">
-                  <p class="c-form-edit-field-output">
-                     {#if organization.box}
-                        {`${organization.street}
+            <p class="c-form-edit-label">Straat:</p>
+            <div class="c-form-edit-field">
+               <p class="c-form-edit-field-output">
+                  {#if organization.box}
+                     {`${organization.street}
                      ${organization.street_number}${organization.box}
                      `}
-                     {:else}
-                        {`${organization.street}
+                  {:else}
+                     {`${organization.street}
                      ${organization.street_number}
                      `}
-                     {/if}
-                  </p>
-               </div>
-
-               <p class="c-form-edit-label">Stad:</p>
-               <div class="c-form-edit-field">
-                  <p class="c-form-edit-field-output">{organization.city}</p>
-               </div>
-
-               <p class="c-form-edit-label">Postcode:</p>
-               <div class="c-form-edit-field">
-                  <p class="c-form-edit-field-output">{organization.zip}</p>
-               </div>
-
-               <p class="c-form-edit-label">Land:</p>
-               <div class="c-form-edit-field">
-                  <p class="c-form-edit-field-output">{organization.country}</p>
-               </div>
+                  {/if}
+               </p>
             </div>
-            <div class="c-form-altinputs">
 
-               {#if isOwner}
+            <p class="c-form-edit-label">Stad:</p>
+            <div class="c-form-edit-field">
+               <p class="c-form-edit-field-output">{organization.city}</p>
+            </div>
+
+            <p class="c-form-edit-label">Postcode:</p>
+            <div class="c-form-edit-field">
+               <p class="c-form-edit-field-output">{organization.zip}</p>
+            </div>
+
+            <p class="c-form-edit-label">Land:</p>
+            <div class="c-form-edit-field">
+               <p class="c-form-edit-field-output">{organization.country}</p>
+            </div>
+         </div>
+         <div class="c-form-altinputs">
+            {#if isOwner}
                <Link to="/{id}/edit">
                   <button class="c-button-edit"> Bewerken </button>
                </Link>
-               {/if}
-
-               
-               
-            </div>
-         </form>
-      {/if}
-   </div>
-
+            {/if}
+         </div>
+      </form>
+   {/if}
+</div>

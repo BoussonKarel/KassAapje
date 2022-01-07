@@ -186,9 +186,7 @@
    {:else if fetchingState === 'error'}
       Error getting organization
    {:else if organization}
-      <div class="c-navigation">
          <NavigationBar title={'Organisatie bewerken'} />
-      </div>
 
       <form class="c-form" name="AddOrganisation" on:submit|preventDefault={handleSubmit}>
          <div class="c-form-textinputs">

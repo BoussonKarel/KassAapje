@@ -122,9 +122,7 @@
 </script>
 
 <div class="c-page">
-   <div class="c-navigation">
-      <NavigationBar title={'Kassa bewerken'} />
-   </div>
+   <NavigationBar title={'Kassa bewerken'} />
 
    <form class="c-form" name="EditRegister" on:submit|preventDefault={handleSubmit}>
       <div class="c-form-textinputs">

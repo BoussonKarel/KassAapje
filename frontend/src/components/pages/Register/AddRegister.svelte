@@ -89,9 +89,7 @@
 </script>
 
 <div class="c-page">
-   <div class="c-navigation">
-      <NavigationBar title={'Kassa toevoegen'} />
-   </div>
+   <NavigationBar title={'Kassa toevoegen'} />
 
    <form class="c-form" name="AddOrganisation" on:submit|preventDefault={handleSubmit}>
       <div class="c-form-textinputs">

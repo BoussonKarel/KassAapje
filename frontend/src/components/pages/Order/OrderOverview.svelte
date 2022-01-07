@@ -6,9 +6,7 @@ import Pencil from 'svelte-material-icons/Pencil.svelte';
 </script>
 
 <div class="c-page">
-   <div class="c-navigation">
       <NavigationBar title={'Bestellingen'} />
-   </div>
    <div class="u-toolbar">
       <div class="c-selector">
          <p class="c-selector-title">Periode:</p>

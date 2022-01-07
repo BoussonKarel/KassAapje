@@ -36,9 +36,8 @@
    {:else if fetchingState === 'error'}
       Error getting organization
    {:else if register}
-      <div class="c-navigation">
-         <NavigationBar title={register.name} />
-      </div>
+      <NavigationBar title={register.name} />
+
       <form class="c-form" name="RegisterInfo">
          <div class="c-form-edit">
             <p class="c-form-edit-label">Naam:</p>
