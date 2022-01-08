@@ -56,9 +56,8 @@
             fetchingState = ''
          })
    }
-   
+
    refreshStore.subscribe(() => {
-      console.log("Refreshing")
       getOrganizations();
    })
 </script>

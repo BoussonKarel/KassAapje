@@ -6,7 +6,7 @@
    import NavigationBar from '../../NavigationBar.svelte';
    import { formatHelper } from '../../../utils/formatHelper';
    import { orderHelper } from '../../../utils/orderHelper';
-   import Loading from '../../Loading/Loading.svelte';
+   import {refreshStore } from '../../../utils/refresh';
    import SkeletonCard from '../../Cards/SkeletonCard.svelte';
 
    export let register_id;
@@ -28,7 +28,7 @@
          })
    }
 
-   onMount(() => {
+   refreshStore.subscribe(() => {
       getOrders();
    })
 </script>

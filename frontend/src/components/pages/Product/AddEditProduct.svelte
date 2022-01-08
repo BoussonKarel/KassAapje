@@ -10,6 +10,7 @@
    import { formHelper } from '../../../utils/formHelper'
    import SectionLoading from '../../Loading/SectionLoading.svelte'
 import Delete from 'svelte-material-icons/Delete.svelte';
+import { refresh } from '../../../utils/refresh';
 
    const { DEFAULT_ERROR, validateNotEmpty, validateEmail, validateNumber } = formHelper()
 
@@ -20,7 +21,7 @@ import Delete from 'svelte-material-icons/Delete.svelte';
 
    export let product_id = ''
 
-   export let register_id
+   export let register_id:string
 
    const openPopup = () => {
       deletePopup = true
@@ -36,10 +37,11 @@ import Delete from 'svelte-material-icons/Delete.svelte';
             errors.submit = `Er ging iets fout: ${e.message}`
          })
          .finally(() => {
-            authHelper.refresh()
+            refresh()
+            navigate(-1)
          })
       
-      navigate(-1)
+      
    }
 
    let values: ProductInput = {

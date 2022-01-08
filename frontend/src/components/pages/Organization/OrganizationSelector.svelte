@@ -8,6 +8,7 @@
    import { Link } from 'svelte-navigator'
    import SectionLoading from '../../Loading/SectionLoading.svelte'
    import SkeletonCard from '../../Cards/SkeletonCard.svelte'
+   import { refreshStore } from '../../../utils/refresh';
 
    let fetchingState = '',
       organizations = undefined
@@ -28,6 +29,10 @@
 
    onMount(() => {
       getOrganizations()
+   })
+
+   refreshStore.subscribe(() => {
+      getOrganizations();
    })
 </script>
 

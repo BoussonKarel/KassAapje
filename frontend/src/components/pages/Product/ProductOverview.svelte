@@ -8,10 +8,11 @@
    import { gqlHelper } from '../../../utils/graphQL'
    import SectionLoading from '../../Loading/SectionLoading.svelte'
    import Plus from 'svelte-material-icons/Plus.svelte'
+import { refreshStore } from '../../../utils/refresh';
 
-   export let register_id
+   export let register_id:string
 
-   export let isOwner
+   export let isOwner:boolean
 
    let fetchingState = '',
       products: Product[] = undefined
@@ -30,7 +31,7 @@
          })
    }
 
-   onMount(() => {
+   refreshStore.subscribe(() => {
       getProducts()
    })
 </script>

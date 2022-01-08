@@ -10,6 +10,7 @@
    import { gqlHelper } from '../../../utils/graphQL'
    import { Link } from 'svelte-navigator'
 import Settings from 'svelte-material-icons/Settings.svelte';
+import { refreshStore } from '../../../utils/refresh';
 
    export let organization_id
    export let isOwner
@@ -34,8 +35,8 @@ import Settings from 'svelte-material-icons/Settings.svelte';
       // Filter which ones he has perms??
    }
 
-   onMount(() => {
-      getRegisters()
+   refreshStore.subscribe(() => {
+      getRegisters();
    })
 </script>
 

@@ -11,9 +11,10 @@
    import type { Product } from '../../../models/Product'
    import Settings from 'svelte-material-icons/Settings.svelte'
    import { Link } from 'svelte-navigator'
+   import { refreshStore } from '../../../utils/refresh';
 
-   export let register_id
-   export let isOwner
+   export let register_id:string
+   export let isOwner:boolean
 
    let finishing = false
 
@@ -44,7 +45,7 @@
       }
    }
 
-   onMount(() => {
+   refreshStore.subscribe(() => {
       if (register_id) {
          // Als er nog geen mandje is of het mandje van n andere kassa is > Nieuw mandje
          if (!$basketStore || $basketStore.register_id != register_id) setupNewBasket(register_id)
