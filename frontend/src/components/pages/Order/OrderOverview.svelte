@@ -47,8 +47,7 @@
 
       <div class="u-toolbar-amount">
          <div class="u-toolbar-amount__title">Totaal:</div>
-         <div class="u-toolbar-amount__symbol">€</div>
-         <div class="u-toolbar-amount__number">{fetchingState === 'loading' ? '...' : orders ? orderHelper.totalAll(orders) : '???'}</div>
+         <div class="u-toolbar-amount__number">{fetchingState === 'loading' ? '...' : orders ? formatHelper.price(orderHelper.totalAll(orders)) : '€ ???'}</div>
       </div>
    </div>
 

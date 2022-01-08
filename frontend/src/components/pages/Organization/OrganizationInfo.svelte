@@ -5,6 +5,7 @@
    import { Link } from 'svelte-navigator'
    import SectionLoading from '../../Loading/SectionLoading.svelte'
    import type { Organization } from '../../../models/Organization';
+import Account from 'svelte-material-icons/Account.svelte';
 
    export let organization_id: string
    export let isOwner: boolean
@@ -39,12 +40,14 @@
       <NavigationBar title={organization.name} />
 
       <div class="c-dashboard">
-         <!-- <div class="c-dashboard__actions">
-            <Link to="../" class="c-button c-button--action">
-               <Store />
-               Kassa's
-            </Link>
-         </div> -->
+         {#if isOwner}
+            <div class="c-dashboard__actions">
+               <Link to="../roles" class="c-button c-button--action">
+                  <Account />
+                  Gebruikers
+               </Link>
+            </div>
+         {/if}
          <div class="c-dashboard__info c-info">
             <div class="c-info__section">
                <div class="c-info__label">Naam</div>

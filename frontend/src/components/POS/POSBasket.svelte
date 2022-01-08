@@ -14,7 +14,6 @@
 
    const checkout = () => {
       orderHelper.checkout($basketStore).then(() => {
-         console.log("I see it worked (basket says)")
          successFullyAdded = true;
          setTimeout(() => {
             successFullyAdded = false;

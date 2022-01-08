@@ -14,14 +14,11 @@
 
    const add = () => {
       updateBasketProduct(order_item.product, 1)
-      console.log('Add 1 to product')
    }
 
    const remove = () => {
       updateBasketProduct(order_item.product, order_item.quantity * -1)
    }
-
-  console.log(order_item)
 </script>
 
 <div class="c-basket-item">

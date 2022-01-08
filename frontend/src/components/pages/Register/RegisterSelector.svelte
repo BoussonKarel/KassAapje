@@ -12,11 +12,12 @@
 import Settings from 'svelte-material-icons/Settings.svelte';
 import { refreshStore } from '../../../utils/refresh';
 
-   export let organization_id
-   export let isOwner
+   export let organization_id: string
+   export let isOwner: boolean
 
    let fetchingState = '',
-      registers = undefined
+      registers = undefined,
+      title = "Kassa's"
 
    const getRegisters = async () => {
       fetchingState = 'loading'
@@ -25,6 +26,7 @@ import { refreshStore } from '../../../utils/refresh';
          .registers(organization_id)
          .then(result => {
             fetchingState = ''
+            if (result.length > 0) title = "Kassa's van " + result[0].organization.name
             return result;
          })
          .catch(() => {
@@ -41,7 +43,7 @@ import { refreshStore } from '../../../utils/refresh';
 </script>
 
 <div class="c-page">
-   <NavigationBar title={"Kassa's"}>
+   <NavigationBar {title}>
       <Link class="c-navigation__button" to="info">
          <Settings />
       </Link>

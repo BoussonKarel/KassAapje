@@ -10,6 +10,7 @@
    import RegisterRoutes from './RegisterRoutes.svelte'
    import AddRegister from '../pages/Register/AddRegister.svelte'
    import NoOrgPerms from '../pages/Auth/NoOrgPerms.svelte'
+import CreateInvitation from '../pages/CreateInvitation.svelte';
 
    const params = useParams()
 
@@ -35,6 +36,14 @@
    </Route>
    <Route path="/info">
       <OrganizationInfo organization_id={$params.orgId} {isOwner} />
+   </Route>
+
+   <Route path="/roles">
+      {#if isOwner}
+         <CreateInvitation organization_id={$params.orgId} />
+      {:else}
+         <NoOrgPerms />
+      {/if}
    </Route>
    
    <Route path="/edit">
