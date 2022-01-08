@@ -9,6 +9,7 @@
    import Inventory from '../../../ExtraIcons/Inventory.svelte'
    import { authHelper } from '../../../utils/auth'
    import Delete from 'svelte-material-icons/Delete.svelte'
+   import Store from 'svelte-material-icons/Store.svelte'
 
    export let id
    export let orgId
@@ -68,23 +69,24 @@
       <NavigationBar title={register.name} />
 
       <div class="c-dashboard">
-         {#if isOwner}
-            <div class="c-dashboard__actions">
-               <Link to="../orders" class="c-button c-button--action">
-                  <Receipt />
-                  Orders
-               </Link>
-               <Link to="../products" class="c-button c-button--action">
-                  <Inventory />
-                  Producten
-               </Link>
-               <Link to="../roles" class="c-button c-button--action">
-                  <Account />
-                  Gebruikers
-               </Link>
-            </div>
-         {/if}
-
+         <div class="c-dashboard__actions">
+            <Link to=".." class="c-button c-button--action">
+               <Store />
+               Kassa
+            </Link>
+            <Link to="../orders" class="c-button c-button--action">
+               <Receipt />
+               Orders
+            </Link>
+            <Link to="../products" class="c-button c-button--action">
+               <Inventory />
+               Producten
+            </Link>
+            <Link to="../roles" class="c-button c-button--action">
+               <Account />
+               Gebruikers
+            </Link>
+         </div>
          <div class="c-dashboard__info c-info">
             <div class="c-info__section">
                <div class="c-info__label">Vereniging</div>
