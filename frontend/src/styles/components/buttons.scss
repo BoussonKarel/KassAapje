@@ -78,6 +78,7 @@
 
    &:hover {
       color: map-get($colors-theme, '600');
+      cursor:pointer;
    }
    &:focus {
       color: map-get($colors-theme, '600');

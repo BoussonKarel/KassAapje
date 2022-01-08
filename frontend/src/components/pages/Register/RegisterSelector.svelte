@@ -12,6 +12,7 @@
 import Settings from 'svelte-material-icons/Settings.svelte';
 
    export let organization_id
+   export let isOwner
 
    let fetchingState = '',
       registers = undefined
@@ -56,7 +57,9 @@ import Settings from 'svelte-material-icons/Settings.svelte';
          {#each registers as register}
             <RegisterCard {register} />
          {/each}
+         {#if isOwner}
          <AddCard page={'registers'} />
+         {/if}
       </CardList>
    {:else}
    <div class="o-container-center">
