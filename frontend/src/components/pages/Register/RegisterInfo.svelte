@@ -29,7 +29,6 @@
          .finally(() => {
             fetchingState = ''
          })
-      console.log(register)
    }
 
    const openPopup = () => {
@@ -80,18 +79,12 @@
          </div>
          <div class="c-dashboard__info c-info">
             <div class="c-info__section">
-               <div class="c-info__field">
-                  <div class="c-info__label">Vereniging</div>
-                  <div class="c-info__value">{register.organization.name}</div>
-               </div>
-               <div class="c-info__field">
-                  <div class="c-info__label">Naam</div>
-                  <div class="c-info__value">{register.name}</div>
-               </div>
-               <div class="c-info__field">
-                  <div class="c-info__label">Beschrijving</div>
-                  <div class="c-info__value">{register.description}</div>
-               </div>
+               <div class="c-info__label">Vereniging</div>
+               <div class="c-info__value">{register.organization.name}</div>
+               <div class="c-info__label">Naam</div>
+               <div class="c-info__value">{register.name}</div>
+               <div class="c-info__label">Beschrijving</div>
+               <div class="c-info__value">{register.description}</div>
             </div>
             {#if isOwner}
                <div class="c-info__edit">
