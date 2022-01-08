@@ -47,7 +47,7 @@
 
    <div class="c-basket-total">
       <div class="c-basket-total__title">Totaal</div>
-      <div class="c-basket-total__amount">{formatHelper.price(200)}</div>
+      <div class="c-basket-total__amount">{formatHelper.price(orderHelper.total($basketStore))}</div>
    </div>
 
    <div class="c-basket-checkout">
