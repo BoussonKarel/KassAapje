@@ -4,9 +4,21 @@ import { getAuth } from "firebase/auth";
 import type { Product } from "../models/Product";
 import type { OrderItem } from "../models/OrderItem";
 
-export const basketStore = writable<Order>(JSON.parse(localStorage.getItem("basket")) || undefined);
+const getLocalStorageBasket = () => {
+  try {
+    return JSON.parse(localStorage.getItem("basket"));
+  }
+  catch {
+    return undefined;
+  }
+}
 
-basketStore.subscribe(basketValue => localStorage.setItem("basket", JSON.stringify(basketValue)));
+export const basketStore = writable<Order>(getLocalStorageBasket());
+
+basketStore.subscribe(basketValue => {
+  if (basketValue) localStorage.setItem("basket", JSON.stringify(basketValue))
+  else localStorage.removeItem("basket")
+});
 
 export const setupNewBasket = (register_id: string) => {
   basketStore.set({

@@ -9,8 +9,6 @@
    import { onMount } from 'svelte';
    import { gqlHelper } from '../../utils/graphQL';
 
-   const location = useLocation();
-
    let sidebarCollapsed = false,
       smallScreen = false
 

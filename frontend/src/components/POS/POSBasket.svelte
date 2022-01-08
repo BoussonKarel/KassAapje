@@ -47,10 +47,10 @@
 
    <div class="c-basket-total">
       <div class="c-basket-total__title">Totaal</div>
-      <div class="c-basket-total__amount">{formatHelper.price(orderHelper.total($basketStore))}</div>
+      <div class="c-basket-total__amount">{$basketStore ? formatHelper.price(orderHelper.total($basketStore)) : '???'}</div>
    </div>
 
    <div class="c-basket-checkout">
-      <button disabled={$basketStore.order_items.length === 0} on:click={checkout} class="c-basket-checkout__button c-button">Afrekenen</button>
+      <button disabled={$basketStore && $basketStore.order_items.length <= 0} on:click={checkout} class="c-basket-checkout__button c-button">Afrekenen</button>
    </div>
 </div>
