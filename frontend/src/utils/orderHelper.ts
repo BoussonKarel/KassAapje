@@ -1,13 +1,11 @@
 import type { Order } from "../models/Order";
-import { basketStore, setupNewBasket } from "./basket";
+import { setupNewBasket } from "./basket";
 import { gqlHelper } from "./graphQL";
 
 export const orderHelper = {
   checkout: (order: Order) => {
     if (order && order.order_items.length > 0) {
       const newOrder : Order = order;
-
-      console.log({newOrder})
 
       newOrder.order_items.forEach(oi => {
          delete oi.product
