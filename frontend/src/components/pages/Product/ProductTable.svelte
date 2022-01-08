@@ -1,6 +1,7 @@
 <script lang="ts">
    import ProductTableItem from './ProductTableItem.svelte'
 
+
    export let isOwner
    export let products
 </script>
