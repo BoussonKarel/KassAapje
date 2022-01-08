@@ -1,6 +1,7 @@
 import { getAuth } from 'firebase/auth'
 import type { Order } from '../models/Order'
 import { baseUrl } from '../config/api'
+import type { Invitation } from '../models/Invitation'
 
 const query = async (name: string, query: string, variables?: Object) => {
    return await fetch(`${baseUrl}/v1/graphQL`, {
@@ -192,6 +193,12 @@ export const gqlMutations = {
          order_id
       }
    }`,
+   createInvitation: `mutation ($invitation: InvitationInput!) {
+      createInvitation(invitation: $invitation) {
+         invitation_id,
+         expiration_date
+      }
+   }`,
 }
 
 export const gqlHelper = {
@@ -231,9 +238,7 @@ export const gqlHelper = {
       updateProduct: product => query('updateProduct', gqlMutations.updateProduct, { product }),
       removeProduct: (product_id: string) =>
          query('removeProduct', gqlMutations.removeProduct, { product_id }),
-      addOrder: (order: Order) => {
-         console.log({ order })
-         return query('addOrder', gqlMutations.addOrder, { order })
-      },
+      addOrder: (order: Order) => query('addOrder', gqlMutations.addOrder, { order }),
+      createInvitation: (invitation: Invitation) => query('createInvitation', gqlMutations.createInvitation, {invitation})
    },
 }

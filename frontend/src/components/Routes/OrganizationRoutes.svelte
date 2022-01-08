@@ -1,7 +1,8 @@
 <script lang="ts">
    import { Route } from 'svelte-navigator'
 
-   import { authStore, Role } from '../../utils/auth'
+   import { authStore } from '../../utils/auth'
+   import { Role } from '../../models/Role'
    import OrganizationInfo from '../pages/Organization/OrganizationInfo.svelte'
    import EditOrganization from '../pages/Organization/EditOrganization.svelte'
    import RegisterSelector from '../pages/Register/RegisterSelector.svelte'
