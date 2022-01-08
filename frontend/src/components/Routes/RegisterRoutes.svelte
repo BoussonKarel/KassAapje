@@ -9,6 +9,7 @@
    import AddEditProduct from '../pages/Product/AddEditProduct.svelte'
    import EditRegister from '../pages/Register/EditRegister.svelte'
    import OrderScreen from '../pages/Order/OrderScreen.svelte'
+import CreateInvitation from '../pages/CreateInvitation.svelte';
 
    const parentParams = useParams()
    export let orgId: string
@@ -40,6 +41,12 @@
    </Route>
 
    {#if isOwner}
+      <Route path="/roles">
+         <CreateInvitation register_id={$params.regId} />
+      </Route>
+      <Route path="/orders">
+         <OrderOverview register_id={$params.regId} />
+      </Route>
       <Route path="/edit">
          <EditRegister register_id={$parentParams.regId} />
       </Route>
@@ -47,7 +54,6 @@
          <Route path="/">
             <ProductOverview register_id={$parentParams.regId} {isOwner} />
          </Route>
-
          <Route path="/add">
             <AddEditProduct register_id={$parentParams.regId} />
          </Route>
