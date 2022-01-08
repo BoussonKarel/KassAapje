@@ -119,6 +119,19 @@ export const gqlQueries = {
           stock_quantity
       }
    }`,
+   orders: `query ($register_id: String!) {
+      getOrders(register_id: $register_id) {
+         order_id,
+         timestamp,
+         order_items {
+            quantity,
+            price,
+            product {
+               name
+            }
+         }
+      }
+   }`
 }
 
 export const gqlMutations = {
@@ -195,6 +208,7 @@ export const gqlHelper = {
          query('getInvitationInfo', gqlQueries.invitation, { invitation_id }),
       products: (register_id: string) => query('getProducts', gqlQueries.products, { register_id }),
       product: (product_id: string) => query('getProductById', gqlQueries.product, { product_id }),
+      orders: (register_id: string) => query('getOrders', gqlQueries.orders, { register_id }),
    },
    mutations: {
       addOrganization: organization =>

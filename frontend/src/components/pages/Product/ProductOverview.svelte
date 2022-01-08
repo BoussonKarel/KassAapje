@@ -9,9 +9,9 @@
    import SectionLoading from '../../Loading/SectionLoading.svelte'
 
 
-   export let register_id
+   export let register_id;
 
-   export let isOwner
+   export let isOwner;
 
    let fetchingState = '',
       products: Product[] = undefined

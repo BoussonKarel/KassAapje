@@ -1,8 +1,8 @@
 <script lang="ts">
    import ProductTableItem from './ProductTableItem.svelte'
 
-   export let isOwner
-   export let products
+   export let isOwner;
+   export let products;
 </script>
 
 <div class="c-table c-table-products">
