@@ -103,7 +103,7 @@ export class OrganizationResolver {
     try {
       // Check if user has correct perms
       return await this.roleManager
-        .hasOrganizationRole(user, id, [Role.OWNER])
+        .hasOrganizationRole(user, id, [Role.USER, Role.OWNER])
         .then(async () => {
           return await this.manager.findOne(Organization, id)
         })
