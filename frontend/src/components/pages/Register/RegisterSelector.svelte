@@ -11,6 +11,7 @@
    import { Link } from 'svelte-navigator'
 
    export let organization_id
+   export let isOwner
 
    let fetchingState = '',
       registers = undefined
@@ -51,7 +52,9 @@
          {#each registers as register}
             <RegisterCard {register} />
          {/each}
+         {#if isOwner}
          <AddCard page={'registers'} />
+         {/if}
       </CardList>
    {:else}
    <div class="o-container-center">

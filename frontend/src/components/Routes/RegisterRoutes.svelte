@@ -11,6 +11,7 @@
    import EditRegister from '../pages/Register/EditRegister.svelte'
    import OrderScreen from '../pages/Order/OrderScreen.svelte'
 import CreateInvitation from '../pages/CreateInvitation.svelte';
+import NoRegPerms from '../pages/Auth/NoRegPerms.svelte'
 
    const parentParams = useParams()
    export let orgId: string
@@ -61,14 +62,14 @@ import CreateInvitation from '../pages/CreateInvitation.svelte';
       </Route>
    {/if}
    <Route>
-      404 or no permission
+      <NoRegPerms/>
    </Route>
 {:else}
-   <div class="c-page">
-      <div class="o-container-center">
-         <div class="c-bigcard c-bigcard--error">
-            <div class="c-bigcard__text">You don't have permission to work in this register.</div>
-         </div>
+<div class="c-page">
+   <div class="o-container-center">
+      <div class="c-bigcard c-bigcard--error">
+         <div class="c-bigcard__text">Seems like you are not logged in correctly.</div>
       </div>
    </div>
+</div>
 {/if}

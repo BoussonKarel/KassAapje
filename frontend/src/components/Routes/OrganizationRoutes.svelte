@@ -28,7 +28,7 @@
 {#if isUser}
    <!-- Check permission in organization -->
    <Route path="/">
-      <RegisterSelector organization_id={$params.orgId} />
+      <RegisterSelector organization_id={$params.orgId} {isOwner} />
    </Route>
    <Route path="/:regId/*">
       <RegisterRoutes orgId={$params.orgId} />
@@ -36,6 +36,7 @@
    <Route path="/info">
       <OrganizationInfo id={$params.orgId} {isOwner} />
    </Route>
+   
    <Route path="/edit">
       {#if isOwner}
          <EditOrganization organization_id={$params.orgId} />
