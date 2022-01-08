@@ -27,5 +27,10 @@ export const orderHelper = {
     return order.order_items.reduce((a, b) => {
       return a + b.price;
     }, 0);
+  },
+  totalAll: (orders: Order[]) => {
+    return orders.reduce((a, b) => {
+      return a + orderHelper.total(b);
+    }, 0);
   }
 }

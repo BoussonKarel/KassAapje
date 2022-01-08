@@ -3,7 +3,7 @@ $global-card-height: 230px;
 .c-cardlist {
    display: grid;
 
-   grid-template-columns: repeat(auto-fill, minmax(280px, auto));
+   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 
    gap: 2em;
 

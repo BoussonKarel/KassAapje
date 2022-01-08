@@ -6,6 +6,8 @@
    import NavigationBar from '../../NavigationBar.svelte';
    import { formatHelper } from '../../../utils/formatHelper';
    import { orderHelper } from '../../../utils/orderHelper';
+   import Loading from '../../Loading/Loading.svelte';
+   import SkeletonCard from '../../Cards/SkeletonCard.svelte';
 
    export let register_id;
 
@@ -46,13 +48,13 @@
       <div class="u-toolbar-amount">
          <div class="u-toolbar-amount__title">Totaal:</div>
          <div class="u-toolbar-amount__symbol">€</div>
-         <div class="u-toolbar-amount__number">420,60</div>
+         <div class="u-toolbar-amount__number">{fetchingState === 'loading' ? '...' : orders ? orderHelper.totalAll(orders) : '???'}</div>
       </div>
    </div>
 
    <div class="c-orderlist">
       {#if fetchingState === 'loading'}
-         Loading
+         <SkeletonCard />
       {:else if orders && orders.length > 0}
          {#each orders as order}
             <div class="c-order">
@@ -83,6 +85,9 @@
                </div>
             </div>
          {/each}
+
+      {:else}
+      Kon orders niet ophalen
       {/if}
    </div>
 </div>
