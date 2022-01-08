@@ -23,6 +23,8 @@
    align-items: center;
    justify-content: center;
 
+   text-align: center;
+
    &--error {
       color: map-get($colors-theme, '500');
       font-weight: 500;

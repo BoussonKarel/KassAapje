@@ -58,7 +58,7 @@ export class ProductResolver {
     try {
       // If authorized...
       return await this.roleManager
-        .hasRegisterRole(user, registerId, [Role.OWNER, Role.USER])
+        .hasRegisterRole(user, registerId, [Role.USER, Role.OWNER])
         .then(async () => {
           // ...then find products
           return await this.manager.find(Product, {where: {register_id: registerId}})

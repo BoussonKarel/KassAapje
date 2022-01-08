@@ -88,9 +88,11 @@ export class RoleManager {
 
     // Check roles in above organization first: owner?
     const organization_id = registerOnlyIDs.organization_id
+    const permsOnOrganization = await this.hasOrganizationRole(user, organization_id, [Role.OWNER]).catch(e => {
+      return false
+    });
     // user is owner in the above organization
-    if (await this.hasOrganizationRole(user, organization_id, [Role.OWNER]))
-      return true
+    if (permsOnOrganization) return true;
     else {
       // Check roles in this register
       const permissionsHere = user.permissions.filter(
