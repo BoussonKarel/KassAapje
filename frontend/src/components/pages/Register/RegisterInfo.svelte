@@ -53,7 +53,7 @@
             authHelper.refresh()
          })
 
-      navigate(`/`)
+      navigate(`..`)
    }
 
    onMount(async () => {

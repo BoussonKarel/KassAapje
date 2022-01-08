@@ -29,22 +29,20 @@
    <Route path="/">
       <RegisterSelector organization_id={$params.orgId} />
    </Route>
-   <Route path="/info">
-      <OrganizationInfo id={$params.orgId} {isOwner} />
+   <Route path="/:regId/*">
+      <RegisterRoutes orgId={$params.orgId} />
    </Route>
    {#if isOwner}
+      <Route path="/info">
+         <OrganizationInfo id={$params.orgId} {isOwner} />
+      </Route>
       <Route path="/edit">
          <EditOrganization organization_id={$params.orgId} />
       </Route>
       <Route path="/new">
          <AddRegister organization_id={$params.orgId} />
       </Route>
-   {:else}
-      No owner perms to edit organization
    {/if}
-   <Route path="/:regId/*">
-      <RegisterRoutes orgId={$params.orgId} />
-   </Route>
 {:else}
    <div class="c-page">
       <div class="o-container-center">

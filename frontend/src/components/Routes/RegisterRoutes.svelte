@@ -34,9 +34,6 @@ import CreateInvitation from '../pages/CreateInvitation.svelte';
    <Route path="/">
       <OrderScreen register_id={$parentParams.regId} {isOwner} />
    </Route>
-   <Route path="/orders">
-      <OrderOverview register_id={$parentParams.regId} />
-   </Route>
    <Route path="/info">
       <RegisterInfo id={$parentParams.regId} {orgId} {isOwner} />
    </Route>
@@ -63,7 +60,7 @@ import CreateInvitation from '../pages/CreateInvitation.svelte';
          </Route>
       </Route>
    {:else}
-      You don't have permission to work in the register catalogue.
+      You don't have permission to see this page.
    {/if}
 {:else}
    <div class="c-page">

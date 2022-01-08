@@ -64,7 +64,7 @@ export class RegisterResolver {
     try {
       // Check if user has correct perms
       return await this.roleManager
-        .hasOrganizationRole(user, organization_id, [Role.OWNER])
+        .hasOrganizationRole(user, organization_id, [Role.USER])
         .then(async () => {
           return await this.manager.find(Register, {
             where: {
