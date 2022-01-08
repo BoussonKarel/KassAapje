@@ -7,6 +7,7 @@
    import { identity, onMount } from 'svelte/internal'
    import { formHelper } from '../../../utils/formHelper'
    import SectionLoading from '../../Loading/SectionLoading.svelte'
+   import { authHelper } from '../../../utils/auth'
 
    const { DEFAULT_ERROR, validateNotEmpty, validateEmail, validateNumber } = formHelper()
 
@@ -51,7 +52,6 @@
    async function handleSubmit() {
       for (let field in values) {
          if (field == 'zip' || field == 'street_number') {
-            console.log('nummer getarget')
             if (!validateNumber(values[field])) {
                errors[field] = DEFAULT_ERROR.number
             } else {
@@ -78,8 +78,6 @@
          valid = true
       } else {
          valid = false
-         console.log('hier loopt er iets mis')
-         console.log('errors', errors)
          errors.submit = DEFAULT_ERROR.submit
       }
 
@@ -89,12 +87,11 @@
          await gqlHelper.mutations
             .updateOrganization(body)
             .catch(e => {
-               console.log(e)
+               errors.submit = `Er ging iets fout: ${e.message}`
             })
             .finally(() => {
-               console.log('org updated')
+               authHelper.refresh()
             })
-         console.log(body)
          navigate(`/${organization_id}/info`)
       }
    }
@@ -110,7 +107,6 @@
       var field: string = e.target.name
 
       if (field == 'zip' || field == 'street_number') {
-         console.log('nummer getarget')
          if (!validateNumber(values[field])) {
             errors[field] = DEFAULT_ERROR.number
          } else {
@@ -142,7 +138,6 @@
          !errors.color &&
          !errors.email
       ) {
-         console.log('alle errors weggewerkt')
          errors.submit = null
       }
    }
@@ -168,7 +163,6 @@
          .finally(() => {
             fetchingState = ''
          })
-      console.log(organization)
       setOrganizationInfo()
    }
 

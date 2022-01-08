@@ -53,13 +53,11 @@
             .addRegister(body)
             .catch(e => {
                errors.submit = `Er ging iets fout: ${e.message}`
-               console.log(e)
             })
             .finally(() => {
                authHelper.refresh()
             })
 
-         console.log(body)
 
          navigate(-1)
       }
@@ -82,7 +80,6 @@
       }
 
       if (!errors.name && !errors.description && !errors.color) {
-         console.log('alle errors weggewerkt')
          errors.submit = null
       }
    }

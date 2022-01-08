@@ -28,8 +28,6 @@
          .catch(() => {
             fetchingState = 'error'
          })
-
-      console.log(products)
    }
 
    onMount(() => {

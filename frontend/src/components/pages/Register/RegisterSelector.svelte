@@ -32,8 +32,6 @@
       // Filter which ones he has perms??
    }
 
-   const addRegister = async () => {}
-
    onMount(() => {
       getRegisters()
    })

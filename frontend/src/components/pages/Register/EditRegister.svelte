@@ -58,13 +58,10 @@
             .updateRegister(body)
             .catch(e => {
                errors.submit = `Er ging iets fout: ${e.message}`
-               console.log(e)
             })
             .finally(() => {
                authHelper.refresh()
             })
-
-         console.log('body', body)
 
          navigate(-1)
       }
@@ -79,7 +76,6 @@
 
    const handleInput = e => {
       var field: string = e.target.name
-      console.log('field', field)
 
       if (!validateNotEmpty(values[field])) {
          errors[field] = DEFAULT_ERROR.empty
@@ -87,10 +83,7 @@
          errors[field] = null
       }
 
-      console.log('errors', errors)
-
       if (!errors.name && !errors.description && !errors.color) {
-         console.log('verwijder submit error')
          errors.submit = null
       }
    }
@@ -113,7 +106,6 @@
          .finally(() => {
             fetchingState = ''
          })
-      console.log('register', register)
       setRegisterInfo()
    }
 
