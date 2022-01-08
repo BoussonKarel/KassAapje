@@ -4,6 +4,7 @@
   import {Role, RoleHuman} from '../../models/Role'
   import { gqlHelper } from "../../utils/graphQL";
 import type { Invitation } from "../../models/Invitation";
+import { formatHelper } from "../../utils/formatHelper";
 
   export let register_id = undefined;
   export let organization_id = undefined;
@@ -51,11 +52,14 @@ import type { Invitation } from "../../models/Invitation";
           <Loading size={1} />
         {:else if invitation}
         <div class="c-bigcard__text">
-          Uitnodiging aangemaakt.<br />Stuur deze link naar de persoon die je wil uitnodigen voor de rol <strong>{RoleHuman[selectedRole]}</strong>
+          Stuur deze link naar de persoon die je wil uitnodigen voor de rol <strong>{RoleHuman[selectedRole]}</strong>
         </div>
         <span on:click={copyURL} style="user-select: all" class="c-input c-bigcard__input" name="URL" type="text">
           {invitationURL}
         </span>
+        <div class="c-bigcard__text">
+          Deze uitnodiging is geldig tot {formatHelper.dateTime(invitation.expiration_date)}
+        </div>
         <div class="bigcard__buttons">
           <button on:click={copyURL} class="c-button">
             Link kopiëren
