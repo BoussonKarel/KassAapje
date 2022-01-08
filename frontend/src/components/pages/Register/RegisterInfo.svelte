@@ -1,12 +1,13 @@
 <script lang="ts">
    import { onMount } from 'svelte'
-   import { Link } from 'svelte-navigator'
+   import { Link, navigate } from 'svelte-navigator'
    import { gqlHelper } from '../../../utils/graphQL'
    import NavigationBar from '../../NavigationBar.svelte'
    import SectionLoading from '../../Loading/SectionLoading.svelte'
    import Receipt from 'svelte-material-icons/Receipt.svelte'
    import Account from 'svelte-material-icons/Account.svelte'
    import Inventory from '../../../ExtraIcons/Inventory.svelte'
+   import { authHelper } from '../../../utils/auth';
 
    export let id
    export let orgId
