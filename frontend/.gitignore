@@ -1,5 +1,3 @@
 node_modules
 dist
 bundle_stats.html
-
-src/config/firebaseConfig.ts
