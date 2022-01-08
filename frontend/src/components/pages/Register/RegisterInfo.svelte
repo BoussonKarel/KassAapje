@@ -4,6 +4,9 @@
    import { gqlHelper } from '../../../utils/graphQL'
    import NavigationBar from '../../NavigationBar.svelte'
    import SectionLoading from '../../Loading/SectionLoading.svelte'
+   import { authHelper } from '../../../utils/auth'
+   import { useNavigate } from 'svelte-navigator'
+   const navigate = useNavigate()
 
    export let id
    export let orgId
@@ -26,6 +29,20 @@
       console.log(register)
    }
 
+   const removeRegister = async () => {
+      gqlHelper.mutations
+         .removeRegister(id)
+         .catch(e => {
+            console.log('mislukt')
+         })
+         .finally(() => {
+            console.log('register verwijderd')
+            authHelper.refresh()
+         })
+
+      navigate(`/${orgId}`)
+   }
+
    onMount(async () => {
       getRegisterInfo()
    })
@@ -33,11 +50,11 @@
 
 <div class="c-page">
    {#if fetchingState === 'loading'}
-   <SectionLoading/>
+      <SectionLoading />
    {:else if fetchingState === 'error'}
       Error getting organization
    {:else if register}
-         <NavigationBar title={register.name} />
+      <NavigationBar title={register.name} />
 
       <form class="c-form" name="RegisterInfo">
          <div class="c-form-edit">
@@ -60,6 +77,8 @@
                <Link to="/{orgId}/{id}/edit">
                   <button class="c-button"> Bewerken </button>
                </Link>
+
+               <button class="c-button" on:click={removeRegister}> verwijder kassa</button>
             {/if}
          </div>
       </form>
