@@ -59,9 +59,10 @@ import CreateInvitation from '../pages/CreateInvitation.svelte';
             <AddEditProduct register_id={$parentParams.regId} product_id={params.prodId} />
          </Route>
       </Route>
-   {:else}
-      You don't have permission to see this page.
    {/if}
+   <Route>
+      404 or no permission
+   </Route>
 {:else}
    <div class="c-page">
       <div class="o-container-center">
