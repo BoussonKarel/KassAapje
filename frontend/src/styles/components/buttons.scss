@@ -74,13 +74,13 @@
    background: none;
    border: none;
    text-decoration: underline;
-   color: map-get($colors-status, 'error');
+   color: map-get($colors-theme, '500');
 
    &:hover {
-      color: #ff6969;
+      color: map-get($colors-theme, '600');
    }
    &:focus {
-      color: #ff6969;
+      color: map-get($colors-theme, '600');
    }
 }
 

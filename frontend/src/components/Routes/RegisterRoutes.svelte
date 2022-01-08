@@ -10,7 +10,7 @@
    import EditRegister from '../pages/Register/EditRegister.svelte'
    import OrderScreen from '../pages/Order/OrderScreen.svelte'
 
-   const params = useParams()
+   const parentParams = useParams()
    export let orgId: string
 
    $: isUser = false
@@ -25,34 +25,34 @@
       isUser = isOwner || perms.registers.some(o => o.id === register_id)
    }
 
-   $: checkRegisterPermissions(orgId, $params.regId)
+   $: checkRegisterPermissions(orgId, $parentParams.regId)
 </script>
 
 {#if isUser}
    <Route path="/">
-      <OrderScreen register_id={$params.regId} {isOwner} />
+      <OrderScreen register_id={$parentParams.regId} {isOwner} />
    </Route>
    <Route path="/orders">
-      <OrderOverview register_id={$params.regId} />
+      <OrderOverview register_id={$parentParams.regId} />
    </Route>
    <Route path="/info">
-      <RegisterInfo id={$params.regId} {orgId} {isOwner} />
+      <RegisterInfo id={$parentParams.regId} {orgId} {isOwner} />
    </Route>
 
    {#if isOwner}
       <Route path="/edit">
-         <EditRegister register_id={$params.regId} />
+         <EditRegister register_id={$parentParams.regId} />
       </Route>
       <Route path="/products/*">
          <Route path="/">
-            <ProductOverview register_id={$params.regId} {isOwner} />
+            <ProductOverview register_id={$parentParams.regId} {isOwner} />
          </Route>
 
          <Route path="/add">
-            <AddEditProduct register_id={$params.regId} />
+            <AddEditProduct register_id={$parentParams.regId} />
          </Route>
-         <Route path="/:prodId/edit">
-            <AddEditProduct register_id={$params.regId} product_id={$params.prodId} />
+         <Route path="/:prodId/edit" let:params>
+            <AddEditProduct register_id={$parentParams.regId} product_id={params.prodId} />
          </Route>
       </Route>
    {:else}

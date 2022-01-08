@@ -93,7 +93,7 @@ import Delete from 'svelte-material-icons/Delete.svelte';
                      Bewerken
                   </Link>
                   <button on:click|preventDefault={openPopup} class="c-textbutton__delete"
-                   >kassa verwijderen</button
+                   >Kassa verwijderen</button
                 >
                </div>
             {/if}
