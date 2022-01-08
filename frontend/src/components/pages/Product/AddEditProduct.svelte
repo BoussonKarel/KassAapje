@@ -176,7 +176,7 @@
    {:else if fetchingState === 'error'}
       Error getting organization
    {:else if product || product_id == ''}
-      <NavigationBar title={'Product toevoegen'} />
+      <NavigationBar title={product_id != '' ? 'Product bewerken' : 'Product toevoegen'} />
 
       <form class="c-form" name="AddOrganisation" on:submit|preventDefault={handleSubmit}>
          <div class="c-form-textinputs">
