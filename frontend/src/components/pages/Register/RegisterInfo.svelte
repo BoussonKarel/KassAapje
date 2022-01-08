@@ -12,6 +12,8 @@
    export let orgId
    export let isOwner
 
+   let deletePopup = false
+
    let fetchingState = '',
       register = undefined
 
@@ -27,6 +29,26 @@
             fetchingState = ''
          })
       console.log(register)
+   }
+
+   const openPopup = () => {
+      deletePopup = true
+   }
+   const closePopup = () => {
+      deletePopup = false
+   }
+
+   const removeRegister = async () => {
+      gqlHelper.mutations
+         .removeRegister(id)
+         .catch(e => {
+            console.log('mislukt')
+         })
+         .finally(() => {
+            console.log('register verwijderd')
+         })
+      authHelper.refresh()
+      navigate(`/${orgId}`)
    }
 
    onMount(async () => {
