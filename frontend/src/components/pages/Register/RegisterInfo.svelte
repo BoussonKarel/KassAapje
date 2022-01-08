@@ -13,7 +13,7 @@
    export let orgId
    export let isOwner
 
-   let deletePopup = false;
+   let deletePopup = false
 
    let fetchingState = '',
       register = undefined
@@ -33,10 +33,10 @@
    }
 
    const openPopup = () => {
-      deletePopup = true;
+      deletePopup = true
    }
    const closePopup = () => {
-      deletePopup = false;
+      deletePopup = false
    }
 
    const removeRegister = async () => {
@@ -63,7 +63,17 @@
    {:else if fetchingState === 'error'}
       Error getting organization
    {:else if register}
-      <NavigationBar title={register.name} />
+      <div class="c-navigation__with-buttons">
+         <NavigationBar title={register.name} />
+         {#if isOwner}
+            <button
+               class="c-button u-button__delete u-button__delete-icon"
+               on:click|preventDefault={openPopup}
+            >
+               <Delete /></button
+            >
+         {/if}
+      </div>
 
       <form class="c-form" name="RegisterInfo">
          <div class="c-form-edit">
@@ -86,31 +96,27 @@
                <Link to="/{orgId}/{id}/edit">
                   <button class="c-button"> Bewerken </button>
                </Link>
-
-               <button class="c-button" on:click|preventDefault={openPopup}> verwijder kassa</button>
             {/if}
          </div>
       </form>
 
       {#if deletePopup}
-      <div class="c-popup-delete">
-         <div class="c-popup-delete__info">
-            <div class="c-popup-delete__title">
-               Kassa verwijderen?
+         <div class="c-popup-delete">
+            <div class="c-popup-delete__info">
+               <div class="c-popup-delete__title">Kassa verwijderen?</div>
+               <div>Deze actie is onomkeerbaar.</div>
             </div>
-            <div>
-               Deze actie is onomkeerbaar.
-            </div>
-         </div>
-         
-         <div class="c-popup-delete__buttons">
-            <button class="c-button u-button__cancel" on:click={closePopup}>Annuleren</button>
-            <button class="c-button u-button__delete u-button__delete-icon" on:click={removeRegister}> <Delete/></button>
-         </div>
-         
-      </div>
-      {/if}
 
-      
+            <div class="c-popup-delete__buttons">
+               <button class="c-button u-button__cancel" on:click={closePopup}>Annuleren</button>
+               <button
+                  class="c-button u-button__delete u-button__delete-icon"
+                  on:click={removeRegister}
+               >
+                  <Delete /></button
+               >
+            </div>
+         </div>
+      {/if}
    {/if}
 </div>
