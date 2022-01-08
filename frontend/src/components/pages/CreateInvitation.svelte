@@ -5,6 +5,7 @@
   import { gqlHelper } from "../../utils/graphQL";
 import type { Invitation } from "../../models/Invitation";
 import { formatHelper } from "../../utils/formatHelper";
+import NavigationBar from "../NavigationBar.svelte";
 
   export let register_id = undefined;
   export let organization_id = undefined;
@@ -46,6 +47,7 @@ import { formatHelper } from "../../utils/formatHelper";
 </script>
 
 <div class="c-page">
+  <NavigationBar title="Uitnodiging aanmaken" />
   <div class="o-container-center">
     <div class="c-bigcard {fetchingState === 'error' ? 'c-bigcard--error' : ''}">
         {#if fetchingState === 'loading'}
