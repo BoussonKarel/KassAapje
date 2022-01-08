@@ -40,3 +40,6 @@ jobs:
 
     - name: Deploy backend service to kubernetes
       run: kubectl apply -f k8/backend-svc.yml
+
+    - name: Kubectl rollout restart
+      run: kubectl rollout restart deployment/kassaapje-backend --namespace kassaapje

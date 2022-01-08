@@ -34,3 +34,6 @@ jobs:
 
     - name: Deploy frontend to kubernetes
       run: kubectl apply -f k8/frontend-svc.yml
+
+    - name: Kubectl rollout restart
+      run: kubectl rollout restart deployment/kassaapje-frontend --namespace kassaapje

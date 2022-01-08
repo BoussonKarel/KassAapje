@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "start": "sirv --single --host",
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
@@ -11,6 +12,7 @@
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.11",
     "@tsconfig/svelte": "^2.0.1",
+    "@types/node": "^17.0.8",
     "rollup-plugin-visualizer": "^5.5.2",
     "sass": "^1.43.5",
     "svelte": "^3.37.0",
@@ -23,6 +25,7 @@
   },
   "dependencies": {
     "firebase": "^9.6.1",
+    "sirv-cli": "^2.0.1",
     "svelte-material-icons": "^1.0.3",
     "svelte-navigator": "^3.1.5"
   }

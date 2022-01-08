@@ -14,8 +14,8 @@ WORKDIR /usr/app
 
 COPY ["package.json", "package-lock.json", "./"]
 RUN npm ci --only=production
-RUN npm install http-server -g
+RUN npm install sirv-cli -g
 COPY --from=build-container /usr/app/dist .
-EXPOSE 80
+EXPOSE 8080
 
-CMD ["http-server"]
+CMD ["npm", "start"]
