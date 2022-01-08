@@ -2,7 +2,7 @@
    background-color: map-get($colors-theme, '500');
    display: flex;
    flex-direction: column;
-   min-width: $menu-width;
+   width: $menu-width;
    height: 100vh;
 
    &--collapsed {
@@ -114,6 +114,8 @@
 }
 
 .c-sb-org {
+   width: 100%;
+
    &__header {
       font-size: rem(20px);
       padding: 8px 0.75em;
@@ -164,8 +166,8 @@
 
    &__content {
       display: flex;
-
       flex-direction: column;
+      
       list-style: none;
 
       margin: 4px 0;
@@ -174,28 +176,29 @@
    }
 
    &__item {
+      display: flex;
+      align-items: center;
+
+      padding-top: 2px;
+      padding-bottom: 2px;
+      padding-left: 16px;
+
       a, a:visited, a:focus {
          outline: none;
          text-decoration: none;
       }
 
       a {
-         display: flex;
-         gap: 8px;
-         align-items: center;
+         display: block;
+         max-width: 100%;
 
+         white-space: nowrap;
+         overflow: hidden;
+         text-overflow: ellipsis;
    
          color: map-get($colors-neutral, '100');
          font-size: rem(16px);
          font-weight: 300;
-   
-         padding-top: 2px;
-         padding-bottom: 2px;
-         padding-left: 16px;
-   
-         white-space: nowrap;
-         overflow: hidden;
-         text-overflow: ellipsis;
       }
 
       &--noreg a {
@@ -203,8 +206,8 @@
       }
    }
 
-   &__item a:hover,
-   &__item a:focus {
+   &__item:hover,
+   &__item:focus {
       cursor: pointer;
       background-color: map-get($colors-theme, '400');
 
