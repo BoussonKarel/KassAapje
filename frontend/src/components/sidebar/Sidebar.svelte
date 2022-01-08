@@ -62,7 +62,7 @@
    })
 </script>
 
-<div class="c-sidebar {sidebarCollapsed ? 'c-sidebar--collapsed' : ''}">
+<div class="c-sidebar {sidebarCollapsed ? 'c-sidebar--collapsed' : ''} u-scrollbar-light">
    <Link to="/" class="c-sb-button c-sb-button--main  {sidebarCollapsed ? 'c-sb-button--collapsed' : ''}">
       {#if sidebarCollapsed}
          <div class="c-sb-button__icon">

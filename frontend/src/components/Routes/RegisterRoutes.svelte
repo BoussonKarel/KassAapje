@@ -33,7 +33,7 @@
       <OrderScreen register_id={$params.regId} {isOwner} />
    </Route>
    <Route path="/orders">
-      <OrderOverview />
+      <OrderOverview register_id={$params.regId} />
    </Route>
    <Route path="/info">
       <RegisterInfo id={$params.regId} {orgId} {isOwner} />

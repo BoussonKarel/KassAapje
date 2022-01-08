@@ -1,21 +1,47 @@
-<script lang="ts">
-import Pencil from 'svelte-material-icons/Pencil.svelte';
+   <script lang="ts">
+   import type { Order } from '../../../models/Order';
+   import { gqlHelper } from '../../../utils/graphQL';
+   import { onMount } from 'svelte';
+   import Pencil from 'svelte-material-icons/Pencil.svelte';
+   import NavigationBar from '../../NavigationBar.svelte';
+   import { formatHelper } from '../../../utils/formatHelper';
+   import { orderHelper } from '../../../utils/orderHelper';
 
-   import NavigationBar from '../../NavigationBar.svelte'
-   import OrderTable from './OrderTable.svelte'
+   export let register_id;
+
+   let fetchingState = '',
+   orders: Order[] = undefined;
+
+   const getOrders = async () => {
+      fetchingState = 'loading'
+
+      orders = await gqlHelper.queries
+         .orders(register_id)
+         .then(result => {
+            fetchingState = ''
+            return result
+         })
+         .catch(() => {
+            fetchingState = 'error'
+         })
+   }
+
+   onMount(() => {
+      getOrders();
+   })
 </script>
 
 <div class="c-page">
       <NavigationBar title={'Bestellingen'} />
    <div class="u-toolbar">
-      <div class="c-selector">
+      <!-- <div class="c-selector">
          <p class="c-selector-title">Periode:</p>
          <select class="c-selector-unit" id="timeframe" name="timeframe">
             <option class="c-selector__option">Laatste Week </option>
             <option class="c-selector__option">Laatste Maand </option>
             <option class="c-selector__option">Altijd </option>
          </select>
-      </div>
+      </div> -->
 
       <div class="u-toolbar-amount">
          <div class="u-toolbar-amount__title">Totaal:</div>
@@ -25,29 +51,38 @@ import Pencil from 'svelte-material-icons/Pencil.svelte';
    </div>
 
    <div class="c-orderlist">
-      {#each Array(10) as _}
-         <div class="c-order">
-            <div class="c-order__header">
-               <div class="c-order__title">
-                  Order # 123456
+      {#if fetchingState === 'loading'}
+         Loading
+      {:else if orders && orders.length > 0}
+         {#each orders as order}
+            <div class="c-order">
+               <div class="c-order__header">
+                  <div class="c-order__title">
+                     <span class="c-order__id">
+                        # {order.order_id}
+                     </span>
+                     <span class="c-order__time">
+                        {formatHelper.dateTime(order.timestamp)}
+                     </span>
+                  </div>
+                  <button disabled class="c-order__edit">
+                     <Pencil />
+                  </button>
                </div>
-               <div class="c-order__edit">
-                  <Pencil />
+               <div class="c-order__summary">
+                  <div class="c-order__content">
+                     {#if order.order_items && order.order_items.length > 0}
+                        {#each order.order_items as order_item}
+                           {order_item.quantity}x {order_item.product.name}<br />
+                        {/each}
+                     {/if}
+                  </div>
+                  <div class="c-order__price">
+                     {formatHelper.price(orderHelper.total(order))}
+                  </div>
                </div>
             </div>
-            <div class="c-order__summary">
-               <div class="c-order__content">
-                  1x div<br />
-                  1x ap<br />
-                  2x pc<br />
-               </div>
-               <div class="c-order__price">
-                  € 120,00
-               </div>
-            </div>
-         </div>
-      {/each}
+         {/each}
+      {/if}
    </div>
-
-   <!-- <OrderTable /> -->
 </div>
