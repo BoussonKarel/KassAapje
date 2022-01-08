@@ -22,15 +22,12 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
     
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v2
-      with:
-        context: ./frontend
-        push: true
-        tags: ghcr.io/boussonkarel/kassaapje-frontend:latest
+    # - name: Build and push Docker image
+    #   uses: docker/build-push-action@v2
+    #   with:
+    #     context: ./backend
+    #     push: true
+    #     tags: ghcr.io/boussonkarel/kassaapje-backend:latest
     
-    - name: Deploy frontend to kubernetes
-      run: kubectl apply -f k8/frontend.yml
-      
-    - name: Deploy frontend service to kubernetes
-      run: kubectl apply -f k8/frontend-svc.yml
+    # - name: Deploy frontend to kubernetes
+    #   run: kubectl apply -f k8/frontend.yml

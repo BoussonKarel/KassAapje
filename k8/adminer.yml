@@ -21,7 +21,6 @@ spec:
           - containerPort: 8080 # The interal port of the app
             name: 8080tcp
             protocol: TCP
-            # _serviceType: ClusterIP # Register it as a ClusterIP service
       nodeName: bousson-karel # Change the name of your node!
 ---
 apiVersion: v1

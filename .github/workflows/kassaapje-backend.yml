@@ -2,11 +2,14 @@ name: Deploy KassAapje backend
 
 on:
   push:
-    branches: [ main ]
+    branches:
+    - main
+    paths:
+      - 'backend/**'
   workflow_dispatch:
 
 jobs:
-  build:
+  build-and-k8s:
     runs-on: self-hosted
 
     steps:
@@ -23,18 +26,17 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: ./backend
-#         file: ./backend/Dockerfile
         push: true
         tags: ghcr.io/boussonkarel/kassaapje-backend:latest
     
-    - name: Deploy mariadb to kubernetes
-      run: kubectl apply -f k8/mariadb.yml --validate=false
+    - name: Deploy mariadb to kubernetes # Does not do anything when it is unchanged
+      run: kubectl apply -f k8/mariadb.yml
       
-    - name: Deploy adminer to kubernetes
-      run: kubectl apply -f k8/adminer.yml --validate=false
+    - name: Deploy adminer to kubernetes # Does not do anything when it is unchanged
+      run: kubectl apply -f k8/adminer.yml
       
     - name: Deploy backend to kubernetes
-      run: kubectl apply -f k8/backend-prod.yml
+      run: kubectl apply -f k8/backend.yml
 
     - name: Deploy backend service to kubernetes
-      run: kubectl apply -f k8/backend-svc-prod.yml
+      run: kubectl apply -f k8/backend-svc.yml
