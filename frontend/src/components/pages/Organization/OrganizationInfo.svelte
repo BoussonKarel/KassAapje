@@ -4,7 +4,8 @@
    import { gqlHelper } from '../../../utils/graphQL'
    import { Link } from 'svelte-navigator'
    import Login from '../Auth/Login.svelte'
-   import { authStore, Role } from '../../../utils/auth'
+   import { authStore } from '../../../utils/auth'
+   import { Role } from '../../../models/Role'
    import SectionLoading from '../../Loading/SectionLoading.svelte'
 
    export let id

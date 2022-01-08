@@ -9,6 +9,7 @@
    import { useParams } from 'svelte-navigator'
    import RegisterRoutes from './RegisterRoutes.svelte'
    import AddRegister from '../pages/Register/AddRegister.svelte'
+   import NoOrgPerms from '../pages/Auth/NoOrgPerms.svelte'
 
    const params = useParams()
 
@@ -32,24 +33,28 @@
    <Route path="/:regId/*">
       <RegisterRoutes orgId={$params.orgId} />
    </Route>
-   {#if isOwner}
-      <Route path="/info">
-         <OrganizationInfo id={$params.orgId} {isOwner} />
-      </Route>
-      <Route path="/edit">
+   <Route path="/info">
+      <OrganizationInfo id={$params.orgId} {isOwner} />
+   </Route>
+   <Route path="/edit">
+      {#if isOwner}
          <EditOrganization organization_id={$params.orgId} />
-      </Route>
-      <Route path="/new">
+      {:else}
+         <NoOrgPerms />
+      {/if}
+   </Route>
+   <Route path="/new">
+      {#if isOwner}
          <AddRegister organization_id={$params.orgId} />
-      </Route>
-   {/if}
+      {:else}
+         <NoOrgPerms />
+      {/if}
+   </Route>
 {:else}
    <div class="c-page">
       <div class="o-container-center">
          <div class="c-bigcard c-bigcard--error">
-            <div class="c-bigcard__text">
-               You don't have permission to work in this organization.
-            </div>
+            <div class="c-bigcard__text">Seems like you are not logged in correctly.</div>
          </div>
       </div>
    </div>
