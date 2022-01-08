@@ -7,9 +7,9 @@
    import Receipt from 'svelte-material-icons/Receipt.svelte'
    import Account from 'svelte-material-icons/Account.svelte'
    import Inventory from '../../../ExtraIcons/Inventory.svelte'
-   import { authHelper } from '../../../utils/auth'
    import Delete from 'svelte-material-icons/Delete.svelte'
    import Store from 'svelte-material-icons/Store.svelte'
+   import { refresh } from '../../../utils/refresh';
 
    export let register_id: string
    export let isOwner: boolean
@@ -50,10 +50,10 @@
             errors.remove = `Er ging iets fout: ${e.message}`
          })
          .finally(() => {
-            authHelper.refresh()
+            refresh()
+            navigate(`../`)
          })
 
-      navigate(`../`, {state: {refresh: true}})
    }
 
    onMount(async () => {
