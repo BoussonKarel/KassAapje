@@ -6,7 +6,7 @@
     <div class="o-container-center">
        <div class="c-bigcard c-bigcard--error">
           <div class="c-bigcard__text">
-             You don't have permission to work in this organization.
+             Je hebt niet de juiste rechten om deze organisatie te bewerken.
           </div>
        </div>
     </div>
