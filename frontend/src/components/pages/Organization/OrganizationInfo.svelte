@@ -24,7 +24,6 @@
          .finally(() => {
             fetchingState = ''
          })
-      console.log(organization)
    }
 
    onMount(async () => {

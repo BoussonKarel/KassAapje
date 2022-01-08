@@ -33,12 +33,12 @@ import Delete from 'svelte-material-icons/Delete.svelte';
       gqlHelper.mutations
          .removeProduct(product_id)
          .catch(e => {
-            console.log('mislukt')
+            errors.submit = `Er ging iets fout: ${e.message}`
          })
          .finally(() => {
-            console.log('register verwijderd')
+            authHelper.refresh()
          })
-      authHelper.refresh()
+      
       navigate(-1)
    }
 
@@ -62,7 +62,6 @@ import Delete from 'svelte-material-icons/Delete.svelte';
    async function handleSubmit() {
       for (let field in values) {
          if (field == 'price' || field == 'stock_quantity') {
-            console.log('nummer getarget')
             if (!validateNumber(values[field])) {
                errors[field] = DEFAULT_ERROR.number
             } else {
@@ -81,7 +80,6 @@ import Delete from 'svelte-material-icons/Delete.svelte';
          valid = true
       } else {
          valid = false
-         console.log('errors', errors)
          errors.submit = DEFAULT_ERROR.submit
       }
 
@@ -95,19 +93,16 @@ import Delete from 'svelte-material-icons/Delete.svelte';
                price: values.price,
                stock_quantity: values.stock_quantity,
             }
-            console.log('body', body)
 
             await gqlHelper.mutations
                .updateProduct(body)
                .catch(e => {
                   errors.submit = `Er ging iets fout: ${e.message}`
-                  console.log(e)
                })
                .finally(() => {
                   authHelper.refresh()
                })
 
-            console.log(body)
 
             navigate(-1)
          } else {
@@ -119,13 +114,10 @@ import Delete from 'svelte-material-icons/Delete.svelte';
                .addProduct(body)
                .catch(e => {
                   errors.submit = `Er ging iets fout: ${e.message}`
-                  console.log(e)
                })
                .finally(() => {
                   authHelper.refresh()
                })
-
-            console.log(body)
 
             navigate(-1)
          }
@@ -143,7 +135,6 @@ import Delete from 'svelte-material-icons/Delete.svelte';
       var field: string = e.target.name
 
       if (field == 'price' || field == 'stock_quantity') {
-         console.log('nummer getarget')
          if (!validateNumber(values[field])) {
             errors[field] = DEFAULT_ERROR.number
          } else {
@@ -158,7 +149,6 @@ import Delete from 'svelte-material-icons/Delete.svelte';
       }
 
       if (!errors.name && !errors.price && !errors.stock_quantity) {
-         console.log('alle errors weggewerkt')
          errors.submit = null
       }
    }
@@ -181,14 +171,12 @@ import Delete from 'svelte-material-icons/Delete.svelte';
          .finally(() => {
             fetchingState = ''
          })
-      console.log(product)
       setProductInfo()
    }
 
    onMount(async () => {
       if (product_id != '') {
          getProductInfo()
-         console.log(product_id)
       }
    })
 </script>

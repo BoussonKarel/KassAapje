@@ -19,6 +19,10 @@
    let fetchingState = '',
       register = undefined
 
+   let errors = {
+      remove: null,
+   }
+
    const getRegisterInfo = async () => {
       fetchingState = 'loading'
 
@@ -43,13 +47,13 @@
       gqlHelper.mutations
          .removeRegister(id)
          .catch(e => {
-            console.log('mislukt')
+            errors.remove = `Er ging iets fout: ${e.message}`
          })
          .finally(() => {
-            console.log('register verwijderd')
+            authHelper.refresh()
          })
-      authHelper.refresh()
-      navigate(`/${orgId}`)
+
+      navigate(`/`)
    }
 
    onMount(async () => {
@@ -112,6 +116,9 @@
                      <Delete /></button
                   >
                </div>
+               <span class="c-form-error">
+                  {errors.remove ? errors.remove : ''}
+               </span>
             </div>
          {/if}
       </div>

@@ -47,7 +47,6 @@
    async function handleSubmit() {
       for (let field in values) {
          if (field == 'zip' || field == 'street_number') {
-            console.log('nummer getarget')
             if (!validateNumber(values[field])) {
                errors[field] = DEFAULT_ERROR.number
             } else {
@@ -74,7 +73,6 @@
          valid = true
       } else {
          valid = false
-         console.log('errors', errors)
          errors.submit = DEFAULT_ERROR.submit
       }
 
@@ -84,12 +82,12 @@
          await gqlHelper.mutations
             .addOrganization(body)
             .catch(e => {
-               console.log(e)
+               errors.submit = `Er ging iets fout: ${e.message}`
             })
             .finally(() => {
                authHelper.refresh()
             })
-         console.log(body)
+
          navigate('/')
       }
    }
@@ -105,7 +103,6 @@
       var field: string = e.target.name
 
       if (field == 'zip' || field == 'street_number') {
-         console.log('nummer getarget')
          if (!validateNumber(values[field])) {
             errors[field] = DEFAULT_ERROR.number
          } else {
@@ -137,7 +134,6 @@
          !errors.color &&
          !errors.email
       ) {
-         console.log('alle errors weggewerkt')
          errors.submit = null
       }
    }
