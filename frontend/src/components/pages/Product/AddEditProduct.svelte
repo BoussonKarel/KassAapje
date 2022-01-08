@@ -9,15 +9,38 @@
    import NavigationBar from '../../NavigationBar.svelte'
    import { formHelper } from '../../../utils/formHelper'
    import SectionLoading from '../../Loading/SectionLoading.svelte'
+import Delete from 'svelte-material-icons/Delete.svelte';
 
    const { DEFAULT_ERROR, validateNotEmpty, validateEmail, validateNumber } = formHelper()
 
    // INPUTS
    let valid = false
 
+   let deletePopup = false
+
    export let product_id = ''
 
    export let register_id
+
+   const openPopup = () => {
+      deletePopup = true
+   }
+   const closePopup = () => {
+      deletePopup = false
+   }
+
+   const removeProduct = async () => {
+      gqlHelper.mutations
+         .removeProduct(product_id)
+         .catch(e => {
+            console.log('mislukt')
+         })
+         .finally(() => {
+            console.log('register verwijderd')
+         })
+      authHelper.refresh()
+      navigate(-1)
+   }
 
    let values: ProductInput = {
       register_id: register_id,
@@ -172,11 +195,11 @@
 
 <div class="c-page">
    {#if fetchingState === 'loading'}
-   <SectionLoading/>
+      <SectionLoading />
    {:else if fetchingState === 'error'}
       Error getting organization
    {:else if product || product_id == ''}
-      <NavigationBar title={'Product toevoegen'} />
+      <NavigationBar title={product_id != '' ? 'Product bewerken' : 'Product toevoegen'} />
 
       <form class="c-form" name="AddOrganisation" on:submit|preventDefault={handleSubmit}>
          <div class="c-form-textinputs">
@@ -227,7 +250,34 @@
                {errors.submit ? errors.submit : ''}
             </span>
 
-            <button class="c-button"> {product_id == '' ? 'opslaan' : 'Bewerken'} </button>
+            <div class="c-form-altinputs">
+               <button class="c-button"> {product_id == '' ? 'opslaan' : 'Bewerken'} </button>
+
+               {#if product_id}
+               <button on:click|preventDefault={openPopup} class="c-textbutton__delete"
+                   >Product verwijderen</button
+                >
+               {/if}
+               
+            </div>
+            {#if deletePopup}
+            <div class="c-popup-delete">
+               <div class="c-popup-delete__info">
+                  <div class="c-popup-delete__title">Product verwijderen?</div>
+                  <div>Deze actie is onomkeerbaar.</div>
+               </div>
+
+               <div class="c-popup-delete__buttons">
+                  <button class="c-button u-button__cancel" on:click={closePopup}>Annuleren</button>
+                  <button
+                     class="c-button u-button__delete u-button__delete-icon"
+                     on:click={removeProduct}
+                  >
+                     <Delete /></button
+                  >
+               </div>
+            </div>
+         {/if}
          </div>
       </form>
    {/if}

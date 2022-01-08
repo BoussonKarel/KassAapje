@@ -13,10 +13,8 @@
 <Link to={register.register_id} class="c-card-link">
    <div class="c-card c-registercard">
       <div class="c-registercard__upper">
-         <Link to="{register.register_id}/info">
-            <div class="c-registercard__icon-cog">
+         <Link  class="c-registercard__icon-cog" to="{register.register_id}/info">
                <Settings />
-            </div>
          </Link>
 
          <span class="c-registercard__title">{register.name}</span>

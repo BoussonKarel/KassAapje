@@ -74,13 +74,13 @@
    background: none;
    border: none;
    text-decoration: underline;
-   color: map-get($colors-status, 'error');
+   color: map-get($colors-theme, '500');
 
    &:hover {
-      color: #ff6969;
+      color: map-get($colors-theme, '600');
    }
    &:focus {
-      color: #ff6969;
+      color: map-get($colors-theme, '600');
    }
 }
 
@@ -196,9 +196,16 @@
    display: flex;
    justify-content: center;
    align-items: center;
-   & svg {
-      color: map-get($colors-neutral, '900');
+   color: map-get($colors-neutral, '900');
+   & svg { 
       width: 1em;
       height: 1em;
+   }
+
+   &:hover{
+      color: map-get($colors-neutral, '700');
+   }
+   &:focus {
+      color: map-get($colors-neutral, '700');
    }
 }
