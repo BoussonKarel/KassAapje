@@ -107,6 +107,7 @@ $global-card-height: 230px;
       display: flex;
       flex-direction: column;
       justify-content: space-around;
+
    }
 
    &__title {
@@ -176,15 +177,18 @@ $global-card-height: 230px;
 
    &__icon {
       &-cog {
-         display: flex;
-         justify-content: end;
+         align-self: flex-end;
          color: map-get($colors-neutral, '100');
+         
 
          padding: 0.5rem;
 
          svg {
             width: 1em;
             height: 1em;
+         }
+         &:hover {
+            color: map-get($colors-neutral, '400')
          }
       }
 

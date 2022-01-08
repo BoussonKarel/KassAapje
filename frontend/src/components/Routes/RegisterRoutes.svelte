@@ -42,10 +42,10 @@ import CreateInvitation from '../pages/CreateInvitation.svelte';
 
    {#if isOwner}
       <Route path="/roles">
-         <CreateInvitation register_id={$params.regId} />
+         <CreateInvitation register_id={$parentParams.regId} />
       </Route>
       <Route path="/orders">
-         <OrderOverview register_id={$params.regId} />
+         <OrderOverview register_id={$parentParams.regId} />
       </Route>
       <Route path="/edit">
          <EditRegister register_id={$parentParams.regId} />
