@@ -34,6 +34,18 @@
     margin-top: em(8px);
     width: 100%;
   }
+
+  &--action {
+    // background-color: map-get($colors-theme, '300');
+
+    display: inline-flex;
+    align-items: center;
+    gap: 1ch;
+
+    // &:hover, &:focus {
+    //   background-color: map-get($colors-theme, '500');
+    // }
+  }
 }
 
 .c-button-save {
@@ -106,7 +118,6 @@
   }
 }
 
-
 .c-button-manage {
   display: flex;
   align-items: center;
@@ -124,16 +135,6 @@ height: 50px;
   &:hover {
     background-color: map-get($colors-theme, 'selection');
     cursor: pointer;
-  }
-}
-
-.c-button__navigation-right {
-  &__settings {
-    & svg {
-      color: map-get($colors-theme, '500');
-      width: 2em;
-      height: 2em;
-    }
   }
 }
 

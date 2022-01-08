@@ -1,0 +1,19 @@
+.c-dashboard {
+  padding: 1em;
+}
+
+.c-dashboard__actions {
+  margin-bottom: 1em;
+  display: flex;
+  gap: 1em;
+}
+
+.c-dashboard__info {
+  
+}
+
+.c-info {
+  &__edit {
+    margin-top: 1em;
+  }
+}

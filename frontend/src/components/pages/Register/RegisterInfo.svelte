@@ -4,6 +4,9 @@
    import { gqlHelper } from '../../../utils/graphQL'
    import NavigationBar from '../../NavigationBar.svelte'
    import SectionLoading from '../../Loading/SectionLoading.svelte'
+   import Receipt from 'svelte-material-icons/Receipt.svelte'
+   import Account from 'svelte-material-icons/Account.svelte'
+   import Inventory from '../../../ExtraIcons/Inventory.svelte'
 
    export let id
    export let orgId
@@ -33,35 +36,58 @@
 
 <div class="c-page">
    {#if fetchingState === 'loading'}
-   <SectionLoading/>
-   {:else if fetchingState === 'error'}
-      Error getting organization
+      <SectionLoading />
    {:else if register}
-         <NavigationBar title={register.name} />
+      <NavigationBar title={register.name} />
 
-      <form class="c-form" name="RegisterInfo">
-         <div class="c-form-edit">
-            <p class="c-form-edit-label">Naam:</p>
-            <div class="c-form-edit-field">
-               <p class="c-form-edit-field-output">{register.name}</p>
-            </div>
-
-            <p class="c-form-edit-label">Beschrijving:</p>
-            <div class="c-form-edit-field">
-               <p class="c-form-edit-field-output u-description">
-                  {register.description}
-               </p>
-            </div>
+      <div class="c-dashboard">
+         <div class="c-dashboard__actions">
+            <Link to="../orders" class="c-button c-button--action">
+               <Receipt />
+               Orders
+            </Link>
+            <Link to="../products" class="c-button c-button--action">
+               <Inventory />
+               Producten
+            </Link>
+            <Link to="../roles" class="c-button c-button--action">
+               <Account />
+               Gebruikers
+            </Link>
          </div>
-         <div class="c-form-altinputs">
-            <div>Roles Overview placeholder</div>
-
+         <div class="c-dashboard__info c-info">
+            <div class="c-info__section">
+               <div class="c-info__field">
+                  <div class="c-info__label">Vereniging</div>
+                  <div class="c-info__value">{register.organization.name}</div>
+               </div>
+               <div class="c-info__field">
+                  <div class="c-info__label">Naam</div>
+                  <div class="c-info__value">{register.name}</div>
+               </div>
+               <div class="c-info__field">
+                  <div class="c-info__label">Beschrijving</div>
+                  <div class="c-info__value">{register.description}</div>
+               </div>
+            </div>
             {#if isOwner}
-               <Link to="/{orgId}/{id}/edit">
-                  <button class="c-button"> Bewerken </button>
-               </Link>
+               <div class="c-info__edit">
+                  <Link to="/{orgId}/{id}/edit">
+                     <button class="c-button">Bewerken</button>
+                  </Link>
+               </div>
             {/if}
          </div>
-      </form>
-   {/if}
+      </div>
+      {:else}
+      <div class="o-container-center">
+         <div class="c-bigcard {fetchingState === 'error' ? 'c-bigcard--error' : ''}">
+            {#if fetchingState === 'error'}
+               <span class="c-bigcard__text">Er ging iets fout bij het ophalen van de kassa.</span>
+            {:else}
+               <span class="c-bigcard__text">Kassa werd niet gevonden...</span>
+            {/if}
+         </div>
+      </div>
+      {/if}
 </div>

@@ -55,16 +55,13 @@
 </script>
 
 <div class="c-page">
-   <div class="c-navigation__with-buttons">
-      <NavigationBar title={'Order toevoegen'} />
+   <NavigationBar title={'Order toevoegen'}>
       {#if isOwner}
-         <Link to="products">
-            <div class="c-button__navigation-right__settings">
-               <Settings />
-            </div>
+         <Link class="c-navigation__button" to="info">
+            <Settings />
          </Link>
       {/if}
-   </div>
+   </NavigationBar>
 
    <div class="c-orderscreen {finishing ? 'u-blur' : ''}">
       <div class="c-orderscreen__catalogue">

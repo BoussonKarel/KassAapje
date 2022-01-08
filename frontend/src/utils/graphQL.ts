@@ -86,7 +86,10 @@ export const gqlQueries = {
    register: `query ($register_id: String!){
       getRegisterById(id: $register_id) {
           name,
-          description
+          description,
+          organization {
+             name
+          }
       }
   }`,
    invitation: `query ($invitation_id: String!) {

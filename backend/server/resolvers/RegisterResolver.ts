@@ -89,7 +89,7 @@ export class RegisterResolver {
       return await this.roleManager
         .hasRegisterRole(user, id, [Role.USER, Role.OWNER])
         .then(async () => {
-          return await this.manager.findOne(Register, id)
+          return await this.manager.findOne(Register, id, {relations: ['organization']})
         })
     } catch (error: any) {
       console.error(`⛔ (${user.email}) ` + error.message)

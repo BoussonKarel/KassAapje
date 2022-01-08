@@ -7,10 +7,16 @@
 </script>
 
 <div class="c-navigation">
-   <button class="c-navigation__back" on:click={() => navigate(-1)}>
-      <ArrowLeftThick />
-   </button>
-   <h1 class="c-navigation__title">
-      {title}
-   </h1>
+   <div class="c-navigation__main">
+      <button class="c-navigation__back" on:click={() => navigate(-1)}>
+         <ArrowLeftThick />
+      </button>
+      <h1 class="c-navigation__title">
+         {title}
+      </h1>
+   </div>
+   
+   <div class="c-navigation__extra">
+      <slot />
+   </div>
 </div>

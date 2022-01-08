@@ -2,8 +2,16 @@
    display: flex;
    flex-direction: row;
    align-items: center;
+   justify-content: space-between;
+
    gap: 1em;
    padding: 1em;
+
+   &__main {
+      display: flex;
+      align-items: center;
+      gap: 1em;
+   }
 
    &__back {
       cursor: pointer;
@@ -37,11 +45,28 @@
       color: map-get($colors-theme, '500');
    }
 
-   &__with-buttons {
-      justify-content: space-between;
-      align-items: center;
+   &__extra {
       display: flex;
-      margin-right: 24px;
+      align-items: center;
    }
 
+   &__button {
+      display: flex;
+      align-items: center;
+
+      background: transparent;
+      outline: none;
+      padding: 0;
+
+      color: map-get($colors-theme, '500');
+
+      &:focus, &:hover {
+         color: map-get($colors-theme, '400');
+      }
+
+      & svg {
+         width: 2em;
+         height: 2em;
+      }
+   }
 }
