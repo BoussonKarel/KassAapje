@@ -6,6 +6,8 @@
    import { onMount } from 'svelte'
    import type { Product } from '../../../models/Product'
    import { gqlHelper } from '../../../utils/graphQL'
+   import SectionLoading from '../../Loading/SectionLoading.svelte'
+
 
    export let register_id
 
@@ -31,11 +33,6 @@
    }
 
    onMount(() => {
-      // if (register_id) {
-      //    // Als er nog geen mandje is of het mandje van n andere kassa is > Nieuw mandje
-      //    if (!$basketStore || $basketStore.register_id != register_id) setupNewBasket(register_id)
-      // }
-
       getProducts()
    })
 </script>
@@ -51,7 +48,7 @@
    </div>
 
    {#if fetchingState === 'loading'}
-      <div>loading</div>
+   <SectionLoading/>
    {:else if fetchingState === ''}
    {#if products}
    <ProductTable {isOwner} {products} />

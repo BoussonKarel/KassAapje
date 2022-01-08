@@ -3,6 +3,7 @@
    import { Link } from 'svelte-navigator'
    import { gqlHelper } from '../../../utils/graphQL'
    import NavigationBar from '../../NavigationBar.svelte'
+   import SectionLoading from '../../Loading/SectionLoading.svelte'
 
    export let id
    export let orgId
@@ -32,7 +33,7 @@
 
 <div class="c-page">
    {#if fetchingState === 'loading'}
-      Loading
+   <SectionLoading/>
    {:else if fetchingState === 'error'}
       Error getting organization
    {:else if register}

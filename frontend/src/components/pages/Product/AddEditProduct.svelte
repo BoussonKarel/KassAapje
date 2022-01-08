@@ -6,10 +6,9 @@
    const navigate = useNavigate()
    import { onMount, prevent_default } from 'svelte/internal'
    import { authHelper } from '../../../utils/auth'
-
    import NavigationBar from '../../NavigationBar.svelte'
-
    import { formHelper } from '../../../utils/formHelper'
+   import SectionLoading from '../../Loading/SectionLoading.svelte'
 
    const { DEFAULT_ERROR, validateNotEmpty, validateEmail, validateNumber } = formHelper()
 
@@ -173,7 +172,7 @@
 
 <div class="c-page">
    {#if fetchingState === 'loading'}
-      Loading
+   <SectionLoading/>
    {:else if fetchingState === 'error'}
       Error getting organization
    {:else if product || product_id == ''}

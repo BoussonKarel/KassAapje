@@ -5,6 +5,7 @@
    import { Link } from 'svelte-navigator'
    import Login from '../Auth/Login.svelte'
    import { authStore, Role } from '../../../utils/auth'
+   import SectionLoading from '../../Loading/SectionLoading.svelte'
 
    export let id
    export let isOwner
@@ -33,10 +34,11 @@
 
 <div class="c-page">
    {#if fetchingState === 'loading'}
-      Loading
+   <SectionLoading/>
    {:else if fetchingState === 'error'}
       Error getting organization
    {:else if organization}
+   
       <NavigationBar title={organization.name} />
 
       <form class="c-form" name="OrganisationInfo">

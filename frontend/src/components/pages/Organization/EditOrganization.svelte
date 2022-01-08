@@ -1,15 +1,12 @@
 <script lang="ts">
    import { useNavigate } from 'svelte-navigator'
-
    const navigate = useNavigate()
    import type { OrganizationUpdateInput } from '../../../models/OrganizationUpdateInput'
-
    import { gqlHelper } from '../../../utils/graphQL'
-
    import NavigationBar from '../../NavigationBar.svelte'
    import { identity, onMount } from 'svelte/internal'
-
    import { formHelper } from '../../../utils/formHelper'
+   import SectionLoading from '../../Loading/SectionLoading.svelte'
 
    const { DEFAULT_ERROR, validateNotEmpty, validateEmail, validateNumber } = formHelper()
 
@@ -182,7 +179,7 @@
 
 <div class="c-page">
    {#if fetchingState === 'loading'}
-      Loading
+   <SectionLoading/>
    {:else if fetchingState === 'error'}
       Error getting organization
    {:else if organization}

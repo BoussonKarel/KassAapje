@@ -9,6 +9,7 @@
    import { onMount, prevent_default } from 'svelte/internal'
    import { authHelper } from '../../../utils/auth'
    import type { RegisterUpdateInput } from '../../../models/RegisterUpdateInput'
+   import SectionLoading from '../../Loading/SectionLoading.svelte'
 
    import { formHelper } from '../../../utils/formHelper'
 
@@ -122,44 +123,52 @@
 </script>
 
 <div class="c-page">
-   <NavigationBar title={'Kassa bewerken'} />
+   {#if fetchingState === 'loading'}
+      <SectionLoading />
+   {:else if fetchingState === 'error'}
+      Error getting register
+   {:else if register}
+      <NavigationBar title={'Kassa bewerken'} />
 
-   <form class="c-form" name="EditRegister" on:submit|preventDefault={handleSubmit}>
-      <div class="c-form-textinputs">
-         <label class="c-form-label" for="Name"> Naam: *</label>
+      <form class="c-form" name="EditRegister" on:submit|preventDefault={handleSubmit}>
+         <div class="c-form-textinputs">
+            <label class="c-form-label" for="Name"> Naam: *</label>
 
-         <input
-            class="c-form-textinput c-input {errors.name ? 'has-error' : ''}"
-            type="text"
-            name="name"
-            bind:value={values.name}
-            on:blur={handleInput}
-         />
+            <input
+               class="c-form-textinput c-input {errors.name ? 'has-error' : ''}"
+               type="text"
+               name="name"
+               bind:value={values.name}
+               on:blur={handleInput}
+            />
+            <span class="c-form-error">
+               {errors.name ? errors.name : ''}
+            </span>
+            <label class="c-form-label" for="Description"> Beschrijving: *</label>
+
+            <textarea
+               class="c-form-textinput c-input u-description {errors.description
+                  ? 'has-error'
+                  : ''}"
+               name="description"
+               id="desc"
+               cols="30"
+               rows="10"
+               bind:value={values.description}
+               on:blur={handleInput}
+            />
+            <span class="c-form-error">
+               {errors.description ? errors.description : ''}
+            </span>
+         </div>
+
+         <p class="c-form__info">(*) Verplicht veld</p>
          <span class="c-form-error">
-            {errors.name ? errors.name : ''}
+            {errors.submit ? errors.submit : ''}
          </span>
-         <label class="c-form-label" for="Description"> Beschrijving: *</label>
-
-         <textarea
-            class="c-form-textinput c-input u-description {errors.description ? 'has-error' : ''}"
-            name="description"
-            id="desc"
-            cols="30"
-            rows="10"
-            bind:value={values.description}
-            on:blur={handleInput}
-         />
-         <span class="c-form-error">
-            {errors.description ? errors.description : ''}
-         </span>
-      </div>
-
-      <p class="c-form__info">(*) Verplicht veld</p>
-      <span class="c-form-error">
-         {errors.submit ? errors.submit : ''}
-      </span>
-      <div class="c-form-altinputs">
-         <button class="c-button"> Opslaan </button>
-      </div>
-   </form>
+         <div class="c-form-altinputs">
+            <button class="c-button"> Opslaan </button>
+         </div>
+      </form>
+   {/if}
 </div>
