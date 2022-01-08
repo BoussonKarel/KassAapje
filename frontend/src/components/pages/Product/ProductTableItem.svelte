@@ -1,6 +1,7 @@
 <script lang="ts">
    import Pencil from 'svelte-material-icons/Pencil.svelte'
    import { Link } from 'svelte-navigator'
+   import { formatHelper } from '../../../utils/formatHelper'
 
    export let isOwner
    export let product
@@ -10,8 +11,7 @@
    <div>{product.name}</div>
 
    <div class="c-table-products__item--price">
-      <div>€ </div>
-      <div> {product.price}</div>
+      {formatHelper.price(product.price)}
    </div>
 
    <div class="c-table-products__item--stock">{product.stock_quantity}</div>
