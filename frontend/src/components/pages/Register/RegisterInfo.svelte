@@ -8,6 +8,7 @@
    import Account from 'svelte-material-icons/Account.svelte'
    import Inventory from '../../../ExtraIcons/Inventory.svelte'
    import { authHelper } from '../../../utils/auth';
+import Delete from 'svelte-material-icons/Delete.svelte';
 
    export let id
    export let orgId
@@ -98,9 +99,30 @@
                   <Link class="c-button" to="/{orgId}/{id}/edit">
                      Bewerken
                   </Link>
+                  <button on:click|preventDefault={openPopup} class="c-textbutton__delete"
+                   >kassa verwijderen</button
+                >
                </div>
             {/if}
          </div>
+         {#if deletePopup}
+         <div class="c-popup-delete">
+            <div class="c-popup-delete__info">
+               <div class="c-popup-delete__title">Kassa verwijderen?</div>
+               <div>Deze actie is onomkeerbaar.</div>
+            </div>
+
+            <div class="c-popup-delete__buttons">
+               <button class="c-button u-button__cancel" on:click={closePopup}>Annuleren</button>
+               <button
+                  class="c-button u-button__delete u-button__delete-icon"
+                  on:click={removeRegister}
+               >
+                  <Delete /></button
+               >
+            </div>
+         </div>
+      {/if}
       </div>
       {:else}
       <div class="o-container-center">
