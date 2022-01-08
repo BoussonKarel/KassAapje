@@ -198,6 +198,7 @@
                class="c-form-numberinput c-input {errors.price ? 'has-error' : ''}"
                type="number"
                name="price"
+               step="any"
                placeholder="1"
                bind:value={values.price}
                on:blur={handleInput}
@@ -210,6 +211,7 @@
             <input
                class="c-form-numberinput c-input {errors.stock_quantity ? 'has-error' : ''}"
                type="number"
+               step=".01"
                name="stock_quantity"
                placeholder="1"
                bind:value={values.stock_quantity}
