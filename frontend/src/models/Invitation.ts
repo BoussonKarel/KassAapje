@@ -9,5 +9,5 @@ export interface Invitation {
   register_id?: string
   register?: Register
   role?: Role
-  expiration_date: Date
+  expiration_date?: Date
 }

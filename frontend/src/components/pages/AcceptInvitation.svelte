@@ -60,29 +60,36 @@
             </Link>
           </div>
         {:else if invitation}
-          <div class="c-bigcard__text">
-            {#if invitation.organization}
-              Je bent uitgenodigd voor de rol <strong>{RoleHuman[invitation.role]}</strong> in de vereniging <strong>{invitation.organization.name}</strong>.
-            {:else if invitation.register}
-              Je bent uitgenodigd voor de rol <strong>{RoleHuman[invitation.role]}</strong> in de kassa <strong>{invitation.register.name}</strong>.
-            {/if}
-          </div>
-
-          {#if authorized}
-            <div class="c-bigcard__buttons">
-              <button on:click={acceptInvitation} class="c-button">
-                Accepteren
-              </button>
+          {#if new Date(invitation.expiration_date).getTime() < new Date().getTime()}
+            <div class="c-bigcard__text">
+              Deze uitnodiging is verlopen.<br />
+              Gelieve een nieuwe te vragen aan de gebruiker die je deze stuurde.
             </div>
           {:else}
-            <div class="c-bigcard__buttons">
-              <Link to="/?redirect={location.pathname}" class="c-button">
-                INLOGGEN
-              </Link>
-              <Link to="/signup?redirect={location.pathname}" class="c-button">
-                REGISTREREN
-              </Link>
+            <div class="c-bigcard__text">
+              {#if invitation.organization}
+                Je bent uitgenodigd voor de rol <strong>{RoleHuman[invitation.role]}</strong> in de vereniging <strong>{invitation.organization.name}</strong>.
+              {:else if invitation.register}
+                Je bent uitgenodigd voor de rol <strong>{RoleHuman[invitation.role]}</strong> in de kassa <strong>{invitation.register.name}</strong>.
+              {/if}
             </div>
+
+            {#if authorized}
+              <div class="c-bigcard__buttons">
+                <button on:click={acceptInvitation} class="c-button">
+                  Accepteren
+                </button>
+              </div>
+            {:else}
+              <div class="c-bigcard__buttons">
+                <Link to="/?redirect={location.pathname}" class="c-button">
+                  INLOGGEN
+                </Link>
+                <Link to="/signup?redirect={location.pathname}" class="c-button">
+                  REGISTREREN
+                </Link>
+              </div>
+            {/if}
           {/if}
         {:else}
           <div class="c-bigcard__text">

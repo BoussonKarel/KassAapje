@@ -21,11 +21,6 @@ export const getToken = async () => {
    return getAuth().currentUser.getIdToken();
 }
 
-export enum Role {
-   OWNER = '*',
-   USER = 'u',
-}
-
 const getRoles = async (claims) => {
    const perms = claims.perms as string;
 

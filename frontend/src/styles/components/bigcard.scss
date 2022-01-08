@@ -21,6 +21,10 @@
     }
   }
 
+  &__input:disabled {
+    cursor: default !important;
+  }
+
   &__buttons {
     display: inline-flex;
     gap: 1em;
