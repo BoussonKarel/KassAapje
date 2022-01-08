@@ -34,7 +34,7 @@ import { customAuthChecker } from './auth/customAuthChecker'
 import authenticateRequests from './auth/authenticateRequests'
 import { OrderResolver } from './resolvers/OrderResolver'
 
-(async () => {
+;(async () => {
   const connectionOptions: ConnectionOptions = await getConnectionOptions()
 
   const initDatabase = () => {
@@ -100,15 +100,23 @@ import { OrderResolver } from './resolvers/OrderResolver'
               )
               // Remove user from firebase?
               await admin.auth().deleteUser(firebaseUser.uid)
-              response.send('Could not save new user to database.').status(500)
+              response
+                .status(500)
+                .send({ error: 'Could not save new user to database.' })
             })
         })
         .catch(error => {
           console.error(
-            `⛔ (${email}) Could not register user at firebase:`,
-            error,
+            `⛔ (${email}) Could not register user at firebase: ${error.message}`,
           )
-          response.send('Could not register user at firebase.').status(500)
+          if (error.code === 'auth/email-already-exists')
+            response
+              .status(409)
+              .send({ error: 'Het e-mailadres is al in gebruik.' })
+          else
+            response
+              .status(500)
+              .send({ error: 'Kon de gebruiker niet registreren.' })
         })
     })
 
@@ -121,7 +129,7 @@ import { OrderResolver } from './resolvers/OrderResolver'
         RegisterResolver,
         ProductResolver,
         InvitationResolver,
-        OrderResolver
+        OrderResolver,
       ],
       authChecker: customAuthChecker,
       authMode: 'null',
@@ -158,7 +166,7 @@ import { OrderResolver } from './resolvers/OrderResolver'
   // TRY TO INIT THE DATABASE
   initDatabase()
     .then(main)
-    .catch((e) => {
+    .catch(e => {
       console.error('⛔ Could not create database. Trying again in 10.')
       console.error(e)
       setTimeout(initDatabase, 10000)

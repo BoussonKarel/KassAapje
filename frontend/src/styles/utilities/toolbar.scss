@@ -1,0 +1,27 @@
+// Toolbar for the OrderOverview
+
+.u-toolbar {
+   max-width: 80%;
+
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding-left: 1em;
+   padding-right: 1em;
+
+   &-amount {
+      display: flex;
+      align-items: center;
+      font-size: em(28px);
+      
+
+      &__title {
+          margin-right: 1em;
+          font-weight: 600;
+      }
+
+      &__symbol {
+          margin-right: 8px;
+      }
+   }
+}

@@ -1,0 +1,72 @@
+.c-popup {
+   &-delete {
+      margin-top: .5em;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+
+      // z-index: 100;
+
+      background-color: map-get($colors-neutral, '300');
+      width: 270px;
+      height: 130px;
+      padding: 8px;
+
+      border-radius: $global-border-radius;
+      box-shadow: $default-shadow;
+
+      &__title {
+         color: map-get($colors-neutral, '900');
+         font-weight: 500;
+      }
+      &__buttons {
+         display: flex;
+         flex-direction: row;
+         gap: var(--global-baseline);
+      }
+   }
+
+   &-order {
+      background-color: map-get($colors-neutral, '100');
+
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      width: 30%;
+      min-width: 250px;
+      height: 70%;
+
+      border-radius: $global-border-radius;
+      z-index: 2;
+
+      box-shadow: $default-shadow;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-left: 2em;
+      padding-right: 2em;
+
+      &__title {
+         font-weight: bold;
+         font-size: em(20px);
+         color: map-get($colors-theme, 'base');
+      }
+
+      &__amount {
+         width: 100%;
+         justify-content: space-between;
+         margin-left: 1em;
+         margin-right: 1em;
+      }
+   }
+}
+
+.u-popup-submit {
+   position: fixed;
+   bottom: 0;
+   margin-bottom: 1em;
+}

@@ -1,0 +1,212 @@
+.c-button {
+   display: inline-block;
+   background-color: map-get($colors-theme, '500');
+   color: map-get($colors-neutral, '100');
+   font-size: rem(20px);
+   text-transform: uppercase;
+   font-weight: 500;
+   border: none;
+   outline: none;
+
+   padding: 0.5em 1em;
+   border-radius: $global-border-radius;
+
+   text-decoration: none;
+
+   cursor: pointer;
+
+   &:disabled {
+      cursor: default;
+      background-color: map-get($colors-neutral, '500');
+
+      &:hover,
+      &:focus {
+         background-color: map-get($colors-neutral, '500');
+      }
+   }
+
+   &:hover,
+   &:focus {
+      background-color: map-get($colors-theme, '400');
+   }
+
+  &--submit {
+    padding-top: 0.75em;
+    padding-bottom: 0.75em;
+    margin-top: em(8px);
+    width: 100%;
+  }
+
+  &--action {
+    // background-color: map-get($colors-theme, '300');
+
+    display: inline-flex;
+    align-items: center;
+    gap: 1ch;
+
+    // &:hover, &:focus {
+    //   background-color: map-get($colors-theme, '500');
+    // }
+  }
+}
+
+.c-button-save {
+   background-color: map-get($colors-theme, '500');
+   color: map-get($colors-neutral, '100');
+   font-size: rem(28px);
+   font-weight: 500;
+   border: none;
+   min-height: 30px;
+   min-width: 100px;
+   height: 60px;
+   width: 240px;
+   border-radius: $global-border-radius;
+
+   &:hover {
+      background-color: map-get($colors-theme, 'selection');
+      cursor: pointer;
+   }
+}
+
+.c-textbutton__delete {
+  margin-top: 8px;
+   display: block;
+   background: none;
+   border: none;
+   text-decoration: underline;
+   color: map-get($colors-theme, '500');
+
+   &:hover {
+      color: map-get($colors-theme, '600');
+      cursor:pointer;
+   }
+   &:focus {
+      color: map-get($colors-theme, '600');
+   }
+}
+
+.u-button-disabled {
+   background-color: map-get($colors-neutral, '500');
+}
+
+.u-button__delete {
+   background-color: map-get($colors-status, 'error');
+   width: 60px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   &:hover {
+      background-color: #ff6969;
+   }
+   &:focus {
+      background-color: #ff6969;
+   }
+}
+
+.u-button__cancel {
+   background-color: map-get($colors-neutral, '700');
+
+   &:hover {
+      background-color: map-get($colors-neutral, '600');
+   }
+   &:focus {
+      background-color: map-get($colors-neutral, '600');
+   }
+}
+
+.c-button-add {
+   cursor: pointer;
+
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 4em;
+   height: 4em;
+
+   border-radius: 100%;
+
+   background-color: map-get($colors-theme, '500');
+   box-shadow: $default-shadow;
+
+   &:hover {
+      background-color: map-get($colors-theme, '400');
+      cursor: pointer;
+   }
+
+   &__icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      & svg {
+         color: map-get($colors-neutral, '100');
+         height: 2em;
+         width: 2em;
+      }
+   }
+}
+
+.c-button-edit {
+   background-color: map-get($colors-theme, '500');
+   color: map-get($colors-neutral, '100');
+   font-size: rem(28px);
+   font-weight: 500;
+   border: none;
+   height: 60px;
+   width: 240px;
+   margin-top: 1em;
+   border-radius: $global-border-radius;
+
+   &:hover {
+      background-color: map-get($colors-neutral, '700');
+      cursor: pointer;
+   }
+}
+
+.c-button-manage {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background-color: map-get($colors-theme, 'base');
+   color: map-get($colors-neutral, '100');
+   font-size: rem(20px);
+   font-weight: 500;
+   border: none;
+   width: 120px;
+   height: 50px;
+   margin-right: 50px;
+   border-radius: $global-border-radius;
+
+   &:hover {
+      background-color: map-get($colors-theme, 'selection');
+      cursor: pointer;
+   }
+}
+
+.c-button__navigation-right {
+  &__settings {
+    & svg {
+      color: map-get($colors-theme, '500');
+      width: 2em;
+      height: 2em;
+    }
+  }
+}
+
+.c-button__product-edit {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   color: map-get($colors-neutral, '900');
+   & svg { 
+      width: 1em;
+      height: 1em;
+   }
+
+   &:hover{
+      color: map-get($colors-neutral, '700');
+   }
+   &:focus {
+      color: map-get($colors-neutral, '700');
+   }
+}

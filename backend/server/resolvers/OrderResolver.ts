@@ -61,7 +61,7 @@ export class OrderResolver {
       return await this.roleManager
         .hasRegisterRole(user, registerId, [Role.OWNER, Role.USER])
         .then(async () => {
-          return await this.manager.find(Order)
+          return await this.manager.find(Order, {where: {register_id: registerId}})
         })
     } catch (error: any) {
       console.error(`⛔ (${user.email}) ` + error.message)

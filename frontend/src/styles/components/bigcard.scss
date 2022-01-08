@@ -1,0 +1,36 @@
+.c-bigcard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: map-get($colors-neutral, '100');
+
+  box-shadow: $default-shadow;
+  border-radius: $global-border-radius;
+
+  padding: 2em;
+  gap: 1em;
+
+  &__text {
+    font-size: rem(22px);
+    text-align: center;
+
+    &--big {
+      font-size: rem(28px);
+    }
+  }
+
+  &__input:disabled {
+    cursor: default !important;
+  }
+
+  &__buttons {
+    display: inline-flex;
+    gap: 1em;
+  }
+
+  &--error {
+    background-color: map-get($colors-theme, '100');
+  }
+}

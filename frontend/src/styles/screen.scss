@@ -1,0 +1,51 @@
+// SETINGS
+@import "./settings/colors.scss";
+@import "./settings/typography.scss";
+@import "./settings/global.scss";
+@import "./settings/keyframes.scss";
+
+// TOOLS
+@import "./tools/functions.scss";
+@import "./tools/mixins.scss";
+
+// GENERIC
+@import "./generic/normalize.scss";
+
+// ELEMENTS
+@import "./elements/headers.scss";
+@import "./elements/page.scss";
+@import "./elements/link.scss";
+@import "./elements/scrollbar.scss";
+
+// OBJECTS
+@import "./objects/container.scss";
+
+// COMPONENTS
+@import "./components/activity.scss";
+@import "./components/app.scss";
+@import "./components/sidebar.scss";
+@import "./components/basket.scss";
+@import "./components/card.scss";
+@import "./components/bigcard.scss";
+@import "./components/buttons.scss";
+@import "./components/form.scss";
+@import "./components/colorpicker.scss";
+@import "./components/navigation.scss";
+@import "./components/searchbar.scss";
+@import "./components/orderscreen-pos.scss";
+@import "./components/popups.scss";
+@import "./components/auth.scss";
+@import "./components/table.scss";
+@import "./components/selector.scss";
+@import "./components/loading.scss";
+@import "./components/order.scss";
+@import "./components/dashboard-info.scss";
+
+// UTILITIES
+@import "./utilities/textinput.scss";
+@import "./utilities/description.scss";
+@import "./utilities/padding.scss";
+@import "./utilities/toolbar.scss";
+@import "./utilities/horizontal.scss";
+@import "./utilities/unset.scss";
+

@@ -1,3 +1,4 @@
+import e from 'express'
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { EntityManager, getManager } from 'typeorm'
 import { Role, RoleManager } from '../auth/roleManagement'
@@ -7,6 +8,7 @@ import {
   OrganizationUpdateInput,
 } from '../entity/organization'
 import { Permission } from '../entity/permission'
+import { Register } from '../entity/register'
 import { User } from '../entity/user'
 import { CurrentUser } from '../middleware/currentUserParamDecorator'
 
@@ -67,6 +69,31 @@ export class OrganizationResolver {
     return await this.manager.find(Organization)
   }
 
+  @Query(() => [Organization], { nullable: true })
+  async getUserOrganizations(
+    @CurrentUser() user: User
+  ): Promise<Organization[]> {
+    try {
+      const data = await this.manager
+      .createQueryBuilder(Organization, 'o')
+      .leftJoin("o.permissions", "p")
+      .addSelect("p.uid")
+      .where("p.uid = :id", { id: user.uid })
+      .leftJoinAndSelect("o.registers", "r")
+      .getMany()
+      .catch(e => {
+        console.error(e)
+        throw new Error('Could not fetch organizations for user.')
+      });
+
+      return data;
+    }
+    catch (error: any) {
+      console.error(`⛔ (${user.email}) ` + error.message)
+      throw error
+    }
+  }
+
   @Authorized()
   @Query(() => Organization, { nullable: true })
   async getOrganizationById(
@@ -76,11 +103,9 @@ export class OrganizationResolver {
     try {
       // Check if user has correct perms
       return await this.roleManager
-        .hasOrganizationRole(user, id, [Role.OWNER])
+        .hasOrganizationRole(user, id, [Role.USER, Role.OWNER])
         .then(async () => {
-          return await this.manager.findOne(Organization, id, {
-            relations: ['registers'],
-          })
+          return await this.manager.findOne(Organization, id)
         })
     } catch (error: any) {
       console.error(`⛔ (${user.email}) ` + error.message)

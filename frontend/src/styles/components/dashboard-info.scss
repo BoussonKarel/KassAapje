@@ -1,0 +1,26 @@
+.c-dashboard {
+  padding: 1em;
+}
+
+.c-dashboard__actions {
+  margin-bottom: 1em;
+  display: flex;
+  gap: 1em;
+}
+
+.c-info {
+  &__edit {
+    margin-top: 1em;
+  }
+
+  &__section {
+    display: grid;
+    grid-template-columns: minmax(200px, 1fr) minmax(auto, 600px);
+    column-gap: 2ch;
+    max-width: 792px;
+  }
+
+  &__label {
+    font-weight: 500;
+  }
+}

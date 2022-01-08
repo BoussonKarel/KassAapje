@@ -1,0 +1,163 @@
+.c-table {
+   margin-top: 1em;
+   margin-bottom: 1em;
+   width: 80%;
+   overflow-x: auto;
+
+   &-products {
+      max-width: 100%;
+      max-height: 82%;
+
+      &::-webkit-scrollbar {
+         display: none;
+      }
+
+      -ms-overflow-style: none;
+      scrollbar-width: none; /* Firefox */
+
+      border-radius: $global-border-radius;
+      background-color: map-get($colors-theme, '200');
+
+      &__header {
+         display: grid;
+         grid-template-columns: 50% 20% 20% 10%;
+         position: sticky;
+         top: 0;
+
+         &--item {
+            padding-left: 1em;
+            display: flex;
+            align-items: center;
+
+            background-color: map-get($colors-theme, '500');
+            font-weight: bold;
+            color: map-get($colors-neutral, '100');
+            height: 2.5em;
+         }
+      }
+      &__content {
+         display: block;
+         width: 100%;
+         max-height: 100%;
+      }
+
+      &__item {
+         display: grid;
+         grid-template-columns: 50% 20% 20% 10% ;
+         padding-top: 0.7em;
+         padding-bottom: 0.7em;
+         padding-left: 0.8em;
+         
+
+         color: map-get($colors-neutral, '900');
+
+         &:nth-child(odd) {
+            background-color: map-get($colors-theme, '100');
+         }
+         &:nth-child(even) {
+            background-color: map-get($colors-theme, '200');
+         }
+
+         &--price {
+            display: flex;
+         }
+
+         &--edit {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+         }
+      }
+   }
+
+   &-orders {
+      max-width: 100%;
+      max-height: 70%;
+      &::-webkit-scrollbar {
+         display: none;
+      }
+
+      -ms-overflow-style: none;
+      scrollbar-width: none; /* Firefox */
+
+      border-radius: $global-border-radius;
+
+      &__header {
+         display: grid;
+         grid-template-columns: 30% 30% 40%;
+
+         position: sticky;
+         top: 0;
+
+         background-color: map-get($colors-neutral, '200');
+
+         &--item {
+            padding-left: 1em;
+
+            font-weight: 500;
+            color: map-get($colors-neutral, '900');
+            height: 2.5em;
+         }
+      }
+
+      &__content {
+         display: block;
+         width: 100%;
+         max-height: 100%;
+         background-color: pink;
+      }
+
+      &__item {
+         display: grid;
+         grid-template-columns: 30% 30% 40%;
+
+         padding-top: 0.7em;
+         padding-bottom: 0.7em;
+         padding-left: 0.8em;
+
+         &:nth-child(odd) {
+            background-color: map-get($colors-neutral, '500');
+         }
+         &:nth-child(even) {
+            background-color: map-get($colors-neutral, '300');
+         }
+      }
+   }
+
+   &--finish-order {
+      width: 100%;
+      max-height: 55%;
+      overflow-y: scroll;
+      margin-bottom: 1em;
+
+      &::-webkit-scrollbar {
+         display: none;
+      }
+
+      -ms-overflow-style: none;
+      scrollbar-width: none; /* Firefox */
+
+      &__item {
+         display: grid;
+         grid-template-columns: 70% 30%;
+         padding: 0.5em;
+
+         &:nth-child(odd) {
+            background-color: map-get($colors-neutral, '500');
+         }
+         &:nth-child(even) {
+            background-color: map-get($colors-neutral, '300');
+         }
+         &--name {
+            margin-left: 8px;
+         }
+
+         &--amount {
+            display: flex;
+            &-symbol {
+               margin-right: 8px;
+            }
+         }
+      }
+   }
+}

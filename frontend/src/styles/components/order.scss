@@ -1,0 +1,71 @@
+.c-orderlist {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+  padding: 1em;
+  gap: 1em;
+}
+
+.c-order {
+  background-color: map-get($colors-neutral, '100');
+  border-radius: $global-border-radius;
+  box-shadow: $default-shadow;
+
+  &__header {
+    padding: 1em;
+    background-color: map-get($colors-neutral, '300');
+    
+    border-radius: $global-border-radius $global-border-radius 0 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1em;
+  }
+
+  &__id,
+  &__time {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: inline-block;
+    width: 100%;
+  }
+
+  &__time {
+    // font-style: italic;
+    font-weight: 300;
+  }
+
+  &__summary {
+    padding: 1em;
+    
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__price {
+    font-weight: 500;
+  }
+
+  &__edit {
+    background: transparent;
+    border: none;
+    padding: 0;
+    outline: none;
+
+    cursor: pointer;
+
+    &:hover, &:focus {
+      color: map-get($colors-theme, '600');
+    }
+
+    & svg {
+
+    }
+
+    &:disabled {
+      color: map-get($colors-neutral, '600');
+
+      cursor: not-allowed;
+    }
+  }
+}

@@ -64,12 +64,13 @@ export class RegisterResolver {
     try {
       // Check if user has correct perms
       return await this.roleManager
-        .hasOrganizationRole(user, organization_id, [Role.OWNER])
+        .hasOrganizationRole(user, organization_id, [Role.USER, Role.OWNER])
         .then(async () => {
           return await this.manager.find(Register, {
             where: {
               organization: { organization_id: organization_id },
             },
+            relations: ['organization']
           })
         })
     } catch (error: any) {
@@ -88,7 +89,7 @@ export class RegisterResolver {
       return await this.roleManager
         .hasRegisterRole(user, id, [Role.USER, Role.OWNER])
         .then(async () => {
-          return await this.manager.findOne(Register, id)
+          return await this.manager.findOne(Register, id, {relations: ['organization']})
         })
     } catch (error: any) {
       console.error(`⛔ (${user.email}) ` + error.message)

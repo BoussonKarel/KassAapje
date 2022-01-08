@@ -1,0 +1,222 @@
+.c-sidebar {
+   background-color: map-get($colors-theme, '500');
+   display: flex;
+   flex-direction: column;
+   width: $menu-width;
+   height: 100vh;
+
+   &--collapsed {
+      min-width: $menu-width--collapsed;
+      width: $menu-width--collapsed;
+   }
+
+   &--collapsed &__org {
+      display: none;
+   }
+
+   &__organizations {
+      max-height: 100%;
+      overflow-y: auto;
+   }
+}
+
+.c-sb-header {
+   padding: 0.5em;
+
+   &__title {
+      color: map-get($colors-neutral, '100');
+      display: flex;
+      justify-content: center;
+   }
+
+   &__icon {
+      display: flex;
+      align-items: center;
+
+      svg {
+         color: map-get($colors-neutral, '600');
+         width: 100%;
+         height: auto;
+      }
+   }
+}
+
+.c-sb-button {
+   // reset button & link stuff
+   color: inherit;
+   text-decoration: none;
+   background: transparent;
+   border: none;
+   padding: 0;
+   
+   display: flex;
+   align-items: center;
+   padding: 0.75em;
+
+   &__icon {
+      display: flex;
+      align-items: center;
+      width: 2em;
+      flex-shrink: 0;
+
+      svg {
+         color: map-get($colors-neutral, '100');
+         width: 100%;
+         height: auto;
+      }
+   }
+
+   &--collapsed {
+      justify-content: center;
+   }
+
+   &--collapsed &__text {
+      display: none;
+   }
+
+   &--collapsed &__icon--collapse {
+      transform: rotate(180deg);
+   }
+
+   &__text {
+      margin-left: 1em;
+      color: map-get($colors-neutral, '100');
+      font-size: rem(20px);
+      font-weight: 400;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+   }
+
+   &:hover,
+   &:focus {
+      outline: none;
+      background-color: map-get($colors-theme, '400');
+      cursor: pointer;
+   }
+
+   &--bottom {
+      margin-top: auto;
+   }
+
+   &--main {
+      padding: 0.5em;
+   }
+
+   &--main &__text {
+      font-size: rem(32px);
+      font-weight: 700;
+      margin-left: auto;
+      margin-right: auto;
+   }
+
+   &--main &__icon {
+      width: 100%;
+   }
+}
+
+.c-sb-org {
+   width: 100%;
+
+   &__header {
+      font-size: rem(20px);
+      padding: 8px 0.75em;
+
+      background-color: inherit;
+      color: map-get($colors-neutral, '100');
+      border: none;
+      text-decoration: none;
+
+      display: flex;
+      gap: 4px;
+      width: 100%;
+
+      justify-content: space-between;
+      align-items: center;
+   }
+
+   &__header:hover,
+   &__header:focus {
+      outline: none;
+      cursor: pointer;
+      background-color: map-get($colors-theme, '400');
+      // border-radius: 20px 0 0 20px;
+   }
+
+   &__title {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+   }
+
+   &--collapsed &__chevron {
+      transform: rotate(180deg);
+   }
+
+   &__chevron {
+      display: flex;
+
+      & svg {
+         width: 1.5em;
+         height: 1.5em;
+      }
+   }
+
+   &--collapsed &__content {
+      display: none;
+   }
+
+   &__content {
+      display: flex;
+      flex-direction: column;
+      
+      list-style: none;
+
+      margin: 4px 0;
+      gap: 4px;
+      padding-left: 0.75em;
+   }
+
+   &__item {
+      display: flex;
+      align-items: center;
+
+      padding-top: 2px;
+      padding-bottom: 2px;
+      padding-left: 16px;
+
+      a, a:visited, a:focus {
+         outline: none;
+         text-decoration: none;
+      }
+
+      a {
+         display: block;
+         max-width: 100%;
+
+         white-space: nowrap;
+         overflow: hidden;
+         text-overflow: ellipsis;
+   
+         color: map-get($colors-neutral, '100');
+         font-size: rem(16px);
+         font-weight: 300;
+      }
+
+      &--noreg a {
+         font-weight: 400;
+      }
+   }
+
+   &__item:hover,
+   &__item:focus {
+      cursor: pointer;
+      background-color: map-get($colors-theme, '400');
+
+      border-radius: 20px 0 0 20px;
+   }
+}
+
+.u-hidden {
+   display: none;
+}

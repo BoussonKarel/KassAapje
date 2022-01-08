@@ -9,6 +9,7 @@ import {
 import { generateUID } from '../helpers/generateUID'
 import { Permission } from './permission'
 import { Register } from './register'
+import { Invitation } from './roleInvitation'
 
 @ObjectType()
 @Entity('organizations')
@@ -62,11 +63,14 @@ export class Organization extends BaseEntity {
   email?: string
 
   @Field(() => [Register], { nullable: true })
-  @OneToMany(() => Register, r => r.organization)
+  @OneToMany(() => Register, r => r.organization, {eager: true})
   registers?: Register[]
 
   @OneToMany(() => Permission, p => p.organization)
   permissions?: Permission[]
+
+  @OneToMany(() => Invitation, p => p.organization)
+  invitations?: Invitation[]
 }
 
 @InputType('OrganizationInput')
