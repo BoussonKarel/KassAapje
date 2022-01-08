@@ -18,6 +18,7 @@ spec:
       containers:
       - image: ghcr.io/boussonkarel/kassaapje-frontend # Change to your image
         name: frontend-container
+        imagePullPolicy: Always
         # No env for now
         ports:
         - containerPort: 8080 # The interal port of the app

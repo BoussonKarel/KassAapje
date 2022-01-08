@@ -18,6 +18,7 @@ spec:
       containers:
       - image: ghcr.io/boussonkarel/kassaapje-backend # Change to your image
         name: backend-container
+        imagePullPolicy: Always
         envFrom:
         - configMapRef:
             name: typeorm-variables
