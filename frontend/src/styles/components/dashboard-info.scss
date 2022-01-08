@@ -8,12 +8,18 @@
   gap: 1em;
 }
 
-.c-dashboard__info {
-  
-}
-
 .c-info {
   &__edit {
     margin-top: 1em;
+  }
+
+  &__section {
+    display: grid;
+    grid-template-columns: minmax(auto, 1fr) minmax(auto, 7fr);
+    column-gap: 2ch;
+  }
+
+  &__label {
+    font-weight: 500;
   }
 }
