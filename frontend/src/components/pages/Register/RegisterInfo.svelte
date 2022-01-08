@@ -95,8 +95,8 @@
             </div>
             {#if isOwner}
                <div class="c-info__edit">
-                  <Link to="/{orgId}/{id}/edit">
-                     <button class="c-button">Bewerken</button>
+                  <Link class="c-button" to="/{orgId}/{id}/edit">
+                     Bewerken
                   </Link>
                </div>
             {/if}
