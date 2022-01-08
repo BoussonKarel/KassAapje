@@ -52,10 +52,12 @@
       </div>
    </div>
 
-   <div class="c-orderlist">
       {#if fetchingState === 'loading'}
-         <SkeletonCard />
+         <div class="c-orderlist">
+            <SkeletonCard />
+         </div>
       {:else if orders && orders.length > 0}
+      <div class="c-orderlist">
          {#each orders as order}
             <div class="c-order">
                <div class="c-order__header">
@@ -85,9 +87,18 @@
                </div>
             </div>
          {/each}
-
+         </div>
       {:else}
-      Kon orders niet ophalen
+         <div class="o-container-center">
+            <div class="c-bigcard {fetchingState === 'error' ? 'c-bigcard--error' : ''}">
+               <div class="c-bigcard__text">
+                  {#if fetchingState === 'error'}
+                     Kon orders niet ophalen
+                  {:else}
+                     Je hebt nog geen bestellingen
+                  {/if}
+               </div>
+            </div>
+         </div>
       {/if}
    </div>
-</div>

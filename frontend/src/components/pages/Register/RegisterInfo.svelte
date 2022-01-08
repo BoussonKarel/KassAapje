@@ -9,6 +9,7 @@
    import Inventory from '../../../ExtraIcons/Inventory.svelte'
    import { authHelper } from '../../../utils/auth'
    import Delete from 'svelte-material-icons/Delete.svelte'
+   import Store from 'svelte-material-icons/Store.svelte'
 
    export let id
    export let orgId
@@ -69,6 +70,10 @@
 
       <div class="c-dashboard">
          <div class="c-dashboard__actions">
+            <Link to=".." class="c-button c-button--action">
+               <Store />
+               Kassa
+            </Link>
             <Link to="../orders" class="c-button c-button--action">
                <Receipt />
                Orders
