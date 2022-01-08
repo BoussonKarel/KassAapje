@@ -1,17 +1,16 @@
 <script lang="ts">
    import NavigationBar from '../../NavigationBar.svelte'
-   import type { RegisterInput } from '../../../models/RegisterInput'
    import { gqlHelper } from '../../../utils/graphQL'
 
    import { useNavigate } from 'svelte-navigator'
    const navigate = useNavigate()
 
-   import { onMount, prevent_default } from 'svelte/internal'
-   import { authHelper } from '../../../utils/auth'
+   import { onMount } from 'svelte/internal'
    import type { RegisterUpdateInput } from '../../../models/RegisterUpdateInput'
    import SectionLoading from '../../Loading/SectionLoading.svelte'
 
    import { formHelper } from '../../../utils/formHelper'
+   import { refresh } from '../../../utils/refresh';
 
    const { DEFAULT_ERROR, validateNotEmpty } = formHelper()
 
@@ -60,10 +59,9 @@
                errors.submit = `Er ging iets fout: ${e.message}`
             })
             .finally(() => {
-               authHelper.refresh()
+               refresh()
+               navigate(-1)
             })
-
-         navigate(-1)
       }
    }
 

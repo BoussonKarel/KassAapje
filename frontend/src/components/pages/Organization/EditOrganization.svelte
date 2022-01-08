@@ -4,10 +4,10 @@
    import type { OrganizationUpdateInput } from '../../../models/OrganizationUpdateInput'
    import { gqlHelper } from '../../../utils/graphQL'
    import NavigationBar from '../../NavigationBar.svelte'
-   import { identity, onMount } from 'svelte/internal'
+   import { onMount } from 'svelte/internal'
    import { formHelper } from '../../../utils/formHelper'
    import SectionLoading from '../../Loading/SectionLoading.svelte'
-   import { authHelper } from '../../../utils/auth'
+   import { refresh } from '../../../utils/refresh';
 
    const { DEFAULT_ERROR, validateNotEmpty, validateEmail, validateNumber } = formHelper()
 
@@ -90,9 +90,9 @@
                errors.submit = `Er ging iets fout: ${e.message}`
             })
             .finally(() => {
-               authHelper.refresh()
+               refresh();
+               navigate(`/${organization_id}/info`)
             })
-         navigate(`/${organization_id}/info`)
       }
    }
 

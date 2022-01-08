@@ -9,8 +9,7 @@
    import { formHelper } from '../../../utils/formHelper'
 
    const { DEFAULT_ERROR, validateNotEmpty } = formHelper()
-
-   import { authHelper } from '../../../utils/auth'
+   import { refresh } from '../../../utils/refresh';
 
    export let organization_id
 
@@ -54,10 +53,9 @@
                errors.submit = `Er ging iets fout: ${e.message}`
             })
             .finally(() => {
-               authHelper.refresh()
+               refresh();
+               navigate('../')
             })
-
-         navigate(-1)
       }
    }
 

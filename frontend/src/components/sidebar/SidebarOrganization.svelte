@@ -7,16 +7,10 @@
 
    export let organization
 
-   let registers;
-
    let collapsed = true
    function toggleCollapse() {
       collapsed = !collapsed
    }
-
-   onMount(async () => {
-      registers = organization.registers
-   })
 </script>
 
 <div class="c-sidebar__org c-sb-org {collapsed ? 'c-sb-org--collapsed' : ''}">
@@ -29,8 +23,8 @@
 
    <!-- Registers -->
    <ul class="c-sb-org__content">
-      {#if registers && registers.length > 0}
-         {#each registers as register}
+      {#if organization.registers && organization.registers.length > 0}
+         {#each organization.registers as register}
             <li class="c-sb-org__item">
                <Link to="/{organization.organization_id}/{register.register_id}"
                   >{register.name}</Link

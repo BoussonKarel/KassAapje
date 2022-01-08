@@ -1,15 +1,11 @@
 <script lang="ts">
    import { useNavigate } from 'svelte-navigator'
-
    const navigate = useNavigate()
    import type { OrganizationInput } from 'src/models/OrganizationInput'
-
    import { gqlHelper } from '../../../utils/graphQL'
-
    import NavigationBar from '../../NavigationBar.svelte'
-   import { authHelper } from '../../../utils/auth'
-
    import { formHelper } from '../../../utils/formHelper'
+   import { refresh } from '../../../utils/refresh';
 
    const { DEFAULT_ERROR, validateNotEmpty, validateEmail, validateNumber } = formHelper()
 
@@ -85,10 +81,10 @@
                errors.submit = `Er ging iets fout: ${e.message}`
             })
             .finally(() => {
-               authHelper.refresh()
+               refresh();
+               navigate('/')
             })
 
-         navigate('/')
       }
    }
 

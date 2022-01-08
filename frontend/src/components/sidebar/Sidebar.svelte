@@ -8,6 +8,7 @@
    import Logo from '../Logo.svelte'
    import { onMount } from 'svelte';
    import { gqlHelper } from '../../utils/graphQL';
+   import { refreshStore } from '../../utils/refresh';
 
    let sidebarCollapsed = false,
       smallScreen = false
@@ -55,8 +56,9 @@
             fetchingState = ''
          })
    }
-
-   onMount(async () => {
+   
+   refreshStore.subscribe(() => {
+      console.log("Refreshing")
       getOrganizations();
    })
 </script>
