@@ -15,7 +15,7 @@
 
   &__section {
     display: grid;
-    grid-template-columns: minmax(auto, 1fr) minmax(auto, 7fr);
+    grid-template-columns: minmax(200px, 1fr) minmax(auto, 600px);
     column-gap: 2ch;
     max-width: 792px;
   }
