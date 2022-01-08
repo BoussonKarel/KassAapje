@@ -34,7 +34,7 @@
       <RegisterRoutes orgId={$params.orgId} />
    </Route>
    <Route path="/info">
-      <OrganizationInfo id={$params.orgId} {isOwner} />
+      <OrganizationInfo organization_id={$params.orgId} {isOwner} />
    </Route>
    <Route path="/edit">
       {#if isOwner}

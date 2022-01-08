@@ -1,6 +1,5 @@
 <script lang="ts">
    import ArrowLeftThick from 'svelte-material-icons/ArrowLeftThick.svelte'
-   import Settings from 'svelte-material-icons/Settings.svelte'
    import { navigate } from 'svelte-navigator'
 
    export let title: string
@@ -11,6 +10,9 @@
       <button class="c-navigation__back" on:click={() => navigate(-1)}>
          <ArrowLeftThick />
       </button>
+      <!-- <Link to=".." class="c-navigation__back">
+         <ArrowLeftThick />
+      </Link> -->
       <h1 class="c-navigation__title">
          {title}
       </h1>

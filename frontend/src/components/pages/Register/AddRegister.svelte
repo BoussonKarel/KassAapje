@@ -58,7 +58,6 @@
                authHelper.refresh()
             })
 
-
          navigate(-1)
       }
    }

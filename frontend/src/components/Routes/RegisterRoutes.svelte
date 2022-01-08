@@ -35,7 +35,7 @@ import CreateInvitation from '../pages/CreateInvitation.svelte';
       <OrderScreen register_id={$parentParams.regId} {isOwner} />
    </Route>
    <Route path="/info">
-      <RegisterInfo id={$parentParams.regId} {orgId} {isOwner} />
+      <RegisterInfo register_id={$parentParams.regId} {isOwner} />
    </Route>
 
    {#if isOwner}

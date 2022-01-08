@@ -45,6 +45,7 @@
       </Route>
    {:else}
       <Sidebar />
+      
       <Route path="/">
          <OrganizationSelector />
       </Route>

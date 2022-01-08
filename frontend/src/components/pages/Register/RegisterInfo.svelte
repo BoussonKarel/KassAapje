@@ -11,9 +11,8 @@
    import Delete from 'svelte-material-icons/Delete.svelte'
    import Store from 'svelte-material-icons/Store.svelte'
 
-   export let id
-   export let orgId
-   export let isOwner
+   export let register_id: string
+   export let isOwner: boolean
 
    let deletePopup = false
 
@@ -28,7 +27,7 @@
       fetchingState = 'loading'
 
       register = await gqlHelper.queries
-         .register(id)
+         .register(register_id)
          .catch(e => {
             fetchingState = 'error'
          })
@@ -46,7 +45,7 @@
 
    const removeRegister = async () => {
       gqlHelper.mutations
-         .removeRegister(id)
+         .removeRegister(register_id)
          .catch(e => {
             errors.remove = `Er ging iets fout: ${e.message}`
          })
@@ -54,7 +53,7 @@
             authHelper.refresh()
          })
 
-      navigate(`..`)
+      navigate(`../`, {state: {refresh: true}})
    }
 
    onMount(async () => {
@@ -70,9 +69,9 @@
 
       <div class="c-dashboard">
          <div class="c-dashboard__actions">
-            <Link to=".." class="c-button c-button--action">
+            <Link to="../" class="c-button c-button--action">
                <Store />
-               Kassa
+               Verkoop
             </Link>
             <Link to="../orders" class="c-button c-button--action">
                <Receipt />
@@ -98,7 +97,7 @@
             </div>
             {#if isOwner}
                <div class="c-info__edit">
-                  <Link class="c-button" to="/{orgId}/{id}/edit">Bewerken</Link>
+                  <Link class="c-button" to="../edit">Bewerken</Link>
                   <button on:click|preventDefault={openPopup} class="c-textbutton__delete"
                      >Kassa verwijderen</button
                   >

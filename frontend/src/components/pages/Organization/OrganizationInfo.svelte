@@ -3,22 +3,20 @@
    import { onMount } from 'svelte'
    import { gqlHelper } from '../../../utils/graphQL'
    import { Link } from 'svelte-navigator'
-   import Login from '../Auth/Login.svelte'
-   import { authStore } from '../../../utils/auth'
-   import { Role } from '../../../models/Role'
    import SectionLoading from '../../Loading/SectionLoading.svelte'
+   import type { Organization } from '../../../models/Organization';
 
-   export let id
-   export let isOwner
+   export let organization_id: string
+   export let isOwner: boolean
 
    let fetchingState = '',
-      organization = undefined
+      organization : Organization = undefined
 
    const getOrganizationInfo = async () => {
       fetchingState = 'loading'
 
       organization = await gqlHelper.queries
-         .organization(id)
+         .organization(organization_id)
          .catch(e => {
             fetchingState = 'error'
          })
@@ -34,67 +32,41 @@
 
 <div class="c-page">
    {#if fetchingState === 'loading'}
-   <SectionLoading/>
+      <SectionLoading/>
    {:else if fetchingState === 'error'}
       Error getting organization
    {:else if organization}
-   
       <NavigationBar title={organization.name} />
 
-      <form class="c-form" name="OrganisationInfo">
-         <div class="c-form-edit">
-            <p class="c-form-edit-label">Naam:</p>
-            <div class="c-form-edit-field">
-               <p class="c-form-edit-field-output">{organization.name}</p>
-            </div>
+      <div class="c-dashboard">
+         <!-- <div class="c-dashboard__actions">
+            <Link to="../" class="c-button c-button--action">
+               <Store />
+               Kassa's
+            </Link>
+         </div> -->
+         <div class="c-dashboard__info c-info">
+            <div class="c-info__section">
+               <div class="c-info__label">Naam</div>
+               <div class="c-info__value">{organization.name}</div>
+               <div class="c-info__label">E-mailadres</div>
+               <div class="c-info__value">{organization.email}</div>
+               <div class="c-info__label">Website</div>
+               <div class="c-info__value">{organization.website}</div>
 
-            <p class="c-form-edit-label">Website:</p>
-            <div class="c-form-edit-field">
-               <p class="c-form-edit-field-output">{organization.website}</p>
+               <div class="c-info__label">Adres</div>
+               <div class="c-info__value">
+                  {organization.street} {organization.street_number} {organization.box ? organization.box : ''}, {organization.zip} {organization.city}, {organization.country}
+               </div>
             </div>
-
-            <p class="c-form-edit-label">Email:</p>
-            <div class="c-form-edit-field">
-               <p class="c-form-edit-field-output">{organization.email}</p>
-            </div>
-
-            <p class="c-form-edit-label">Straat:</p>
-            <div class="c-form-edit-field">
-               <p class="c-form-edit-field-output">
-                  {#if organization.box}
-                     {`${organization.street}
-                     ${organization.street_number}${organization.box}
-                     `}
-                  {:else}
-                     {`${organization.street}
-                     ${organization.street_number}
-                     `}
-                  {/if}
-               </p>
-            </div>
-
-            <p class="c-form-edit-label">Stad:</p>
-            <div class="c-form-edit-field">
-               <p class="c-form-edit-field-output">{organization.city}</p>
-            </div>
-
-            <p class="c-form-edit-label">Postcode:</p>
-            <div class="c-form-edit-field">
-               <p class="c-form-edit-field-output">{organization.zip}</p>
-            </div>
-
-            <p class="c-form-edit-label">Land:</p>
-            <div class="c-form-edit-field">
-               <p class="c-form-edit-field-output">{organization.country}</p>
-            </div>
-         </div>
-         <div class="c-form-altinputs">
             {#if isOwner}
-               <Link to="/{id}/edit">
-                  <button class="c-button"> Bewerken </button>
+            <div class="c-info__edit">
+               <Link class="c-button" to="../edit">
+                  Bewerken
                </Link>
+            </div>
             {/if}
          </div>
-      </form>
+      </div>
    {/if}
 </div>

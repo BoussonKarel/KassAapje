@@ -9,6 +9,7 @@
    import Plus from 'svelte-material-icons/Plus.svelte'
    import { gqlHelper } from '../../../utils/graphQL'
    import { Link } from 'svelte-navigator'
+import Settings from 'svelte-material-icons/Settings.svelte';
 
    export let organization_id
 
@@ -38,7 +39,11 @@
 </script>
 
 <div class="c-page">
-   <NavigationBar title={"Kassa's"} />
+   <NavigationBar title={"Kassa's"}>
+      <Link class="c-navigation__button" to="info">
+         <Settings />
+      </Link>
+   </NavigationBar>
 
    {#if fetchingState === 'loading'}
       <SectionLoading />

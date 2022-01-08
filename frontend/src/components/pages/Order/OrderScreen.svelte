@@ -56,11 +56,9 @@
 
 <div class="c-page">
    <NavigationBar title={'Order toevoegen'}>
-      {#if isOwner}
-         <Link class="c-navigation__button" to="info">
-            <Settings />
-         </Link>
-      {/if}
+      <Link class="c-navigation__button" to="info">
+         <Settings />
+      </Link>
    </NavigationBar>
 
    <div class="c-orderscreen {finishing ? 'u-blur' : ''}">

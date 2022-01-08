@@ -5,7 +5,6 @@
    import { onMount } from 'svelte'
    import { gqlHelper } from '../../../utils/graphQL'
    import Plus from 'svelte-material-icons/Plus.svelte'
-   import { writable } from 'svelte/store'
    import { Link } from 'svelte-navigator'
    import SectionLoading from '../../Loading/SectionLoading.svelte'
    import SkeletonCard from '../../Cards/SkeletonCard.svelte'

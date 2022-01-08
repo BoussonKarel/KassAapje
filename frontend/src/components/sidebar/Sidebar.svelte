@@ -2,13 +2,14 @@
    import AccountCircleOutline from 'svelte-material-icons/AccountCircleOutline.svelte'
    import LogoutVariant from 'svelte-material-icons/LogoutVariant.svelte'
    import SidebarCollapse from './SidebarCollapse.svelte'
-   import { Link } from 'svelte-navigator'
+   import { Link, useLocation } from 'svelte-navigator'
    import { authHelper, authStore } from '../../utils/auth'
    import SidebarOrganization from './SidebarOrganization.svelte'
    import Logo from '../Logo.svelte'
    import { onMount } from 'svelte';
    import { gqlHelper } from '../../utils/graphQL';
-   import Loading from '../Loading/Loading.svelte';
+
+   const location = useLocation();
 
    let sidebarCollapsed = false,
       smallScreen = false
@@ -58,7 +59,7 @@
    }
 
    onMount(async () => {
-      getOrganizations()
+      getOrganizations();
    })
 </script>
 
