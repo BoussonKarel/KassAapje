@@ -10,7 +10,6 @@
 
    const { DEFAULT_ERROR, validateNotEmpty } = formHelper()
 
-   import { prevent_default } from 'svelte/internal'
    import { authHelper } from '../../../utils/auth'
 
    export let organization_id

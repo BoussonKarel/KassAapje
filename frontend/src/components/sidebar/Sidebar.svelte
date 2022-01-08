@@ -43,7 +43,7 @@
    }
 
    let fetchingState = '',
-      organizations = []
+      organizations = [];
 
    const getOrganizations = async () => {
       fetchingState = 'loading'
