@@ -63,18 +63,7 @@
    {:else if fetchingState === 'error'}
       Error getting organization
    {:else if register}
-      <div class="c-navigation__with-buttons">
-         <NavigationBar title={register.name} />
-         {#if isOwner}
-            <button
-               class="c-button u-button__delete u-button__delete-icon"
-               on:click|preventDefault={openPopup}
-            >
-               <Delete /></button
-            >
-         {/if}
-      </div>
-
+      <NavigationBar title={register.name} />
       <form class="c-form" name="RegisterInfo">
          <div class="c-form-edit">
             <p class="c-form-edit-label">Naam:</p>
@@ -96,6 +85,10 @@
                <Link to="/{orgId}/{id}/edit">
                   <button class="c-button"> Bewerken </button>
                </Link>
+
+               <button on:click|preventDefault={openPopup} class="c-textbutton__delete"
+                  >kassa verwijderen</button
+               >
             {/if}
          </div>
       </form>

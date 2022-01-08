@@ -56,6 +56,22 @@
    }
 }
 
+.c-textbutton__delete {
+  margin-top: 8px;
+   display: block;
+   background: none;
+   border: none;
+   text-decoration: underline;
+   color: map-get($colors-status, 'error');
+
+   &:hover {
+      color: #ff6969;
+   }
+   &:focus {
+      color: #ff6969;
+   }
+}
+
 .u-button-disabled {
    background-color: map-get($colors-neutral, '500');
 }

@@ -18,7 +18,6 @@
    const getRegisters = async () => {
       fetchingState = 'loading'
 
-
       registers = await gqlHelper.queries
          .registers(organization_id)
          .then(result => {
