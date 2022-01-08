@@ -68,7 +68,7 @@ import NoRegPerms from '../pages/Auth/NoRegPerms.svelte'
 <div class="c-page">
    <div class="o-container-center">
       <div class="c-bigcard c-bigcard--error">
-         <div class="c-bigcard__text">Seems like you are not logged in correctly.</div>
+         <div class="c-bigcard__text">Het lijkt erop dat je niet correct ingelogd bent.</div>
       </div>
    </div>
 </div>
