@@ -7,10 +7,13 @@
    import { authHelper } from '../../../utils/auth'
    import { useNavigate } from 'svelte-navigator'
    const navigate = useNavigate()
+   import Delete from 'svelte-material-icons/Delete.svelte'
 
    export let id
    export let orgId
    export let isOwner
+
+   let deletePopup = false;
 
    let fetchingState = '',
       register = undefined
@@ -29,6 +32,13 @@
       console.log(register)
    }
 
+   const openPopup = () => {
+      deletePopup = true;
+   }
+   const closePopup = () => {
+      deletePopup = false;
+   }
+
    const removeRegister = async () => {
       gqlHelper.mutations
          .removeRegister(id)
@@ -37,9 +47,8 @@
          })
          .finally(() => {
             console.log('register verwijderd')
-            authHelper.refresh()
          })
-
+      authHelper.refresh()
       navigate(`/${orgId}`)
    }
 
@@ -78,9 +87,30 @@
                   <button class="c-button"> Bewerken </button>
                </Link>
 
-               <button class="c-button" on:click={removeRegister}> verwijder kassa</button>
+               <button class="c-button" on:click|preventDefault={openPopup}> verwijder kassa</button>
             {/if}
          </div>
       </form>
+
+      {#if deletePopup}
+      <div class="c-popup-delete">
+         <div class="c-popup-delete__info">
+            <div class="c-popup-delete__title">
+               Kassa verwijderen?
+            </div>
+            <div>
+               Deze actie is onomkeerbaar.
+            </div>
+         </div>
+         
+         <div class="c-popup-delete__buttons">
+            <button class="c-button u-button__cancel" on:click={closePopup}>Annuleren</button>
+            <button class="c-button u-button__delete u-button__delete-icon" on:click={removeRegister}> <Delete/></button>
+         </div>
+         
+      </div>
+      {/if}
+
+      
    {/if}
 </div>
