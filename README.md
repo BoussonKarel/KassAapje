@@ -18,7 +18,7 @@ Het bevat de mogelijkheid om een vereniging aan te maken en daarbinnen meerdere 
   * EXTRA: Voorraad beheren?
   * EXTRA: Nabestelling toestaan?
 * EXTRA: Verschillende betaalmethoden (zelf toe te voegen)
-  * bv. Payconic, overschrijving, cash...
+  * bv. Payconiq, overschrijving, cash...
 * EXTRA: Verschillende afrekenmogelijkheden
   * Bestelling op naam
   * Anonieme klant
