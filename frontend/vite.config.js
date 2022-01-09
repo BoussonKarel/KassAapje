@@ -8,4 +8,5 @@ export default defineConfig({
     exclude: ['@urql/svelte'],
   },
   plugins: [svelte(), visualizer({filename: 'bundle_stats.html'})],
+  optimizeDeps: { exclude: ["svelte-navigator"] },
 })
