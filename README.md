@@ -37,10 +37,10 @@ Het bevat de mogelijkheid om een vereniging aan te maken en daarbinnen meerdere 
   * Password: strong_password
 * Admin Gebruiker:
   * User: docent@howest.be
-  * Password: Test123!
+  * Password: P@ssw0rd
 * Gewone Kassa gebruiker:
   * User: gebruiker@howest.be
-  * Password: Test123!
+  * Password: P@ssw0rd
 
 ### IP adressen
 - **Lokaal - Development**
