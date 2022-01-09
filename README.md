@@ -37,10 +37,10 @@ Het bevat de mogelijkheid om een vereniging aan te maken en daarbinnen meerdere 
   * Password: strong_password
 * Admin Gebruiker:
   * User: docent@howest.be
-  * Password: Test123!
+  * Password: P@ssw0rd
 * Gewone Kassa gebruiker:
   * User: gebruiker@howest.be
-  * Password: Test123!
+  * Password: P@ssw0rd
 
 ### IP adressen
 - **Lokaal - Development**
@@ -79,3 +79,60 @@ Het bevat de mogelijkheid om een vereniging aan te maken en daarbinnen meerdere 
 
 ### Nog te komen
 Week van 10 januari: presentatie
+
+## Rapportering
+### Checklists
+![Checklist backend](images/ac9e68f0e4d02267305ef2c6d4e7866a2cf1330151291d6fe182e4ebd520f807.png)
+
+![Checklist frontend 1/2](images/9a4e744b8217625b14db2fea296686556ae405b8e9273c441e3282e837b32bd1.png)  
+
+
+![Checklist frontend 2/2](images/5d0ae9a75b3cda3daf0f0e6015f18b170c2aac034869374e2358f7c8686899ef.png)
+
+### Werktijden
+We zijn niet echt consistent geweest in het tracken van onze tijden, het waren rare tijden de laatste maanden en we hebben een tijdje alles getoggled, maar zijn het dan vergeten.
+
+Op het einde van het project (voor de oorspronkelijke), waren we de hele dag aan het programmeren en dachtten we er niet aan om te togglen.
+
+Ook in de kerstvakantie, na uitstel, hebben we niet echt meer getoggled, maar wel een groot deel van de dag telkens gewerkt.
+
+Het was dus nogal chaotisch in ons hoofd...
+We kunnen dus jammer genoeg geen deftig toggl verslag afleveren.
+
+### Grootste behaalde succes
+**Karel:**
+- Na een zwaar handtrauma terug kunnen programmeren.
+- Alsook de backend en de app volledig in k8s kunnen deployen. Het kostte veel zweet (en bijna tranen) maar is uiteindelijk gelukt (nog voor de oorspronkelijke deadline).
+
+**Ibe:**
+- Kunnen werken met Svelte, wat we nog niet kenden.
+
+**Samen:**
+- Van bijna niets op de frontend (buiten wat CSS) naar een MVP kunnen gaan met een maandje extra uitstel.
+
+### Grootste moeilijkheid
+**Karel:**
+- k8s
+- Lessen inhalen en terwijl aan project werken.
+- De eerste paar dagen in Svelte
+
+**Ibe:**
+- Design & CSS
+- Planning
+
+**Samen:**
+- Frontend 😅 onze weg vinden in Svelte etc.
+
+### Extra's
+**Backend:**
+- Parameter decorators & middleware voor auth (o.a. @CurrentUser om huidige gebruiker op te halen)
+- Rollensysteem + meegeven in firebase claims (encoded in string vorm)
+  - *ORGID1/u,ORGID2/\*_REGID1/u*
+  - u = user / * = owner ...
+  - _ als separator organisaties/kassa's
+- Logging van fouten: gebruiker + fout met leesbare foutmeldingen
+
+
+**Frontend:**
+- Geen zotte extra's, wel Svelte gebruikt.
+- Service worker op app als PWA te kunnen gebruiken.

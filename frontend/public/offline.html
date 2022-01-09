@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="mask-icon" href="safari-pinned-tab.svg" color="#e97b00">
+  <meta name="msapplication-TileColor" content="#e97b00">
+  <meta name="theme-color" content="#e97b00">
+
+  <title>KassAapje - offline</title>
+
+  <style>
+    body.c-offline {
+      background-color: #FFA543;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      min-height: 100vh;
+      display: flex;
+
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .c-offline__card {
+      margin: auto;
+      width: 100%;
+      max-width: calc(480em/18);
+
+      padding: 48px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+  </style>
+</head>
+<body class="c-offline">
+  <div class="c-offline__card">
+    Oeps, het ziet ernaar uit dat je offline bent.<br />
+    KassAapje vereist een werkende internetverbinding.
+  </div>
+</body>
+</html>
