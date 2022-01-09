@@ -121,7 +121,7 @@ We kunnen dus jammer genoeg geen deftig toggl verslag afleveren.
 - Planning
 
 **Samen:**
-- Frontend 😅
+- Frontend 😅 onze weg vinden in Svelte etc.
 
 ### Extra's
 **Backend:**
