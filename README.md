@@ -135,4 +135,4 @@ We kunnen dus jammer genoeg geen deftig toggl verslag afleveren.
 
 **Frontend:**
 - Geen zotte extra's, wel Svelte gebruikt.
-- Service worker op app als PWA te kunnen gebruiken.
+- Service worker om app als PWA te kunnen gebruiken.
