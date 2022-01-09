@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "sirv dist --single --host",
+    "start": "sirv --single --host",
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
